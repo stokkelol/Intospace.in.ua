@@ -51,6 +51,11 @@ class User extends Authenticatable
         return $this->hasMany(Post::class, 'user_id');
     }
 
+    public function videos()
+    {
+        return $this->hasMany(Video::class, 'user_id');
+    }
+
     /*
     public function setPasswordAttribute($password)
     {

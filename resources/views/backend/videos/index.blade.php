@@ -24,9 +24,8 @@
                             <div class="categories-table">
                                 <div class="col-lg-1">{{ $video->id }}</div>
                                 <div class="col-lg-8"><strong>{{ $video->title }}</strong>
-                                    <a href="{{ route('backend.categories.show', ['category_id' => $category->id]) }}"><span class="label label-default pull-right"><i class="fa fa-list-alt" aria-hidden="true"></i> Show with posts</span></a>
-                                    <a href="{{ route('backend.categories.edit', ['category_id' => $category->id]) }}"><span class="label label-default pull-right"><i class="fa fa-pencil" aria-hidden="true"></i> Edit </span></a>
-                                    <span class="label pull-right"><i class="fa fa-file-o" aria-hidden="true"></i> {{ $category->num }}</span>
+                                        <span class="label label-default"><a href="{{ route('backend.videos.edit', ['video_id' => $video->id]) }}">
+                                                <i class="fa fa-pencil" aria-hidden="true"></i>Edit</a></span>
                                 </div>
                                 <div class="col-lg-3"> {{ $video->slug }}</div>
                                 <br>

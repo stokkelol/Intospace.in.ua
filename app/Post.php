@@ -8,7 +8,7 @@ use Cviebrock\EloquentSluggable\SluggableTrait;
 use App\Traits\InstanceTrait;
 use Cache;
 
-class Post extends Entity implements SluggableInterface
+class Post extends Model implements SluggableInterface
 {
 
     use SluggableTrait;
@@ -114,12 +114,10 @@ class Post extends Entity implements SluggableInterface
         return $query->whereSlug($slug)->firstOrFail();
     }
 
-    /*
     public function scopeByStatus($query, $statuses)
     {
         return $query->where('status', $statuses);
     }
-    */
 
     public function scopeRecent($query)
     {
