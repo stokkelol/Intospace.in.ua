@@ -4,12 +4,13 @@
 </div>
 <br>
 
-<ul>
-  @foreach ($tags as $tag)
-    <li><a href="{{ route('tag', ['slug' => $tag->slug]) }}" class="{{ (($tag->id)%2 == 0) ? 'tag-odd' : 'tag-even' }}">{{ $tag->tag }}</a>
-    </li>
-  @endforeach
-</ul>
+<div class="text-center clearfix">
+    <br>
+    <br>
+    @foreach ($tags as $tag)
+        <a href="{{ route('tag', ['slug' => $tag->slug]) }}" class="{{ (($tag->id)%2 == 0) ? 'tag-odd' : 'tag-even' }}">{{ $tag->tag }}</a>
+    @endforeach
+</div>
 <br>
 
 <div class="sidebar-posts">

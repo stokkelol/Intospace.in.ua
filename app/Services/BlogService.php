@@ -3,8 +3,6 @@
 namespace App\Services;
 
 use App\Post;
-use App\Tag;
-use App\PostTag;
 
 class BlogService
 {
@@ -20,6 +18,5 @@ class BlogService
         $relatedposts = $relatedposts->orderBy('created_at')->take($number)->get();
 
         return $relatedposts;
-
     }
 }

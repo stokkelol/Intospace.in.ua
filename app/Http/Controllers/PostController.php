@@ -8,8 +8,10 @@ use App\Http\Requests;
 use App\Category;
 use App\Post;
 use App\Tag;
+use App\Video;
 use View;
 use App;
+use LithiumDev\TagCloud\TagCloud;
 
 class PostController extends Controller
 {
@@ -33,10 +35,11 @@ class PostController extends Controller
 
         $data = [
             'posts'         =>  $posts,
-            'tags'          =>  Tag::all(),
+            'tags'          =>  Tag::with('posts')->groupBy('tag')->orderBy('tag', 'asc')->get(),
             'randposts'     =>  $randposts,
             'latestposts'   =>  $latestposts,
-            'app_name'      =>  'https://intospace.in.ua/'
+            'app_name'      =>  'https://intospace.in.ua/',
+            'videos'        =>  Video::with('user')->groupBy('id')->orderBy('id', 'desc')->take(10)->get(),
         ];
 
         return View::make('frontend.main', $data);

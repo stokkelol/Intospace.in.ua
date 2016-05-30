@@ -30,6 +30,10 @@ a {
     color: darken(white, 10%);
 }
 
+.login-panel {
+  padding-top: 60px;
+}
+
 // TOP POST
 .nav-pills > li {
     float: left;
@@ -51,15 +55,6 @@ a {
 .nav-pills > li.active > a:hover {
     @include default-hover;
     background-color: transparent;
-}
-
-.dropdown-menu {
-
-  li {
-    a {
-      @include default-hover;
-    }
-  }
 }
 
 .top-post {
@@ -257,4 +252,10 @@ a {
 
 .main-video {
   padding-top: 60px;
+}
+
+//FOOTER
+
+.footer-copyright {
+  font-size: 12px;
 }

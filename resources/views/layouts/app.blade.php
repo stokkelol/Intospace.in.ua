@@ -21,6 +21,8 @@
     @yield('content')
     @include('frontend.partials.footer')
     <!-- JavaScripts -->
+
+    <script src="{{ elixir('js/all.js') }}"></script>
     <script>
 
     var popupSize = {
@@ -79,6 +81,5 @@ if ($(window).width() > MQL) {
 $('[data-toggle="tooltip"]').tooltip();
 });
 </script>
-<script src="{{ elixir('js/all.js') }}"></script>
 </body>
 </html>

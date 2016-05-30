@@ -65,8 +65,8 @@
                       <div class="panel-body">
                         <ul>
                           @foreach ($popular_posts as $popular_post)
-                            <li>{{ $popular_post->title }}</li>
-                            @endforeach
+                                <li>{{ $popular_post->title }}</li>
+                          @endforeach
                         </ul>
                       </div>
                     </div>

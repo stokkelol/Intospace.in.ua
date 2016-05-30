@@ -41,10 +41,10 @@
                     <span>Backend</span>
                   </a></li>
                 <li><a href="{{ url('/backend/posts') }}"><i class="fa fa-list" aria-hidden="true"></i><span>Posts</span></a></li>
+                <li><a href="{{ url('/backend/videos') }}"><i class="fa fa-video-camera" aria-hidden="true"></i><span>Videos</span></a></li>
                 <li><a href="{{ url('/backend/categories') }}"><i class="fa fa-columns" aria-hidden="true"></i><span>Categories</span></a></li>
                 <li><a href="{{ url('/backend/tags') }}"><i class="fa fa-tags" aria-hidden="true"></i><span>Tags</span></a></li>
                 <li><a href="{{ url('/backend/users') }}"><i class="fa fa-users" aria-hidden="true"></i><span>Users</span></a></li>
-                <li><a href="{{ url('/backend/videos') }}"><i class="fa fa-users" aria-hidden="true"></i><span>Videos</span></a></li>
             </ul>
 
             <!-- Right Side Of Navbar -->

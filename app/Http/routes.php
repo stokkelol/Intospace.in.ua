@@ -16,11 +16,16 @@ Route::auth();
 /**
  * Routes for frontend
  */
-Route::get('/', 'PostController@maintainance');
+Route::get('/', 'PostController@index');
 
 Route::get('/post/{slug}', [
     'as'    =>  'post',
     'uses'  =>  'PostController@post'
+]);
+
+Route::get('/video/{slug}', [
+    'as'    =>  'video',
+    'uses'  =>  'VideoController@video'
 ]);
 
 Route::get('videos', 'VideoController@index');

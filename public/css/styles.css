@@ -8,6 +8,9 @@ a {
 .img-thumbnail {
   color: #e6e6e6; }
 
+.login-panel {
+  padding-top: 60px; }
+
 .nav-pills > li {
   float: left; }
 
@@ -27,9 +30,6 @@ a {
 .nav-pills > li.active > a:hover {
   transition: color .4s ease-out, background .2s ease-in;
   background-color: transparent; }
-
-.dropdown-menu li a {
-  transition: color .4s ease-out, background .2s ease-in; }
 
 .top-post em {
   font-size: 14px;
@@ -195,5 +195,8 @@ a {
 
 .main-video {
   padding-top: 60px; }
+
+.footer-copyright {
+  font-size: 12px; }
 
 /*# sourceMappingURL=styles.css.map */
