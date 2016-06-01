@@ -8,7 +8,7 @@ class BlogService
 {
     public function getRelatedPosts($tags)
     {
-        $number = 4;
+        $number = 3;
 
         $tagsids = $tags->lists('tag');
         $relatedposts = Post::whereHas('tags', function ($query) use ($tagsids) {

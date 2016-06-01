@@ -50,19 +50,4 @@ class Tag extends Model implements SluggableInterface
     {
         return static::where('slug', 'like', $slug)->first();
     }
-
-    public function postsCount()
-    {
-        return $this->belongsToMany(Post::class)->selectRaw('count(post_id) as aggregate')->groupBy('post_id');
-    }
-
-    public function getPostsCountAttribute()
-    {
-        if (!array_key_exists('postsCount', $this->relations))
-            $this->load('postsCount');
-
-        $related = $this->getRelation('postsCount');
-
-        return ($related) ? (int) $related->aggregate : 0;
-    }
 }

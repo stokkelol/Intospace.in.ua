@@ -27,8 +27,15 @@ class Video extends Model implements SluggableInterface
         'published_at',
     ];
 
+    public static $instance = null;
+
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function getBySlug($slug)
+    {
+        return $this->with(['user'])->where('slug', $slug)->first();
     }
 }

@@ -1,2 +1,2 @@
   <br>
-  <a href="{{ route('category', ['slug' => $post->category->slug]) }}">{{ $post->category->title }}</a>&nbsp;
+  <a href="{{ route('categories', ['slug' => $post->category->slug]) }}">{{ $post->category->title }}</a>&nbsp;

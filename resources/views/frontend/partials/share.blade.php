@@ -10,5 +10,4 @@
 
   <a href="http://vk.com/share.php?url={{urlencode($app_name.'post/'.$post->slug)}}" target="_blank">
     <i class="fa fa-vk" aria-hidden="true"></i></a>
-
 </div>

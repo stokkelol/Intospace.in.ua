@@ -17,4 +17,19 @@ class VideoController extends Controller
         
         return View::make('frontend.videos.index', compact('videos'));
     }
+
+    public function video($slug)
+    {
+        $video = Video::getInstance()->getBySlug($slug);
+
+        $data = [
+            'video'     =>  $video,
+            'title'     =>  $video->title,
+            'app_name'  =>  'https://intospace.in.ua/'
+        ];
+
+        //dd($video);
+
+        return View::make('frontend.videos.video', $data);
+    }
 }

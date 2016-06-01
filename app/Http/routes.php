@@ -18,31 +18,33 @@ Route::auth();
  */
 Route::get('/', 'PostController@index');
 
-Route::get('/post/{slug}', [
-    'as'    =>  'post',
+Route::get('/posts/{slug}', [
+    'as'    =>  'posts',
     'uses'  =>  'PostController@post'
-]);
-
-Route::get('/video/{slug}', [
-    'as'    =>  'video',
-    'uses'  =>  'VideoController@video'
 ]);
 
 Route::get('videos', 'VideoController@index');
 
-Route::get('/tag/{slug}', [
-    'as'    =>  'tag',
+Route::get('/videos/{slug}', [
+    'as'    =>  'videos',
+    'uses'  =>  'VideoController@video'
+]);
+
+Route::get('/tags/{slug}', [
+    'as'    =>  'tags',
     'uses'  =>  'TagController@show'
 ]);
 
-Route::get('/category/{slug}', [
-    'as'    =>  'category',
+Route::get('/categories/{slug}', [
+    'as'    =>  'categories',
     'uses'  =>  'CategoryController@show'
 ]);
 
 Route::get('/home', 'HomeController@index');
 
 Route::get('/feed', 'FeedController@feed');
+
+Route::get('/sitemap', 'SitemapController@sitemap');
 
 /**
  * Routes for backend
@@ -100,3 +102,5 @@ Route::group(['prefix' => 'backend', 'middleware' => 'auth'], function () {
         'uses'  =>  'Backend\PostController@setCategory'
     ]);
 });
+
+Route::get('pages/{page_title}', 'PageController@index');

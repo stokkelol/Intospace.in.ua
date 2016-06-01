@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default navbar-fixed-top navbar-custom ">
+<nav class="navbar navbar-default navbar-fixed-top navbar-custom">
     <div class="container-fluid navbar-container">
         <div class="navbar-header page-scroll">
 
@@ -18,8 +18,8 @@
 
         <div class="collapse navbar-collapse" id="app-navbar-collapse">
             <!-- Left Side Of Navbar -->
-            <ul class="nav navbar-nav">
-                <li><a href="{{ url('/home') }}">Home</a></li>
+            <ul class="nav navbar-nav cl-effect-1">
+                <!--<li><a href="{{ url('/home') }}">Home</a></li>-->
                 @if (Request::path() == 'login')
                 @elseif (Request::path() == 'register')
                 @else
@@ -27,19 +27,21 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Последние обзоры<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             @foreach ($navbarposts as $post)
-                                <li><a href="/../post/{{ $post->slug }}">{{ $post->title }}</a></li>
+                                <li><a href="{{ route('posts', ['slug' => $post->slug]) }}">{{ $post->title }}</a></li>
                             @endforeach
                         </ul>
                     </li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Последние видео<span class="caret"></span></a>
+                        <a href="/videos">Последние видео<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             @foreach ($navbarvideos as $video)
-                                <li><a href="/../video/{{ $video->slug }}">{{ $video->title }}</a></li>
+                                <li><a href="{{ route('videos', ['slug' => $video->slug])}}">{{ $video->title }}</a></li>
                             @endforeach
                         </ul>
                     </li>
                 @endif
+                <li class="hidden-sm hidden-xs"><a href="/pages/top-2015">Топ 2015</a></li>
+                <li class="hidden-sm hidden-xs"><a href="#tagscloud">Облако тегов</a></li>
             </ul>
 
 

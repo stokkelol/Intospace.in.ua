@@ -28,7 +28,8 @@
         "lucadegasperi/oauth2-server-laravel": "^5.1",
         "roumen/feed": "^2.10",
         "teamtnt/tntsearch": "0.6.*",
-        "lithiumdev/laravel-tagcloud": "~1.0"
+        "lithiumdev/laravel-tagcloud": "~1.0",
+        "roumen/sitemap": "^2.6"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

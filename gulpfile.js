@@ -24,13 +24,15 @@ elixir(function(mix) {
 
     mix.styles([
         'bootstrap.min.css',
-        'normalize.css'
+        'normalize.css',
+        'component.css'
     ], 'public/css/libs.css');
 
     mix.scripts([
         'jquery-2.2.3.min.js',
         'bootstrap.min.js',
-        'select2.min.js'
+        'select2.min.js',
+        'modernizr.custom.js'
         ], 'public/js/all.js');
 
     mix.version([

@@ -2,7 +2,7 @@
 @if ($post->status == 'active'  && $post->is_pinned == '0')
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
       <div class="clearfix regular-post-title clearfix">
-          <a href="{{ route('post', ['slug' => $post->slug]) }}">{{$post->title}}</a>
+          <a href="{{ route('posts', ['slug' => $post->slug]) }}">{{$post->title}}</a>
       </div>
       <br>
       <div class="col-lg-5 clearfix">
@@ -21,9 +21,9 @@
             {{ $post->excerpt }}
         </div>
 
-        <div class="clearfix">
+        <div class="clearfix cl-effect-1">
             <p>
-              <a href="{{ route('post', ['slug' => $post->slug]) }}">Читать далее</a>
+              <a href="{{ route('posts', ['slug' => $post->slug]) }}" class="more-link">Читать далее</a>
             </p>
         </div>
       </div>

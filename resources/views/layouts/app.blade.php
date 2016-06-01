@@ -21,10 +21,8 @@
     @yield('content')
     @include('frontend.partials.footer')
     <!-- JavaScripts -->
-
     <script src="{{ elixir('js/all.js') }}"></script>
     <script>
-
     var popupSize = {
         width: 780,
         height: 550

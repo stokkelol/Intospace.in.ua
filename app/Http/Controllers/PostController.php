@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use LithiumDev\TagCloud\TagCloud;
 use App\Http\Requests;
 use App\Category;
 use App\Post;
@@ -11,7 +11,8 @@ use App\Tag;
 use App\Video;
 use View;
 use App;
-use LithiumDev\TagCloud\TagCloud;
+use DB;
+
 
 class PostController extends Controller
 {
@@ -36,6 +37,11 @@ class PostController extends Controller
         $data = [
             'posts'         =>  $posts,
             'tags'          =>  Tag::with('posts')->groupBy('tag')->orderBy('tag', 'asc')->get(),
+            'counttags'     =>  Tag::join('post_tag', 'tags.id', '=', 'post_tag.tag_id')
+                                    ->groupBy('tags.id')
+                                    ->select(['tags.*', DB::raw('COUNT(*) as cnt')])
+                                    ->orderBy('cnt', 'desc')
+                                    ->get(),
             'randposts'     =>  $randposts,
             'latestposts'   =>  $latestposts,
             'app_name'      =>  'https://intospace.in.ua/',

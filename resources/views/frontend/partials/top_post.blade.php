@@ -1,19 +1,21 @@
 <div class="container">
   <div class="top-post">
-    <div class="col-lg-12 top-post-title">
-      <a href="{{ route('post', ['slug' => $post->slug]) }}">{{$post->title}}</a>
+    <div class="top-post-desc">
+        <div class="col-lg-12 top-post-title">
+            <a href="{{ route('posts', ['slug' => $post->slug]) }}">{{$post->title}}</a>
+        </div>
     </div>
     <div class="col-lg-4 col-md-4 col-sm-12 col-sx-12 top-post-img">
       <img src="/upload/covers/{{ $post->img }}" class="img-thumbnail img-responsive center-block">
     </div>
     <div class="col-lg-8 col-md-8 col-sm-12 col-sx-12 top-post-textarea">
-        <div><em class="post-top-author">{{ $post->published_at->diffForHumans() }} | <strong>{{ $post->user->name }}</strong></em>
+        <div><em class="top-post-date">{{ $post->published_at->diffForHumans() }} | <strong>{{ $post->user->name }}</strong></em>
             <br>
           @include('frontend.partials.tags', ['tags' => $post->tags])
         </div>
             @include('frontend.partials.share')
         <br>
-        <ul class="nav nav-pills">
+        <ul class="nav nav-pills cl-effect-1">
             <li class="active"><a data-toggle="tab" href="#{{ $post->id}}tab1">Обзор</a></li>
             <li><a data-toggle="tab" href="#{{ $post->id}}tab2">Видео</a></li>
             <li><a data-toggle="tab" href="#{{ $post->id}}tab3">Ссылки</a></li>
@@ -30,6 +32,5 @@
             <div id="{{ $post->id}}tab4" class="tab-pane fade">{!! $post->similar !!}</div>
         </div>
     </div>
-
   </div>
 </div>

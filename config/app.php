@@ -198,6 +198,8 @@ return [
         //Zizaco\Entrust\EntrustServiceProvider::class,
         //https://github.com/LithiumHosting/laravel-tagcloud
         LithiumDev\TagCloud\ServiceProvider::class,
+        //https://github.com/RoumenDamianoff/laravel-sitemap
+        Roumen\Sitemap\SitemapServiceProvider::class,
 
 
     ],

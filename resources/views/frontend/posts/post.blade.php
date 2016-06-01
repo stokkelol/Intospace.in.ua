@@ -38,9 +38,12 @@
     <hr>
     <div class="container">
         <div class="col-lg-1"></div>
-        <div class="col-lg-10">
-          @include('frontend.partials.related')
-        </div>
+            <div class="col-lg-10">
+                @include('frontend.partials.related')
+                <hr>
+                @include('frontend.partials.disqus')
+
+            </div>
         <div class="col-lg-1"></div>
     </div>
 @endsection

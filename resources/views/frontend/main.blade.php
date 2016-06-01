@@ -15,7 +15,7 @@
         @foreach ($posts as $post)
             @if ($post->is_pinned == '1')
                 @include('frontend.partials.top_post', ['toppost' => $post])
-                <div class="row"><hr></div>
+
             @endif
         @endforeach
     @endif
@@ -23,7 +23,11 @@
 
 @section('content')
     <div class="container">
+      <hr>
         <div class="row">
+            @if (Request::path() != '/')
+                <div class="regular-post-padding"></div>
+            @endif
                 <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
                     @include('frontend.partials.regular_post', ['posts'  =>  $posts])
                 </div>
