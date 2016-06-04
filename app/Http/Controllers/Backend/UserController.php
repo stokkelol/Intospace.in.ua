@@ -46,21 +46,27 @@ class UserController extends Controller
       //dd($user->email);
       $user->save();
 
-      return Redirect::back();
+      return Redirect::route('backend.users.index');
     }
 
     public function edit($user_id)
     {
       $user = User::findOrNew($user_id);
 
-      $user->update();
-
-      return Redirect::back();
+      return View::make('backend.users.edit', compact('user'));
     }
 
     public function update(Request $request, $user_id)
     {
+        $user = User::findOrNew($user_id);
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->password = $request->input('password');
+        //$user->role = $request->input('role');
+        //dd($user);
+        $user->update();
 
+        return Redirect::route('backend.users.index');
     }
 
     public function destroy($user_id)

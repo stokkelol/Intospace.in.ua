@@ -1,24 +1,27 @@
 @foreach ($posts as $post)
 @if ($post->status == 'active'  && $post->is_pinned == '0')
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-      <div class="clearfix regular-post-title clearfix">
-          <a href="{{ route('posts', ['slug' => $post->slug]) }}">{{$post->title}}</a>
+      <div class="col-lg-9">
+        <div class="clearfix regular-post-title clearfix">
+            <a href="{{ route('posts', ['slug' => $post->slug]) }}">{{$post->title}}</a>
+        </div>
       </div>
+      <div class="col-lg-3">@include('frontend.partials.share')</div>
       <br>
-      <div class="col-lg-5 clearfix">
+      <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 clearfix">
           <img src="/upload/covers/{{ $post->img_thumbnail }}" class="img-responsive img-thumbnail">
       </div>
-      <div class="col-lg-7 clearfix">
+      <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12 clearfix">
         <div>
-            <em class="regular-post-author">{{ $post->published_at->diffForHumans() }} | <strong>{{ $post->user->name }}</strong></em>
+            <em class="regular-post-author">{{ $post->published_at->diffForHumans() }} - <strong>{{ $post->user->name }}</strong></em>
         </div>
         <div class="regular-post-tags clearfix">
             @include('frontend.partials.tags', ['tags' => $post->tags])
         </div>
-            @include('frontend.partials.share')
+
         <br>
         <div class="clearfix">
-            {{ $post->excerpt }}
+            {!! $post->excerpt !!}
         </div>
 
         <div class="clearfix cl-effect-1">
@@ -33,3 +36,4 @@
     </div>
 @endif
 @endforeach
+<div class="paginate text-center">{!! $posts->render() !!}</div>

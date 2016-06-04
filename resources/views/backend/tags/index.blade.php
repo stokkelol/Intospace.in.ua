@@ -13,6 +13,9 @@
         <div class="row">
               <div class="panel panel-warning">
                     <div class="panel-heading">Tags</div>
+                    <div class="posts-paginate text-center">
+                        {!! $tags->render() !!}
+                    </div>
                     <div class="panel-body">
                       <div class="categories-list">
                           <div class="col-lg-1 element">id</div>

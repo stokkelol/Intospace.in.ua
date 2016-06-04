@@ -25,19 +25,19 @@ class PostController extends Controller
      *
      * @return View
      */
-    public function index()
+    public function index(Request $request)
     {
-        if (Input::has('status')) {
-            $query = Input::get('status');
+        if ($request->has('status')) {
+            $query = $request->get('status');
             $posts = Post::with('category')
                 ->byStatus($query)
                 ->paginate(15);
-        } elseif (Input::has('search')) {
-            $query = Input::get('search');
+        } elseif ($request->has('search')) {
+            $query = $request->get('search');
             $posts = Post::with('category')
                 ->where('title', 'like', '%'.$query.'%')
                 ->orWhere('excerpt', 'like', '%'.$query.'%')
-                ->orderBy('id', 'ASC')
+                ->orderBy('id', 'desc')
                 ->paginate(15);
         } else {
             $posts = Post::with('category')
@@ -88,7 +88,7 @@ class PostController extends Controller
             $image = $request->file('img');
             $this->saveImage($image);
             $post->img = $image->getClientOriginalName();
-            $post->img_thumbnail = '300x300_'.$image->getClientOriginalName();
+            $post->img_thumbnail = 'thumbnail_'.$image->getClientOriginalName();
         }
 
         if($request->hasFile('logo')) {
@@ -97,6 +97,8 @@ class PostController extends Controller
           $post->logo = $image->getClientOriginalName();
         }
 
+        $post->published_at = $request->input('published_at');
+        //$post->published_at = Carbon::now();
         $post->save();
         $this->syncTags($post, $request->input('tagList'));
 
@@ -140,9 +142,16 @@ class PostController extends Controller
             $image = $request->file('img');
             $this->saveImage($image);
             $post->img = $image->getClientOriginalName();
-            $post->img_thumbnail = '300x300_'.$image->getClientOriginalName();
+            $post->img_thumbnail = 'thumbnail_'.$image->getClientOriginalName();
         }
 
+        if($request->hasFile('logo')) {
+          $image = $request->file('logo');
+          $this->saveLogo($image);
+          $post->logo = $image->getClientOriginalName();
+        }
+        $post->updated_at = $request->input('updated_at');
+        $post->published_at = $request->input('published_at');
         $post->update();
 
         Flash::message('Post updated!');
@@ -256,11 +265,11 @@ class PostController extends Controller
         $post->title = $request->input('title');
         $post->excerpt = $request->input('excerpt');
         $post->content = $request->input('content');
-        $post->published_at = Carbon::now();
         $post->category_id = $request->input('category_id');
         $this->syncTags($post, $request->input('tagList'));
         $post->links = $request->input('links');
-        $post->published_at = $request->input('published_at');
+        $post->video = $request->input('video');
+        $post->similar = $request->input('similar');
 
         return $post;
     }

@@ -4,11 +4,13 @@ namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Traits\InstanceTrait;
+use Zizaco\Entrust\Traits\EntrustUserTrait;
 
 class User extends Authenticatable
 {
 
     use InstanceTrait;
+    use EntrustUserTrait;
 
     /**
      * Users table name
@@ -55,12 +57,4 @@ class User extends Authenticatable
     {
         return $this->hasMany(Video::class, 'user_id');
     }
-
-    /*
-    public function setPasswordAttribute($password)
-    {
-        $this->attributes['password'] = bcrypt($password);
-    }
-    */
-
 }

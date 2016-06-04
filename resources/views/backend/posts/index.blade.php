@@ -31,6 +31,9 @@
                                   Posts
                                 </p>
                               </div>
+                              <div class="posts-paginate text-center">
+                                  {!! $posts->render() !!}
+                              </div>
                                 <div class="posts-list">
                                     <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 text-default">id</div>
                                     <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 text-danger">author</div>
@@ -48,7 +51,7 @@
                                   <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"><span>{{ $post->status }}</span>
                                   </div>
                                   <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><span>
-                                          <a href="{{ route('backend.posts.show', ['post_id' => $post->id]) }}" class="posts-title"><strong>{{ $post->title }}</strong></a></span>
+                                          <a href="{{ route('posts', ['slug' => $post->slug]) }}" class="posts-title"><strong>{{ $post->title }}</strong></a></span>
                                           <p>
                                             <span class="label label-default"><a href="{{ route('backend.posts.edit', ['post_id' => $post->id]) }}">
                                                         <i class="fa fa-pencil" aria-hidden="true"></i>Edit</a></span>
@@ -71,15 +74,12 @@
                                   </div>
 
                                   <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"><span>{{ $post->category->title }}</span></div>
-                                  <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"><span>{{ $post->created_at }}</span></div>
+                                  <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"><span>{{ $post->published_at }}</span></div>
                                 </div>
                                 <hr>
 
                                 @endforeach
                                     <br>
-                                    <div class="posts-paginate">
-                                        {!! $posts->render() !!}
-                                    </div>
                             </div>
                         </div>
                 </div>

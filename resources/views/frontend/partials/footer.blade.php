@@ -1,4 +1,5 @@
 <hr>
+<div id="sticky-bottom-anchor"></div>
 <footer>
   <div class="container">
       <div class="row">
@@ -6,9 +7,9 @@
             <p class="footer-column-title"><i class="fa fa-list" aria-hidden="true"></i> Материалы:</p>
                 <div class="footer-column">
                     <ul class="list-unstyled cl-effect-1">
-                        <li><a href="#">Последние обзоры</a></li>
-                        <li><a href="#">Последние видео</a></li>
-                        <li><a href="#">Ежегодные топ-50</a></li>
+                        <li><a href="/">Последние обзоры</a></li>
+                        <li><a href="/videos">Последние видео</a></li>
+                        <li><a href="/pages/top-2015">Ежегодные топ-50</a></li>
                         <li><a href="#"></a></li>
                         <li><a href="#"></a></li>
                     </ul>
@@ -18,7 +19,7 @@
             <p class="footer-column-title">Друзья:</p>
                 <div class="footer-column">
                     <ul class="list-unstyled cl-effect-1">
-                        <li><a href="www.neformat.com.ua">neformat.com.ua</a></li>
+                        <li><a href="http://neformat.com.ua">neformat.com.ua</a></li>
                         <li><a href="http://vk.com/expcore">e<sup>x</sup></a></li>
                     </ul>
                 </div>

@@ -12,7 +12,7 @@ use App\Video;
 use View;
 use App;
 use DB;
-
+use Input;
 
 class PostController extends Controller
 {
@@ -25,11 +25,22 @@ class PostController extends Controller
     public function index($slug = '')
     {
 
-        $posts = Post::with('category', 'tags')
-                ->whereNotIn('status', ['deleted', 'refused'])
-                ->groupBy('id')
-                ->orderBy('id', 'desc')
-                ->paginate(20);
+        if (Input::has('search')) {
+          $query = Input::get('search');
+          $posts = Post::with('category', 'tags', 'user')
+                   ->where('title', 'like', '%'.$query.'%')
+                   ->orWhere('excerpt', 'like', '%'.$query,'%')
+                   ->whereIn('status', ['active'])
+                   ->groupBy('published_at')
+                   ->orderBy('published_at', 'desc')
+                   ->paginate(15);
+        } else {
+          $posts = Post::with('category', 'tags', 'user')
+                  ->whereIn('status', ['active'])
+                  ->groupBy('published_at')
+                  ->orderBy('published_at', 'desc')
+                  ->paginate(15);
+        }
 
         $randposts = $this->getRandomPosts();
         $latestposts = $this->getLatestPosts();
@@ -90,7 +101,7 @@ class PostController extends Controller
     public function getRandomPosts()
     {
         $number = 6;
-        $randomposts = Post::all()->random($number);
+        $randomposts = Post::all()->whereIn('status', ['active'])->random($number);
 
         return $randomposts;
     }

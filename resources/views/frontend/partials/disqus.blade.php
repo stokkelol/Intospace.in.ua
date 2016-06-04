@@ -1,7 +1,7 @@
 @if (App::environment() === 'production')
     <div id="disqus_thread"></div>
     <script type="text/javascript">
-        var disqus_shortname = 'SHORTNAME HERE';
+        var disqus_shortname = 'intospacewithdeath';
         @if (isset($slug))
         var disqus_identifier = 'blog-{{ $slug }}';
         @endif

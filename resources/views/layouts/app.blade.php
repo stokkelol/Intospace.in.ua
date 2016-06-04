@@ -7,12 +7,9 @@
     @include('frontend.partials.meta')
     <meta name="keywords" content="music, deathmetal, blackmetal, sludge, doom, thrash metal, avantgarde, psychedelic, neformat">
     <meta name="robots" content="">
-    <!-- Fonts -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css" integrity="sha384-XdYbMnZ/QjLh6iI4ogqCTaIjrFk87ip+ekIjefZch0Y+PvJ8CDYtEs1ipDmPorQ+" crossorigin="anonymous">
     <!-- Styles -->
-
-    <link href="{{ elixir('css/libs.css') }}" rel="stylesheet">
-    <link href="{{ elixir('css/styles.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ elixir('css/libs.css') }}">
+    <link rel="stylesheet" href="{{ elixir('css/styles.css') }}">
 </head>
 <body>
     @include('frontend.partials.navbar')
@@ -22,6 +19,7 @@
     @include('frontend.partials.footer')
     <!-- JavaScripts -->
     <script src="{{ elixir('js/all.js') }}"></script>
+    @include('frontend.partials.analytics')
     <script>
     var popupSize = {
         width: 780,
@@ -77,6 +75,26 @@ if ($(window).width() > MQL) {
 
 // Initialize tooltips
 $('[data-toggle="tooltip"]').tooltip();
+});
+</script>
+<script>
+function sticky_relocate() {
+var window_top = $(window).scrollTop();
+var div_top = $('#sticky-anchor').offset().top;
+var div_bot = $(window).scrollTop()+$(window).height();
+var bot = $('#sticky-bottom-anchor').offset().top;
+if ((window_top+50) > div_top) {
+    $('#sticky').addClass('stick');
+    $('#sticky-anchor').height($('#sticky').outerHeight());
+} else {
+    $('#sticky').removeClass('stick');
+    $('#sticky-anchor').height(0);
+}
+}
+
+$(function() {
+$(window).scroll(sticky_relocate);
+sticky_relocate();
 });
 </script>
 </body>

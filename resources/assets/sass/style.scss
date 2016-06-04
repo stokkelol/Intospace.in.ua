@@ -31,9 +31,15 @@
   }
 }
 
+
+
 $blue: #337ab7;
 $dark-blue: #084b85;
 $black: #060606;
+
+html {
+  font-family: 'Open Sans' !important;
+}
 
 body {
   margin: 0 auto;
@@ -42,6 +48,14 @@ body {
 
 .navbar {
   position: absolute;
+}
+
+blockquote {
+    padding:10px 20px;
+    margin:0 0 20px;
+    font-size:10px;
+    border-left:5px solid #337ab7;
+    text-align: justify;
 }
 
 a {
@@ -187,6 +201,10 @@ a {
     }
 }
 
+.top-post-links {
+  font-size: 36px;
+}
+
 .img-preview {
   width: 150px;
   height: 150px;
@@ -230,7 +248,7 @@ a {
 .social-buttons {
   font-size: 24px;
   text-align: right;
-  margin-top: -46px;
+
   a {
     &:hover {
       @include Opacity(0.8);
@@ -241,7 +259,6 @@ a {
 .regular-post-title {
   a {
     font-size: 24px;
-    padding-left: 75px;
   }
 }
 
@@ -250,6 +267,9 @@ a {
 }
 
 .regular-post-img {
+  @media only screen and (max-width: 970px) {
+    text-align: center;
+  }
   width: 300px;
   height: 300px;
 }
@@ -265,7 +285,12 @@ a {
   padding-left: 5px;
 }
 
+.regular-post-author {
+  color: $blue;
+}
+
 .more-link {
+  font-size: 16px;
   &:hover {
     text-decoration:none;
   }
@@ -282,6 +307,19 @@ a {
     text-align:center;
   }
   text-align: center;
+}
+
+.sidebar-list {
+  font-size: 12px;
+  @media all and (max-width: 970px) {
+    text-align:center;
+  }
+}
+
+.sidebar-title {
+  @media all and (max-width: 970px) {
+    text-align:center;
+  }
 }
 
 .sidebar-image {
@@ -329,6 +367,20 @@ a {
   }
 }
 
+.post-links {
+  font-size: 28px;
+  color: $blue;
+}
+
+.post-similars {
+  font-size:16px;
+  color: $blue;
+  p {
+    font-size: 14px;
+    color: #888;
+  }
+}
+
 //RELATED POSTS
 
 .related-posts {
@@ -337,17 +389,17 @@ a {
   justify-content: space-around;
 
   .related-post-item {
-    width: 260px;
-    height: 260px;
+    width: 220px;
+    height: 220px;
 
     .related-post-img {
-      width: 235px;
-      height: 235px;
+      width: 205px;
+      height: 205px;
     }
 
     .related-post-title {
       text-align: center;
-      font-size: 18px;
+      font-size: 14px;
     }
   }
 }
@@ -356,12 +408,6 @@ a {
 
 .main-video {
   padding-top: 60px;
-}
-
-.video-item {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
 }
 
 .video-title {
@@ -394,6 +440,7 @@ a {
   }
   text-align:left;
   font-size: 12px;
+  max-height: 80px;
   li {
     padding-top: 5px;
   }
@@ -442,4 +489,20 @@ a {
 
 .pages-container {
   padding-top: 60px;
+}
+
+#sticky {
+    width: 300px;
+    @media all and (max-width: 970px) {
+      text-align: center;
+      width: 100%;
+    }
+}
+
+#sticky.stick {
+    margin-top: 0 !important;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    position: fixed;
+    top: 0;
 }

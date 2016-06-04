@@ -8,15 +8,14 @@ class BlogService
 {
     public function getRelatedPosts($tags)
     {
-        $number = 3;
-
         $tagsids = $tags->lists('tag');
         $relatedposts = Post::whereHas('tags', function ($query) use ($tagsids) {
             $query->whereIn('tag', $tagsids);
         });
 
-        $relatedposts = $relatedposts->orderBy('created_at')->take($number)->get();
+        $relatedposts = $relatedposts->orderBy('created_at', 'desc')->take(4)->get();
 
         return $relatedposts;
     }
+
 }

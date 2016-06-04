@@ -16,7 +16,8 @@ class VideoController extends Controller
 {
     public function index()
     {
-        $videos = Video::all();
+        $videos = Video::orderBy('id', 'desc')->paginate(15);
+
         return View::make('backend.videos.index', compact('videos'));
     }
 
@@ -35,6 +36,7 @@ class VideoController extends Controller
 
         $video->save();
 
+        Flash::message('Video created!');
         return Redirect::route('backend.videos.edit', ['video_id' => $video->id]);
         //return Redirect::back();
     }

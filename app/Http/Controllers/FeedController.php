@@ -8,7 +8,6 @@ use App\Http\Requests;
 use App;
 use URL;
 
-
 class FeedController extends Controller
 {
     public function feed() {

@@ -28,9 +28,8 @@
                                                 <i class="fa fa-pencil" aria-hidden="true"></i>Edit</a></span>
                                 </div>
                                 <div class="col-lg-3"> {{ $video->slug }}</div>
-                                <br>
+                                <hr>
                             </div>
-                            <hr>
                         @endforeach
                       </div>
 

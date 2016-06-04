@@ -9,7 +9,7 @@
         <div class="form-group">
 
             {!! Form::label('inputExcerpt', 'Excerpt:') !!}
-            {!! Form::text('excerpt', null, ['class' => 'form-control']) !!}
+            {!! Form::textarea('excerpt', null, ['class' => 'form-control']) !!}
         </div>
 
 
@@ -23,22 +23,27 @@
 
 
         <div class="row">
-    <div class="col-lg-10"><div class="form-group">
-            {{ Form::label('inputLinks', 'Links:') }}
-            {{ Form::textarea('links', null, ['class' => 'form-control ckeditor']) }}
-        </div>
-    </div>
-        <div class="col-lg-2">
-            <div>
-                <ul>
-                    <li><i class="fa fa-instagram" aria-hidden="true"></i></li>
-                    <li><i class="fa fa-twitter-square" aria-hidden="true"></i></li>
-                    <li><i class="fa fa-facebook-official" aria-hidden="true"></i></li>
-                    <li><i class="fa fa-vk" aria-hidden="true"></i></li>
-                    <li><i class="fa fa-pinterest-square" aria-hidden="true"></i></li>
-                    <li><i class="fa fa-google-plus" aria-hidden="true"></i></li>
-                </ul>
+        <div class="col-lg-10"><div class="form-group">
+            <label for="inputLinks">Links:</label>
+            <textarea class="form-control links" id="links" name="links" cols="50" rows="10">
+            @if (empty($post))
+            <a href="#"><i class="fa fa-twitter-square" aria-hidden="true"></i></a>
+            <a href="#"><i class="fa fa-facebook-official" aria-hidden="true"></i></a>
+            <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+            <a href="#"><i class="fa fa-vk" aria-hidden="true"></i></a>
+            <a href="#"><i class="fa fa-youtube" aria-hidden="true"></i></a>
+            <a href="#"><i class="fa fa-lastfm-square" aria-hidden="true"></i></a>
+            @endif
+            @if (!empty($post) && !empty($post->links))
+
+              {{ $post->links }}
+            @endif
+            </textarea>
+            <!--{{ Form::label('inputLinks', 'Links:') }}
+            {{ Form::textarea('links', null, ['class' => 'form-control links', 'id' => 'links']) }}-->
             </div>
+        </div>
+        <div class="col-lg-2">
         </div>
         </div>
 
@@ -48,8 +53,8 @@
         </div>
 
         <div class="form-group">
-            {!! Form::label('inputSimial', 'Similars:') !!}
-            {!! Form::textarea('similar', null, ['class' => 'form-control ckeditor']) !!}
+            {!! Form::label('inputSimilar', 'Similars:') !!}
+            {!! Form::textarea('similar', null, ['class' => 'form-control']) !!}
         </div>
     </div>
     <div class="col-lg-3">
@@ -73,7 +78,7 @@
         <div class="form-group">
             <label for="inputImg">Cover</label>
             @if (!empty($post) && !empty($post->img))
-                <img src="/upload/covers/{{ $post->img }}" alt="">
+                <img src="/upload/covers/{{ $post->img }}" alt="" class="img-responsive">
                 @endif
             <input type="file" id="inputImg" name="img" class="">
         </div>
@@ -81,7 +86,7 @@
         <div class="form-group">
             <label for="inputLogo">Logo</label>
             @if (!empty($post) && !empty($post->img))
-                <img src="/upload/logos/{{ $post->logo }}" alt="">
+                <img src="/upload/logos/{{ $post->logo }}" alt="" class="img-responsive">
                 @endif
             <input type="file" id="inputLogo" name="logo" class="">
         </div>
@@ -91,6 +96,7 @@
             {!! Form::input('datetime', 'published_at', Carbon\Carbon::now(), ['class' => 'form-control']) !!}
         </div>
 
+
         <br>
 
         <div class="row">
@@ -99,7 +105,7 @@
     </div>
 </div>
 
-<script>
+    <script>
         CKEDITOR.replace( 'ckeditor', {
             filebrowserImageBrowseUrl: '/laravel-filemanager?type=Images',
             filebrowserBrowseUrl: '/laravel-filemanager?type=Files'

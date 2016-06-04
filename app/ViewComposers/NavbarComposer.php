@@ -13,7 +13,11 @@ class NavbarComposer
      */
     public function compose(View $view)
     {
-        $post = Post::all()->take(10);
+        $post = Post::with('user')->where('status', 'like', 'active')
+                                  ->groupBy('published_at')
+                                  ->orderBy('published_at', 'desc')
+                                  ->take(10)
+                                  ->get();
         $video = Video::all()->take(10);
         $view->with('navbarposts', $post);
         $view->with('navbarvideos', $video);

@@ -6,12 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title> Intospace.in.ua</title>
-
-    <!-- Fonts -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css" integrity="sha384-XdYbMnZ/QjLh6iI4ogqCTaIjrFk87ip+ekIjefZch0Y+PvJ8CDYtEs1ipDmPorQ+" crossorigin="anonymous">
-
     <!-- Styles -->
-
     <link rel="stylesheet" href="{{ elixir("css/all.css") }}">
 </head>
 <body>
@@ -45,6 +40,7 @@
                 <li><a href="{{ url('/backend/categories') }}"><i class="fa fa-columns" aria-hidden="true"></i><span>Categories</span></a></li>
                 <li><a href="{{ url('/backend/tags') }}"><i class="fa fa-tags" aria-hidden="true"></i><span>Tags</span></a></li>
                 <li><a href="{{ url('/backend/users') }}"><i class="fa fa-users" aria-hidden="true"></i><span>Users</span></a></li>
+                <li><a href="https://intospacewithdeath.disqus.com/admin/"><i class="fa fa-comments" aria-hidden="true"></i><span>Disqus</span></a></li>
             </ul>
 
             <!-- Right Side Of Navbar -->

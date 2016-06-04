@@ -24,7 +24,7 @@
 @section('content')
     <div class="container">
       <hr>
-        <div class="row">
+        <div class="row main-body">
             @if (Request::path() != '/')
                 <div class="regular-post-padding"></div>
             @endif

@@ -1,34 +1,60 @@
 
-  <p class="sidebar-tagline">...и всё более странная музыка...</p>
-  <div class="sidebar-image">
-      <img src="images/avatar.png" class="main-img">
-  </div>
-  <br>
-
-  <div class="text-center clearfix">
-      <br>
-      <br>
-      <section class="tagscloud" id="tagscloud">
-        <p><i class="fa fa-tags" aria-hidden="true"></i> Облако тегов:</p>
-          @foreach ($counttags as $tag)
-              @if (($tag->cnt) > 2)
-                  <a href="{{ route('tags', ['slug' => $tag->slug]) }}" class="{{ (($tag->id)%2 == 0) ? 'tag-odd' : 'tag-even' }}" style="font-size:16px"><span>{{ $tag->tag }}</span></a>
-              @else
-                  <a href="{{ route('tags', ['slug' => $tag->slug]) }}" class="{{ (($tag->id)%2 == 0) ? 'tag-odd' : 'tag-even' }}" style="font-size:12px">{{ $tag->tag }}</a>
-              @endif
-          @endforeach
-      </section>
-  </div>
-  <br>
 
 
+    <p class="sidebar-tagline">...и всё более странная музыка...</p>
+    <div class="sidebar-image">
+        <!--<img src="images/avatar.png" class="main-img">-->
+    </div>
+    <br>
+    <div class="text-left">
+        <p class="sidebar-title">Последние обзоры:</p>
+        <ul class="list-unstyled">
+            @foreach ($latestposts as $post)
+                <li class="sidebar-list">
+                    <a href="/posts/{{ $post->slug }}">{{ $post->title }}</a>
+                </li>
+            @endforeach
+        </ul>
+        <p class="sidebar-title">Последние видео:</p>
+        <ul class="list-unstyled">
+            @foreach ($videos as $video)
+                <li class="sidebar-list">
+                    <a href="/posts/{{ $video->slug }}">{{ $video->title }}</a>
+                </li>
+            @endforeach
+        </ul>
+    </div>
 
-  <div class="sidebar-posts">
-    <ul>
-      @foreach($posts as $post)
-        @if ($post->id <=10)
-          <li><a href="{{ $post->slug }}">{{ $post->title }}</a></li>
-        @endif
-      @endforeach
-    </ul>
-  </div>
+    <div class="text-center clearfix">
+        <br>
+        <br>
+        <div id="sticky-anchor"></div>
+        <div id="sticky">
+        <section class="tagscloud" id="tagscloud">
+          <p><i class="fa fa-tags" aria-hidden="true"></i> Облако тегов:</p>
+            @foreach ($counttags as $tag)
+                @if (($tag->cnt) > 5)
+                    <a href="{{ route('tags', ['slug' => $tag->slug]) }}" class="{{ (($tag->id)%3 == 0) ? 'tag-even' : 'tag-odd' }}" style="font-size:14px"><span>{{ $tag->tag }}</span></a>
+                @elseif (($tag->cnt) > 3)
+                    <a href="{{ route('tags', ['slug' => $tag->slug]) }}" class="{{ (($tag->id)%3 == 1) ? 'tag-even' : 'tag-odd' }}" style="font-size:12px"><span>{{ $tag->tag }}</span></a>
+                @else
+                    <a href="{{ route('tags', ['slug' => $tag->slug]) }}" class="{{ (($tag->id)%3 == 2) ? 'tag-even' : 'tag-odd' }}" style="font-size:10px">{{ $tag->tag }}</a>
+                @endif
+            @endforeach
+        </section>
+      </div>
+    </div>
+    <br>
+
+
+  <!--
+    <div class="sidebar-posts">
+      <ul class="list-unstyled">
+        @foreach($posts as $post)
+          @if (($post->id) > 75)
+            <li><a href="{{ $post->slug }}">{{ $post->title }}</a></li>
+          @endif
+        @endforeach
+      </ul>
+    </div>
+  -->
