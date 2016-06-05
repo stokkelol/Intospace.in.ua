@@ -97,5 +97,16 @@ $(window).scroll(sticky_relocate);
 sticky_relocate();
 });
 </script>
+<script>
+    $(document).ready(function() {
+        $("#sidebar").stick_in_parent()
+          .on('sticky_kit:bottom', function(e) {
+            $(this).parent().css('position', 'static');
+          })
+          .on('sticky_kit:unbottom', function(e) {
+            $(this).parent().css('position, relative');
+          })
+    });
+</script>
 </body>
 </html>

@@ -34,7 +34,8 @@ elixir(function(mix) {
         'jquery-2.2.3.min.js',
         'bootstrap.min.js',
         'select2.min.js',
-        'modernizr.custom.js'
+        'modernizr.custom.js',
+        'jquery.sticky-kit.min.js'
         ], 'public/js/all.js');
 
     mix.version([

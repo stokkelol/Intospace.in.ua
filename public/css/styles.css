@@ -261,7 +261,9 @@ a {
     max-height: 210px; }
 
 .main-img {
-  border-radius: 50%; }
+  border-radius: 50%;
+  min-width: 260px;
+  min-height: 260px; }
 
 .tag-odd {
   color: #337ab7; }

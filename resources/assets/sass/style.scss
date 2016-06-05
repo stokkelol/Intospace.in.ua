@@ -336,6 +336,8 @@ a {
 
 .main-img {
   @include rounded(50%);
+  min-width: 260px;
+  min-height: 260px;
 }
 
 .tag-odd {
