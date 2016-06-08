@@ -6,6 +6,24 @@ use Cviebrock\EloquentSluggable\SluggableTrait;
 use Illuminate\Database\Eloquent\Model;
 use App\Traits\InstanceTrait;
 
+/**
+ * App\Tag
+ *
+ * @property-read \App\User $user
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Post[] $posts
+ * @property-write mixed $slug
+ * @method static \Illuminate\Database\Query\Builder|\App\Tag findBySlug($slug)
+ * @method static \Illuminate\Database\Query\Builder|\App\Tag whereSlug($slug)
+ * @mixin \Eloquent
+ * @property integer $id
+ * @property string $tag
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
+ * @method static \Illuminate\Database\Query\Builder|\App\Tag whereId($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Tag whereTag($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Tag whereCreatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Tag whereUpdatedAt($value)
+ */
 class Tag extends Model implements SluggableInterface
 {
 

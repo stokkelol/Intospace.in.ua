@@ -74,7 +74,7 @@ class CategoryController extends Controller
     public function destroy($category_id)
     {
         $category = Post::findOrFail($category_id);
-        Post::destroy($category_id);
+        Category::destroy($category_id);
 
         Flash::message('Category deleted!');
         return redirect('backend/posts');

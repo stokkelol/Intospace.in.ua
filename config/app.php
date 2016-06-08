@@ -196,8 +196,6 @@ return [
         TeamTNT\TNTSearch\TNTSearchServiceProvider::class,
         //https://github.com/Zizaco/entrust
         Zizaco\Entrust\EntrustServiceProvider::class,
-        //https://github.com/LithiumHosting/laravel-tagcloud
-        LithiumDev\TagCloud\ServiceProvider::class,
         //https://github.com/RoumenDamianoff/laravel-sitemap
         Roumen\Sitemap\SitemapServiceProvider::class,
 
@@ -262,7 +260,6 @@ return [
         'Elasticsearch' => Cviebrock\LaravelElasticsearch\Facade::class,
         'LaravelAnalytics' => Spatie\LaravelAnalytics\LaravelAnalyticsFacade::class,
         'Feed' => Roumen\Feed\Feed::class,
-        'TNTSearch' => TeamTNT\TNTSearch\Facades\TNTSearch::class,
         'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
 
     ],

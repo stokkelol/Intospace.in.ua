@@ -1,5 +1,5 @@
 
-  <div>
+
     <p class="sidebar-tagline">...и всё более странная музыка...</p>
     <!--<div class="sidebar-image">
         <img src="http://intospace.in.ua/upload/images/logo.jpg" class="main-img img-responsive">
@@ -16,11 +16,11 @@
         </ul>
         <p class="sidebar-title">Последние видео:</p>
         <ul class="list-unstyled">
-            @foreach ($videos as $video)
-                <li class="sidebar-list">
-                    <a href="/posts/{{ $video->slug }}">{{ $video->title }}</a>
-                </li>
-            @endforeach
+          @foreach ($latestvideos as $video)
+              <li class="sidebar-list">
+                  <a href="/posts/{{ $video->slug }}">{{ $video->title }}</a>
+              </li>
+          @endforeach
         </ul>
     </div>
           <div class="text-center clearfix">
@@ -53,5 +53,3 @@
           </ul>
         </div>
       -->
-
-  </div>

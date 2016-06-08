@@ -6,7 +6,7 @@
             <a href="{{ route('posts', ['slug' => $post->slug]) }}">{{$post->title}}</a>
         </div>
       </div>
-      <div class="col-lg-3">@include('frontend.partials.share')</div>
+      <div class="col-lg-3"><span class="pull-right">@include('frontend.partials.share')</span></div>
       <br>
       <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 clearfix">
           <img src="/upload/covers/{{ $post->img_thumbnail }}" class="img-responsive img-thumbnail">

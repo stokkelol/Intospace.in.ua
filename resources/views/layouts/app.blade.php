@@ -78,35 +78,24 @@ $('[data-toggle="tooltip"]').tooltip();
 });
 </script>
 <script>
-function sticky_relocate() {
-var window_top = $(window).scrollTop();
-var div_top = $('#sticky-anchor').offset().top;
-var div_bot = $(window).scrollTop()+$(window).height();
-var bot = $('#sticky-bottom-anchor').offset().top;
-if ((window_top+50) > div_top) {
-    $('#sticky').addClass('stick');
-    $('#sticky-anchor').height($('#sticky').outerHeight());
-} else {
-    $('#sticky').removeClass('stick');
-    $('#sticky-anchor').height(0);
-}
-}
-
-$(function() {
-$(window).scroll(sticky_relocate);
-sticky_relocate();
-});
-</script>
-<script>
     $(document).ready(function() {
-        $("#sidebar").stick_in_parent()
-          .on('sticky_kit:bottom', function(e) {
-            $(this).parent().css('position', 'static');
-          })
-          .on('sticky_kit:unbottom', function(e) {
-            $(this).parent().css('position, relative');
-          })
+        if (navigator.userAgent.indexOf("Chrome") != -1)
+        {
+          $("#sidebar").stick_in_parent()
+            .on('sticky_kit:bottom', function(e) {
+              $(this).parent().css('position', 'static');
+            })
+            .on('sticky_kit:unbottom', function(e) {
+              $(this).parent().css('position', 'relative');
+            })
+        }
+        if (navigator.userAgent.indexOf("Firefox") != -1)
+        {
+          
+        }
     });
 </script>
+
+
 </body>
 </html>

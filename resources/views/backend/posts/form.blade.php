@@ -35,7 +35,6 @@
             <a href="#"><i class="fa fa-lastfm-square" aria-hidden="true"></i></a>
             @endif
             @if (!empty($post) && !empty($post->links))
-
               {{ $post->links }}
             @endif
             </textarea>
@@ -93,7 +92,7 @@
 
         <div class="form-group">
             {!! Form::label('inputPublished_at', 'Published at:') !!}
-            {!! Form::input('datetime', 'published_at', Carbon\Carbon::now(), ['class' => 'form-control']) !!}
+            {!! Form::input('datetime', 'published_at', isset($post->published_at) ? $post->published_at : Carbon\Carbon::now(), ['class' => 'form-control']) !!}
         </div>
 
 

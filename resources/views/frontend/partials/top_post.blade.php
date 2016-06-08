@@ -1,11 +1,8 @@
 <div class="container">
   <div class="top-post">
     <div class="top-post-desc">
-        <div class="col-lg-10  col-md-10 col-sm-10 col-xs-10 top-post-title">
+        <div class="col-lg-12  col-md-12 col-sm-12 col-xs-12 top-post-title">
             <a href="{{ route('posts', ['slug' => $post->slug]) }}">{{$post->title}}</a>
-        </div>
-        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-            @include('frontend.partials.share')
         </div>
     </div>
     <div class="col-lg-4 col-md-4 col-sm-12 col-sx-12 top-post-img">
@@ -22,7 +19,10 @@
             <li><a data-toggle="tab" href="#{{ $post->id}}tab4">Похожие исполнители</a></li>
         </ul>
         <div class="tab-content">
-            <div id="{{ $post->id}}tab1" class="tab-pane fade in active">{!! $post->content !!}</div>
+            <div id="{{ $post->id}}tab1" class="tab-pane fade in active">
+              <p>{!! $post->excerpt !!}</p>
+              <p>{!! $post->content !!}</p>
+            </div>
             <div id="{{ $post->id}}tab2" class="tab-pane fade">
                 <div class="embed-responsive embed-responsive-16by9">
                     <iframe src="https://www.youtube.com/embed/{{ $post->video }}" frameborder="0" allowfullscreen></iframe>

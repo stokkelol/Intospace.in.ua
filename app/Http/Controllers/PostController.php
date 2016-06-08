@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use LithiumDev\TagCloud\TagCloud;
 use App\Http\Requests;
 use App\Category;
 use App\Post;
@@ -22,41 +21,21 @@ class PostController extends Controller
      * @param string $slug
      * @return mixed
      */
-    public function index($slug = '')
+    public function index(Request $request)
     {
 
-        if (Input::has('search')) {
-          $query = Input::get('search');
-          $posts = Post::with('category', 'tags', 'user')
-                   ->where('title', 'like', '%'.$query.'%')
-                   ->orWhere('excerpt', 'like', '%'.$query,'%')
-                   ->whereIn('status', ['active'])
-                   ->groupBy('published_at')
-                   ->orderBy('published_at', 'desc')
-                   ->paginate(15);
+        if ($request->has('search')) {
+          $query = $request->get('search');
+          $posts = $this->getPostsBySearchQuery($query);
         } else {
-          $posts = Post::with('category', 'tags', 'user')
-                  ->whereIn('status', ['active'])
-                  ->groupBy('published_at')
-                  ->orderBy('published_at', 'desc')
-                  ->paginate(15);
+          $posts = $this->getLatestPublishedPosts();
         }
-
-        $randposts = $this->getRandomPosts();
-        $latestposts = $this->getLatestPosts();
 
         $data = [
             'posts'         =>  $posts,
-            'tags'          =>  Tag::with('posts')->groupBy('tag')->orderBy('tag', 'asc')->get(),
-            'counttags'     =>  Tag::join('post_tag', 'tags.id', '=', 'post_tag.tag_id')
-                                    ->groupBy('tags.id')
-                                    ->select(['tags.*', DB::raw('COUNT(*) as cnt')])
-                                    ->orderBy('cnt', 'desc')
-                                    ->get(),
-            'randposts'     =>  $randposts,
-            'latestposts'   =>  $latestposts,
             'app_name'      =>  'https://intospace.in.ua/',
-            'videos'        =>  Video::with('user')->groupBy('id')->orderBy('id', 'desc')->take(10)->get(),
+            'tags'          =>  $this->getAllTags(),
+            'randposts'     =>  $this->getRandomPosts()
         ];
 
         return View::make('frontend.main', $data);
@@ -94,38 +73,47 @@ class PostController extends Controller
         return View::make('frontend.posts.post', $data);
     }
 
-
-    /**
-     * @return mixed
-     */
     public function getRandomPosts()
     {
         $number = 6;
-        $randomposts = Post::all()->whereIn('status', ['active'])->random($number);
+        $randomposts = Post::all()->whereIn('status', ['active'])
+                                  //->whereIn('category_id', ['1'])
+                                  ->random($number);
 
         return $randomposts;
     }
 
-    public function getLatestPosts()
+    public function getPostsBySearchQuery($query)
     {
-      $latestposts = Post::latest()->take(10)->get();
+        $posts = Post::with('category', 'tags', 'user')
+            ->where('title', 'like', '%'.$query.'%')
+            ->orWhere('excerpt', 'like', '%'.$query,'%')
+            ->whereIn('status', 'active')
+            ->groupBy('published_at')
+            ->orderBy('published_at', 'desc')
+            ->paginate(15);
 
-      return $latestposts;
+        return $posts;
     }
 
-    public function getPostShare() {
-      $post = Post::find($id);
+    public function getLatestPublishedPosts()
+    {
+        $posts = Post::with('category', 'tags', 'user')
+            ->whereIn('status', 'active')
+            ->groupBy('published_at')
+            ->orderBy('published_at', 'desc')
+            ->paginate(15);
 
-      if (!isset($_SERVER['HTTP_USER_AGENT']) && !preg_match('/bot|crawl|slurp|spider/i', $_SERVER['HTTP_USER_AGENT'])) {
-        $post->save();
-      }
-
-      switch($social) {
-        case 'twitter' :
-        $share_url = 'https://twitter.com/share/home?status=';
-        $share_url .= $post['title'].''.$post->getUrl();
-        break;
-      }
-      return Redirect::to($url);
+        return $posts;
     }
+
+    public function getAllTags()
+    {
+        $tags = Tag::with('posts')->groupBy('tag')
+            ->orderBy('tag', 'asc')
+            ->get();
+
+        return $tags;
+    }
+
 }

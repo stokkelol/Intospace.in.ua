@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Backend;
 
-
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Intervention\Image\Facades\Image;
@@ -28,15 +27,12 @@ class PostController extends Controller
     public function index(Request $request)
     {
         if ($request->has('status')) {
-            $query = $request->get('status');
             $posts = Post::with('category')
-                ->byStatus($query)
+                ->byStatus($request->get('status'))
                 ->paginate(15);
         } elseif ($request->has('search')) {
-            $query = $request->get('search');
             $posts = Post::with('category')
-                ->where('title', 'like', '%'.$query.'%')
-                ->orWhere('excerpt', 'like', '%'.$query.'%')
+                ->bySearchQuery($request->get('search'))
                 ->orderBy('id', 'desc')
                 ->paginate(15);
         } else {

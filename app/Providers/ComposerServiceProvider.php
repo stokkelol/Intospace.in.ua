@@ -15,6 +15,7 @@ class ComposerServiceProvider extends ServiceProvider
     public function boot(ViewFactory $view)
     {
         $view->composer('frontend.partials.navbar', \App\ViewComposers\NavbarComposer::class);
+        $view->composer('frontend.sidebar.sidebar', \App\ViewComposers\SidebarComposer::class);
     }
 
     /**
