@@ -8,57 +8,6 @@ use Cviebrock\EloquentSluggable\SluggableTrait;
 use App\Traits\InstanceTrait;
 use Cache;
 
-/**
- * App\Post
- *
- * @property-read \App\User $user
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Tag[] $tags
- * @property-read mixed $tag_list
- * @property-read \App\Category $category
- * @method static \Illuminate\Database\Query\Builder|\App\Post findBySlug($slug)
- * @method static \Illuminate\Database\Query\Builder|\App\Post byStatus($statuses)
- * @method static \Illuminate\Database\Query\Builder|\App\Post bySearchQuery($search)
- * @method static \Illuminate\Database\Query\Builder|\App\Post recent()
- * @method static \Illuminate\Database\Query\Builder|\App\Post whereSlug($slug)
- * @mixin \Eloquent
- * @property integer $id
- * @property integer $category_id
- * @property integer $user_id
- * @property string $title
- * @property string $excerpt
- * @property string $content
- * @property string $links
- * @property string $video
- * @property string $similar
- * @property string $img
- * @property string $img_thumbnail
- * @property string $logo
- * @property string $slug
- * @property boolean $is_pinned
- * @property boolean $views
- * @property string $status
- * @property \Carbon\Carbon $published_at
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
- * @method static \Illuminate\Database\Query\Builder|\App\Post whereId($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Post whereCategoryId($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Post whereUserId($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Post whereTitle($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Post whereExcerpt($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Post whereContent($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Post whereLinks($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Post whereVideo($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Post whereSimilar($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Post whereImg($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Post whereImgThumbnail($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Post whereLogo($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Post whereIsPinned($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Post whereViews($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Post whereStatus($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Post wherePublishedAt($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Post whereCreatedAt($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Post whereUpdatedAt($value)
- */
 class Post extends Model implements SluggableInterface
 {
 
