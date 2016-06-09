@@ -8,7 +8,6 @@ use App\Video;
 use Carbon\Carbon;
 use Flash;
 use App\Http\Requests;
-use Redirect;
 use Auth;
 
 class VideoController extends Controller
@@ -36,13 +35,13 @@ class VideoController extends Controller
         $video->save();
 
         Flash::message('Video created!');
-        return Redirect::route('backend.videos.edit', ['video_id' => $video->id]);
+        return redirect()->route('backend.videos.edit', ['video_id' => $video->id]);
         //return Redirect::back();
     }
 
-    public function edit($video_id)
+    public function edit(Video $_video, $video_id)
     {
-        $video = Video::find($video_id);
+        $video = $_video->find($video_id);
 
         return view('backend.videos.edit', compact('video'));
     }
@@ -53,7 +52,8 @@ class VideoController extends Controller
         $video->resluggify();
         $video->update();
 
-        return Redirect::back();
+        Flash::message('Video updated!');
+        return redirect()->route('backend.videos.edit', ['video_id' => $video->id]);
     }
 
     public function storeOrUpdateVideo(Video $_video, Request $request, $video_id)

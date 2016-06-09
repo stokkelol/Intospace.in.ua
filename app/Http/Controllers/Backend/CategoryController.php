@@ -8,9 +8,6 @@ use App\Category;
 use App\Post;
 use Auth;
 use Flash;
-use Input;
-use Redirect;
-use View;
 use DB;
 use App\Http\Requests;
 
@@ -50,7 +47,7 @@ class CategoryController extends Controller
         $category->save();
         Flash::message('Category created!');
 
-        return Redirect::route('backend.categories.index');
+        return redirect()->route('backend.categories.index');
     }
 
     public function show(Category $_category, $category_id)
@@ -97,6 +94,6 @@ class CategoryController extends Controller
 
 
         Flash::message('Category updated!');
-        return Redirect::route('backend.categories.index');
+        return redirect()->route('backend.categories.index');
     }
 }

@@ -11,9 +11,6 @@ use App\Tag;
 use App\User;
 use Flash;
 use Auth;
-use Input;
-use Redirect;
-use View;
 use Carbon\Carbon;
 use DB;
 
@@ -106,7 +103,7 @@ class PostController extends Controller
         $this->syncTags($post, $request->input('tagList'));
 
         Flash::message('Post created!');
-        return Redirect::route('backend.posts.edit', ['post_id' => $post->id]);
+        return redirect()->route('backend.posts.edit', ['post_id' => $post->id]);
     }
 
     public function show(Post $_post, $post_id)
@@ -158,7 +155,7 @@ class PostController extends Controller
         $post->update();
 
         Flash::message('Post updated!');
-        return Redirect::route('backend.posts.index');
+        return redirect()->route('backend.posts.index');
     }
 
     public function setCategory(Post $_post, Category $_category, $post_id, $category_id)
@@ -173,7 +170,7 @@ class PostController extends Controller
         $post->category_id = $category_id;
         $post->save();
 
-        return Redirect::back();
+        return redirect()->back();
     }
 
     /**
@@ -200,7 +197,7 @@ class PostController extends Controller
         $this->setPostStatus($_post, $post_id, 'draft');
         Flash::message('Post sent to draft!');
 
-        return Redirect::back();
+        return redirect()->back();
     }
 
     public function toActive(Post $_post, $post_id)
@@ -208,7 +205,7 @@ class PostController extends Controller
         $this->setPostStatus($_post, $post_id, 'active');
         Flash::message('Post sent to active!');
 
-        return Redirect::back();
+        return redirect()->back();
     }
 
     public function toDeleted(Post $_post, $post_id)
@@ -216,7 +213,7 @@ class PostController extends Controller
         $this->setPostStatus($_post, $post_id, 'deleted');
         Flash::message('Post sent to deleted!');
 
-        return Redirect::back();
+        return redirect()->back();
     }
 
     public function setPinnedStatus(Post $_post, $post_id, $pinned)
@@ -232,7 +229,7 @@ class PostController extends Controller
         $this->setPinnedStatus($_post, $post_id, '1');
         Flash::message('Post is pinned');
 
-        return Redirect::back();
+        return redirect()->back();
     }
 
     public function toRegular(Post $_post, $post_id)
@@ -240,7 +237,7 @@ class PostController extends Controller
         $this->setPinnedStatus($_post, $post_id, '0');
         Flash::message('Post is unpinned');
 
-        return Redirect::back();
+        return redirect()->back();
     }
 
     public function saveImage($image)

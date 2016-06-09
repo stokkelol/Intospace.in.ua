@@ -46,7 +46,7 @@ class UserController extends Controller
       //dd($user->email);
       $user->save();
 
-      return Redirect::route('backend.users.index');
+      return redirect()->route('backend.users.index');
     }
 
     public function edit(User $_user, $user_id)
@@ -66,7 +66,7 @@ class UserController extends Controller
         //dd($user);
         $user->update();
 
-        return Redirect::route('backend.users.index');
+        return redirect()->route('backend.users.index');
     }
 
     public function destroy($user_id)

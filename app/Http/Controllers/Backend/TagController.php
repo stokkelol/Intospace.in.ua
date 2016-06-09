@@ -43,7 +43,7 @@ class TagController extends Controller
         $tag->tag = $request->input('tagtitle');
         $tag->save();
 
-        return Redirect::route('backend.tags.index');
+        return redirect()->route('backend.tags.index');
     }
 
     public function remove(Tag $_tag, PostTag $_posttag, $tag_id)
@@ -51,7 +51,7 @@ class TagController extends Controller
         $_tag->destroy($tag_id);
         $_posttag->where(['tag_id' => $tag_id])->delete();
 
-        return Redirect::back();
+        return redirect()->back();
     }
 
     public function edit(Tag $_tag, $tag_id)
@@ -77,7 +77,7 @@ class TagController extends Controller
         $tag->resluggify();
         $tag->update();
 
-        return Redirect::route('backend.tags.index');
+        return redirect()->route('backend.tags.index');
     }
 
     public function show(Tag $_tag, Post $_post, $slug)
