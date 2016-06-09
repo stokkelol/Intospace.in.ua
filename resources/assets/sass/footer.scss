@@ -1,0 +1,46 @@
+//FOOTER
+
+.footer-column-title {
+  @media all and (max-width: 970px) {
+    text-align: left;
+  }
+    font-size: 12px;
+    text-align: left;
+    padding-left: 20px;
+    i {
+      font-size: 14px;
+    }
+}
+
+.footer-column {
+  @media all and (max-width: 970px) {
+    text-align: left;
+  }
+  text-align:left;
+  font-size: 12px;
+  max-height: 80px;
+  li {
+    padding-top: 5px;
+  }
+  a {
+
+    &:hover {
+      text-decoration:none;
+    }
+  }
+}
+
+.footer-social-links {
+  font-size: 24px;
+  color: $blue;
+  padding-left: 10px;
+}
+
+.footer-copyright {
+  font-size: 12px;
+  padding-left: 40px;
+  line-height: 1;
+  p {
+    line-height: 1;
+  }
+}

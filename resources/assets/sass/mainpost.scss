@@ -1,0 +1,43 @@
+//MAIN POST
+
+.main-post {
+padding-top: 65px;
+  em {
+      font-size: 12px;
+  }
+
+  .main-post-img {
+    padding-top: 5px;
+  }
+
+  .main-post-text {
+    font-size: 14px;
+
+    .main-post-title {
+      font-size: 32px;
+    }
+  }
+}
+
+.main-post-body {
+  padding-top:30px;
+}
+
+.main-post-author {
+  color: $blue;
+  padding-top: 10px;
+}
+
+.post-links {
+  font-size: 28px;
+  color: $blue;
+}
+
+.post-similars {
+  font-size:16px;
+  color: $blue;
+  p {
+    font-size: 14px;
+    color: #888;
+  }
+}

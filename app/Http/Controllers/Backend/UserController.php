@@ -20,12 +20,12 @@ class UserController extends Controller
        'password'
      ];
 
-    public function index()
+    public function index(User $_user)
     {
 
-        $users = User::all();
+        $users = $_user->all();
 
-        return View::make('backend.users.index', compact('users'));
+        return view('backend.users.index', compact('users'));
     }
 
     public function create()
@@ -34,12 +34,12 @@ class UserController extends Controller
             'title' =>  'Create new user',
             'url' =>    route('backend.users.store'),
         ];
-        return View::make('backend.users.user', $data);
+        return view('backend.users.user', $data);
     }
 
-    public function store(Request $request)
+    public function store(User $_user, Request $request, $user_id = 0)
     {
-      $user = new User();
+      $user = $_user->findOrFail($user_id);
       $user->name = $request->input('name');
       $user->email = $request->input('email');
       $user->password = Hash::make($request->input('password'));
@@ -49,16 +49,16 @@ class UserController extends Controller
       return Redirect::route('backend.users.index');
     }
 
-    public function edit($user_id)
+    public function edit(User $_user, $user_id)
     {
-      $user = User::findOrNew($user_id);
+      $user = $_user->findOrNew($user_id);
 
-      return View::make('backend.users.edit', compact('user'));
+      return view('backend.users.edit', compact('user'));
     }
 
-    public function update(Request $request, $user_id)
+    public function update(User $_user, Request $request, $user_id)
     {
-        $user = User::findOrNew($user_id);
+        $user = $_user->findOrNew($user_id);
         $user->name = $request->input('name');
         $user->email = $request->input('email');
         $user->password = $request->input('password');

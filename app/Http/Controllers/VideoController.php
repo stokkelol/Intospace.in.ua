@@ -6,21 +6,20 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Video;
-use View;
 
 class VideoController extends Controller
 {
-    public function index($slug='')
+    public function index(Video $_video, $slug='')
     {
-        $videos = Video::with('user')->groupBy('id')->orderBy('id', 'desc')->paginate(10);
+        $videos = $_video->with('user')->groupBy('id')->orderBy('id', 'desc')->paginate(10);
         //dd($videos);
         
-        return View::make('frontend.videos.index', compact('videos'));
+        return view('frontend.videos.index', compact('videos'));
     }
 
-    public function video($slug)
+    public function video(Video $_video, $slug)
     {
-        $video = Video::getInstance()->getBySlug($slug);
+        $video = $_video->getBySlug($slug);
 
         $data = [
             'video'     =>  $video,
@@ -30,6 +29,6 @@ class VideoController extends Controller
 
         //dd($video);
 
-        return View::make('frontend.videos.video', $data);
+        return view('frontend.videos.video', $data);
     }
 }

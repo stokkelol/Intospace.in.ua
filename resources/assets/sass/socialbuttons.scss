@@ -1,0 +1,15 @@
+//SOCIAL BUTTONS
+
+.social-buttons {
+  font-size: 24px;
+  text-align: right;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  a {
+    &:hover {
+      text-decoration: none;
+      @include Opacity(0.8);
+    }
+  }
+}

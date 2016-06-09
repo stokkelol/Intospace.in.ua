@@ -125,4 +125,13 @@ class Post extends Model implements SluggableInterface
 
         return $posts;
     }
+
+    public function setPostStatus(Post $_post, $post_id, $status)
+    {
+        $post = $_post->find($post_id);
+        $post->status = $status;
+        $post->save();
+
+        return $post;
+    }
 }

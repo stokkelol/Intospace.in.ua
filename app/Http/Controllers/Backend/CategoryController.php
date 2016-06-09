@@ -16,10 +16,17 @@ use App\Http\Requests;
 
 class CategoryController extends Controller
 {
-    public function index()
+    protected $_category;
+
+    public function __construct(Category $category)
     {
-        $categories = Category::getInstance()->categoriesWithPostsCount();
-        return View::make('backend.categories.index', compact('categories'));
+        $this->_category = $category;
+    }
+
+    public function index(Category $_category)
+    {
+        $categories = $_category->categoriesWithPostsCount();
+        return view('backend.categories.index', compact('categories'));
     }
 
     public function create()
@@ -30,12 +37,12 @@ class CategoryController extends Controller
             'save_url'  =>  route('backend.categories.store'),
         ];
 
-        return View::make('backend.categories.category', $data);
+        return view('backend.categories.category', $data);
     }
 
-    public function store(Request $request, $category_id = null)
+    public function store(Category $_category, Request $request, $category_id = null)
     {
-        $category = Category::findOrNew($category_id);
+        $category = $_category->findOrNew($category_id);
 
         //$category->user_id = Auth::user()->id;
         $category->title = $request->input('title');
@@ -46,21 +53,21 @@ class CategoryController extends Controller
         return Redirect::route('backend.categories.index');
     }
 
-    public function show($category_id)
+    public function show(Category $_category, $category_id)
     {
-        $category = Category::findOrFail($category_id);
+        $category = $_category->findOrFail($category_id);
 
         $data = [
             'title' =>  $category->title,
             'posts' =>  DB::table('posts')->where('category_id', $category_id)->get(),
         ];
 
-        return View::make('backend.categories.show', $data);
+        return view('backend.categories.show', $data);
     }
 
-    public function edit($category_id)
+    public function edit(Category $_category, $category_id)
     {
-        $category = Category::findOrFail($category_id);
+        $category = $_category->findOrFail($category_id);
         //$category->user_id = Auth::user()->id;
         $data = [
             'categories'    =>  Category::all(),
@@ -68,21 +75,21 @@ class CategoryController extends Controller
             'title'         =>  $category->id.': Edit Category',
         ];
 
-        return View::make('backend.categories.edit', $data);
+        return view('backend.categories.edit', $data);
     }
 
-    public function destroy($category_id)
+    public function destroy(Category $_category, $category_id)
     {
-        $category = Post::findOrFail($category_id);
+        $category = $_category->findOrFail($category_id);
         Category::destroy($category_id);
 
         Flash::message('Category deleted!');
         return redirect('backend/posts');
     }
 
-    public function update(Request $request, $category_id)
+    public function update(Category $_category, Request $request, $category_id)
     {
-        $category = Category::findOrNew($category_id);
+        $category = $_category->findOrNew($category_id);
         //$category->user_id = Auth::user()->id;
         $category->title = $request->input('title');
         $category->resluggify();

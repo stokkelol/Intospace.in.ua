@@ -1,0 +1,17 @@
+//RELATED POSTS
+
+.related-posts {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+
+  .related-post-item {
+    width: 200px;
+    height: 220px;
+
+    .related-post-title {
+      text-align: center;
+      font-size: 14px;
+    }
+  }
+}

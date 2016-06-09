@@ -1,0 +1,31 @@
+//PAGES
+
+.pages-title {
+    font-size: 28px;
+    color: $blue;
+    h2 {
+      border-bottom: 1px solid;
+      padding-left: 100px;
+      @media all and (max-width: 970px) {
+        text-align: center;
+        padding-left: 0px;
+      }
+    }
+
+}
+
+.pages-content {
+  font-size: 16px;
+}
+
+.pages-container {
+  padding-top: 60px;
+}
+
+.sidebar {
+  float: right;
+}
+
+.feed-icon {
+  font-size: 22px;
+}

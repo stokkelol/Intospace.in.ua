@@ -6,20 +6,17 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Tag;
 use App\Post;
-use View;
-use DB;
-use App\Video;
 
 class TagController extends Controller
 {
-    public function show($slug)
+    public function show(Tag $_tag, Post $_post, $slug)
     {
         $data = [
-            'posts'           =>  Post::getInstance()->getPostsByTag($slug),
-            'tags'            =>  Tag::all(),
-            'title'           =>  Tag::getInstance()->getBySlug($slug)->tag,
+            'posts'           =>  $_post->getPostsByTag($slug),
+            'tags'            =>  $_tag->all(),
+            'title'           =>  $_tag->getBySlug($slug)->tag,
             'app_name'        =>  'https://intospace.in.ua/',
         ];
-        return View::make('frontend.main', $data);
+        return view('frontend.main', $data);
     }
 }

@@ -19,25 +19,32 @@ use DB;
 
 class PostController extends Controller
 {
+    protected $_post;
+
+    public function __construct(Post $_post)
+    {
+        $this->_post = $_post;
+    }
+
     /**
      * backend.posts.index
      *
      * @return View
      */
-    public function index(Request $request)
+    public function index(Post $_post, Category $_category, Request $request)
     {
         if ($request->has('status')) {
-            $posts = Post::with('category')
+            $posts = $_post->with('category')
                 ->byStatus($request->get('status'))
                 ->paginate(15);
         } elseif ($request->has('search')) {
-            $posts = Post::with('category')
+            $posts = $_post->with('category')
                 ->bySearchQuery($request->get('search'))
                 ->orderBy('id', 'desc')
                 ->paginate(15);
         } else {
-            $posts = Post::with('category')
-                ->whereNotIn('status', ['deleted', 'refused'])
+            $posts = $_post->with('category')
+                ->whereIn('status', ['active', 'draft'])
                 ->groupBy('id')
                 ->orderBy('id', 'desc')
                 ->paginate(15);
@@ -46,10 +53,10 @@ class PostController extends Controller
         $data = [
             'posts'         =>  $posts,
             'title'         =>  'Posts',
-            'categories'    =>  Category::all(),
+            'categories'    =>  $_category->all(),
         ];
 
-        return View::make('backend.posts.index', $data);
+        return view('backend.posts.index', $data);
     }
 
     /**
@@ -57,16 +64,16 @@ class PostController extends Controller
      *
      * @return View
      */
-    public function create()
+    public function create(Category $_category, Tag $_tag)
     {
         $data = [
-            'categories'    =>  Category::all(),
+            'categories'    =>  $_category->all(),
             'title'         =>  'New Post',
             'save_url'      =>  route('backend.posts.store'),
             //'post'        =>  null,
-            'tags'          =>  Tag::lists('tag', 'id'),
+            'tags'          =>  $_tag->lists('tag', 'id'),
         ];
-        return View::make('backend.posts.post', $data);
+        return view('backend.posts.post', $data);
     }
 
     /**
@@ -76,9 +83,9 @@ class PostController extends Controller
      * @param null $post_id
      * @return mixed
      */
-    public function store(Request $request, $post_id = null)
+    public function store(Post $_post, Request $request, $post_id = null)
     {
-        $post = $this->storeOrUpdatePost($request, $post_id = null);
+        $post = $this->storeOrUpdatePost($_post, $request, $post_id = null);
 
         if($request->hasFile('img')) {
             $image = $request->file('img');
@@ -102,36 +109,36 @@ class PostController extends Controller
         return Redirect::route('backend.posts.edit', ['post_id' => $post->id]);
     }
 
-    public function show($post_id)
+    public function show(Post $_post, $post_id)
     {
-        $post = Post::findOrFail($post_id);
+        $post = $_post->findOrFail($post_id);
         $data = [
             'post'  =>  $post,
         ];
-        return View::make('backend.posts.show', $data);
+        return view('backend.posts.show', $data);
     }
 
-    public function edit($post_id)
+    public function edit(Post $_post, Tag $_tag, Category $_category, $post_id)
     {
-        $post = Post::find($post_id);
+        $post = $_post->find($post_id);
         $post->user_id = Auth::user()->id;
-        $tags = Tag::lists('tag', 'id');
-        $categories = Category::all();
+        $tags = $_tag->lists('tag', 'id');
+        $categories = $_category->all();
 
-        return View::make('backend.posts.edit', compact('tags', 'post', 'categories'));
+        return view('backend.posts.edit', compact('tags', 'post', 'categories'));
     }
 
-    public function destroy($post_id)
+    public function destroy(Post $_post, $post_id)
     {
-        $post = Post::findOrFail($post_id);
-        Post::destroy($post_id);
+        $post = $_post->findOrFail($post_id);
+        $_post->destroy($post_id);
 
         return redirect('backend/posts');
     }
 
-    public function update(Request $request, $post_id)
+    public function update(Post $_post, Request $request, $post_id)
     {
-        $post = $this->storeOrUpdatePost($request, $post_id);
+        $post = $this->storeOrUpdatePost($_post, $request, $post_id);
         $post->resluggify();
 
         if($request->hasFile('img')) {
@@ -154,15 +161,15 @@ class PostController extends Controller
         return Redirect::route('backend.posts.index');
     }
 
-    public function setCategory($post_id, $category_id)
+    public function setCategory(Post $_post, Category $_category, $post_id, $category_id)
     {
-        $category = Category::find($category_id);
+        $category = $_category->find($category_id);
 
         if (empty($category)) {
             return Redirect::back();
         }
 
-        $post = Post::find($post_id);
+        $post = $_post->find($post_id);
         $post->category_id = $category_id;
         $post->save();
 
@@ -179,58 +186,58 @@ class PostController extends Controller
         $post->tags()->sync($tags);
     }
 
-    public function setPostStatus($post_id, $status)
+    public function setPostStatus(Post $_post, $post_id, $status)
     {
-        $post = Post::find($post_id);
+        $post = $_post->find($post_id);
         $post->status = $status;
         $post->save();
 
         return $post;
     }
 
-    public function toDraft($post_id)
+    public function toDraft(Post $_post, $post_id)
     {
-        $this->setPostStatus($post_id, 'draft');
+        $this->setPostStatus($_post, $post_id, 'draft');
         Flash::message('Post sent to draft!');
 
         return Redirect::back();
     }
 
-    public function toActive($post_id)
+    public function toActive(Post $_post, $post_id)
     {
-        $this->setPostStatus($post_id, 'active');
+        $this->setPostStatus($_post, $post_id, 'active');
         Flash::message('Post sent to active!');
 
         return Redirect::back();
     }
 
-    public function toDeleted($post_id)
+    public function toDeleted(Post $_post, $post_id)
     {
-        $this->setPostStatus($post_id, 'deleted');
+        $this->setPostStatus($_post, $post_id, 'deleted');
         Flash::message('Post sent to deleted!');
 
         return Redirect::back();
     }
 
-    public function setPinnedStatus($post_id, $pinned)
+    public function setPinnedStatus(Post $_post, $post_id, $pinned)
     {
-        $post = Post::findOrFail($post_id);
+        $post = $_post->findOrFail($post_id);
         $post->is_pinned = $pinned;
         $post->save();
         return $post;
     }
 
-    public function toPinned($post_id)
+    public function toPinned(Post $_post, $post_id)
     {
-        $this->setPinnedStatus($post_id, '1');
+        $this->setPinnedStatus($_post, $post_id, '1');
         Flash::message('Post is pinned');
 
         return Redirect::back();
     }
 
-    public function toRegular($post_id)
+    public function toRegular(Post $_post, $post_id)
     {
-        $this->setPinnedStatus($post_id, '0');
+        $this->setPinnedStatus($_post, $post_id, '0');
         Flash::message('Post is unpinned');
 
         return Redirect::back();
@@ -254,9 +261,9 @@ class PostController extends Controller
         Image::make($image->getRealPath())->save($path);
     }
 
-    public function storeOrUpdatePost(Request $request, $post_id)
+    public function storeOrUpdatePost(Post $_post, Request $request, $post_id)
     {
-        $post = Post::findOrNew($post_id);
+        $post = $_post->findOrNew($post_id);
         $post->user_id = Auth::user()->id;
         $post->title = $request->input('title');
         $post->excerpt = $request->input('excerpt');

@@ -1,0 +1,42 @@
+
+//REGULAR POST
+
+.regular-post-title {
+  a {
+    font-size: 24px;
+  }
+}
+
+.regular-post-padding {
+  padding-top: 60px;
+}
+
+.regular-post-img {
+  @media only screen and (max-width: 970px) {
+    text-align: center;
+  }
+  width: 300px;
+  height: 300px;
+}
+
+.regular-post-date {
+  color: #337ab7;
+  font-size: 12px;
+}
+
+.regular-post-tags {
+  color: #337ab7;
+  font-size: 12px;
+  padding-left: 5px;
+}
+
+.regular-post-author {
+  color: $blue;
+}
+
+.more-link {
+  font-size: 16px;
+  &:hover {
+    text-decoration:none;
+  }
+}

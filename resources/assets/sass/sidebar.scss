@@ -1,0 +1,52 @@
+
+//SIDEBAR
+.sidebar-posts {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.sidebar-tagline {
+  @media all and (max-width: 970px) {
+    text-align:center;
+  }
+  text-align: center;
+}
+
+.sidebar-list {
+  font-size: 12px;
+  @media all and (max-width: 970px) {
+    text-align:center;
+  }
+}
+
+.sidebar-title {
+  @media all and (max-width: 970px) {
+    text-align:center;
+  }
+}
+
+.sidebar-image {
+  display: flex;
+  justify-content: space-around;
+
+  img {
+    width: 80%;
+    height: 80%;
+    max-width: 210px;
+    max-height: 210px;
+  }
+}
+
+.main-img {
+  @include rounded(50%);
+  min-width: 260px;
+  min-height: 260px;
+}
+
+.tag-odd {
+  color: $blue;
+}
+
+.tag-even {
+  color: $dark-blue;
+}

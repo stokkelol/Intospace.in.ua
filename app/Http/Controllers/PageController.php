@@ -11,6 +11,6 @@ class PageController extends Controller
 {
     public function index($page_title)
     {
-        return View::make('frontend.pages.'.$page_title);
+        return view('frontend.pages.'.$page_title);
     }
 }

@@ -23,6 +23,7 @@
                                 <p>Total posts: {{ $posts_total }}</p>
                                 <p>Active posts: {{ $posts_active }}</p>
                                 <p>Draft: {{ $posts_draft }}</p>
+                                <p>Total videos: {{ $videos_total }}</p>
                             </div>
                         </div>
                     </div>

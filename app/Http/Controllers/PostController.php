@@ -4,57 +4,62 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests;
-use App\Category;
 use App\Post;
-use App\Tag;
-use App\Video;
-use View;
 use App;
-use DB;
-use Input;
+use App\Repositories\PostRepository;
 
 class PostController extends Controller
 {
+    protected $_post;
+
     /**
-     * Main page
-     *
-     * @param string $slug
-     * @return mixed
+     * PostController constructor.
+     * @param PostRepository $_post
      */
+    public function __construct(PostRepository $_post)
+    {
+        $this->_post = $_post;
+    }
+
     public function index(Request $request)
     {
 
         if ($request->has('search')) {
           $query = $request->get('search');
-          $posts = $this->getPostsBySearchQuery($query);
+          $posts = $this->_post->getPostsBySearchQuery($query);
         } else {
-          $posts = $this->getLatestPublishedPosts();
+          $posts = $this->_post->getLatestPublishedPosts();
         }
 
         $data = [
             'posts'         =>  $posts,
             'app_name'      =>  'https://intospace.in.ua/',
-            'tags'          =>  $this->getAllTags(),
-            'randposts'     =>  $this->getRandomPosts()
+            'tags'          =>  $this->_post->getAllTags(),
+            'randposts'     =>  $this->_post->getRandomPosts()
         ];
 
-        return View::make('frontend.main', $data);
-    }
-
-    public function maintainance()
-    {
-      return View::make('errors.503-custom');
+        return view('frontend.main', $data);
     }
 
     /**
-     * Post page
+     * Custom 503 page for a little bit of maintenance
+     *
+     * @return mixed
+     */
+    public function maintenance()
+    {
+      return view('errors.503-custom');
+    }
+
+    /**
+     * Get single post page by slug
      *
      * @param $slug
      * @return mixed
      */
-    public function post($slug)
+    public function post(Post $_post, $slug)
     {
-        $post = Post::getInstance()->getBySlug($slug);
+        $post = $_post->getBySlug($slug);
 
         if($post == NULL) {
           App::abort(404);
@@ -70,50 +75,6 @@ class PostController extends Controller
             'app_name'  => 'https://intospace.in.ua/',
         ];
 
-        return View::make('frontend.posts.post', $data);
+        return view('frontend.posts.post', $data);
     }
-
-    public function getRandomPosts()
-    {
-        $number = 6;
-        $randomposts = Post::all()->whereIn('status', ['active'])
-                                  //->whereIn('category_id', ['1'])
-                                  ->random($number);
-
-        return $randomposts;
-    }
-
-    public function getPostsBySearchQuery($query)
-    {
-        $posts = Post::with('category', 'tags', 'user')
-            ->where('title', 'like', '%'.$query.'%')
-            ->orWhere('excerpt', 'like', '%'.$query,'%')
-            ->whereIn('status', 'active')
-            ->groupBy('published_at')
-            ->orderBy('published_at', 'desc')
-            ->paginate(15);
-
-        return $posts;
-    }
-
-    public function getLatestPublishedPosts()
-    {
-        $posts = Post::with('category', 'tags', 'user')
-            ->whereIn('status', 'active')
-            ->groupBy('published_at')
-            ->orderBy('published_at', 'desc')
-            ->paginate(15);
-
-        return $posts;
-    }
-
-    public function getAllTags()
-    {
-        $tags = Tag::with('posts')->groupBy('tag')
-            ->orderBy('tag', 'asc')
-            ->get();
-
-        return $tags;
-    }
-
 }

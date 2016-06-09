@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use View;
 use App\Video;
 use Carbon\Carbon;
 use Flash;
@@ -14,11 +13,11 @@ use Auth;
 
 class VideoController extends Controller
 {
-    public function index()
+    public function index(Video $_video)
     {
-        $videos = Video::orderBy('id', 'desc')->paginate(15);
+        $videos = $_video->orderBy('id', 'desc')->paginate(15);
 
-        return View::make('backend.videos.index', compact('videos'));
+        return view('backend.videos.index', compact('videos'));
     }
 
     public function create()
@@ -27,12 +26,12 @@ class VideoController extends Controller
             'save_url'  =>  route('backend.videos.store'),
             'title' =>  'New video',
         ];
-        return View::make('backend.videos.video', $data);
+        return view('backend.videos.video', $data);
     }
 
-    public function store(Request $request)
+    public function store(Video $_video, Request $request)
     {
-        $video = $this->storeOrUpdateVideo($request, null);
+        $video = $this->storeOrUpdateVideo($_video, $request, null);
 
         $video->save();
 
@@ -45,21 +44,21 @@ class VideoController extends Controller
     {
         $video = Video::find($video_id);
 
-        return View::make('backend.videos.edit', compact('video'));
+        return view('backend.videos.edit', compact('video'));
     }
 
-    public function update(Request $request, $video_id)
+    public function update(Video $_video, Request $request, $video_id)
     {
-        $video = $this->storeOrUpdateVideo($request, $video_id);
+        $video = $this->storeOrUpdateVideo($_video, $request, $video_id);
         $video->resluggify();
         $video->update();
 
         return Redirect::back();
     }
 
-    public function storeOrUpdateVideo(Request $request, $video_id)
+    public function storeOrUpdateVideo(Video $_video, Request $request, $video_id)
     {
-        $video = Video::findOrNew($video_id);
+        $video = $_video->findOrNew($video_id);
         $video->title = $request->input('title');
         $video->excerpt = $request->input('excerpt');
         $video->video = $request->input('video');

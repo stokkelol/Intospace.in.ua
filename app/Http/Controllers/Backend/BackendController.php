@@ -6,8 +6,8 @@ use App\Post;
 use App\User;
 use App\Category;
 use Auth;
-use View;
 use DB;
+use App\Video;
 use App\Http\Requests;
 use LaravelAnalytics;
 
@@ -18,18 +18,19 @@ class BackendController extends Controller
      *
      * @return mixed
      */
-    public function index()
+    public function index(Post $_post, Video $_video, User $_user)
     {
 
         $data = [
             'title' =>  'Dashboard',
-            'posts_total'       =>  Post::count(),
-            'posts_active'      =>  Post::where('status', 'active')->count(),
-            'posts_draft'       =>  Post::where('status', 'draft')->count(),
-            'posts_moderation'  =>  Post::where('status', 'moderation')->count(),
-            'users_total'       =>  User::count(),
-            'recent_posts'      =>  Post::latest()->take(5)->get(),
-            'popular_posts'     =>  Post::latest()->groupBy('views')->orderBy('views')->take(5)->get(),
+            'posts_total'       =>  $_post->count(),
+            'posts_active'      =>  $_post->where('status', 'active')->count(),
+            'posts_draft'       =>  $_post->where('status', 'draft')->count(),
+            'posts_moderation'  =>  $_post->where('status', 'moderation')->count(),
+            'videos_total'       =>  $_video->count(),
+            'users_total'       =>  $_user->count(),
+            'recent_posts'      =>  $_post->latest()->take(5)->get(),
+            'popular_posts'     =>  $_post->latest()->groupBy('views')->orderBy('views')->take(5)->get(),
             //'analyticsData'     =>  LaravelAnalytics::getVisitorsAndPageViews(7),
             //'users_active'      =>  User::where('active', '1')->count(),
             //'users_inactive'    =>  User::where('active', '0')->count(),
@@ -40,6 +41,6 @@ class BackendController extends Controller
         ];
         //dd($data);
 
-        return View::make('backend.main', $data);
+        return view('backend.main', $data);
     }
 }

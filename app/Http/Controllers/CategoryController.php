@@ -8,18 +8,17 @@ use App\Http\Requests;
 use App\Category;
 use App\Post;
 use App\Tag;
-use View;
 
 class CategoryController extends Controller
 {
-    public function show($slug)
+    public function show(Category $_category, Post $_post, Tag $_tag, $slug)
     {
         $data = [
-            'posts' =>  Post::getInstance()->getPostsByCategory($slug),
-            'tags'  =>  Tag::all(),
-            'title' =>  Category::getInstance()->getBySlug($slug)->title,
+            'posts' =>  $_post->getPostsByCategory($slug),
+            'tags'  =>  $_tag->all(),
+            'title' =>  $_category->getBySlug($slug)->title,
         ];
 
-        return View::make('frontend.main', $data);
+        return view('frontend.main', $data);
     }
 }
