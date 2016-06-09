@@ -67,8 +67,8 @@ class CategoryController extends Controller
         $category = $_category->findOrFail($category_id);
         //$category->user_id = Auth::user()->id;
         $data = [
-            'categories'    =>  Category::all(),
-            'category'          =>  $category,
+            'categories'    =>  $_category->all(),
+            'category'      =>  $category,
             'title'         =>  $category->id.': Edit Category',
         ];
 

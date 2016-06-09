@@ -10,15 +10,15 @@ use App\Repositories\PostRepository;
 
 class PostController extends Controller
 {
-    protected $_post;
+    protected $posts;
 
     /**
      * PostController constructor.
-     * @param PostRepository $_post
+     * @param PostRepository $posts
      */
-    public function __construct(PostRepository $_post)
+    public function __construct(PostRepository $posts)
     {
-        $this->_post = $_post;
+        $this->posts = $posts;
     }
 
     public function index(Request $request)
@@ -26,16 +26,16 @@ class PostController extends Controller
 
         if ($request->has('search')) {
           $query = $request->get('search');
-          $posts = $this->_post->getPostsBySearchQuery($query);
+          $posts = $this->posts->getPostsBySearchQuery($query);
         } else {
-          $posts = $this->_post->getLatestPublishedPosts();
+          $posts = $this->posts->getLatestPublishedPosts();
         }
 
         $data = [
             'posts'         =>  $posts,
             'app_name'      =>  'https://intospace.in.ua/',
-            'tags'          =>  $this->_post->getAllTags(),
-            'randposts'     =>  $this->_post->getRandomPosts()
+            'tags'          =>  $this->posts->getAllTags(),
+            'randposts'     =>  $this->posts->getRandomPosts()
         ];
 
         return view('frontend.main', $data);
