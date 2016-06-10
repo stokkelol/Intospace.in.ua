@@ -91,11 +91,15 @@ $('[data-toggle="tooltip"]').tooltip();
         }
         if (navigator.userAgent.indexOf("Firefox") != -1)
         {
-          
+
         }
     });
 </script>
-
+<script>
+    $(document).ready(function() {
+      $('.js-lazyYT').lazyYT();
+    });
+</script>
 
 </body>
 </html>

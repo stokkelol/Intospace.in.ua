@@ -20,9 +20,9 @@ class CategoryController extends Controller
         $this->_category = $category;
     }
 
-    public function index(Category $_category)
+    public function index()
     {
-        $categories = $_category->categoriesWithPostsCount();
+        $categories = $this->_category->categoriesWithPostsCount();
         return view('backend.categories.index', compact('categories'));
     }
 
@@ -37,9 +37,9 @@ class CategoryController extends Controller
         return view('backend.categories.category', $data);
     }
 
-    public function store(Category $_category, Request $request, $category_id = null)
+    public function store(Request $request, $category_id = null)
     {
-        $category = $_category->findOrNew($category_id);
+        $category = $this->_category->findOrNew($category_id);
 
         //$category->user_id = Auth::user()->id;
         $category->title = $request->input('title');
@@ -50,9 +50,9 @@ class CategoryController extends Controller
         return redirect()->route('backend.categories.index');
     }
 
-    public function show(Category $_category, $category_id)
+    public function show($category_id)
     {
-        $category = $_category->findOrFail($category_id);
+        $category = $this->_category->findOrFail($category_id);
 
         $data = [
             'title' =>  $category->title,
@@ -62,12 +62,12 @@ class CategoryController extends Controller
         return view('backend.categories.show', $data);
     }
 
-    public function edit(Category $_category, $category_id)
+    public function edit($category_id)
     {
-        $category = $_category->findOrFail($category_id);
+        $category = $this->_category->findOrFail($category_id);
         //$category->user_id = Auth::user()->id;
         $data = [
-            'categories'    =>  $_category->all(),
+            'categories'    =>  $this->_category->all(),
             'category'      =>  $category,
             'title'         =>  $category->id.': Edit Category',
         ];
@@ -75,18 +75,18 @@ class CategoryController extends Controller
         return view('backend.categories.edit', $data);
     }
 
-    public function destroy(Category $_category, $category_id)
+    public function destroy($category_id)
     {
-        $category = $_category->findOrFail($category_id);
+        $category = $this->_category->findOrFail($category_id);
         Category::destroy($category_id);
 
         Flash::message('Category deleted!');
         return redirect('backend/posts');
     }
 
-    public function update(Category $_category, Request $request, $category_id)
+    public function update(Request $request, $category_id)
     {
-        $category = $_category->findOrNew($category_id);
+        $category = $this->_category->findOrNew($category_id);
         //$category->user_id = Auth::user()->id;
         $category->title = $request->input('title');
         $category->resluggify();

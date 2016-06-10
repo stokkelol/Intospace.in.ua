@@ -27,7 +27,8 @@ elixir(function(mix) {
         'font-awesome.min.css',
         'bootstrap.min.css',
         'normalize.css',
-        'component.css'
+        'component.css',
+        'lazyYT.css'
     ], 'public/css/libs.css');
 
     mix.scripts([
@@ -35,7 +36,8 @@ elixir(function(mix) {
         'bootstrap.min.js',
         'select2.min.js',
         'modernizr.custom.js',
-        'jquery.sticky-kit.min.js'
+        'jquery.sticky-kit.min.js',
+        'lazyYT.js'
         ], 'public/js/all.js');
 
     mix.version([

@@ -20,16 +20,16 @@ class TagController extends Controller
         $this->_tag = $_tag;
     }
 
-    public function index(Tag $_tag)
+    public function index()
     {
-        $tags = $_tag->latest()->paginate(15);
+        $tags = $this->_tag->latest()->paginate(15);
         return view('backend.tags.index', compact('tags'));
     }
 
-    public function create(Tag $_tag)
+    public function create()
     {
         $data = [
-            'tags'      =>  $_tag->all(),
+            'tags'      =>  $this->_tag->all(),
             'title'     =>  'Create new tag',
             'save_url'  =>  route('backend.tags.store'),
         ];
@@ -37,30 +37,31 @@ class TagController extends Controller
         return view('backend.tags.tag', $data);
     }
 
-    public function store(Tag $_tag, Request $request, $tag_id = null)
+    public function store(Request $request, $tag_id = null)
     {
-        $tag = $_tag->findOrNew($tag_id);
+        $tag = $this->_tag->findOrNew($tag_id);
         $tag->tag = $request->input('tagtitle');
         $tag->save();
 
         return redirect()->route('backend.tags.index');
     }
 
-    public function remove(Tag $_tag, PostTag $_posttag, $tag_id)
+    public function remove(PostTag $_posttag, $tag_id)
     {
-        $_tag->destroy($tag_id);
+        $tag = $this->_tag->findOrFail($tag_id);
+        $tag->destroy();
         $_posttag->where(['tag_id' => $tag_id])->delete();
 
         return redirect()->back();
     }
 
-    public function edit(Tag $_tag, $tag_id)
+    public function edit($tag_id)
     {
-        $tag = $_tag->find($tag_id);
+        $tag = $this->_tag->find($tag_id);
 
         $data = [
             'title'     =>  $tag->id.': Edit Tag',
-            'tags'      =>  $_tag->all(),
+            'tags'      =>  $this->_tag->all(),
             'tag'       =>  $tag,
         ];
 
@@ -69,9 +70,9 @@ class TagController extends Controller
         return view('backend.tags.edit', $data);
     }
 
-    public function update(Tag $_tag, Request $request, $tag_id)
+    public function update(Request $request, $tag_id)
     {
-        $tag = $_tag->find($tag_id);
+        $tag = $this->_tag->find($tag_id);
         //$category->user_id = Auth::user()->id;
         $tag->tag = $request->input('tagtitle');
         $tag->resluggify();
@@ -80,9 +81,9 @@ class TagController extends Controller
         return redirect()->route('backend.tags.index');
     }
 
-    public function show(Tag $_tag, Post $_post, $slug)
+    public function show(Post $_post, $slug)
     {
-        $tag = $_tag->findBySlug($slug);
+        $tag = $this->_tag->findBySlug($slug);
 
         $posts = $_post->with('tags', 'category')->whereHas('tags', function ($query) use ($slug) {
             $query->whereSlug($slug);

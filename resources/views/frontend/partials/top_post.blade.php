@@ -12,7 +12,7 @@
         <div><em class="top-post-date">{{ $post->published_at->diffForHumans() }} - <strong>{{ $post->user->name }}</strong></em>
             @include('frontend.partials.tags', ['tags' => $post->tags])
         </div>
-        <ul class="nav nav-pills cl-effect-1">
+        <ul class="nav nav-pills cl-effect-1" id="post-tabs">
             <li class="active"><a data-toggle="tab" href="#{{ $post->id}}tab1">Обзор</a></li>
             <li><a data-toggle="tab" href="#{{ $post->id}}tab2">Видео</a></li>
             <li><a data-toggle="tab" href="#{{ $post->id}}tab3">Ссылки</a></li>
@@ -24,8 +24,8 @@
               <p>{!! $post->content !!}</p>
             </div>
             <div id="{{ $post->id}}tab2" class="tab-pane fade">
-                <div class="embed-responsive embed-responsive-16by9">
-                    <iframe src="https://www.youtube.com/embed/{{ $post->video }}" frameborder="0" allowfullscreen></iframe>
+                <div class="video-pane">
+                    <div class="js-lazyYT" data-youtube-id="{{$post->video}}" data-ratio="16:9"></div>
                 </div>
             </div>
             <div id="{{ $post->id}}tab3" class="tab-pane fade">

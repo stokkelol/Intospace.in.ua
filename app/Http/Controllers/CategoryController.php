@@ -11,12 +11,21 @@ use App\Tag;
 
 class CategoryController extends Controller
 {
-    public function show(Category $_category, Post $_post, Tag $_tag, $slug)
+    protected $_category;
+    protected $_post;
+    protected $_tag;
+
+    public function __construct(Category $_category, Post $_post, Tag $_tag)
+    {
+
+    }
+
+    public function show($slug)
     {
         $data = [
-            'posts' =>  $_post->getPostsByCategory($slug),
-            'tags'  =>  $_tag->all(),
-            'title' =>  $_category->getBySlug($slug)->title,
+            'posts' =>  $this->_post->getPostsByCategory($slug),
+            'tags'  =>  $this->_tag->all(),
+            'title' =>  $this->_category->getBySlug($slug)->title,
         ];
 
         return view('frontend.main', $data);
