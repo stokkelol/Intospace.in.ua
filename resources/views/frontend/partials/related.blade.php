@@ -1,6 +1,5 @@
 @inject('relatedposts', 'App\Services\BlogService')
-
-<?php $posts = $relatedposts->getRelatedPosts($post->tags);?>
+<?php $posts = $relatedposts->getRelatedPosts($post->tags, $post->id);?>
 <div class="related-posts">
     @foreach ($posts as $post)
         <div class="col-lg-4 col-sm-12 col-sx-12 related-post-item">

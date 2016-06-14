@@ -23,7 +23,7 @@ class TagController extends Controller
         $data = [
             'posts'           =>  $this->_post->getPostsByTag($slug),
             'tags'            =>  $this->_tag->all(),
-            'title'           =>  $this->_tag->getBySlug($slug)->tag
+            'title'           =>  $this->_tag->findBySlug($slug)->tag
         ];
         return view('frontend.main', $data);
     }

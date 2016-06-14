@@ -71,7 +71,6 @@ class PostController extends Controller
         $data = [
             'post'      => $post,
             'title'     => $post->title,
-            'app_name'  => 'https://intospace.in.ua/',
         ];
 
         return view('frontend.posts.post', $data);

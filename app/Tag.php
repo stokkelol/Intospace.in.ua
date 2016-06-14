@@ -45,9 +45,4 @@ class Tag extends Model implements SluggableInterface
             $this->attributes['slug'] = $tag;
         }
     }
-
-    public function getBySlug($slug)
-    {
-        return static::where('slug', 'like', $slug)->first();
-    }
 }
