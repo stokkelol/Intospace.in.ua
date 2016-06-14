@@ -9,17 +9,24 @@ use App\Video;
 
 class VideoController extends Controller
 {
-    public function index(Video $_video, $slug='')
+    protected $_video;
+
+    public function __construct(Video $video)
     {
-        $videos = $_video->with('user')->groupBy('id')->orderBy('id', 'desc')->paginate(10);
+        $this->_video = $video;
+    }
+
+    public function index($slug='')
+    {
+        $videos = $this->_video->with('user')->groupBy('id')->orderBy('id', 'desc')->paginate(10);
         //dd($videos);
         
         return view('frontend.videos.index', compact('videos'));
     }
 
-    public function video(Video $_video, $slug)
+    public function video($slug)
     {
-        $video = $_video->getBySlug($slug);
+        $video = $this->_video->getBySlug($slug);
 
         $data = [
             'video'     =>  $video,

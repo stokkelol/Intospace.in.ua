@@ -9,13 +9,21 @@ use App\Post;
 
 class TagController extends Controller
 {
-    public function show(Tag $_tag, Post $_post, $slug)
+    protected $_tag;
+    protected $_post;
+
+    public function __construct(Tag $tag, Post $post)
+    {
+        $this->_tag = $tag;
+        $this->_post = $post;
+    }
+
+    public function show($slug)
     {
         $data = [
-            'posts'           =>  $_post->getPostsByTag($slug),
-            'tags'            =>  $_tag->all(),
-            'title'           =>  $_tag->getBySlug($slug)->tag,
-            'app_name'        =>  'https://intospace.in.ua/',
+            'posts'           =>  $this->_post->getPostsByTag($slug),
+            'tags'            =>  $this->_tag->all(),
+            'title'           =>  $this->_tag->getBySlug($slug)->tag
         ];
         return view('frontend.main', $data);
     }
