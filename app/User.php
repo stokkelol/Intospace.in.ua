@@ -44,8 +44,6 @@ class User extends Authenticatable
     public static $instance = null;
 
     /**
-     * User have many posts
-     *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function posts()

@@ -15,13 +15,17 @@ class SidebarComposer
      */
     public function compose(View $view)
     {
-        $posts = Post::latest()->take(10)->get();
-        $videos = Video::latest()->take(10)->get();
+        $posts = Post::latest()
+                ->whereIn('status', ['active'])->take(10)->get();
+
+        $videos = Video::latest()
+                ->take(10)->get();
+
         $counttags = Tag::join('post_tag', 'tags.id', '=', 'post_tag.tag_id')
-                                ->groupBy('tags.id')
-                                ->select(['tags.*', DB::raw('COUNT(*) as cnt')])
-                                ->orderBy('cnt', 'desc')
-                                ->get();
+                ->groupBy('tags.id')
+                ->select(['tags.*', DB::raw('COUNT(*) as cnt')])
+                ->orderBy('cnt', 'desc')
+                ->get();
 
         $view->with('latestposts', $posts);
         $view->with('latestvideos', $videos);

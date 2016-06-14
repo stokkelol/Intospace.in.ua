@@ -15,9 +15,11 @@ class CategoryController extends Controller
     protected $_post;
     protected $_tag;
 
-    public function __construct(Category $_category, Post $_post, Tag $_tag)
+    public function __construct(Category $category, Post $post, Tag $tag)
     {
-
+        $this->_category = $category;
+        $this->_post = $post;
+        $this->_tag = $tag;
     }
 
     public function show($slug)
