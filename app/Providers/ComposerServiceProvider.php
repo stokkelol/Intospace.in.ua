@@ -16,6 +16,7 @@ class ComposerServiceProvider extends ServiceProvider
     {
         $view->composer('frontend.partials.navbar', \App\ViewComposers\NavbarComposer::class);
         $view->composer('frontend.sidebar.sidebar', \App\ViewComposers\SidebarComposer::class);
+        $view->composer('frontend.partials.footer', \App\ViewComposers\FooterComposer::class);
     }
 
     /**

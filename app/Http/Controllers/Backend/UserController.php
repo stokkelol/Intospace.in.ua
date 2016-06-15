@@ -6,9 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\User;
-use View;
 use Hash;
-use Redirect;
 
 class UserController extends Controller
 {

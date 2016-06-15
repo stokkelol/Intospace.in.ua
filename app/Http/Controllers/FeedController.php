@@ -17,10 +17,14 @@ class FeedController extends Controller
       $feed->setCache(60, 'laravelFeedKey');
 
       if (!$feed->isCached()) {
-          $posts = Post::all()->take(20);
+          $posts = Post::with('category', 'tags', 'user')
+              ->whereIn('status', ['active'])
+              ->groupBy('published_at')
+              ->orderBy('published_at', 'desc')
+              ->paginate(15);
 
           $feed->title = 'Intospace.in.ua';
-          $feed->description = 'Music site';
+          $feed->description = 'Dark side of the music';
           $feed->logo = 'logo.jpg';
           $feed->link = url('feed');
           $feed->setDateFormat('datetime');

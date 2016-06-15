@@ -24,7 +24,6 @@ class BackendController extends Controller
         $this->_user = $user;
     }
 
-
     public function index()
     {
 
@@ -39,12 +38,6 @@ class BackendController extends Controller
             'recent_posts'        =>  $this->_post->latest()->take(5)->get(),
             'popular_posts'       =>  $this->_post->latest()->groupBy('views')->orderBy('views')->take(5)->get(),
             //'analyticsData'     =>  LaravelAnalytics::getVisitorsAndPageViews(7),
-            //'users_active'      =>  User::where('active', '1')->count(),
-            //'users_inactive'    =>  User::where('active', '0')->count(),
-            //'latest_posts'      =>  Post::active()->orderBy('published_at', 'desc')->limit(5)->get(),
-            //'popular_posts'     =>  Post::active()->orderBy('views', 'desc')->limit(5)->get(),
-
-
         ];
         //dd($data);
 

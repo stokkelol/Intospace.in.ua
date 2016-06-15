@@ -176,8 +176,6 @@ return [
         Styde\BladePagination\ServiceProvider::class,
         //https://github.com/barryvdh/laravel-debugbar
         Barryvdh\Debugbar\ServiceProvider::class,
-        //https://github.com/barryvdh/laravel-elfinder
-        Barryvdh\Elfinder\ElfinderServiceProvider::class,
         //https://github.com/gaaarfild/laravel-pinger
         Gaaarfild\LaravelPinger\LaravelPingerServiceProvider::class,
         //https://github.com/cviebrock/eloquent-sluggable
@@ -187,9 +185,7 @@ return [
         //https://github.com/spatie/laravel-analytics
         Spatie\LaravelAnalytics\LaravelAnalyticsServiceProvider::class,
         //https://packagist.org/packages/unisharp/laravel-ckeditor
-        //Unisharp\Ckeditor\ServiceProvider::class,
-        //http://packalyst.com/packages/package/tsawler/laravel-filemanager
-        Tsawler\Laravelfilemanager\LaravelFilemanagerServiceProvider::class,
+        Unisharp\Ckeditor\ServiceProvider::class,
         //https://github.com/RoumenDamianoff/laravel-feed
         Roumen\Feed\FeedServiceProvider::class,
         //https://github.com/teamtnt/tntsearch
@@ -257,7 +253,6 @@ return [
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
         'Pinger' => Gaaarfild\LaravelPinger\PingerFacade::class,
         'Flash' => Laracasts\Flash\Flash::class,
-        'Elasticsearch' => Cviebrock\LaravelElasticsearch\Facade::class,
         'LaravelAnalytics' => Spatie\LaravelAnalytics\LaravelAnalyticsFacade::class,
         'Feed' => Roumen\Feed\Feed::class,
         'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
