@@ -10,25 +10,30 @@ use DB;
 
 class SidebarComposer
 {
-    /**
-     * @param View $view
-     */
+    protected $_post;
+    protected $_video;
+    protected $_tag;
+
+    public function __construct(Post $post, Video $video, Tag $tag)
+    {
+        $this->_post = $post;
+        $this->_video = $video;
+        $this->_tag = $tag;
+    }
+
     public function compose(View $view)
     {
-        $posts = Post::latest()
-                ->whereIn('status', ['active'])->take(10)->get();
+        $posts = $this->_post->getLatestActivePosts();
 
-        $videos = Video::latest()
-                ->take(10)->get();
+        $videos = $this->_video->getLatestVideos();
 
-        $counttags = Tag::join('post_tag', 'tags.id', '=', 'post_tag.tag_id')
-                ->groupBy('tags.id')
-                ->select(['tags.*', DB::raw('COUNT(*) as cnt')])
-                ->orderBy('cnt', 'desc')
-                ->get();
+        $popularposts = $this->_post->getPopularPosts();
+
+        $counttags = $this->_tag->countTags();
 
         $view->with('latestposts', $posts);
         $view->with('latestvideos', $videos);
         $view->with('counttags', $counttags);
+        $view->with('popularposts', $popularposts);
     }
 }

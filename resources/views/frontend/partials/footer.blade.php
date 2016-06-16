@@ -55,7 +55,7 @@
           </div>
           <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
               <p>Контакты:</p>
-              <a href="mailto:redwhite@bigmir.net"><i class="fa fa-caret-right" aria-hidden="true"></i> redwhite</a>
+              <a href="mailto:redwhite@bigmir.net"><i class="fa fa-caret-right" aria-hidden="true"></i> email</a>
           </div>
       </div>
       <hr>

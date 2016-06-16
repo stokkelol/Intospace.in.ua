@@ -10,9 +10,6 @@ use DB;
 
 class Category extends Model implements SluggableInterface
 {
-    /**
-     * Categories model
-     */
     use SluggableTrait;
     use InstanceTrait;
 
@@ -22,12 +19,8 @@ class Category extends Model implements SluggableInterface
         'unique'        =>  true,
     ];
 
-    /**
-     * Categories table name
-     *
-     * @var string
-     */
     protected $table = 'categories';
+
     public static $instance = null;
 
     public function posts()

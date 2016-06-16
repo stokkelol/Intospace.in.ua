@@ -5,10 +5,10 @@ use Cviebrock\EloquentSluggable\SluggableInterface;
 use Cviebrock\EloquentSluggable\SluggableTrait;
 use Illuminate\Database\Eloquent\Model;
 use App\Traits\InstanceTrait;
+use DB;
 
 class Tag extends Model implements SluggableInterface
 {
-
     use SluggableTrait;
     use InstanceTrait;
 
@@ -44,5 +44,14 @@ class Tag extends Model implements SluggableInterface
         } else {
             $this->attributes['slug'] = $tag;
         }
+    }
+
+    public function countTags()
+    {
+        return $this->join('post_tag', 'tags.id', '=', 'post_tag.tag_id')
+            ->groupBy('tags.id')
+            ->select(['tags.*', DB::raw('COUNT(*) as cnt')])
+            ->orderBy('cnt', 'desc')
+            ->get();
     }
 }

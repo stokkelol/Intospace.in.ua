@@ -47,7 +47,7 @@
 
             <!-- Right Side Of Navbar -->
             <ul class="nav navbar-nav navbar-right">
-              <li><a href="/feed" class="feed-icon"><i class="fa fa-rss-square" aria-hidden="true"></i></a></li>
+                <li><a href="/feed" class="feed-icon"><i class="fa fa-rss-square" aria-hidden="true"></i></a></li>
                 <!-- Authentication Links -->
                 @if (Auth::guest())
                     <li><a href="{{ url('/login') }}">Login</a></li>

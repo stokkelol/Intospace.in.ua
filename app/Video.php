@@ -11,12 +11,7 @@ class Video extends Model implements SluggableInterface
 {
     use SluggableTrait;
     use InstanceTrait;
-
-    /**
-     * Sluggable
-     *
-     * @var array
-     */
+    
     protected $sluggable = [
         'build_from' => 'title',
         'save_to' => 'slug',
@@ -37,5 +32,12 @@ class Video extends Model implements SluggableInterface
     public function getBySlug($slug)
     {
         return $this->with(['user'])->where('slug', $slug)->first();
+    }
+
+    public function getLatestVideos()
+    {
+        return Video::latest()
+            ->take(10)
+            ->get();
     }
 }

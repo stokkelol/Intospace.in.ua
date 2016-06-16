@@ -10,27 +10,17 @@ use Cache;
 
 class Post extends Model implements SluggableInterface
 {
-
     use SluggableTrait;
     use InstanceTrait;
 
-    /**
-     * @var array
-     */
     protected $sluggable = [
         'build_from'    =>  'title',
         'save_to'       =>  'slug',
         'unique'        =>   true,
     ];
 
-    /**
-     * @var string
-     */
     protected $table = 'posts';
 
-    /**
-     * @var array
-     */
     protected $fillable = [
         'id',
         'title',
@@ -44,17 +34,11 @@ class Post extends Model implements SluggableInterface
         'published_at'
     ];
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
     public function tags()
     {
         return $this->belongsToMany(Tag::class)->withTimestamps();
@@ -65,9 +49,6 @@ class Post extends Model implements SluggableInterface
         return $this->tags->lists('id')->all();
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
     public function category()
     {
         return $this->belongsTo(Category::class, 'category_id');
@@ -133,5 +114,23 @@ class Post extends Model implements SluggableInterface
         $post->save();
 
         return $post;
+    }
+
+    public function getPopularPosts()
+    {
+        return $this->with('tags')
+            ->whereIn('status', ['active'])
+            ->groupBy('views')
+            ->orderBy('views', 'desc')
+            ->take(10)
+            ->get();
+    }
+
+    public function getLatestActivePosts()
+    {
+        return $this->latest()
+            ->whereIn('status', ['active'])
+            ->take(10)
+            ->get();
     }
 }
