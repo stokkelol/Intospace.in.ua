@@ -3,46 +3,47 @@
 <footer>
   <div class="container">
       <div class="row">
-          <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-              <p class="footer-column-title">Навигация:</p>
-              <div class="footer-column cl-effect-1">
-                  <ul class="list-unstyled">
-                      <li><a href="/">На главную</a></li>
-                      <li><a href="#tagscloud">Облако тегов</a></li>
-                  </ul>
+          <div class="footer-container">
+              <div class="col-lg-2 col-md-2 col-sm-4 col-xs-4">
+                  <p class="footer-column-title">Навигация:</p>
+                  <div class="footer-column cl-effect-1">
+                      <ul class="list-unstyled">
+                          <li><a href="/">На главную</a></li>
+                          <li><a href="#tagscloud">Облако тегов</a></li>
+                      </ul>
+                  </div>
               </div>
-          </div>
-          <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-            <p class="footer-column-title">Материалы:</p>
-                <div class="footer-column">
-                    <ul class="list-unstyled cl-effect-1">
-                        <li><a href="/">Последние обзоры</a></li>
-                        <li><a href="/videos">Последние видео</a></li>
-                        <li><a href="/pages/top-2015">Ежегодные топ-50</a></li>
-                    </ul>
-                </div>
-          </div>
-          <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-              <p class="footer-column-title">Разделы:</p>
-              <div class="footer-column">
-                  <ul class="list-unstyled cl-effect-1">
-                      <li><a href="/categories/new-reviews">Новые обзоры</a></li>
-                      <li><a href="/categories/old-reviews">Старые обзоры</a></li>
-                      <li><a href="/posts/{{ $randompost->slug }}">Случайный обзор</a></li>
-                  </ul>
+              <div class="col-lg-2 col-md-2 col-sm-4 col-xs-4">
+                  <p class="footer-column-title">Материалы:</p>
+                  <div class="footer-column">
+                      <ul class="list-unstyled cl-effect-1">
+                          <li><a href="/">Последние обзоры</a></li>
+                          <li><a href="/videos">Последние видео</a></li>
+                          <li><a href="/pages/top-2015">Ежегодные топ-50</a></li>
+                      </ul>
+                  </div>
               </div>
-          </div>
-          <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-                <p class="footer-column-title">Друзья:</p>
-                <div class="footer-column">
-                    <ul class="list-unstyled cl-effect-1">
-                        <li><a href="http://www.neformat.com.ua">www.neformat.com.ua</a></li>
-                        <li><a href="http://vk.com/expcore">e<sup>x</sup></a></li>
-                    </ul>
-                </div>
-          </div>
-          <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-              <p class="text-center"> Контакты и соцсети:</p>
+              <div class="col-lg-2 col-md-2 col-sm-4 col-xs-4">
+                  <p class="footer-column-title">Разделы:</p>
+                  <div class="footer-column">
+                      <ul class="list-unstyled cl-effect-1">
+                          <li><a href="/categories/new-reviews">Новые обзоры</a></li>
+                          <li><a href="/categories/old-reviews">Старые обзоры</a></li>
+                          <li><a href="/posts/{{ $randompost->slug }}">Случайный обзор</a></li>
+                      </ul>
+                  </div>
+              </div>
+              <div class="col-lg-2 col-md-2 col-sm-4 col-xs-4">
+                  <p class="footer-column-title">Друзья:</p>
+                  <div class="footer-column">
+                      <ul class="list-unstyled cl-effect-1">
+                          <li><a href="http://www.neformat.com.ua">www.neformat.com.ua</a></li>
+                          <li><a href="http://vk.com/expcore">e<sup>x</sup></a></li>
+                      </ul>
+                  </div>
+              </div>
+              <div class="col-lg-2 col-md-2 col-sm-4 col-xs-4">
+                  <p class="text-center"> Контакты и соцсети:</p>
                   <div class="footer-column">
                       <ul class="list-unstyled list-inline footer-social-links text-center">
                           <li><a href="http://www.last.fm/ru/user/redwhite1"><i class="fa fa-lastfm-square" aria-hidden="true"></i></a></li>
@@ -52,10 +53,11 @@
                       <!--<p class="text-center"><a href="/sitemap">Карта сайта</a></p>-->
                       <p class="text-center"><a href="/feed">RSS-потоки</a></p>
                   </div>
-          </div>
-          <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-              <p>Контакты:</p>
-              <a href="mailto:redwhite@bigmir.net"><i class="fa fa-caret-right" aria-hidden="true"></i> email</a>
+              </div>
+              <div class="col-lg-2 col-md-2 col-sm-4 col-xs-4">
+                  <p>Контакты:</p>
+                  <a href="mailto:redwhite@bigmir.net"><i class="fa fa-caret-right" aria-hidden="true"></i> email</a>
+              </div>
           </div>
       </div>
       <hr>

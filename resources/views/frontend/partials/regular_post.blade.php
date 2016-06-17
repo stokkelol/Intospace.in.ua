@@ -11,30 +11,32 @@
             </div>
             <br>
             <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 clearfix">
-                <img src="/upload/covers/{{ $post->img_thumbnail }}" class="img-responsive img-thumbnail">
-            </div>
-              <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12 clearfix">
-                <div>
-                    <em class="regular-post-author">{{ $post->published_at->diffForHumans() }} - <strong>{{ $post->user->name }}</strong></em>
-                </div>
-                <div class="regular-post-tags clearfix">
-                    @include('frontend.partials.tags', ['tags' => $post->tags])
-                </div>
-
-                <br>
-                <div class="clearfix">
-                    {!! $post->excerpt !!}
-                </div>
-
-                <div class="clearfix cl-effect-1">
-                    <p>
-                      <a href="{{ route('posts', ['slug' => $post->slug]) }}" class="more-link">Читать далее</a>
-                    </p>
+                <div class="text-center">
+                    <img src="/upload/covers/{{ $post->img_thumbnail }}" class="img-responsive img-thumbnail">
                 </div>
             </div>
-        </div>
+                <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12 clearfix">
+                    <div>
+                        <em class="regular-post-author">{{ $post->published_at->diffForHumans() }} - <strong>{{ $post->user->name }}</strong></em>
+                    </div>
+                    <div class="regular-post-tags clearfix">
+                        @include('frontend.partials.tags', ['tags' => $post->tags])
+                    </div>
+
+                    <br>
+                    <div class="clearfix">
+                        {!! $post->excerpt !!}
+                    </div>
+
+                    <div class="clearfix cl-effect-1">
+                        <p>
+                            <a href="{{ route('posts', ['slug' => $post->slug]) }}" class="more-link">Читать далее</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-          <hr>
+            <hr>
         </div>
     @endif
 @endforeach
