@@ -19,15 +19,15 @@
         </div>
         <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12 main-post-text">
             <div>
-                <div class="col-lg-9 col-md-9 col-sm-9 col-sx-9">
+                <div class="col-lg-9 col-md-9 col-sm-12 col-sx-12">
                     <a href="{{ $post->slug }}"><span class="main-post-title">{{$post->title}}</span></a>
                 </div>
-                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
                     @include('frontend.partials.share', ['post' => $post])
                 </div>
             </div>
             <br>
-            <div class="col-lg-12">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
               <div  class="main-post-author clearfix">
                   <em> {{ $post->published_at->diffForHumans() }}</em> <em>|</em> <em><strong>{{ $post->user->name }}</strong></em>
               </div>
@@ -51,17 +51,13 @@
             </div>
             @endif
         </div>
-
     </div>
     <hr>
     <div class="container">
-
-            <div class="col-lg-12">
-                @include('frontend.partials.related')
-                <hr>
-                @include('frontend.partials.disqus')
-
-            </div>
-
+        <div class="col-lg-12">
+            @include('frontend.partials.related')
+            <hr>
+            @include('frontend.partials.disqus')
+        </div>
     </div>
 @endsection

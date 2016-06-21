@@ -22,8 +22,6 @@
                     <div class="regular-post-tags clearfix">
                         @include('frontend.partials.tags', ['tags' => $post->tags])
                     </div>
-
-                    <br>
                     <div class="clearfix">
                         {!! $post->excerpt !!}
                     </div>
