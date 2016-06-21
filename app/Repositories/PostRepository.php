@@ -13,7 +13,7 @@ class PostRepository
     {
         $randomposts = Post::all()
                 ->whereIn('status', ['active'])
-                ->whereIn('category_id', ['1'])
+                //->whereIn('category_id', ['1'])
                 ->random(6);
 
         return $randomposts;
