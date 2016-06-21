@@ -43,7 +43,7 @@
                   </div>
               </div>
               <div class="col-lg-2 col-md-2 col-sm-4 col-xs-4">
-                  <p> Контакты и соцсети:</p>
+                  <p class="footer-column-title"> Контакты и соцсети:</p>
                   <div class="footer-column">
                       <ul class="list-unstyled list-inline footer-social-links">
                           <li><a href="http://www.last.fm/ru/user/redwhite1"><i class="fa fa-lastfm-square" aria-hidden="true"></i></a></li>
@@ -55,9 +55,11 @@
                   </div>
               </div>
               <div class="col-lg-2 col-md-2 col-sm-4 col-xs-4">
-                  <p>Контакты:</p>
+                  <p class="footer-column-title">Контакты:</p>
                   <div class="footer-column">
-                      <a href="mailto:redwhite@bigmir.net"><i class="fa fa-caret-right" aria-hidden="true"></i> email</a>
+                      <ul class="list-unstyled cl-effect-1">
+                          <li><a href="mailto:redwhite@bigmir.net"><i class="fa fa-caret-right" aria-hidden="true"></i> email</a></li>
+                      </ul>
                   </div>
               </div>
           </div>
