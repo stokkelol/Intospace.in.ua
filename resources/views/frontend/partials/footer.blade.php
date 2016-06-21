@@ -49,7 +49,7 @@
                           <li><a href="http://www.last.fm/ru/user/redwhite1"><i class="fa fa-lastfm-square" aria-hidden="true"></i></a></li>
                           <li><a href="https://twitter.com/_redwhite_"><i class="fa fa-twitter-square" aria-hidden="true"></i></a></li>
                           <li><a href="https://www.facebook.com/redwhiteua"><i class="fa fa-facebook-official" aria-hidden="true"></i></a></li>
-                          <li><p style="text-size: 12px;"><a href="/feed">RSS-потоки</a></p></li>
+                          <li><p style="font-size: 12px;"><a href="/feed">RSS-потоки</a></p></li>
                       </ul>
                       <!--<p class="text-center"><a href="/sitemap">Карта сайта</a></p>-->
 
