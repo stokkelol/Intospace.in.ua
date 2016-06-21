@@ -45,7 +45,7 @@
               <div class="col-lg-2 col-md-2 col-sm-4 col-xs-4">
                   <p class="text-center"> Контакты и соцсети:</p>
                   <div class="footer-column">
-                      <ul class="list-unstyled list-inline footer-social-links text-center">
+                      <ul class="list-unstyled list-inline footer-social-links">
                           <li><a href="http://www.last.fm/ru/user/redwhite1"><i class="fa fa-lastfm-square" aria-hidden="true"></i></a></li>
                           <li><a href="https://twitter.com/_redwhite_"><i class="fa fa-twitter-square" aria-hidden="true"></i></a></li>
                           <li><a href="https://www.facebook.com/redwhiteua"><i class="fa fa-facebook-official" aria-hidden="true"></i></a></li>
