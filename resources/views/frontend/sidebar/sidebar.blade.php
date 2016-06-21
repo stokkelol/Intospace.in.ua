@@ -34,7 +34,8 @@
               <br>
               <div id="sticky-anchor"></div>
               <div>
-              <section class="tagscloud" id="tagscloud">
+              <div id="tagscloud"></div>
+              <section class="tagscloud">
                 <p><i class="fa fa-tags" aria-hidden="true"></i> Облако тегов:</p>
                   @foreach ($counttags as $tag)
                       @if (($tag->cnt) > 5)
