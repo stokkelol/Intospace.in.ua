@@ -38,8 +38,8 @@ return [
     'connections' => [
 
         'main' => [
-            'id' => env('AUF9RQZCUS'),
-            'key' => env('c4e80e057731b53bac4e33f3f844ed8b'),
+            'id' => 'AUF9RQZCUS',
+            'key' => 'c4e80e057731b53bac4e33f3f844ed8b',
         ],
 
         'alternative' => [
