@@ -24,11 +24,8 @@ class SidebarComposer
     public function compose(View $view)
     {
         $posts = $this->_post->getLatestActivePosts();
-
         $videos = $this->_video->getLatestVideos();
-
         $popularposts = $this->_post->getPopularPosts();
-
         $counttags = $this->_tag->countTags();
 
         $view->with('latestposts', $posts);

@@ -194,6 +194,8 @@ return [
         Zizaco\Entrust\EntrustServiceProvider::class,
         //https://github.com/RoumenDamianoff/laravel-sitemap
         Roumen\Sitemap\SitemapServiceProvider::class,
+        //https://github.com/algolia/algoliasearch-laravel
+        AlgoliaSearch\Laravel\AlgoliaServiceProvider::class
 
 
     ],

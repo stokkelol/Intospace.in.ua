@@ -47,6 +47,12 @@
 
             <!-- Right Side Of Navbar -->
             <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <form method="GET" action="/" accept-charset="UTF-8" role="search" class="main-search form-inline">
+                        <input class="" name="search" type="text">
+                        <i class="fa fa-search" aria-hidden="true"></i>
+                    </form>
+                </li>
                 <li><a href="/feed" class="feed-icon"><i class="fa fa-rss-square" aria-hidden="true"></i></a></li>
                 <!-- Authentication Links -->
                 @if (Auth::guest())

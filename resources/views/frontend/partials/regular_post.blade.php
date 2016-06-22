@@ -1,3 +1,8 @@
+@if (count($posts) == 0)
+    <div class="col-lg-12 col-md-12 col-sm-12 col-sx-12">
+        <p>Что-то тут такого нет...</p>
+    </div>
+@endif
 @foreach ($posts as $post)
     @if ($post->status == 'active'  && $post->is_pinned == '0')
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">

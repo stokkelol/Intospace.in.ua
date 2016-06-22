@@ -18,10 +18,12 @@ class NavbarComposer
                                   ->orderBy('published_at', 'desc')
                                   ->take(10)
                                   ->get();
+
         $video = Video::with('user')->groupBy('published_at')
                                     ->orderBy('published_at', 'desc')
                                     ->take(10)
                                     ->get();
+        
         $view->with('navbarposts', $post);
         $view->with('navbarvideos', $video);
     }

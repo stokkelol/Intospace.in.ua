@@ -27,7 +27,8 @@
         "teamtnt/tntsearch": "0.6.*",
         "roumen/sitemap": "^2.6",
         "zizaco/entrust": "dev-laravel-5",
-        "doctrine/dbal": "~2.3"
+        "doctrine/dbal": "~2.3",
+        "algolia/algoliasearch-laravel": "^1.1"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
