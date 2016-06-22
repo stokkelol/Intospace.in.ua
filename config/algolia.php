@@ -38,8 +38,8 @@ return [
     'connections' => [
 
         'main' => [
-            'id' => 'your-application-id',
-            'key' => 'your-api-key',
+            'id' => env('ALGOLIA_APP_ID'),
+            'key' => env('ALGOLIA_APP_KEY'),
         ],
 
         'alternative' => [

@@ -25,8 +25,6 @@ class User extends Authenticatable
         'is_admin'  =>  'boolean',
     ];
 
-    public static $instance = null;
-
     public function posts()
     {
         return $this->hasMany(Post::class, 'user_id');

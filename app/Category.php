@@ -21,8 +21,6 @@ class Category extends Model implements SluggableInterface
 
     protected $table = 'categories';
 
-    public static $instance = null;
-
     public function posts()
     {
         return $this->hasMany(Post::class, 'category_id');

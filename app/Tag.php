@@ -19,8 +19,8 @@ class Tag extends Model implements SluggableInterface
     ];
 
     protected $table = 'tags';
+    
     protected $fillable = ['tag', 'id'];
-    public static $instance = null;
 
     public function user()
     {

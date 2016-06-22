@@ -28,8 +28,6 @@ class Post extends Model implements SluggableInterface
         'title',
     ];
 
-    public static $instance = null;
-
     protected $dates = [
         'created_at',
         'updated_at',

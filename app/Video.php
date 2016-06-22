@@ -11,7 +11,7 @@ class Video extends Model implements SluggableInterface
 {
     use SluggableTrait;
     use InstanceTrait;
-    
+
     protected $sluggable = [
         'build_from' => 'title',
         'save_to' => 'slug',
@@ -21,8 +21,6 @@ class Video extends Model implements SluggableInterface
     protected $dates = [
         'published_at',
     ];
-
-    public static $instance = null;
 
     public function user()
     {
