@@ -34,14 +34,12 @@
               <div class="regular-post-tags clearfix pull-left">
                     @include('frontend.partials.tags', ['tags' => $post->tags])
               </div>
-              <div class="text-left clearfix main-post-body">
-                {!! $post->excerpt !!}
-                {!! $post->content !!}
-              </div>
-              <br>
-              <div class="embed-responsive embed-responsive-16by9 clearfix">
-                  <iframe src="https://www.youtube.com/embed/{{ $post->video }}" frameborder="0" allowfullscreen></iframe>
-              </div>
+                <div class="text-left clearfix main-post-body">
+                    {!! $post->excerpt !!}
+                    {!! $post->content !!}
+                    </div>
+                    <br>
+                    <div class="js-lazyYT" data-youtube-id="{{$post->video}}" data-ratio="16:9"></div>
             </div>
             <br>
             @if ($post->similar)

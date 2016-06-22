@@ -11,9 +11,9 @@ class PostRepository
 {
     public function getRandomPosts()
     {
-        $randomposts = Post::all()
-                ->whereIn('status', ['active'])
-                //->whereIn('category_id', ['1'])
+        $randomposts = Post::where('status', 'like', 'active')
+                ->where('category_id', '=', '1')
+                ->get()
                 ->random(6);
 
         return $randomposts;
@@ -35,7 +35,7 @@ class PostRepository
     public function getLatestPublishedPosts()
     {
         $posts = Post::with('category', 'tags', 'user')
-                ->whereIn('status', ['active'])
+                ->where('status', 'like', 'active')
                 ->groupBy('published_at')
                 ->orderBy('published_at', 'desc')
                 ->paginate(15);
