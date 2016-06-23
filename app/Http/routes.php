@@ -49,6 +49,7 @@ Route::get('/sitemap', 'SitemapController@sitemap');
 /**
  * Routes for backend
  */
+
 Route::group(['prefix' => 'backend', 'middleware' => ['role:admin|owner']], function () {
 
     Route::get('/', [

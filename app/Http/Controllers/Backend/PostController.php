@@ -151,9 +151,9 @@ class PostController extends Controller
         }
 
         if($request->hasFile('logo')) {
-          $image = $request->file('logo');
-          $this->saveLogo($image);
-          $post->logo = $image->getClientOriginalName();
+            $image = $request->file('logo');
+            $this->saveLogo($image);
+            $post->logo = $image->getClientOriginalName();
         }
         $post->updated_at = $request->input('updated_at');
         $post->published_at = $request->input('published_at');

@@ -100,6 +100,5 @@ $('[data-toggle="tooltip"]').tooltip();
       $('.js-lazyYT').lazyYT();
     });
 </script>
-
 </body>
 </html>

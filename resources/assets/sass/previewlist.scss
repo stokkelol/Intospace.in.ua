@@ -2,6 +2,9 @@
 
 .preview-list {
     padding-top: 60px;
+    @media all and (max-width: 1130px) {
+      padding-top:120px;
+    }
     display: flex;
     flex-flow: row wrap;
     justify-content: space-around;
