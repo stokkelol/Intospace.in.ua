@@ -15,7 +15,6 @@
         @foreach ($posts as $post)
             @if ($post->is_pinned == '1')
                 @include('frontend.partials.top_post', ['toppost' => $post])
-
             @endif
         @endforeach
     @endif

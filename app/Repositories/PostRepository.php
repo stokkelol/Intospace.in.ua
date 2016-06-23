@@ -21,16 +21,13 @@ class PostRepository
 
     public function getPostsBySearchQuery($query)
     {
-        /*$posts = Post::with('category', 'tags', 'user')
+        $posts = Post::with('category', 'tags', 'user')
                 ->where('title', 'like', '%'.$query.'%')
                 ->orWhere('excerpt', 'like', '%'.$query,'%')
                 ->where('status', 'like', 'active')
                 ->groupBy('published_at')
                 ->orderBy('published_at', 'desc')
                 ->paginate(15);
-                */
-                
-        $posts = Post::search($query);
 
         return $posts;
     }
