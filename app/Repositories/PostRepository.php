@@ -24,6 +24,7 @@ class PostRepository
         $posts = Post::with('category', 'tags', 'user')
                 ->where('title', 'like', '%'.$query.'%')
                 ->orWhere('excerpt', 'like', '%'.$query,'%')
+                ->orWhere('content', 'like', '%'.$query,'%')
                 ->where('status', 'like', 'active')
                 ->groupBy('published_at')
                 ->orderBy('published_at', 'desc')
