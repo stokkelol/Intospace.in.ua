@@ -3,12 +3,10 @@
 namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use App\Traits\InstanceTrait;
 use Zizaco\Entrust\Traits\EntrustUserTrait;
 
 class User extends Authenticatable
 {
-    use InstanceTrait;
     use EntrustUserTrait;
 
     protected $table = 'users';

@@ -4,7 +4,7 @@ namespace App\Services;
 
 use App\Post;
 
-class BlogService
+class RelatedPostsService
 {
     public function getRelatedPosts($tags, $id)
     {

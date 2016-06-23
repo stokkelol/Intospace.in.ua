@@ -6,13 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 use AlgoliaSearch\Laravel\AlgoliaEloquentTrait;
 use Cviebrock\EloquentSluggable\SluggableInterface;
 use Cviebrock\EloquentSluggable\SluggableTrait;
-use App\Traits\InstanceTrait;
 use Cache;
 
 class Post extends Model implements SluggableInterface
 {
     use SluggableTrait;
-    use InstanceTrait;
     use AlgoliaEloquentTrait;
 
     protected $sluggable = [

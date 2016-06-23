@@ -1,4 +1,4 @@
-@inject('relatedposts', 'App\Services\BlogService')
+@inject('relatedposts', 'App\Services\RelatedPostsService')
 <?php $posts = $relatedposts->getRelatedPosts($post->tags, $post->id);?>
 <div class="related-posts">
     @foreach ($posts as $post)

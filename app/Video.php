@@ -1,16 +1,15 @@
 <?php
 
 namespace App;
+
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\SluggableInterface;
 use Cviebrock\EloquentSluggable\SluggableTrait;
-use App\Traits\InstanceTrait;
 
 class Video extends Model implements SluggableInterface
 {
     use SluggableTrait;
-    use InstanceTrait;
 
     protected $sluggable = [
         'build_from' => 'title',
