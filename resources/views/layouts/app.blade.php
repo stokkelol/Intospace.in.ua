@@ -13,6 +13,7 @@
 </head>
 <body>
     @include('frontend.partials.navbar')
+    @yield('tagline')
     @yield('random')
     @yield('toppost')
     @yield('content')

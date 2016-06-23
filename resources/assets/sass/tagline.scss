@@ -1,0 +1,23 @@
+.tagline {
+  padding-top: 61px;
+  padding-bottom: 0px;
+  margin: 0 auto;
+
+  @include default-hover;
+  @media all and (max-width: 1130px) {
+    padding-top:120px;
+  }
+  a {
+    color: #blue;
+    font-size: 12px;
+    &:hover {
+      color: $blue;
+      text-decoration: none;
+    }
+  }
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin-bottom: 0px;
+  padding-bottom: 0px;
+}

@@ -1,5 +1,13 @@
 @extends ('layouts.app')
 
+@section('tagline')
+    <div class="container tagline">
+        <div class="row">
+            @include('frontend.partials.tagline')
+        </div>
+    </div>
+@endsection
+
 @section('random')
     @if (Request::path() == '/')
         <div class="container">
@@ -22,7 +30,7 @@
 
 @section('content')
     <div class="container">
-      <hr>
+        <hr>
         <div class="row main-body">
             @if (Request::path() != '/')
                 <div class="regular-post-padding"></div>
