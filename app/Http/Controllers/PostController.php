@@ -68,6 +68,8 @@ class PostController extends Controller
             $post->increment('views');
         }
 
+        $similars = explode (' ', $post->similars);
+
         $data = [
             'post'      => $post,
             'title'     => $post->title,

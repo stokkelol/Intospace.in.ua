@@ -45,7 +45,7 @@
             @if ($post->similar)
             <div class="post-similars hidden-lg hidden-md">
                 <p>Похожие исполнители:</p>
-                {!! $post->similar !!}
+                {!! $post->similars !!}
             </div>
             @endif
         </div>
