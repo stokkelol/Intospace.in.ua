@@ -157,7 +157,7 @@ class PostController extends Controller
         }
         $post->updated_at = $request->input('updated_at');
         $post->published_at = $request->input('published_at');
-        //dd($post);
+        dd($post);
         $post->update();
 
         Flash::message('Post updated!');
