@@ -9,16 +9,16 @@
     "packages": [
         {
             "name": "algolia/algoliasearch-client-php",
-            "version": "1.9.4",
+            "version": "1.10.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/algolia/algoliasearch-client-php.git",
-                "reference": "27ff39779245f7d562d5fd84a356d4a1cee7b99f"
+                "reference": "8781bad08bb332394a51fd1b109b1c46625dc5f5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/algolia/algoliasearch-client-php/zipball/27ff39779245f7d562d5fd84a356d4a1cee7b99f",
-                "reference": "27ff39779245f7d562d5fd84a356d4a1cee7b99f",
+                "url": "https://api.github.com/repos/algolia/algoliasearch-client-php/zipball/8781bad08bb332394a51fd1b109b1c46625dc5f5",
+                "reference": "8781bad08bb332394a51fd1b109b1c46625dc5f5",
                 "shasum": ""
             },
             "require": {
@@ -56,20 +56,20 @@
             ],
             "description": "Algolia Search API Client for PHP",
             "homepage": "https://github.com/algolia/algoliasearch-client-php",
-            "time": "2016-06-14 13:45:34"
+            "time": "2016-06-23 11:35:32"
         },
         {
             "name": "algolia/algoliasearch-laravel",
-            "version": "1.1.0",
+            "version": "1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/algolia/algoliasearch-laravel.git",
-                "reference": "d230790b9a6158413dde23f885e5b7047444a3d2"
+                "reference": "366cdde290d4cd034c15bcced0a9c9d8e061cebb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/algolia/algoliasearch-laravel/zipball/d230790b9a6158413dde23f885e5b7047444a3d2",
-                "reference": "d230790b9a6158413dde23f885e5b7047444a3d2",
+                "url": "https://api.github.com/repos/algolia/algoliasearch-laravel/zipball/366cdde290d4cd034c15bcced0a9c9d8e061cebb",
+                "reference": "366cdde290d4cd034c15bcced0a9c9d8e061cebb",
                 "shasum": ""
             },
             "require": {
@@ -103,7 +103,7 @@
                 "laravel",
                 "search"
             ],
-            "time": "2016-05-03 08:36:31"
+            "time": "2016-06-23 15:59:54"
         },
         {
             "name": "anhskohbo/no-captcha",
@@ -990,16 +990,16 @@
         },
         {
             "name": "gaaarfild/laravel-pinger",
-            "version": "v1.2.3",
+            "version": "v1.2.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/gaaarfild/laravel-pinger.git",
-                "reference": "ad7d9b11d6ca4226a8076bbbbdcb557465fb8021"
+                "reference": "cee7df49e0ee06f2dd01385a8b9b42946c767c46"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/gaaarfild/laravel-pinger/zipball/ad7d9b11d6ca4226a8076bbbbdcb557465fb8021",
-                "reference": "ad7d9b11d6ca4226a8076bbbbdcb557465fb8021",
+                "url": "https://api.github.com/repos/gaaarfild/laravel-pinger/zipball/cee7df49e0ee06f2dd01385a8b9b42946c767c46",
+                "reference": "cee7df49e0ee06f2dd01385a8b9b42946c767c46",
                 "shasum": ""
             },
             "require": {
@@ -1034,7 +1034,7 @@
                 "yahoo",
                 "yandex"
             ],
-            "time": "2016-01-29 14:04:10"
+            "time": "2016-06-23 14:33:50"
         },
         {
             "name": "google/apiclient",
@@ -1140,16 +1140,16 @@
         },
         {
             "name": "guzzlehttp/psr7",
-            "version": "1.3.0",
+            "version": "1.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/psr7.git",
-                "reference": "31382fef2889136415751badebbd1cb022a4ed72"
+                "reference": "5c6447c9df362e8f8093bda8f5d8873fe5c7f65b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/psr7/zipball/31382fef2889136415751badebbd1cb022a4ed72",
-                "reference": "31382fef2889136415751badebbd1cb022a4ed72",
+                "url": "https://api.github.com/repos/guzzle/psr7/zipball/5c6447c9df362e8f8093bda8f5d8873fe5c7f65b",
+                "reference": "5c6447c9df362e8f8093bda8f5d8873fe5c7f65b",
                 "shasum": ""
             },
             "require": {
@@ -1165,7 +1165,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.0-dev"
+                    "dev-master": "1.4-dev"
                 }
             },
             "autoload": {
@@ -1194,7 +1194,7 @@
                 "stream",
                 "uri"
             ],
-            "time": "2016-04-13 19:56:01"
+            "time": "2016-06-24 23:00:38"
         },
         {
             "name": "intervention/image",
@@ -1562,16 +1562,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v5.2.38",
+            "version": "v5.2.39",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "e211a37eab49a124996ad9150f9e1bdfb52aa048"
+                "reference": "c2a77050269b4e03bd9a735a9f24e573a7598b8a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/e211a37eab49a124996ad9150f9e1bdfb52aa048",
-                "reference": "e211a37eab49a124996ad9150f9e1bdfb52aa048",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/c2a77050269b4e03bd9a735a9f24e573a7598b8a",
+                "reference": "c2a77050269b4e03bd9a735a9f24e573a7598b8a",
                 "shasum": ""
             },
             "require": {
@@ -1687,7 +1687,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2016-06-14 01:20:40"
+            "time": "2016-06-17 19:25:12"
         },
         {
             "name": "laravelcollective/annotations",
@@ -4974,16 +4974,16 @@
         },
         {
             "name": "sebastian/exporter",
-            "version": "1.2.1",
+            "version": "1.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/exporter.git",
-                "reference": "7ae5513327cb536431847bcc0c10edba2701064e"
+                "reference": "42c4c2eec485ee3e159ec9884f95b431287edde4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/exporter/zipball/7ae5513327cb536431847bcc0c10edba2701064e",
-                "reference": "7ae5513327cb536431847bcc0c10edba2701064e",
+                "url": "https://api.github.com/repos/sebastianbergmann/exporter/zipball/42c4c2eec485ee3e159ec9884f95b431287edde4",
+                "reference": "42c4c2eec485ee3e159ec9884f95b431287edde4",
                 "shasum": ""
             },
             "require": {
@@ -4991,12 +4991,13 @@
                 "sebastian/recursion-context": "~1.0"
             },
             "require-dev": {
+                "ext-mbstring": "*",
                 "phpunit/phpunit": "~4.4"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.2.x-dev"
+                    "dev-master": "1.3.x-dev"
                 }
             },
             "autoload": {
@@ -5036,7 +5037,7 @@
                 "export",
                 "exporter"
             ],
-            "time": "2015-06-21 07:55:53"
+            "time": "2016-06-17 09:04:28"
         },
         {
             "name": "sebastian/global-state",
