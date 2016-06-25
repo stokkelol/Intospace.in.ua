@@ -4,9 +4,9 @@
     </div>
     <br>
     <div class="text-left">
-        <p class="sidebar-title">Последние обзоры:</p>
+        <p class="sidebar-title">Популярные обзоры:</p>
         <ul class="list-unstyled">
-            @foreach ($latestposts as $post)
+            @foreach ($popularposts as $post)
                 <li class="sidebar-list">
                     <a href="/posts/{{ $post->slug }}">{{ $post->title }}</a>
                 </li>
@@ -20,9 +20,9 @@
               </li>
           @endforeach
         </ul>
-        <p class="sidebar-title">Популярные обзоры:</p>
+        <p class="sidebar-title">Последние обзоры:</p>
         <ul class="list-unstyled">
-            @foreach ($popularposts as $post)
+            @foreach ($latestposts as $post)
                 <li class="sidebar-list">
                     <a href="/posts/{{ $post->slug }}">{{ $post->title }}</a>
                 </li>
