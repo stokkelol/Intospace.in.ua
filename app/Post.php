@@ -7,10 +7,12 @@ use AlgoliaSearch\Laravel\AlgoliaEloquentTrait;
 use Cviebrock\EloquentSluggable\SluggableInterface;
 use Cviebrock\EloquentSluggable\SluggableTrait;
 use Cache;
+use App\Traits\FiltersTrait;
 
 class Post extends Model implements SluggableInterface
 {
     use SluggableTrait;
+    use FiltersTrait;
 
     protected $sluggable = [
         'build_from'    =>  'title',
@@ -78,27 +80,6 @@ class Post extends Model implements SluggableInterface
     public function scopeFindBySlug($query, $slug)
     {
         return $query->whereSlug($slug)->firstOrFail();
-    }
-
-    public function scopeByStatus($query, $statuses)
-    {
-        return $query->with('category', 'user')->where('status', $statuses);
-    }
-
-    public function scopeBySearchQuery($query, $search)
-    {
-        return $query->with('category', 'user')
-                    ->where('title', 'like', '%'.$search.'%')
-                    ->orWhere('excerpt', 'like', '%'.$search.'%')
-                    ->orderBy('id', 'desc');
-    }
-
-    public function scopeRecent($query)
-    {
-        return $query->with('category', 'user')
-            ->whereIn('status', ['active', 'draft'])
-            ->groupBy('id')
-            ->orderBy('id', 'desc');
     }
 
     public function getPostsByTag($slug)

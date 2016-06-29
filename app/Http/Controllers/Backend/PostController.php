@@ -48,7 +48,7 @@ class PostController extends Controller
         }
 
         //$posts = $this->_post->recent()->paginate(15);
-        $posts = $posts->paginate(15);
+        $posts = $posts->with('user', 'category')->paginate(15);
 
         $data = [
             'posts'         =>  $posts,
