@@ -35,22 +35,20 @@ class PostController extends Controller
      */
     public function index(Request $request)
     {
+        $posts = (new Post)->newQuery();
+
         if ($request->has('status')) {
-            $posts = $this->_post->with('category')
-                ->byStatus($request->get('status'))
-                ->paginate(15);
+            $posts = $this->_post->byStatus($request->get('status'));
+        } elseif ($request->exists('orderby')){
+            $posts = $this->_post->with('category', 'user')->orderBy('published_at', 'asc');
         } elseif ($request->has('search')) {
-            $posts = $this->_post->with('category')
-                ->bySearchQuery($request->get('search'))
-                ->orderBy('id', 'desc')
-                ->paginate(15);
+            $posts = $this->_post->bySearchQuery($request->get('search'));
         } else {
-            $posts = $this->_post->with('category')
-                ->whereIn('status', ['active', 'draft'])
-                ->groupBy('id')
-                ->orderBy('id', 'desc')
-                ->paginate(15);
+            $posts = $this->_post->recent();
         }
+
+        //$posts = $this->_post->recent()->paginate(15);
+        $posts = $posts->paginate(15);
 
         $data = [
             'posts'         =>  $posts,

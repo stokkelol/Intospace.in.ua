@@ -8,16 +8,12 @@
                     </div>
                     <div class="panel-heading">
                         <ul class="list-unstyled list-inline">
-                            <li>
-                                <a href="{{ route('backend.posts.index') }}"><button type="button" class="btn btn-default">All posts</button></a></li>
-                            <li>
-                                <a href="{{ route('backend.posts.create') }}"><button type="button" class="btn btn-primary">Create post</button></a></li>
-                            <li>
-                                <a href="{{ route('backend.posts.index', ['status'  => 'active']) }}"><button type="button" class="btn btn-success">Active</button></a></li>
-                            <li>
-                                <a href="{{ route('backend.posts.index', ['status'  => 'draft']) }}"><button type="button" class="btn btn-warning">Draft</button></a></li>
-                            <li>
-                                <a href="{{ route('backend.posts.index', ['status'  => 'deleted']) }}"><button type="button" class="btn btn-danger">Deleted</button></a></li>
+                            <li><a href="{{ route('backend.posts.index') }}"><button type="button" class="btn btn-default">All posts</button></a></li>
+                            <li><a href="{{ route('backend.posts.create') }}"><button type="button" class="btn btn-primary">Create post</button></a></li>
+                            <li><a href="{{ route('backend.posts.index', ['status'  => 'active']) }}"><button type="button" class="btn btn-success">Active</button></a></li>
+                            <li><a href="{{ route('backend.posts.index', ['status'  => 'draft']) }}"><button type="button" class="btn btn-warning">Draft</button></a></li>
+                            <li><a href="{{ route('backend.posts.index', ['status'  => 'deleted']) }}"><button type="button" class="btn btn-danger">Deleted</button></a></li>
+                            <li><a href="{{ route('backend.posts.index', ['orderby']) }}"><button type="button" class="btn btn-default">OrderBy</button></a></li>
                             <li class="pull-right">{!! Form::open(['route' => 'backend.posts.index', 'role' => 'search', 'method' => 'get', 'class' =>'form-inline']) !!}
                                     {!! Form::text('search', null, ['class' => 'form-control']) !!}{!! Form::submit('search', ['class' => 'btn btn-default']) !!}
                                     {!! Form::close() !!}</li>

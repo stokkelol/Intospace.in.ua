@@ -11,7 +11,6 @@ use Cache;
 class Post extends Model implements SluggableInterface
 {
     use SluggableTrait;
-    use AlgoliaEloquentTrait;
 
     protected $sluggable = [
         'build_from'    =>  'title',
@@ -83,17 +82,23 @@ class Post extends Model implements SluggableInterface
 
     public function scopeByStatus($query, $statuses)
     {
-        return $query->where('status', $statuses);
+        return $query->with('category', 'user')->where('status', $statuses);
     }
 
     public function scopeBySearchQuery($query, $search)
     {
-        return $query->where('title', 'like', '%'.$search.'%')->orWhere('excerpt', 'like', '%'.$search.'%');
+        return $query->with('category', 'user')
+                    ->where('title', 'like', '%'.$search.'%')
+                    ->orWhere('excerpt', 'like', '%'.$search.'%')
+                    ->orderBy('id', 'desc');
     }
 
     public function scopeRecent($query)
     {
-        return $query->orderBy('created_at', 'desc');
+        return $query->with('category', 'user')
+            ->whereIn('status', ['active', 'draft'])
+            ->groupBy('id')
+            ->orderBy('id', 'desc');
     }
 
     public function getPostsByTag($slug)
