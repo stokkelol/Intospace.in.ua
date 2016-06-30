@@ -1,18 +1,18 @@
 <div class="row">
     <div class="col-lg-8">
         <div class="form-group">
-            <label for="inputTitle">Title</label>
-            <input id="inputTitle" type="text"  value="{!! $video->title or Input::old('title') !!}" class="form-control" name="title">
+            {!! Form::label('inputTitle', 'Title:') !!}
+            {!! Form::text('title', null, ['class' => 'form-control']) !!}
         </div>
 
         <div class="form-group">
-            <label for="inputExcerpt">Excerpt</label>
-            <input id="inputExcerpt" type="textarea"  value="{!! $video->excerpt or Input::old('excerpt') !!}" class="form-control" name="excerpt">
+            {!! Form::label('inputExcerpt', 'Excerpt:') !!}
+            {!! Form::textarea('excerpt', null, ['class' => 'form-control']) !!}
         </div>
 
         <div class="form-group">
-            <label for="inputVideo">Title</label>
-            <input id="inputVideo" type="text"  value="{!! $video->video or Input::old('video') !!}" class="form-control" name="video">
+            {!! Form::label('inputVideo', 'Video link:') !!}
+            {!! Form::text('video', null, ['class' => 'form-control']) !!}
         </div>
     </div>
 </div>
