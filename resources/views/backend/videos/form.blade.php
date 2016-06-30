@@ -7,7 +7,7 @@
 
         <div class="form-group">
             <label for="inputExcerpt">Excerpt</label>
-            <input id="inputExcerpt" type="text"  value="{!! $video->excerpt or Input::old('excerpt') !!}" class="form-control" name="excerpt">
+            <input id="inputExcerpt" type="textarea"  value="{!! $video->excerpt or Input::old('excerpt') !!}" class="form-control" name="excerpt">
         </div>
 
         <div class="form-group">
