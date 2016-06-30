@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App;
 use App\Http\Requests;
 use App\Post;
-use App;
 use App\Repositories\PostRepository;
+use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
@@ -67,8 +67,6 @@ class PostController extends Controller
         if ($post->status == 'active') {
             $post->increment('views');
         }
-
-        $similars = explode (' ', $post->similars);
 
         $data = [
             'post'      => $post,

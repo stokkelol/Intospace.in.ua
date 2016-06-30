@@ -16,6 +16,8 @@ class CreateReviewsTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->text('content');
+            $table->string('img');
+            $table->string('video');
             $table->dateTime('publish_at');
             $table->timestamps();
         });

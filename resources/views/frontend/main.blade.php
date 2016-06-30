@@ -28,6 +28,7 @@
     @endif
 @endsection
 
+
 @section('content')
     <div class="container">
         <hr>
