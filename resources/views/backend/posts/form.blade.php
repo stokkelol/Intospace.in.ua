@@ -5,6 +5,10 @@
             {!! Form::text('title', null, ['class' => 'form-control']) !!}
         </div>
         <div class="form-group">
+            {!! Form::label('inputBandTitle', 'Band title:') !!}
+            {!! Form::text('band_title', null, ['class' => 'form-control']) !!}
+        </div>
+        <div class="form-group">
 
             {!! Form::label('inputExcerpt', 'Excerpt:') !!}
             {!! Form::textarea('excerpt', null, ['class' => 'form-control']) !!}

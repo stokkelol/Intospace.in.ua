@@ -28,4 +28,15 @@ class ReviewController extends Controller
 
         return view('backend.reviews.show', compact('review'));
     }
+
+    public function destroy($id)
+    {
+        $review = $this->_review->findOrFail($id);
+
+    }
+
+    public function update(Request $request, $id)
+    {
+        $review = $this->_review->findOrNew($id);
+    }
 }
