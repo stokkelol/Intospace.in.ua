@@ -14,10 +14,10 @@
                                 <li><a href="/posts/{{ $post->slug }}">{{ $post->title }}</a></li>
                             @endforeach
                             @foreach($band->videos as $video)
-                                <li><a href="/videos/{{ $post->slug }}">{{ $video->title }}</a></li>
+                                <li><a href="/videos/{{ $video->slug }}">{{ $video->title }}</a></li>
                             @endforeach
                             @foreach($band->reviews as $review)
-                                <li><a href="/reviews/{{ $post->slug }}">{{ $review->title }}</a></li>
+                                <li><a href="/reviews/{{ $review->slug }}">{{ $review->title }}</a></li>
                             @endforeach
                         </div>
                     </div>
