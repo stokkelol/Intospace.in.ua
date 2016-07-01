@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
 use App\Review;
-use App\Http\Requests;
+use App\Http\Requests\StoreReviewRequest;
 
 class ReviewController extends Controller
 {
@@ -35,8 +35,13 @@ class ReviewController extends Controller
 
     }
 
-    public function update(Request $request, $id)
+    public function update(StoreReviewRequest $request, $id)
     {
         $review = $this->_review->findOrNew($id);
+    }
+
+    public function store(StoreReviewRequest $request)
+    {
+        
     }
 }

@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreVideoRequest;
 use App\Http\Controllers\Controller;
 use App\Video;
 use Carbon\Carbon;
 use Flash;
-use App\Http\Requests;
 use Auth;
 use App\Band;
 
@@ -39,7 +39,7 @@ class VideoController extends Controller
         return view('backend.videos.video', $data);
     }
 
-    public function store(Request $request)
+    public function store(StoreVideoRequest $request)
     {
         $video = $this->storeOrUpdateVideo($request, null);
 
@@ -58,7 +58,7 @@ class VideoController extends Controller
         return view('backend.videos.edit', compact('video', 'bands'));
     }
 
-    public function update(Request $request, $video_id)
+    public function update(StoreVideoRequest $request, $video_id)
     {
         $video = $this->storeOrUpdateVideo($request, $video_id);
         $video->resluggify();

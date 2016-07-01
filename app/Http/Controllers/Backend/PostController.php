@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\StorePostRequest;
 use App\Http\Controllers\Controller;
 use Intervention\Image\Facades\Image;
 use App\Category;
@@ -87,7 +88,7 @@ class PostController extends Controller
      * @param null $post_id
      * @return mixed
      */
-    public function store(Request $request, $post_id = null)
+    public function store(StorePostRequest $request, $post_id = null)
     {
         $post = $this->storeOrUpdatePost($request, $post_id = null);
 
@@ -142,7 +143,7 @@ class PostController extends Controller
         return redirect('backend/posts');
     }
 
-    public function update(Request $request, $post_id)
+    public function update(StorePostRequest $request, $post_id)
     {
         $post = $this->storeOrUpdatePost($request, $post_id);
         $post->resluggify();

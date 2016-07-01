@@ -13,7 +13,6 @@ class feedTest extends TestCase
      */
     public function testExample()
     {
-        $this->visit('/feed')
-             ->see('Intospace');
+        $this->visit('/feed');
     }
 }
