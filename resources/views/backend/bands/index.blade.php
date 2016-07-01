@@ -14,7 +14,9 @@
                     <div class="panel-heading">
                         <p>Bands</p>
                     </div>
-                    {!! $bands->render() !!}
+                    <div class="posts-paginate text-center">
+                        {!! $bands->render() !!}
+                    </div>
                     <div class="panel-body bands-container">
                         <div class="categories-list">
                             <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 element">id</div>

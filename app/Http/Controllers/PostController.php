@@ -6,19 +6,22 @@ use App;
 use App\Http\Requests;
 use App\Post;
 use App\Repositories\PostRepository;
+use App\Repositories\TagRepository;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
-    protected $repository;
+    protected $postrepository;
+    protected $tagrepository;
 
     /**
      * PostController constructor.
      * @param PostRepository $repository
      */
-    public function __construct(PostRepository $repository)
+    public function __construct(PostRepository $postrepository, TagRepository $tagrepository)
     {
-        $this->repository = $repository;
+        $this->postrepository = $postrepository;
+        $this->tagrepository = $tagrepository;
     }
 
     public function index(Request $request)
@@ -26,15 +29,15 @@ class PostController extends Controller
 
         if ($request->has('search')) {
           $query = $request->get('search');
-          $posts = $this->repository->getPostsBySearchQuery($query);
+          $posts = $this->postrepository->getPostsBySearchQuery($query);
         } else {
-          $posts = $this->repository->getLatestPublishedPosts();
+          $posts = $this->postrepository->getLatestPublishedPosts();
         }
 
         $data = [
             'posts'         =>  $posts,
-            'tags'          =>  $this->repository->getAllTags(),
-            'randposts'     =>  $this->repository->getRandomPosts()
+            'tags'          =>  $this->tagrepository->getAllTags(),
+            'randposts'     =>  $this->postrepository->getRandomPosts()
         ];
 
         return view('frontend.main', $data);

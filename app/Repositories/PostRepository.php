@@ -3,7 +3,6 @@
 namespace App\Repositories;
 
 use App\Post;
-use App\Tag;
 use App\User;
 use App\Category;
 
@@ -42,15 +41,5 @@ class PostRepository
                 ->paginate(15);
 
         return $posts;
-    }
-
-    public function getAllTags()
-    {
-        $tags = Tag::with('posts')
-                ->groupBy('tag')
-                ->orderBy('tag', 'asc')
-                ->get();
-
-        return $tags;
     }
 }
