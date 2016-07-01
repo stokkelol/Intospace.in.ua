@@ -22,7 +22,9 @@ class BandController extends Controller
 
     public function index()
     {
-        $bands = $this->_band->with('posts', 'reviews', 'videos')->orderBy('title')->get();
+        $bands = $this->_band->with('posts', 'reviews', 'videos')
+                             ->orderBy('created_at', 'desc')
+                             ->paginate(15);
 
         return view('backend.bands.index', compact('bands'));
     }

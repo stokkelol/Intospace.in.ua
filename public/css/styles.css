@@ -461,4 +461,7 @@ form.main-search {
     flex: 1;
     font-size: 20px; }
 
+.band-element {
+  border-bottom: 1px #080808 solid; }
+
 /*# sourceMappingURL=styles.css.map */
