@@ -16,6 +16,7 @@ class CreateReviewsTable extends Migration
             $table->increments('id');
             $table->integer('user_id');
             $table->string('title');
+            $table->integer('band_id');
             $table->text('content');
             $table->string('img');
             $table->string('img_thumbnail');

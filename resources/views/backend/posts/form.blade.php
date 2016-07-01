@@ -5,8 +5,15 @@
             {!! Form::text('title', null, ['class' => 'form-control']) !!}
         </div>
         <div class="form-group">
-            {!! Form::label('inputBandTitle', 'Band title:') !!}
-            {!! Form::text('band_title', null, ['class' => 'form-control']) !!}
+            <label for="inputBand">Band title:</label>
+            <select name="band_id" id="inputBand" class="select2-container form-control">
+                @foreach($bands as $band)
+                    <option value="{{ $band->id }}"
+                        {{ (!empty($post) && $post->band_id == $band->id) ? 'selected' : '' }}>
+                        {{ $band->title }}
+                    </option>
+                @endforeach
+            </select>
         </div>
         <div class="form-group">
 
@@ -57,7 +64,7 @@
     <div class="col-lg-3">
         <div class="form-group">
             <label for="inputCategory">Categories</label>
-            <select name="category_id" id="inputCategory" class="form-control">
+            <select name="category_id" id="inputCategory" class="select2-container form-control">
                 @foreach($categories as $category)
                     <option value="{{ $category->id }}"
                         {{ (!empty($post) && $post->category_id == $category->id) ? 'selected' : '' }}>

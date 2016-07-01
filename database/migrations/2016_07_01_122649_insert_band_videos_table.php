@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class InsertBandTitlePostsTable extends Migration
+class InsertBandVideosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,8 +12,8 @@ class InsertBandTitlePostsTable extends Migration
      */
     public function up()
     {
-        Schema::table('posts', function (Blueprint $table) {
-            $table->string('band_title')->after('title');
+        Schema::table('videos', function (Blueprint $table) {
+            $table->integer('band_id')->after('title');
         });
     }
 
@@ -24,7 +24,7 @@ class InsertBandTitlePostsTable extends Migration
      */
     public function down()
     {
-        Schema::table('posts', function (Blueprint $table) {
+        Schema::table('videos', function (Blueprint $table) {
             //
         });
     }

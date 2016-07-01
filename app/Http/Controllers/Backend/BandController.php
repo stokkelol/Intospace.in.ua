@@ -13,9 +13,7 @@ class BandController extends Controller
 {
     public function index()
     {
-
-
-        //dd($bands);
+        Band::with('posts', 'reviews', 'videos')->orderBy('title')->get();
 
         return view('backend.bands.index', compact('bands'));
     }

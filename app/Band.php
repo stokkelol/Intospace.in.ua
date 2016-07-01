@@ -19,16 +19,16 @@ class Band extends Model
 
     public function posts()
     {
-        return $this->hasMany(Post::class, 'band_title');
+        return $this->hasMany(Post::class);
     }
 
     public function videos()
     {
-        return $this->hasMany(Video::class, 'band_title');
+        return $this->hasMany(Video::class);
     }
 
     public function reviews()
     {
-        return $this->hasMany(Review::class, 'band_title');
+        return $this->hasMany(Review::class);
     }
 }

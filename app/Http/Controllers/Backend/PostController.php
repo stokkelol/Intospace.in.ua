@@ -9,6 +9,7 @@ use App\Category;
 use App\Post;
 use App\Tag;
 use App\User;
+use App\Band;
 use Flash;
 use Auth;
 use Carbon\Carbon;
@@ -19,12 +20,14 @@ class PostController extends Controller
     protected $_post;
     protected $_category;
     protected $_tag;
+    protected $_band;
 
-    public function __construct(Post $post, Category $category, Tag $tag)
+    public function __construct(Post $post, Category $category, Tag $tag, Band $band)
     {
         $this->_post = $post;
         $this->_category = $category;
         $this->_tag = $tag;
+        $this->_band = $band;
     }
 
 
@@ -67,6 +70,7 @@ class PostController extends Controller
     public function create()
     {
         $data = [
+            'bands'         =>  $this->_band->all(),
             'categories'    =>  $this->_category->all(),
             'title'         =>  'New Post',
             'save_url'      =>  route('backend.posts.store'),
@@ -120,12 +124,14 @@ class PostController extends Controller
 
     public function edit($post_id)
     {
-        $post = $this->_post->find($post_id);
-        $post->user_id = Auth::user()->id;
-        $tags = $this->_tag->lists('tag', 'id');
-        $categories = $this->_category->all();
+        $data = [
+            'post'          =>  $this->_post->find($post_id),
+            'bands'         =>  $this->_band->all(),
+            'categories'    =>  $this->_category->all(),
+            'tags'          =>  $this->_tag->lists('tag', 'id'),
+        ];
 
-        return view('backend.posts.edit', compact('tags', 'post', 'categories'));
+        return view('backend.posts.edit', $data);
     }
 
     public function destroy($post_id)
