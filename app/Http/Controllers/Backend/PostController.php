@@ -273,7 +273,7 @@ class PostController extends Controller
         $post = $this->_post->findOrNew($post_id);
         $post->user_id = Auth::user()->id;
         $post->title = $request->input('title');
-        $post->band_title = $request->input('band_title');
+        $post->band_id = $request->input('band_id');
         $post->excerpt = $request->input('excerpt');
         $post->content = $request->input('content');
         $post->category_id = $request->input('category_id');

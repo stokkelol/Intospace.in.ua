@@ -9,14 +9,17 @@ use Carbon\Carbon;
 use Flash;
 use App\Http\Requests;
 use Auth;
+use App\Band;
 
 class VideoController extends Controller
 {
     protected $_video;
+    protected $_band;
 
-    public function __construct(Video $video)
+    public function __construct(Video $video, Band $band)
     {
         $this->_video = $video;
+        $this->_band = $band;
     }
 
     public function index()
@@ -30,7 +33,8 @@ class VideoController extends Controller
     {
         $data = [
             'save_url'  =>  route('backend.videos.store'),
-            'title' =>  'New video',
+            'title'     =>  'New video',
+            'bands'     =>  $this->_band->all(),
         ];
         return view('backend.videos.video', $data);
     }
@@ -49,8 +53,9 @@ class VideoController extends Controller
     public function edit($video_id)
     {
         $video = $this->_video->find($video_id);
+        $bands = $this->_band->all();
 
-        return view('backend.videos.edit', compact('video'));
+        return view('backend.videos.edit', compact('video', 'bands'));
     }
 
     public function update(Request $request, $video_id)
@@ -67,6 +72,7 @@ class VideoController extends Controller
     {
         $video = $this->_video->findOrNew($video_id);
         $video->title = $request->input('title');
+        $video->band_id = $request->input('band_id');
         $video->excerpt = $request->input('excerpt');
         $video->video = $request->input('video');
         $video->published_at = Carbon::now();
