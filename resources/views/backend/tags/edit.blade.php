@@ -3,8 +3,6 @@
 @section('content')
     <div class="container">
         <h1>{{ $title }}</h1>
-
-
         {!! Form::open(['method' => 'PATCH', 'url' => 'backend/tags/'.$tag->id, 'enctype' => 'multipart/form-data']) !!}
         <div class="row">
             <div class="col-lg-8">
@@ -20,8 +18,5 @@
             </div>
         </div>
         {!! Form::close() !!}
-
     </div>
-
-
 @endsection

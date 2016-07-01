@@ -50,7 +50,7 @@ class BandController extends Controller
     public function edit($band_id)
     {
         $data = [
-            $band = $this->_band->find($band_id),
+            'band' => $this->_band->find($band_id),
         ];
 
         return view('backend.bands.edit', $data);
