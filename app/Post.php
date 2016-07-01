@@ -7,31 +7,12 @@ use AlgoliaSearch\Laravel\AlgoliaEloquentTrait;
 use Cviebrock\EloquentSluggable\SluggableInterface;
 use Cviebrock\EloquentSluggable\SluggableTrait;
 use Cache;
-use App\Traits\FiltersTrait;
 
-class Post extends Model implements SluggableInterface
+class Post extends Entity implements SluggableInterface
 {
     use SluggableTrait;
-    use FiltersTrait;
-
-    protected $sluggable = [
-        'build_from'    =>  'title',
-        'save_to'       =>  'slug',
-        'unique'        =>   true,
-    ];
 
     protected $table = 'posts';
-
-    protected $fillable = [
-        'id',
-        'title',
-    ];
-
-    protected $dates = [
-        'created_at',
-        'updated_at',
-        'published_at'
-    ];
 
     public function user()
     {
@@ -55,7 +36,7 @@ class Post extends Model implements SluggableInterface
 
     public function band()
     {
-        return $this->belongsTo(Band::class, 'band_title');
+        return $this->belongsTo(Band::class, 'band_id');
     }
 
     public function getPostsByCategoryId($category_id)

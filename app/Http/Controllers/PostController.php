@@ -14,7 +14,7 @@ class PostController extends Controller
 
     /**
      * PostController constructor.
-     * @param PostRepository $posts
+     * @param PostRepository $repository
      */
     public function __construct(PostRepository $repository)
     {

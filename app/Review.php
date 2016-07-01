@@ -7,33 +7,15 @@ use AlgoliaSearch\Laravel\AlgoliaEloquentTrait;
 use Cviebrock\EloquentSluggable\SluggableInterface;
 use Cviebrock\EloquentSluggable\SluggableTrait;
 use Cache;
-use App\Traits\FiltersTrait;
 
-class Review extends Model implements SluggableInterface
+class Review extends Entity implements SluggableInterface
 {
     use SluggableTrait;
 
-    protected $sluggable = [
-        'build_from'    =>  'title',
-        'save_to'       =>  'slug',
-        'unique'        =>   true,
-    ];
-
     protected $table = 'reviews';
-
-    protected $fillable = [
-        'id',
-        'title',
-    ];
-
-    protected $dates = [
-        'created_at',
-        'updated_at',
-        'published_at'
-    ];
 
     public function band()
     {
-        return $this->belongsTo(Band::class, 'band_title');
+        return $this->belongsTo(Band::class, 'band_id');
     }
 }

@@ -48,6 +48,11 @@ Route::get('/sitemap', 'SitemapController@sitemap');
 
 Route::get('/bands', 'BandController@index');
 
+Route::get('/bands/{slug}', [
+    'as'    =>  'bands',
+    'uses'  =>  'BandController@show'
+]);
+
 /**
  * Routes for backend
  */

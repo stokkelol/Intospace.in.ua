@@ -21,7 +21,7 @@ class Band extends Model implements SluggableInterface
 
     public function posts()
     {
-        return $this->hasMany(Post::class);
+        return $this->hasMany(Post::class, 'band_id');
     }
 
     public function videos()

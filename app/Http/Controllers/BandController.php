@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Post;
+use App\Band;
 use DB;
 
 use App\Http\Requests;
@@ -13,7 +14,7 @@ class BandController extends Controller
     public function index()
     {
 
-        $bands = DB::table('posts')->lists('band_title');
+        $bands = Band::with('posts', 'reviews', 'videos')->get();
 
         //dd($bands);
 

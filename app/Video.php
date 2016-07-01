@@ -7,19 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\SluggableInterface;
 use Cviebrock\EloquentSluggable\SluggableTrait;
 
-class Video extends Model implements SluggableInterface
+class Video extends Entity implements SluggableInterface
 {
     use SluggableTrait;
-
-    protected $sluggable = [
-        'build_from' => 'title',
-        'save_to' => 'slug',
-        'unique' => true,
-    ];
-
-    protected $dates = [
-        'published_at',
-    ];
 
     public function user()
     {
@@ -28,7 +18,7 @@ class Video extends Model implements SluggableInterface
 
     public function band()
     {
-        return $this->belongsTo(Band::class, 'band_title');
+        return $this->belongsTo(Band::class, 'band_id');
     }
 
     public function getBySlug($slug)
