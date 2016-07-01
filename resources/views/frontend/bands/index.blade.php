@@ -5,11 +5,11 @@
         <div class="row bands-container">
             <ul class="list-unstyled">
                 @foreach($bands as $band)
-                    <div class="col-lg-12 band-container">
-                        <div class="col-lg-6">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 band-container">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <p class="band-title">{{ $band->title }}</p>
                         </div>
-                        <div class="col-lg-6">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             @foreach($band->posts as $post)
                                 <li><a href="/posts/{{ $post->slug }}">{{ $post->title }}</a></li>
                             @endforeach
