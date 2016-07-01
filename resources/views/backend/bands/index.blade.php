@@ -28,18 +28,18 @@
                         <hr>
                         @foreach($bands as $band)
                             <div class="col-lg-1 element">{{ $band->id }}</div>
-                            <div class="col-lg-2">{{ $band->title }}</div>
-                            <div class="col-lg-3">
+                            <div class="col-lg-2 element">{{ $band->title }}</div>
+                            <div class="col-lg-3 element">
                                 @foreach ($band->posts as $post)
                                     {{ $post->title }}
                                 @endforeach
                             </div>
-                            <div class="col-lg-3">
+                            <div class="col-lg-3 element">
                                 @foreach ($band->videos as $video)
                                     {{ $video->title }}
                                 @endforeach
                             </div>
-                            <div class="col-lg-3">
+                            <div class="col-lg-3 element">
                                 @foreach ($band->reviews as $review)
                                     {{ $review->title }}
                                 @endforeach
