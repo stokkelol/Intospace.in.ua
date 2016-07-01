@@ -1,11 +1,12 @@
 .bands-container {
     padding-top: 60px;
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
     padding-bottom: 15px;
     @media all and (max-width: 1130px) {
       padding-top:120px;
+      justify-content: center;
     }
     li {
         font-size: 16px;
