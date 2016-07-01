@@ -17,11 +17,13 @@
     .band-container {
         border-bottom: 1.5px $text solid;
         padding-bottom: 15px;
+        padding-top:15px;
         display: flex;
         justify-content: space-around;
         align-items: center;
         @media all and (max-width: 1130px) {
-          padding-top:120px;
+          padding-top:15px;
+          padding-bottom: 15px;
           display: flex;
           justify-content: flex-start;
           align-items: center;
