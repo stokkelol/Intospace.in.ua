@@ -455,13 +455,26 @@ form.main-search {
   padding-top: 60px;
   display: -ms-flexbox;
   display: flex;
-  padding-left: 100px; }
+  -ms-flex-pack: distribute;
+  justify-content: space-around;
+  -ms-flex-align: center;
+  align-items: center;
+  padding-bottom: 15px; }
+  @media all and (max-width: 1130px) {
+    .bands-container {
+      padding-top: 120px; } }
   .bands-container li {
-    -ms-flex: 1;
-    flex: 1;
+    font-size: 16px; }
+  .bands-container .band-container {
+    border-bottom: 1.5px #888888 solid;
+    padding-bottom: 15px;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: distribute;
+    justify-content: space-around;
+    -ms-flex-align: center;
+    align-items: center; }
+  .bands-container .band-title {
     font-size: 20px; }
-
-.band-element {
-  border-bottom: 1px #080808 solid; }
 
 /*# sourceMappingURL=styles.css.map */

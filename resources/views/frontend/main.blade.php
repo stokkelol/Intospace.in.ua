@@ -9,7 +9,7 @@
 @endsection
 
 @section('random')
-    @if (Request::path() == '/')
+    @if(Request::path() == '/')
         <div class="container">
             <div class="row">
                 @include('frontend.partials.random')
@@ -19,9 +19,9 @@
 @endsection
 
 @section('toppost')
-    @if (Request::path() == '/')
-        @foreach ($posts as $post)
-            @if ($post->is_pinned == '1')
+    @if(Request::path() == '/')
+        @foreach($posts as $post)
+            @if($post->is_pinned == '1')
                 @include('frontend.partials.top_post', ['toppost' => $post])
             @endif
         @endforeach
@@ -33,7 +33,7 @@
     <div class="container">
         <hr>
         <div class="row main-body">
-            @if (Request::path() != '/')
+            @if(Request::path() != '/')
                 <div class="regular-post-padding"></div>
             @endif
                 <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
