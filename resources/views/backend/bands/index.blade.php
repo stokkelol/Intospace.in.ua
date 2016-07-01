@@ -35,7 +35,7 @@
                                                 {{ $post->title }}
                                             @endforeach
                                         @else
-                                            1111
+                                            ---
                                         @endif
                                     </div>
                                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 element">
