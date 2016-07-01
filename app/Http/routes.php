@@ -46,6 +46,8 @@ Route::get('/feed', 'FeedController@feed');
 
 Route::get('/sitemap', 'SitemapController@sitemap');
 
+Route::get('/bands', 'BandController@index');
+
 /**
  * Routes for backend
  */

@@ -31,4 +31,9 @@ class Review extends Model implements SluggableInterface
         'updated_at',
         'published_at'
     ];
+
+    public function band()
+    {
+        return $this->belongsTo(Band::class, 'band_title');
+    }
 }

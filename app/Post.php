@@ -53,6 +53,11 @@ class Post extends Model implements SluggableInterface
         return $this->belongsTo(Category::class, 'category_id');
     }
 
+    public function band()
+    {
+        return $this->belongsTo(Band::class, 'band_title');
+    }
+
     public function getPostsByCategoryId($category_id)
     {
         $posts = $this->with(['category', 'user']);

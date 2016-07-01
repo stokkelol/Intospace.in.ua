@@ -26,6 +26,11 @@ class Video extends Model implements SluggableInterface
         return $this->belongsTo(User::class, 'user_id');
     }
 
+    public function band()
+    {
+        return $this->belongsTo(Band::class, 'band_title');
+    }
+
     public function getBySlug($slug)
     {
         return $this->with(['user'])->where('slug', $slug)->first();
