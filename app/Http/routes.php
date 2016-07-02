@@ -57,7 +57,7 @@ Route::get('/bands/{slug}', [
  * Routes for backend
  */
 
-Route::group(['prefix' => 'backend', 'middleware' => ['role:admin|owner']], function () {
+Route::group(['prefix' => 'backend', 'middleware' => ['role:admin|owner|demo']], function () {
 
     Route::get('/', [
         'as'    =>  'backend.index',
