@@ -6,13 +6,20 @@ use App\Tag;
 
 class TagRepository
 {
-        public function getAllTags()
-        {
-            $tags = Tag::with('posts')
-                    ->groupBy('tag')
-                    ->orderBy('tag', 'asc')
-                    ->get();
+    protected $tag;
 
-            return $tags;
-        }
+    public function __construct(Tag $tag)
+    {
+        $this->tag = $tag;
+    }
+
+    public function getAllTags()
+    {
+        $tags = $this->tag->with('posts')
+                ->groupBy('tag')
+                ->orderBy('tag', 'asc')
+                ->get();
+
+        return $tags;
+    }
 }

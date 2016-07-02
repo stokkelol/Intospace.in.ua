@@ -8,6 +8,13 @@ use App\Category;
 
 class PostRepository
 {
+    protected $post;
+
+    public function __construct(Post $post)
+    {
+        $this->post = $post;
+    }
+
     public function getRandomPosts()
     {
         $randomposts = Post::where('status', 'like', 'active')
