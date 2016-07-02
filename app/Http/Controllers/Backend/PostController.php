@@ -137,10 +137,10 @@ class PostController extends Controller
 
     public function destroy($post_id)
     {
-        $post = $this->_post->findOrFail($post_id);
+        /*$post = $this->_post->findOrFail($post_id);
         $post->destroy($post_id);
 
-        return redirect('backend/posts');
+        return redirect('backend/posts');*/
     }
 
     public function update(StorePostRequest $request, $post_id)
