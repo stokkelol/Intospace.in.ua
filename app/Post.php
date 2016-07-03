@@ -7,12 +7,12 @@ use AlgoliaSearch\Laravel\AlgoliaEloquentTrait;
 use Cviebrock\EloquentSluggable\SluggableInterface;
 use Cviebrock\EloquentSluggable\SluggableTrait;
 use Cache;
-use App\Traits\FiltersTrait;
+use App\Traits\ScopesTrait;
 
 class Post extends Entity implements SluggableInterface
 {
     use SluggableTrait;
-    use FiltersTrait;
+    use ScopesTrait;
 
     protected $table = 'posts';
 

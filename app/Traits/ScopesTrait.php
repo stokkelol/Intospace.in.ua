@@ -2,7 +2,7 @@
 
 namespace App\Traits;
 
-trait FiltersTrait
+trait ScopesTrait
 {
     public function scopeByStatus($query, $statuses)
     {

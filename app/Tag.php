@@ -5,7 +5,6 @@ namespace App;
 use Cviebrock\EloquentSluggable\SluggableInterface;
 use Cviebrock\EloquentSluggable\SluggableTrait;
 use Illuminate\Database\Eloquent\Model;
-use App\Traits\InstanceTrait;
 use DB;
 
 class Tag extends Model implements SluggableInterface
@@ -19,7 +18,7 @@ class Tag extends Model implements SluggableInterface
     ];
 
     protected $table = 'tags';
-    
+
     protected $fillable = ['tag', 'id'];
 
     public function user()

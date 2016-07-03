@@ -2,9 +2,10 @@
 
 namespace App\Repositories;
 
+use App\Repositories\TagRepositoryInterface;
 use App\Tag;
 
-class TagRepository
+class TagRepository implements TagRepositoryInterface
 {
     protected $tag;
 
@@ -15,7 +16,7 @@ class TagRepository
 
     public function getAllTags()
     {
-        $tags = $this->tag->with('posts')
+        $tags = $this->tag->with('posts', 'user')
                 ->groupBy('tag')
                 ->orderBy('tag', 'asc')
                 ->get();

@@ -11,17 +11,17 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
-    protected $postrepository;
-    protected $tagrepository;
+    protected $postRepository;
+    protected $tagRepository;
 
     /**
      * PostController constructor.
      * @param PostRepository $repository
      */
-    public function __construct(PostRepository $postrepository, TagRepository $tagrepository)
+    public function __construct(PostRepository $postRepository, TagRepository $tagRepository)
     {
-        $this->postrepository = $postrepository;
-        $this->tagrepository = $tagrepository;
+        $this->postRepository = $postRepository;
+        $this->tagRepository = $tagRepository;
     }
 
     public function index(Request $request)
@@ -29,15 +29,15 @@ class PostController extends Controller
 
         if ($request->has('search')) {
           $query = $request->get('search');
-          $posts = $this->postrepository->getPostsBySearchQuery($query);
+          $posts = $this->postRepository->getPostsBySearchQuery($query);
         } else {
-          $posts = $this->postrepository->getLatestPublishedPosts();
+          $posts = $this->postRepository->getLatestPublishedPosts();
         }
 
         $data = [
             'posts'         =>  $posts,
-            'tags'          =>  $this->tagrepository->getAllTags(),
-            'randposts'     =>  $this->postrepository->getRandomPosts()
+            'tags'          =>  $this->tagRepository->getAllTags(),
+            'randposts'     =>  $this->postRepository->getRandomPosts()
         ];
 
         return view('frontend.main', $data);

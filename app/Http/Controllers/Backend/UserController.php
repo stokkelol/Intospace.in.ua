@@ -73,9 +73,4 @@ class UserController extends Controller
 
         return redirect()->route('backend.users.index');
     }
-
-    public function destroy($user_id)
-    {
-
-    }
 }
