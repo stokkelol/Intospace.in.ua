@@ -23,6 +23,13 @@
         justify-content: space-around;
         align-items: center;
         height: 60px;
+        li {
+            padding-top: 1px;
+            padding-bottom: 1px;
+            p {
+                margin: 0 auto;
+            }
+        }
         @media all and (max-width: 1130px) {
             padding-top:1px;
             padding-bottom: 1px;
