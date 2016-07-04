@@ -11,7 +11,7 @@
       align-items: center;
     }
     li {
-        font-size: 14px;
+        font-size: 12px;
         flex: 1;
     }
 
@@ -22,6 +22,7 @@
         display: flex;
         justify-content: space-around;
         align-items: center;
+        height: 60px;
         @media all and (max-width: 1130px) {
             padding-top:5px;
             padding-bottom: 5px;
@@ -32,6 +33,6 @@
     }
 
     .band-title {
-        font-size: 14px;
+        font-size: 12px;
     }
 }

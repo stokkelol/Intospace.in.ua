@@ -472,7 +472,7 @@ form.main-search {
       -ms-flex-align: center;
       align-items: center; } }
   .bands-container li {
-    font-size: 14px;
+    font-size: 12px;
     -ms-flex: 1;
     flex: 1; }
   .bands-container .band-container {
@@ -484,7 +484,8 @@ form.main-search {
     -ms-flex-pack: distribute;
     justify-content: space-around;
     -ms-flex-align: center;
-    align-items: center; }
+    align-items: center;
+    height: 60px; }
     @media all and (max-width: 1130px) {
       .bands-container .band-container {
         padding-top: 5px;
@@ -496,6 +497,6 @@ form.main-search {
         -ms-flex-align: center;
         align-items: center; } }
   .bands-container .band-title {
-    font-size: 14px; }
+    font-size: 12px; }
 
 /*# sourceMappingURL=styles.css.map */
