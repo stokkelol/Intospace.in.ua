@@ -4,7 +4,7 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-class feedTest extends TestCase
+class PageAvailableTest extends TestCase
 {
     /**
      * A basic test example.
@@ -13,6 +13,8 @@ class feedTest extends TestCase
      */
     public function testExample()
     {
-        $this->visit('/feed');
+        $response = $this->call('GET', '/');
+
+        $this->assertEquals(200, $response->getStatusCode());
     }
 }

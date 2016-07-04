@@ -5,7 +5,7 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use App\User;
 
-class saveVideoTest extends TestCase
+class SaveVideoTest extends TestCase
 {
     /**
      * A basic test example.
