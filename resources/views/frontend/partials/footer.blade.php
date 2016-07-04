@@ -9,7 +9,7 @@
                   <div class="footer-column cl-effect-1">
                       <ul class="list-unstyled">
                           <li><a href="/">На главную</a></li>
-                          <li><a href="#tagscloud">Облако тегов</a></li>
+                          <li><a href="/#tagscloud">Облако тегов</a></li>
                           <li><a href="/bands">Все группы</a></li>
                       </ul>
                   </div>

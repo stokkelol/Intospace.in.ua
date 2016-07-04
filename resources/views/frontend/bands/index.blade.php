@@ -5,7 +5,6 @@
         <div class="row bands-container">
             <ul class="list-unstyled">
                 @foreach($bands as $band)
-                    @if($band->status == 'active')
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 band-container">
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                                 <p class="band-title pull-right">{{ $band->title }}</p>
@@ -22,7 +21,6 @@
                                 @endforeach
                             </div>
                         </div>
-                    @endif
                 @endforeach
             </ul>
         </div>
