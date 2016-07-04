@@ -11,13 +11,13 @@
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             @foreach($band->posts as $post)
-                                <li><a href="/posts/{{ $post->slug }}">{{ $post->title }}</a></li>
+                                <li><p><a href="/posts/{{ $post->slug }}">{{ $post->title }}</a></p></li>
                             @endforeach
                             @foreach($band->videos as $video)
-                                <li><a href="/videos/{{ $video->slug }}">{{ $video->title }}</a></li>
+                                <li><p><a href="/videos/{{ $video->slug }}">{{ $video->title }}</a></p></li>
                             @endforeach
                             @foreach($band->reviews as $review)
-                                <li><a href="/reviews/{{ $review->slug }}">{{ $review->title }}</a></li>
+                                <li><p><a href="/reviews/{{ $review->slug }}">{{ $review->title }}</a></p></li>
                             @endforeach
                         </div>
                     </div>
