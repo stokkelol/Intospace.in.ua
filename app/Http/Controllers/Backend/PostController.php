@@ -286,8 +286,4 @@ class PostController extends Controller
         return $post;
     }
 
-    public function postContentPreviewOnHover($post_id);
-    {
-
-    }
 }
