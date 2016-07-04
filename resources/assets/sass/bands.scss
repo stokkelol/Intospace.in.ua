@@ -3,7 +3,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-bottom: 15px;
+    padding-bottom: 5px;
     @media all and (max-width: 1130px) {
       padding-top: 120px;
       display: flex;
@@ -17,14 +17,14 @@
 
     .band-container {
         border-bottom: 1.5px $text solid;
-        padding-bottom: 15px;
-        padding-top:15px;
+        padding-bottom: 5px;
+        padding-top:5px;
         display: flex;
         justify-content: space-around;
         align-items: center;
         @media all and (max-width: 1130px) {
-            padding-top:15px;
-            padding-bottom: 15px;
+            padding-top:5px;
+            padding-bottom: 5px;
             display: flex;
             justify-content: flex-start;
             align-items: center;
