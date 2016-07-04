@@ -1,7 +1,7 @@
 @extends ('layouts.app')
 
 @section('tagline')
-    <div class="container tagline">
+    <div class="container">
         <div class="row">
             @include('frontend.partials.tagline')
         </div>
