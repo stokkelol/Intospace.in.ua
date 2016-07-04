@@ -37,7 +37,9 @@ elixir(function(mix) {
         'select2.min.js',
         'modernizr.custom.js',
         'jquery.sticky-kit.min.js',
-        'lazyYT.js'
+        'lazyYT.js',
+        'scripts.js',
+        'vue.min.js'
         ], 'public/js/all.js');
 
     mix.version([
