@@ -11,7 +11,9 @@
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                                 @foreach($band->posts as $post)
+                                    @if($post->status == 'active')
                                     <li><p><a href="/posts/{{ $post->slug }}">{{ $post->title }}</a></p></li>
+                                    @endif
                                 @endforeach
                                 @foreach($band->videos as $video)
                                     <li><p><a href="/videos/{{ $video->slug }}">{{ $video->title }}</a></p></li>
