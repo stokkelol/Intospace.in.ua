@@ -66,6 +66,11 @@ Route::group(['prefix' => 'backend', 'middleware' => ['role:admin|owner|demo']],
 
     Route::resource('posts', 'Backend\PostController');
 
+    Route::get('/posts/preview{post_id}', [
+        'as'    =>  'backend.posts.post-preview',
+        'uses'  =>  'Backend\PostController@postPreviewOnAjaxRequest'
+    ]);
+
     Route::get('/posts/to-draft/{post_id}', [
         'as'    => 'backend.posts.to-draft',
         'uses'  =>  'Backend\PostController@toDraft'

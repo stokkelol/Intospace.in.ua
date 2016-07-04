@@ -286,4 +286,13 @@ class PostController extends Controller
         return $post;
     }
 
+    public function postPreviewOnAjaxRequest(Request $request, $post_id)
+    {
+        $post= $this->post->findOrFail($post_id);
+        $preview = $post->content;
+
+        if ($request->ajax()) {
+            return view('backend.posts.show', $preview)->renderSection('content');
+        }
+    }
 }
