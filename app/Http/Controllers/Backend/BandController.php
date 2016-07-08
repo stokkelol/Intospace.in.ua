@@ -72,4 +72,11 @@ class BandController extends Controller
 
         return redirect()->route('backend.bands.index');
     }
+
+    public function show($band_id)
+    {
+        $band = $this->_band->findOrFail($band_id);
+
+        return view('backend.bands.show', compact('band'));
+    }
 }
