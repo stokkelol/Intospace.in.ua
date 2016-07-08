@@ -20,11 +20,15 @@ class BandController extends Controller
         $this->_band = $band;
     }
 
-    public function index()
+    public function index(Request $request)
     {
+        if ($request->has('search')) {
+            $bands = $this->_band->bySearch($request->get('search'))->paginate(15);
+        } else {
         $bands = $this->_band->with('posts', 'reviews', 'videos')
                              ->orderBy('created_at', 'desc')
                              ->paginate(15);
+        }
 
         return view('backend.bands.index', compact('bands'));
     }

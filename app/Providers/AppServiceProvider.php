@@ -4,6 +4,9 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use View;
+use App\Post;
+use Auth;
+use App\User;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -24,6 +27,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+
     }
 }
