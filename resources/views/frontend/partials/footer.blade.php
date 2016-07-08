@@ -70,7 +70,7 @@
       <div class="row">
           <div class="text-left">
               <div class="footer-copyright">
-                  <i class="fa fa-copyright" aria-hidden="true"></i> 2015-16 Intospace.in.ua. Большая просьба, при использовании материалов с сайта добавьте активную гиперссылку на <a href="www.intospace.in.ua">intospace.in.ua</a>
+                  <i class="fa fa-copyright" aria-hidden="true"></i> 2015-16 Intospace.in.ua. Большая просьба, при использовании материалов с сайта добавьте активную гиперссылку на <a href="http://www.intospace.in.ua">intospace.in.ua</a>
                   <p>Into space with death - это попытка вернуться во времена когда обзоры читали, а жесткие диски не ломились от гигабайт mp3.</p>
                   <p>Powered by <a href="https://laravel.com/">Laravel</a>.</p>
               </div>
