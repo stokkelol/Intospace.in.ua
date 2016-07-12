@@ -5,8 +5,9 @@ namespace App\Http\Controllers;
 use App;
 use App\Http\Requests;
 use App\Post;
-use App\Repositories\PostRepository;
-use App\Repositories\TagRepository;
+use App\Tag;
+use App\Repositories\PostRepositoryInterface;
+use App\Repositories\TagRepositoryInterface;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -18,7 +19,7 @@ class PostController extends Controller
      * PostController constructor.
      * @param PostRepository $repository
      */
-    public function __construct(PostRepository $postRepository, TagRepository $tagRepository)
+    public function __construct(PostRepositoryInterface $postRepository, TagRepositoryInterface $tagRepository)
     {
         $this->postRepository = $postRepository;
         $this->tagRepository = $tagRepository;

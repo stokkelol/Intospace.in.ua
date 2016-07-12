@@ -508,4 +508,21 @@ form.main-search {
   .bands-container .band-title {
     font-size: 12px; }
 
+.newsfeed-container {
+  padding-top: 60px;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: start;
+  align-items: flex-start;
+  -ms-flex-pack: distribute;
+  justify-content: space-around; }
+
+.newsfeed-item-container {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap; }
+
 /*# sourceMappingURL=styles.css.map */

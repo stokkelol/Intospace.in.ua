@@ -4,6 +4,8 @@ namespace App\Repositories;
 
 use App\Repositories\TagRepositoryInterface;
 use App\Tag;
+use App\Post;
+use App\User;
 
 class TagRepository implements TagRepositoryInterface
 {

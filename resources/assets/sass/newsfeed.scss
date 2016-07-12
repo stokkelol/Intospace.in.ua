@@ -1,0 +1,12 @@
+.newsfeed-container {
+    padding-top: 60px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-around;
+}
+
+.newsfeed-item-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
