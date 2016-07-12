@@ -7,9 +7,10 @@
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                     <div class="newsfeed-item-container">
                         @foreach($posts as $post)
-                            <img src="/upload/covers/{{ $post->img_thumbnail }}">
+                            <img src="/upload/covers/{{ $post->img_thumbnail }}" class="img-thumbnail">
                             <br>
                             <a href="/posts/{{ $post->slug }}">{{ $post->title }}</a>
+                            <hr>
                         @endforeach
                     </div>
                 </div>
