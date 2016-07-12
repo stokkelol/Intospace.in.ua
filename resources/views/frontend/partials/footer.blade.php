@@ -27,6 +27,8 @@
                             <li><a href="/">На главную</a></li>
                             <li><a href="/#tagscloud">Облако тегов</a></li>
                             <li><a href="/bands">Все группы</a></li>
+                            <li><a href="/register">Регистрация</a></li>
+                            <li><a href="/login">Вход</a></li>
                         </ul>
                     </div>
                 </div>
