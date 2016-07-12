@@ -18,4 +18,9 @@ class Review extends Entity implements SluggableInterface
     {
         return $this->belongsTo(Band::class, 'band_id');
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

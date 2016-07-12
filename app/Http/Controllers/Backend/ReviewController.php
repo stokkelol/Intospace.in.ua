@@ -2,16 +2,18 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Http\Controllers\Backend\BaseController;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
 use App\Review;
 use App\Band;
 use Auth;
+use Flash;
 use Carbon\Carbon;
 use App\Http\Requests\StoreReviewRequest;
 
-class ReviewController extends Controller
+class ReviewController extends BaseController
 {
     protected $_review;
     protected $_band;
@@ -24,7 +26,7 @@ class ReviewController extends Controller
 
     public function index()
     {
-        $reviews = $this->_review->latest()->get();
+        $reviews = $this->_review->with('user')->paginate(15);
 
         return view('backend.reviews.index', compact('reviews'));
     }
@@ -94,16 +96,5 @@ class ReviewController extends Controller
         $review->video = $request->input('video');
 
         return $review;
-    }
-
-    public function saveImage($image)
-    {
-        $filename = $image->getClientOriginalName();
-        $path = public_path('upload/covers/' . $filename);
-        Image::make($image->getRealPath())->save($path);
-
-        $filename2 = 'thumbnail_'.$image->getClientOriginalName();
-        $path2 = public_path('upload/covers/' . $filename2);
-        Image::make($image->getRealPath())->resize(300,300)->save($path2);
     }
 }
