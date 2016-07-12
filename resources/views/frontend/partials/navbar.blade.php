@@ -25,16 +25,16 @@
                 @else
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Последние обзоры<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            @foreach ($navbarposts as $post)
-                                <li><a href="{{ route('posts', ['slug' => $post->slug]) }}">{{ $post->title }}</a></li>
+                        <ul class="dropdown-menu list-inline">
+                            @foreach($navbarposts as $post)
+                                <li><a href="/posts/{{ $post->slug }}">{{ $post->title }}</a></li>
                             @endforeach
                         </ul>
                     </li>
                     <li class="dropdown">
                         <a href="/videos">Последние видео<span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            @foreach ($navbarvideos as $video)
+                            @foreach($navbarvideos as $video)
                                 <li><a href="{{ route('videos', ['slug' => $video->slug])}}">{{ $video->title }}</a></li>
                             @endforeach
                         </ul>

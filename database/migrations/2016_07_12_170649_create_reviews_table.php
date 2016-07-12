@@ -22,7 +22,7 @@ class CreateReviewsTable extends Migration
             $table->string('img_thumbnail');
             $table->string('video');
             $table->string('slug');
-            $table->dateTime('publish_at');
+            $table->dateTime('published_at');
             $table->timestamps();
         });
     }

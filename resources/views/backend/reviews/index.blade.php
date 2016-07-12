@@ -6,7 +6,7 @@
             <div class="panel-heading">
                 <h2>Reviews</h2>
                 <p><a href="{{ route('backend.reviews.create') }}">
-                    <button type="button" class="btn btn-primary">Create post</button></a>
+                    <button type="button" class="btn btn-primary">Create review</button></a>
                 </p>
             </div>
             <div class="panel panel-danger">
