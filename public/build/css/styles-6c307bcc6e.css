@@ -162,6 +162,8 @@ a {
 
 .footer-container {
   height: 150px; }
+  .footer-container blockquote {
+    font-size: 14px; }
 
 .footer-column {
   text-align: left;
