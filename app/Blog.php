@@ -8,16 +8,11 @@ use Cviebrock\EloquentSluggable\SluggableInterface;
 use Cviebrock\EloquentSluggable\SluggableTrait;
 use Cache;
 
-class Review extends Entity implements SluggableInterface
+class Blog extends Entity implements SluggableInterface
 {
     use SluggableTrait;
 
-    protected $table = 'reviews';
-
-    public function band()
-    {
-        return $this->belongsTo(Band::class, 'band_id');
-    }
+    protected $table = 'blogposts';
 
     public function user()
     {

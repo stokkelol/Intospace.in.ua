@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
 
-class StoreReviewRequest extends Request
+class StoreBlogRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,7 +25,6 @@ class StoreReviewRequest extends Request
     {
         return [
             'title' =>  'required',
-            'band_id'   =>  'required',
         ];
     }
 }

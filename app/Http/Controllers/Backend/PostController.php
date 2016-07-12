@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\StorePostRequest;
-use App\Http\Controllers\Backend\BaseController;
 use App\Http\Controllers\Controller;
 use Intervention\Image\Facades\Image;
 use App\Category;
@@ -17,7 +16,7 @@ use Auth;
 use Carbon\Carbon;
 use DB;
 
-class PostController extends BaseController
+class PostController extends Controller
 {
     protected $_post;
     protected $_category;
@@ -248,6 +247,17 @@ class PostController extends BaseController
         Flash::message('Post is unpinned');
 
         return redirect()->back();
+    }
+
+    public function saveImage($image)
+    {
+        $filename = $image->getClientOriginalName();
+        $path = public_path('upload/covers/' . $filename);
+        Image::make($image->getRealPath())->save($path);
+
+        $filename2 = 'thumbnail_'.$image->getClientOriginalName();
+        $path2 = public_path('upload/covers/' . $filename2);
+        Image::make($image->getRealPath())->resize(300,300)->save($path2);
     }
 
     public function saveLogo($image)
