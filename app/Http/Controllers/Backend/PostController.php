@@ -39,16 +39,16 @@ class PostController extends Controller
      */
     public function index(Request $request)
     {
-        $posts = (new Post)->newQuery();
+        $posts = (new Post)->recent()->newQuery();
 
         if ($request->has('status')) {
             $posts = $this->_post->byStatus($request->get('status'));
-        } elseif ($request->exists('orderby')){
+        }
+        if ($request->exists('orderby')){
             $posts = $this->_post->with('category', 'user')->orderBy('published_at', 'asc');
-        } elseif ($request->has('search')) {
+        }
+        if ($request->has('search')) {
             $posts = $this->_post->bySearchQuery($request->get('search'));
-        } else {
-            $posts = $this->_post->recent();
         }
 
         //$posts = $this->_post->recent()->paginate(15);
@@ -56,7 +56,6 @@ class PostController extends Controller
 
         $data = [
             'posts'         =>  $posts,
-            'title'         =>  'Posts',
             'categories'    =>  $this->_category->all(),
         ];
 
@@ -73,7 +72,6 @@ class PostController extends Controller
         $data = [
             'bands'         =>  $this->_band->all(),
             'categories'    =>  $this->_category->all(),
-            'title'         =>  'New Post',
             'save_url'      =>  route('backend.posts.store'),
             //'post'        =>  null,
             'tags'          =>  $this->_tag->lists('tag', 'id'),
@@ -137,10 +135,10 @@ class PostController extends Controller
 
     public function destroy($post_id)
     {
-        /*$post = $this->_post->findOrFail($post_id);
+        $post = $this->_post->findOrFail($post_id);
         $post->destroy($post_id);
 
-        return redirect('backend/posts');*/
+        return redirect('backend/posts');
     }
 
     public function update(StorePostRequest $request, $post_id)

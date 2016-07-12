@@ -42,6 +42,7 @@
                 <li><a href="{{ url('/backend/users') }}"><i class="fa fa-users" aria-hidden="true"></i><span>Users</span></a></li>
                 <li><a href="https://intospacewithdeath.disqus.com/admin/"><i class="fa fa-comments" aria-hidden="true"></i><span>Disqus</span></a></li>
                 <li><a href="{{ url('/backend/bands') }}"><i class="fa fa-music" aria-hidden="true"></i><span>Bands</span></a></li>
+                <li><a href="{{ url('/backend/reviews') }}"><i class="fa fa-music" aria-hidden="true"></i><span>Reviews</span></a></li>
             </ul>
 
             <!-- Right Side Of Navbar -->

@@ -2,7 +2,6 @@
 
 @section('content')
     <div class="container">
-
                 <div class="row backend-posts-index">
                     <div class="panel-heading">
                     </div>

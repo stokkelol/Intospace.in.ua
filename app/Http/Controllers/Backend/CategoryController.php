@@ -75,14 +75,14 @@ class CategoryController extends Controller
         return view('backend.categories.edit', $data);
     }
 
-    /*public function destroy($category_id)
+    public function destroy($category_id)
     {
         $category = $this->_category->findOrFail($category_id);
         Category::destroy($category_id);
 
         Flash::message('Category deleted!');
         return redirect('backend/posts');
-    }*/
+    }
 
     public function update(Request $request, $category_id)
     {

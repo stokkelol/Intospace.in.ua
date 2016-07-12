@@ -4,8 +4,9 @@
     <div class="container">
         <div class="panel-heading">
             <ul class="list-unstyled list-inline">
-                  <li>  <a href="{{ route('backend.bands.create') }}"><button type="button" class="btn btn-primary">Create band</button></a></li>
-                  <li class="pull-right">{!! Form::open(['route' => 'backend.bands.index', 'role' => 'search', 'method' => 'get', 'class' =>'form-inline']) !!}
+                <h2>Bands</h2>
+                <li>  <a href="{{ route('backend.bands.create') }}"><button type="button" class="btn btn-primary">Create band</button></a></li>
+                <li class="pull-right">{!! Form::open(['route' => 'backend.bands.index', 'role' => 'search', 'method' => 'get', 'class' =>'form-inline']) !!}
                           {!! Form::text('search', null, ['class' => 'form-control']) !!}{!! Form::submit('search', ['class' => 'btn btn-default']) !!}
                           {!! Form::close() !!}</li>
             </ul>

@@ -36,7 +36,7 @@ class BandController extends Controller
     public function create()
     {
         $data =[
-            'title' =>  'Create New Band',
+            'title'     =>  'Create New Band',
             'save_url'  =>  route('backend.bands.store'),
         ];
 

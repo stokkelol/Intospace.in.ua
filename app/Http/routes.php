@@ -112,6 +112,8 @@ Route::group(['prefix' => 'backend', 'middleware' => ['role:admin|owner|demo']],
 
     Route::resource('bands', 'Backend\BandController');
 
+    Route::resource('reviews', 'Backend\ReviewController');
+
     Route::get('posts.set-category/{post_id}/{category_id}', [
         'as'    =>  'backend.post.to.category',
         'uses'  =>  'Backend\PostController@setCategory'

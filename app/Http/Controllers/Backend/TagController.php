@@ -46,14 +46,14 @@ class TagController extends Controller
         return redirect()->route('backend.tags.index');
     }
 
-    /*public function remove(PostTag $_posttag, $tag_id)
+    public function remove(PostTag $_posttag, $tag_id)
     {
         $tag = $this->_tag->findOrFail($tag_id);
         $tag->destroy();
         $_posttag->where(['tag_id' => $tag_id])->delete();
 
         return redirect()->back();
-    }*/
+    }
 
     public function edit($tag_id)
     {
