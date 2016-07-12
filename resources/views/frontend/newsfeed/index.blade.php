@@ -10,7 +10,6 @@
                             <img src="/upload/covers/{{ $post->img_thumbnail }}">
                             <br>
                             <a href="/posts/{{ $post->slug }}">{{ $post->title }}</a>
-                            <hr>
                         @endforeach
                     </div>
                 </div>
