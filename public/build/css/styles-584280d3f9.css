@@ -516,13 +516,19 @@ form.main-search {
   align-items: flex-start;
   -ms-flex-pack: distribute;
   justify-content: space-around; }
+  .newsfeed-container img {
+    width: 200px;
+    height: 200px; }
 
 .newsfeed-item-container {
   display: -ms-flexbox;
   display: flex;
   -ms-flex-pack: center;
   justify-content: center;
-  -ms-flex-wrap: wrap;
-  flex-wrap: wrap; }
+  -ms-flex-wrap: row wrap;
+  flex-wrap: row wrap;
+  padding: 10px; }
+  .newsfeed-item-container a {
+    text-align: center; }
 
 /*# sourceMappingURL=styles.css.map */
