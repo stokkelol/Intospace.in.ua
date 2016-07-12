@@ -25,8 +25,6 @@ Route::get('/posts/{slug}', [
 
 Route::get('videos', 'VideoController@index');
 
-Route::get('newsfeed', 'NewsfeedController@index');
-
 Route::get('/videos/{slug}', [
     'as'    =>  'videos',
     'uses'  =>  'VideoController@video'
