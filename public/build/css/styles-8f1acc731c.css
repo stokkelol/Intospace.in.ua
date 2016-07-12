@@ -520,8 +520,8 @@ form.main-search {
 .newsfeed-item-container {
   display: -ms-flexbox;
   display: flex;
-  -ms-flex-pack: distribute;
-  justify-content: space-around;
+  -ms-flex-pack: center;
+  justify-content: center;
   -ms-flex-flow: wrap;
   flex-flow: wrap;
   margin-top: 10px; }
