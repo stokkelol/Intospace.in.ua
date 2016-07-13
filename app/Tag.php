@@ -44,13 +44,4 @@ class Tag extends Model implements SluggableInterface
             $this->attributes['slug'] = $tag;
         }
     }
-
-    public function countTags()
-    {
-        return $this->join('post_tag', 'tags.id', '=', 'post_tag.tag_id')
-            ->groupBy('tags.id')
-            ->select(['tags.*', DB::raw('COUNT(*) as cnt')])
-            ->orderBy('cnt', 'desc')
-            ->get();
-    }
 }

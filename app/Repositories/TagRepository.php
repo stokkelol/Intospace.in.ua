@@ -6,6 +6,7 @@ use App\Repositories\TagRepositoryInterface;
 use App\Tag;
 use App\Post;
 use App\User;
+use DB;
 
 class TagRepository implements TagRepositoryInterface
 {
@@ -22,6 +23,17 @@ class TagRepository implements TagRepositoryInterface
                 ->groupBy('tag')
                 ->orderBy('tag', 'asc')
                 ->get();
+
+        return $tags;
+    }
+
+    public function countTags()
+    {
+        $tags = $this->tag->join('post_tag', 'tags.id', '=', 'post_tag.tag_id')
+            ->groupBy('tags.id')
+            ->select(['tags.*', DB::raw('COUNT(*) as cnt')])
+            ->orderBy('cnt', 'desc')
+            ->get();
 
         return $tags;
     }

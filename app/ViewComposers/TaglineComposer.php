@@ -3,13 +3,13 @@
 namespace App\ViewComposers;
 
 use Illuminate\Contracts\View\View;
-use App\Tag;
+use App\Repositories\TagRepositoryInterface;
 
 class TaglineComposer
 {
     protected $_tag;
 
-    public function __construct(Tag $tag)
+    public function __construct(TagRepositoryInterface $tag)
     {
         $this->_tag = $tag;
     }

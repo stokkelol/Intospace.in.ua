@@ -17,12 +17,20 @@ class VideoRepository implements VideoRepositoryInterface
     public function getAllVideos()
     {
         return $this->video->with('user')->groupBy('published_at')
-        ->orderBy('published_at', 'desc')
-        ->paginate(15);
+                            ->orderBy('published_at', 'desc')
+                            ->paginate(15);
     }
 
     public function getLatestPublishedVideos()
     {
         return $this->video->latest->with('user')->take(15)->get();
+    }
+
+
+    public function getLatestVideos()
+    {
+        return Video::latest()
+            ->take(10)
+            ->get();
     }
 }

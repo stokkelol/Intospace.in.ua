@@ -3,27 +3,28 @@
 namespace App\ViewComposers;
 
 use Illuminate\Contracts\View\View;
-use App\Post;
-use App\Video;
+use App\Repositories\PostRepositoryInterface;
+use App\Repositories\VideoRepositoryInterface;
 
 class NavbarComposer
 {
+    protected $post;
+    protected $video;
+
+    public function __construct(PostRepositoryInterface $post, VideoRepositoryInterface $video)
+    {
+        $this->post = $post;
+        $this->video = $video;
+    }
+
     /**
      * @param View $view
      */
     public function compose(View $view)
     {
-        $post = Post::with('user')->where('status', 'like', 'active')
-                                  ->groupBy('published_at')
-                                  ->orderBy('published_at', 'desc')
-                                  ->take(10)
-                                  ->get();
+        $post = $this->post->getLatestActivePosts();
+        $video = $this->video->getLatestVideos();
 
-        $video = Video::with('user')->groupBy('published_at')
-                                    ->orderBy('published_at', 'desc')
-                                    ->take(10)
-                                    ->get();
-        
         $view->with('navbarposts', $post);
         $view->with('navbarvideos', $video);
     }

@@ -51,15 +51,6 @@ class Post extends Entity implements SluggableInterface
         return $posts->active()->sort()->paginate(10);
     }
 
-    public function getPostsByCategory($slug)
-    {
-        $posts = Post::with('tags', 'category')->whereHas('category', function ($query) use ($slug) {
-            $query->whereSlug($slug);
-        })->latest()->paginate(10);
-
-        return $posts;
-    }
-
     public function getBySlug($slug)
     {
         return $this->with(['user', 'category', 'tags'])->where('slug', $slug)->first();
@@ -86,23 +77,5 @@ class Post extends Entity implements SluggableInterface
         $post->save();
 
         return $post;
-    }
-
-    public function getPopularPosts()
-    {
-        return $this->with('tags')
-            ->whereIn('status', ['active'])
-            ->groupBy('views')
-            ->orderBy('views', 'desc')
-            ->take(10)
-            ->get();
-    }
-
-    public function getLatestActivePosts()
-    {
-        return $this->latest()
-            ->whereIn('status', ['active'])
-            ->take(10)
-            ->get();
     }
 }

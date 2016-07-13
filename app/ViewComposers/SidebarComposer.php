@@ -3,9 +3,9 @@
 namespace App\ViewComposers;
 
 use Illuminate\Contracts\View\View;
-use App\Post;
-use App\Tag;
-use App\Video;
+use App\Repositories\PostRepositoryInterface;
+use App\Repositories\TagRepositoryInterface;
+use App\Repositories\VideoRepositoryInterface;
 use DB;
 
 class SidebarComposer
@@ -14,7 +14,9 @@ class SidebarComposer
     protected $_video;
     protected $_tag;
 
-    public function __construct(Post $post, Video $video, Tag $tag)
+    public function __construct(PostRepositoryInterface $post,
+                                VideoRepositoryInterface $video,
+                                TagRepositoryInterface $tag)
     {
         $this->_post = $post;
         $this->_video = $video;

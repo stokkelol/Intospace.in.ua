@@ -31,6 +31,37 @@ class PostRepository implements PostRepositoryInterface
         return $randomposts;
     }
 
+    public function getPostsByCategory($slug)
+    {
+        $posts = Post::with('tags', 'category')->whereHas('category', function ($query) use ($slug) {
+            $query->whereSlug($slug);
+        })->latest()->paginate(10);
+
+        return $posts;
+    }
+
+    public function getPopularPosts()
+    {
+        $posts = $this->post->with('tags')
+            ->whereIn('status', ['active'])
+            ->groupBy('views')
+            ->orderBy('views', 'desc')
+            ->take(10)
+            ->get();
+
+        return $posts;
+    }
+
+    public function getLatestActivePosts()
+    {
+        $posts = $this->post->latest()
+            ->whereIn('status', ['active'])
+            ->take(10)
+            ->get();
+
+        return $posts;
+    }
+
     public function getPostsBySearchQuery($query)
     {
         $posts = $this->post->with('category', 'tags', 'user')

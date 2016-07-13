@@ -25,11 +25,4 @@ class Video extends Entity implements SluggableInterface
     {
         return $this->with(['user'])->where('slug', $slug)->first();
     }
-
-    public function getLatestVideos()
-    {
-        return Video::latest()
-            ->take(10)
-            ->get();
-    }
 }
