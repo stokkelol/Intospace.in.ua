@@ -43,6 +43,7 @@
                 <li><a href="https://intospacewithdeath.disqus.com/admin/"><i class="fa fa-comments" aria-hidden="true"></i><span>Disqus</span></a></li>
                 <li><a href="{{ url('/backend/bands') }}"><i class="fa fa-music" aria-hidden="true"></i><span>Bands</span></a></li>
                 <li><a href="{{ url('/backend/blogs') }}"><i class="fa fa-th-large" aria-hidden="true"></i><span>Blog posts</span></a></li>
+                <li><a href="{{ url('/backend/monthlyreviews') }}"><i class="fa fa-file-text" aria-hidden="true"></i><span>Monthly reviews</span></a></li>
             </ul>
 
             <!-- Right Side Of Navbar -->

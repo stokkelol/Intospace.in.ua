@@ -118,6 +118,8 @@ Route::group(['prefix' => 'backend', 'middleware' => ['role:admin|owner|demo']],
 
     Route::resource('blogs', 'Backend\BlogController');
 
+    Route::resource('monthlyreviews', 'Backend\MonthlyReviewController');
+
     Route::get('posts.set-category/{post_id}/{category_id}', [
         'as'    =>  'backend.post.to.category',
         'uses'  =>  'Backend\PostController@setCategory'

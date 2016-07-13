@@ -7,6 +7,4 @@
             @include('backend.categories.form')
         {!! Form::close() !!}
     </div>
-
-
 @endsection
