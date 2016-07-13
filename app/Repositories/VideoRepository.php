@@ -23,14 +23,12 @@ class VideoRepository implements VideoRepositoryInterface
 
     public function getLatestPublishedVideos()
     {
-        return $this->video->latest->with('user')->take(15)->get();
+        return $this->video->latest->with('user')->latest()->paginate(15);
     }
 
 
     public function getLatestVideos()
     {
-        return Video::latest()
-            ->take(10)
-            ->get();
+        return $this->video->with('user')->latest()->get();
     }
 }

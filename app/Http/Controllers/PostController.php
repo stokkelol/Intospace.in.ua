@@ -44,15 +44,6 @@ class PostController extends Controller
         return view('frontend.main', $data);
     }
 
-    /**
-     * Custom 503 page for a little bit of maintenance
-     *
-     * @return mixed
-     */
-    public function maintenance()
-    {
-      return view('errors.503-custom');
-    }
 
     /**
      * Get single post page by slug

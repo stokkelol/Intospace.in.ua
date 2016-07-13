@@ -24,7 +24,7 @@
                 @elseif (Request::path() == 'register')
                 @else
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Последние обзоры<span class="caret"></span></a>
+                        <a href="/posts">Последние обзоры<span class="caret"></span></a>
                         <ul class="dropdown-menu list-inline">
                             @foreach($navbarposts as $post)
                                 <li><a href="/posts/{{ $post->slug }}">{{ $post->title }}</a></li>

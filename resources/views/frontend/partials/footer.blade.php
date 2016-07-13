@@ -36,7 +36,7 @@
                     <p class="footer-column-title">Материалы:</p>
                     <div class="footer-column">
                         <ul class="list-unstyled cl-effect-1">
-                            <li><a href="/">Последние обзоры</a></li>
+                            <li><a href="/posts">Последние обзоры</a></li>
                             <li><a href="/videos">Последние видео</a></li>
                             <li><a href="/pages/top-2015">Ежегодные топ-50</a></li>
                         </ul>
@@ -48,6 +48,7 @@
                         <ul class="list-unstyled cl-effect-1">
                             <li><a href="/categories/new-reviews">Новые обзоры</a></li>
                             <li><a href="/categories/old-reviews">Старые обзоры</a></li>
+                            <li><a href="/categories/short-reviews">Мини-обзоры</a></li>
                             <li><a href="/posts/{{ $randompost->slug }}">Случайный обзор</a></li>
                         </ul>
                     </div>

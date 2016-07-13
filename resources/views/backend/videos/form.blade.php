@@ -25,6 +25,15 @@
             {!! Form::text('video', null, ['class' => 'form-control']) !!}
         </div>
     </div>
+    <div class="col-lg-4">
+        <div class="form-group">
+            <label for="inputImg">Cover</label>
+            @if (!empty($video) && !empty($video->img))
+                <img src="/upload/covers/{{ $video->img }}" alt="" class="img-responsive">
+                @endif
+            <input type="file" id="inputImg" name="img" class="">
+        </div>
+    </div>
 </div>
 <div class="row">
     <div>

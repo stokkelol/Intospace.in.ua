@@ -13,7 +13,7 @@ class RelatedPostsService
             $query->whereIn('tag', $tagsids);
         });
 
-        $relatedposts = $relatedposts->where('id', '<>', $id)->whereIn('status', ['active'])->orderBy('created_at', 'desc')->take(4)->get();
+        $relatedposts = $relatedposts->where('id', '<>', $id)->whereIn('status', ['active'])->orderBy('created_at', 'desc')->get()->random(4);
 
         return $relatedposts;
     }

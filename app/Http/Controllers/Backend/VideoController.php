@@ -43,6 +43,13 @@ class VideoController extends Controller
     {
         $video = $this->storeOrUpdateVideo($request, null);
 
+        if($request->hasFile('img')) {
+            $image = $request->file('img');
+            $this->saveImage($image);
+            $post->img = $image->getClientOriginalName();
+            $post->img_thumbnail = 'thumbnail_'.$image->getClientOriginalName();
+        }
+
         $video->save();
         //dd($video);
         Flash::message('Video created!');
@@ -61,6 +68,14 @@ class VideoController extends Controller
     public function update(StoreVideoRequest $request, $video_id)
     {
         $video = $this->storeOrUpdateVideo($request, $video_id);
+
+        if($request->hasFile('img')) {
+            $image = $request->file('img');
+            $this->saveImage($image);
+            $post->img = $image->getClientOriginalName();
+            $post->img_thumbnail = 'thumbnail_'.$image->getClientOriginalName();
+        }
+
         $video->resluggify();
         $video->update();
 
