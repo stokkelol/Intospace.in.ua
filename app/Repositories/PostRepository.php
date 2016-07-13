@@ -47,11 +47,27 @@ class PostRepository implements PostRepositoryInterface
 
     public function getLatestPublishedPosts()
     {
+        $posts = $this->getActivePosts()
+                ->paginate(15);
+
+        return $posts;
+    }
+
+    public function getShortReviewsPosts()
+    {
+        $posts = $this->getActivePosts()
+                ->where('category_id','=','3')
+                ->paginate(15);
+
+        return $posts;
+    }
+
+    public function getActivePosts()
+    {
         $posts = $this->post->with('category', 'tags', 'user')
                 ->where('status', 'like', 'active')
                 ->groupBy('published_at')
-                ->orderBy('published_at', 'desc')
-                ->paginate(15);
+                ->orderBy('published_at', 'desc');
 
         return $posts;
     }
