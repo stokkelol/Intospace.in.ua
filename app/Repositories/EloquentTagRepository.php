@@ -27,12 +27,17 @@ class EloquentTagRepository implements TagRepository
         return $tags;
     }
 
-    public function countTags()
+    public function countTags($count)
     {
+        if (!isset($count)) {
+            $count = count($this->tag->all());
+        }
+
         $tags = $this->tag->join('post_tag', 'tags.id', '=', 'post_tag.tag_id')
             ->groupBy('tags.id')
             ->select(['tags.*', DB::raw('COUNT(*) as cnt')])
             ->orderBy('cnt', 'desc')
+            ->take($count)
             ->get();
 
         return $tags;

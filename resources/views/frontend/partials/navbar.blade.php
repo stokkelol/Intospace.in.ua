@@ -18,20 +18,20 @@
 
         <div class="collapse navbar-collapse" id="app-navbar-collapse">
             <!-- Left Side Of Navbar -->
-            <ul class="nav navbar-nav cl-effect-1">
+            <ul class="nav navbar-nav">
                 <!--<li><a href="{{ url('/home') }}">Home</a></li>-->
                 @if (Request::path() == 'login')
                 @elseif (Request::path() == 'register')
                 @else
-                    <li class="dropdown">
+                    <li class="dropdown cl-effect-1">
                         <a href="/posts">Последние обзоры<span class="caret"></span></a>
-                        <ul class="dropdown-menu list-inline">
+                        <ul class="dropdown-menu">
                             @foreach($navbarposts as $post)
                                 <li><a href="/posts/{{ $post->slug }}">{{ $post->title }}</a></li>
                             @endforeach
                         </ul>
                     </li>
-                    <li class="dropdown">
+                    <li class="dropdown cl-effect-1">
                         <a href="/videos">Последние видео<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             @foreach($navbarvideos as $video)
@@ -47,6 +47,28 @@
 
             <!-- Right Side Of Navbar -->
             <ul class="nav navbar-nav navbar-right">
+                <!--<li class="dropdown cl-effect-1">
+                    <a href="/posts">Категории<span class="caret cl-effect-1"></span></a>
+                    <ul class="dropdown-menu">
+                        @foreach ($categories as $category)
+                            <li><a href="/categories/{{ $category->slug }}">{{ $category->title }}</a></li>
+                        @endforeach
+                    </ul>
+                </li>-->
+                <li class="dropdown cl-effect-1">
+                    <a href="/posts">Теги<span class="caret cl-effect-1"></span></a>
+                    <ul class="dropdown-menu">
+                        @foreach ($counttags as $tag)
+                            @if (($tag->cnt) > 5)
+                                <li><a href="{{ route('tags', ['slug' => $tag->slug]) }}" class="{{ (($tag->id)%3 == 0) ? 'tag-even' : 'tag-odd' }}" style="font-size:14px"><span>{{ $tag->tag }}</span></a></li>
+                            @elseif (($tag->cnt) > 3)
+                                <li><a href="{{ route('tags', ['slug' => $tag->slug]) }}" class="{{ (($tag->id)%3 == 1) ? 'tag-even' : 'tag-odd' }}" style="font-size:12px"><span>{{ $tag->tag }}</span></a></li>
+                            @else
+                                <li><a href="{{ route('tags', ['slug' => $tag->slug]) }}" class="{{ (($tag->id)%3 == 2) ? 'tag-even' : 'tag-odd' }}" style="font-size:10px">{{ $tag->tag }}</a></li>
+                            @endif
+                        @endforeach
+                    </ul>
+                </li>
                 <li>
                     <form method="GET" action="/" accept-charset="UTF-8" role="search" class="main-search form-inline">
                         <input class="" name="search" type="text">

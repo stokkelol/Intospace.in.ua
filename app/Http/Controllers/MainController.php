@@ -37,11 +37,14 @@ class MainController extends Controller
 
         if ($request->has('search')) {
           $query = $request->get('search');
-          $postscollection = collect($this->postRepository->getPostsBySearchQuery($query));
+          $postscollection = collect($this->postRepository->getPostsBySearchQuery($query)->get());
+          $videoscollection = collect($this->videoRepository->getVideosBySearchQuery($query)->get());
         } else {
           $postscollection = collect($this->postRepository->getActivePosts()->get());
+          $videoscollection = collect($this->videoRepository->getLatestVideos());
         }
-        $videoscollection = collect($this->videoRepository->getLatestVideos());
+
+
 
         $posts = $postscollection->merge($videoscollection)->sortByDesc('published_at');
         //dd($postss);
@@ -53,6 +56,7 @@ class MainController extends Controller
 
         $links = new LengthAwarePaginator($posts, count($posts), $perPage);
         $links->setPath('/');
+
         $data = [
             'links'         =>  $links,
             'posts'         =>  $items,

@@ -70,8 +70,7 @@ class EloquentPostRepository implements PostRepository
                 ->orWhere('content', 'like', '%'.$query,'%')
                 ->where('status', 'like', 'active')
                 ->groupBy('published_at')
-                ->orderBy('published_at', 'desc')
-                ->paginate(15);
+                ->orderBy('published_at', 'desc');
 
         return $posts;
     }

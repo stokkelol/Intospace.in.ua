@@ -177,6 +177,9 @@ a {
   .footer-column a:hover {
     text-decoration: none; }
 
+.col-footer:hover {
+  background-color: #888888; }
+
 .footer-social-links {
   font-size: 24px;
   color: #337ab7;

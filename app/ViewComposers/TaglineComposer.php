@@ -16,7 +16,7 @@ class TaglineComposer
 
     public function compose(View $view)
     {
-        $tags = $this->_tag->countTags()->take(10);
+        $tags = $this->_tag->countTags(10);
 
         $view->with('tags', $tags);
     }

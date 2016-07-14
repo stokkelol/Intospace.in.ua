@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row">
             <div class="footer-container">
-                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                     <blockquote><p><a href="http://www.intospace.in.ua">Intospace</a> - это попытка вернуться во времена когда обзоры читали, а жесткие диски не ломились от гигабайт mp3.</p>
                     </blockquote>
                     <div class="footer-column">
@@ -20,7 +20,7 @@
 
                     </div>
                 </div>
-                <div class="col-lg-2 col-md-2 col-sm-4 col-xs-4">
+                <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3">
                     <p class="footer-column-title">Навигация:</p>
                     <div class="footer-column cl-effect-1">
                         <ul class="list-unstyled">
@@ -32,7 +32,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="col-lg-2 col-md-2 col-sm-4 col-xs-4">
+                <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3">
                     <p class="footer-column-title">Материалы:</p>
                     <div class="footer-column">
                         <ul class="list-unstyled cl-effect-1">
@@ -42,7 +42,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="col-lg-2 col-md-2 col-sm-4 col-xs-4">
+                <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3">
                     <p class="footer-column-title">Разделы:</p>
                     <div class="footer-column">
                         <ul class="list-unstyled cl-effect-1">
@@ -53,7 +53,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="col-lg-2 col-md-2 col-sm-4 col-xs-4">
+                <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3">
                     <p class="footer-column-title">Друзья:</p>
                     <div class="footer-column">
                         <ul class="list-unstyled cl-effect-1">
