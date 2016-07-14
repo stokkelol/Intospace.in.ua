@@ -29,11 +29,6 @@ class Band extends Model implements SluggableInterface
         return $this->hasMany(Video::class);
     }
 
-    public function reviews()
-    {
-        return $this->hasMany(Review::class);
-    }
-
     public function scopeBySearch($query, $search)
     {
         return $query->where('title', 'like', '%'.$search.'%')->orderBy('id', 'desc');

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Repositories\PostRepositoryInterface;
+use App\Repositories\PostRepository;
 use Illuminate\Http\Request;
 use App\Post;
 use App\Http\Requests;
@@ -11,7 +11,7 @@ class ShortReviewController extends Controller
 {
     protected $post;
 
-    public function __construct(PostRepositoryInterface $post)
+    public function __construct(PostRepository $post)
     {
         $this->post = $post;
     }

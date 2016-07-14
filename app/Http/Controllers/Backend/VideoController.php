@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreVideoRequest;
 use App\Http\Controllers\Controller;
+use Intervention\Image\Facades\Image;
 use App\Video;
 use Carbon\Carbon;
 use Flash;
@@ -72,8 +73,8 @@ class VideoController extends Controller
         if($request->hasFile('img')) {
             $image = $request->file('img');
             $this->saveImage($image);
-            $post->img = $image->getClientOriginalName();
-            $post->img_thumbnail = 'thumbnail_'.$image->getClientOriginalName();
+            //dd($image);
+            $video->img = $image->getClientOriginalName();
         }
 
         $video->resluggify();
@@ -93,5 +94,12 @@ class VideoController extends Controller
         $video->published_at = Carbon::now();
 
         return $video;
+    }
+
+    public function saveImage($image)
+    {
+        $filename = $image->getClientOriginalName();
+        $path = public_path('upload/covers/' . $filename);
+        Image::make($image->getRealPath())->save($path);
     }
 }

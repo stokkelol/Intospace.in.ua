@@ -14,7 +14,7 @@ class BandController extends Controller
     public function index()
     {
 
-        $bands = Band::with('posts', 'reviews', 'videos')->orderBy('title', 'asc')->get();
+        $bands = Band::with('posts', 'videos')->orderBy('title', 'asc')->get();
 
         //dd($bands);
 

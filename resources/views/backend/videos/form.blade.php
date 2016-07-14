@@ -30,7 +30,7 @@
             <label for="inputImg">Cover</label>
             @if (!empty($video) && !empty($video->img))
                 <img src="/upload/covers/{{ $video->img }}" alt="" class="img-responsive">
-                @endif
+            @endif
             <input type="file" id="inputImg" name="img" class="">
         </div>
     </div>

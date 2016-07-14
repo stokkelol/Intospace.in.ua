@@ -3,15 +3,15 @@
 namespace App\ViewComposers;
 
 use Illuminate\Contracts\View\View;
-use App\Repositories\PostRepositoryInterface;
-use App\Repositories\VideoRepositoryInterface;
+use App\Repositories\PostRepository;
+use App\Repositories\VideoRepository;
 
 class NavbarComposer
 {
     protected $post;
     protected $video;
 
-    public function __construct(PostRepositoryInterface $post, VideoRepositoryInterface $video)
+    public function __construct(PostRepository $post, VideoRepository $video)
     {
         $this->post = $post;
         $this->video = $video;

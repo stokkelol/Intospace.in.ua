@@ -3,14 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Repositories\PostRepositoryInterface;
-use App\Repositories\TagRepositoryInterface;
-use App\Repositories\VideoRepositoryInterface;
+use App\Repositories\PostRepository;
+use App\Repositories\TagRepository;
+use App\Repositories\VideoRepository;
 use App\Video;
 use App\Http\Requests;
 use DB;
 use Input;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Pagination\Paginator;
 
 class MainController extends Controller
 {
@@ -22,9 +23,9 @@ class MainController extends Controller
      * PostController constructor.
      * @param PostRepository $repository
      */
-    public function __construct(PostRepositoryInterface $postRepository,
-                                TagRepositoryInterface $tagRepository,
-                                VideoRepositoryInterface $videoRepository)
+    public function __construct(PostRepository $postRepository,
+                                TagRepository $tagRepository,
+                                VideoRepository $videoRepository)
     {
         $this->postRepository = $postRepository;
         $this->tagRepository = $tagRepository;
@@ -42,18 +43,19 @@ class MainController extends Controller
         }
         $videoscollection = collect($this->videoRepository->getLatestVideos());
 
-        $postss = $postscollection->merge($videoscollection)->sortByDesc('published_at');
+        $posts = $postscollection->merge($videoscollection)->sortByDesc('published_at');
         //dd($postss);
 
-        $page = Input::get('page', 1);
+        $page = $request->get('page', LengthAwarePaginator::resolveCurrentPage());
         $perPage = 15;
         $offSet = ($page * $perPage) - $perPage;
-        $items = $postss->slice($offSet, $perPage)->all();
+        $items = $posts->slice($offSet, $perPage)->all();
 
-        $posts = new LengthAwarePaginator($items, count($items), $perPage);
-
+        $links = new LengthAwarePaginator($posts, count($posts), $perPage);
+        $links->setPath('/');
         $data = [
-            'posts'         =>  $posts,
+            'links'         =>  $links,
+            'posts'         =>  $items,
             'tags'          =>  $this->tagRepository->getAllTags(),
             'randposts'     =>  $this->postRepository->getRandomPosts()
         ];

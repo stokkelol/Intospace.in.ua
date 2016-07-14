@@ -18,9 +18,6 @@
                                 @foreach($band->videos as $video)
                                     <li><p><a href="/videos/{{ $video->slug }}">{{ $video->title }}</a></p></li>
                                 @endforeach
-                                @foreach($band->reviews as $review)
-                                    <li><p><a href="/reviews/{{ $review->slug }}">{{ $review->title }}</a></p></li>
-                                @endforeach
                             </div>
                         </div>
                 @endforeach

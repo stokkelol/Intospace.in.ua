@@ -20,7 +20,7 @@ class VideoController extends Controller
     {
         $videos = $this->_video->with('user')->groupBy('id')->orderBy('id', 'desc')->paginate(10);
         //dd($videos);
-        
+
         return view('frontend.videos.index', compact('videos'));
     }
 

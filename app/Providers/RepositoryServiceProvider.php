@@ -3,12 +3,12 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use App\Repositories\PostRepositoryInterface;
 use App\Repositories\PostRepository;
-use App\Repositories\TagRepositoryInterface;
+use App\Repositories\EloquentPostRepository;
 use App\Repositories\TagRepository;
-use App\Repositories\VideoRepositoryInterface;
+use App\Repositories\EloquentTagRepository;
 use App\Repositories\VideoRepository;
+use App\Repositories\EloquentVideoRepository;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
@@ -29,8 +29,8 @@ class RepositoryServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(PostRepositoryInterface::class, PostRepository::class);
-        $this->app->bind(TagRepositoryInterface::class, TagRepository::class);
-        $this->app->bind(VideoRepositoryInterface::class, VideoRepository::class);
+        $this->app->bind(PostRepository::class, EloquentPostRepository::class);
+        $this->app->bind(TagRepository::class, EloquentTagRepository::class);
+        $this->app->bind(VideoRepository::class, EloquentVideoRepository::class);
     }
 }
