@@ -44,10 +44,7 @@ class MainController extends Controller
           $videoscollection = collect($this->videoRepository->getLatestVideos());
         }
 
-
-
         $posts = $postscollection->merge($videoscollection)->sortByDesc('published_at');
-        //dd($postss);
 
         $page = $request->get('page', LengthAwarePaginator::resolveCurrentPage());
         $perPage = 15;

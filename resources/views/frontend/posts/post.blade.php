@@ -10,7 +10,7 @@
                 {!! $post->links !!}
                 <br>
             </div>
-            @if (isset($post->similar))
+            @if (!empty($post->similar))
             <div class="post-similars hidden-sm hidden-xs text-center">
                 <p>Похожие исполнители:</p>
                 <ul class="list-unstyled">{!! $post->similar !!}</ul>
