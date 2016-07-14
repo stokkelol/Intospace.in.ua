@@ -91,7 +91,7 @@ class VideoController extends Controller
         $video->band_id = $request->input('band_id');
         $video->excerpt = $request->input('excerpt');
         $video->video = $request->input('video');
-        $video->published_at = Carbon::now();
+        $video->published_at = $request->input('published_at');
 
         return $video;
     }
