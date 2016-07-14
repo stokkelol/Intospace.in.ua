@@ -35,7 +35,7 @@
         </div>
         <div class="form-group">
             {!! Form::label('inputPublished_at', 'Published at:') !!}
-            {!! Form::input('datetime', 'published_at', isset($post->published_at) ? $post->published_at : Carbon\Carbon::now(), ['class' => 'form-control']) !!}
+            {!! Form::input('datetime', 'published_at', isset($video->published_at) ? $video->published_at : Carbon\Carbon::now(), ['class' => 'form-control']) !!}
         </div>
     </div>
 </div>
