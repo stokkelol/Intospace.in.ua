@@ -24,11 +24,11 @@
                     <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12 clearfix">
                         <div>
                             @if ($post->category->id == '1')
-                                <em class="regular-post-author"><a href="/category/new-reviews">Новый обзор</a></em>
+                                <em class="regular-post-author"><a href="/categories/new-reviews">Новый обзор</a></em>
                             @elseif ($post->category->id == '2')
-                                <em class="regular-post-author"><a href="/category/old-reviews">Старый обзор</a></em>
+                                <em class="regular-post-author"><a href="/categories/old-reviews">Старый обзор</a></em>
                             @elseif ($post->category->id == '3')
-                                <em class="regular-post-author"><a href="/category/short-reviews">Мини-обзор</a></em>
+                                <em class="regular-post-author"><a href="/categories/short-reviews">Мини-обзор</a></em>
                             @endif
                         </div>
                         <div>
