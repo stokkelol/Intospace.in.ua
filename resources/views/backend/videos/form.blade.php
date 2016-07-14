@@ -33,6 +33,10 @@
             @endif
             <input type="file" id="inputImg" name="img" class="">
         </div>
+        <div class="form-group">
+            {!! Form::label('inputPublished_at', 'Published at:') !!}
+            {!! Form::input('datetime', 'published_at', isset($post->published_at) ? $post->published_at : Carbon\Carbon::now(), ['class' => 'form-control']) !!}
+        </div>
     </div>
 </div>
 <div class="row">
