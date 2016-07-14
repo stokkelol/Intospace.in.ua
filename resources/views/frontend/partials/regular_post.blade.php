@@ -23,6 +23,15 @@
                 </div>
                     <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12 clearfix">
                         <div>
+                            @if ($post->category->id == '1')
+                                <em class="regular-post-author"><a href="/category/new-reviews">Новый обзор</a></em>
+                            @elseif ($post->category->id == '2')
+                                <em class="regular-post-author"><a href="/category/old-reviews">Старый обзор</a></em>
+                            @elseif ($post->category->id == '3')
+                                <em class="regular-post-author"><a href="/category/short-reviews">Мини-обзор</a></em>
+                            @endif
+                        </div>
+                        <div>
                             <em class="regular-post-author">{{ $post->published_at->diffForHumans() }} - <strong>{{ $post->user->name }}</strong></em>
                         </div>
                         <div class="regular-post-tags clearfix">
@@ -58,6 +67,9 @@
                     </div>
                 </div>
                     <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12 clearfix">
+                        <div>
+                            <em class="regular-post-author"> <a href="/videos">Видео</a></em>
+                        </div>
                         <div>
                             <em class="regular-post-author">{{ $post->published_at->diffForHumans() }} - <strong>{{ $post->user->name }}</strong></em>
                         </div>
