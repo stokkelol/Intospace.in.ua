@@ -78,6 +78,7 @@ class VideoController extends Controller
         }
 
         $video->resluggify();
+        //dd($video->band_id);
         $video->update();
 
         Flash::message('Video updated!');

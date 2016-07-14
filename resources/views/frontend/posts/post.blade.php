@@ -52,7 +52,7 @@
                     <div class="js-lazyYT" data-youtube-id="{{$post->video}}" data-ratio="16:9"></div>
             </div>
             <br>
-            @if ($post->similar)
+            @if (!empty($post->similar))
             <div class="post-similars hidden-lg hidden-md">
                 <p>Похожие исполнители:</p>
                 {!! $post->similars !!}

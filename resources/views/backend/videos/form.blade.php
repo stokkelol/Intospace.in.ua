@@ -9,7 +9,7 @@
             <select name="band_id" id="inputBand" class="select2-container form-control">
                 @foreach($bands as $band)
                     <option value="{{ $band->id }}"
-                        {{ (!empty($post) && $post->band_id == $band->id) ? 'selected' : '' }}>
+                        {{ (!empty($video) && $video->band_id == $band->id) ? 'selected' : '' }}>
                         {{ $band->title }}
                     </option>
                 @endforeach
