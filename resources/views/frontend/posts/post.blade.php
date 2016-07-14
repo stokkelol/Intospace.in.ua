@@ -27,22 +27,23 @@
                 </div>
             </div>
             <br>
-            <div>
-                @if ($post->category->id == '1')
-                    <em class="main-post-author"><a href="/category/new-reviews">Новый обзор</a></em>
-                @elseif ($post->category->id == '2')
-                    <em class="main-post-author"><a href="/category/old-reviews">Старый обзор</a></em>
-                @elseif ($post->category->id == '3')
-                    <em class="main-post-author"><a href="/category/short-reviews">Мини-обзор</a></em>
-                @endif
-            </div>
+
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-              <div  class="main-post-author clearfix">
-                  <em> {{ $post->published_at->diffForHumans() }}</em> <em>|</em> <em><strong>{{ $post->user->name }}</strong></em>
-              </div>
-              <div class="regular-post-tags clearfix pull-left">
+                <div>
+                    @if ($post->category->id == '1')
+                        <em class="main-post-author"><a href="/category/new-reviews">Новый обзор</a></em>
+                    @elseif ($post->category->id == '2')
+                        <em class="main-post-author"><a href="/category/old-reviews">Старый обзор</a></em>
+                    @elseif ($post->category->id == '3')
+                        <em class="main-post-author"><a href="/category/short-reviews">Мини-обзор</a></em>
+                    @endif
+                </div>
+                <div  class="main-post-author clearfix">
+                    <em> {{ $post->published_at->diffForHumans() }}</em> <em>|</em> <em><strong>{{ $post->user->name }}</strong></em>
+                </div>
+                <div class="regular-post-tags clearfix pull-left">
                     @include('frontend.partials.tags', ['tags' => $post->tags])
-              </div>
+                </div>
                 <div class="text-left clearfix main-post-body">
                     {!! $post->excerpt !!}
                     {!! $post->content !!}
