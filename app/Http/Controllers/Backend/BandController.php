@@ -25,7 +25,7 @@ class BandController extends Controller
         if ($request->has('search')) {
             $bands = $this->_band->bySearch($request->get('search'))->paginate(15);
         } else {
-        $bands = $this->_band->with('posts', 'reviews', 'videos')
+        $bands = $this->_band->with('posts', 'videos')
                              ->orderBy('created_at', 'desc')
                              ->paginate(15);
         }
