@@ -177,9 +177,6 @@ a {
   .footer-column a:hover {
     text-decoration: none; }
 
-.col-footer:hover {
-  background-color: #888888; }
-
 .footer-social-links {
   font-size: 24px;
   color: #337ab7;
@@ -459,57 +456,29 @@ form.main-search {
       text-decoration: none; }
 
 .bands-container {
-  padding-top: 60px;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -ms-flex-align: center;
-  align-items: center;
+  padding-top: 80px;
   padding-bottom: 5px; }
   @media all and (max-width: 1130px) {
     .bands-container {
-      padding-top: 120px;
-      display: -ms-flexbox;
-      display: flex;
-      -ms-flex-pack: center;
-      justify-content: center;
-      -ms-flex-align: center;
-      align-items: center; } }
+      padding-top: 140px; } }
   .bands-container li {
     font-size: 12px;
     -ms-flex: 1;
     flex: 1; }
-  .bands-container .band-container {
-    border-bottom: 1.5px #888888 solid;
-    padding-bottom: 1px;
-    padding-top: 1px;
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-pack: distribute;
-    justify-content: space-around;
-    -ms-flex-align: center;
-    align-items: center;
-    height: 60px; }
-    .bands-container .band-container li {
-      padding-top: 1px;
-      padding-bottom: 1px;
-      display: -ms-flexbox;
-      display: flex;
-      -ms-flex-align: center;
-      align-items: center; }
-    @media all and (max-width: 1130px) {
-      .bands-container .band-container {
-        padding-top: 1px;
-        padding-bottom: 1px;
-        display: -ms-flexbox;
-        display: flex;
-        -ms-flex-pack: start;
-        justify-content: flex-start;
-        -ms-flex-align: center;
-        align-items: center; } }
-  .bands-container .band-title {
-    font-size: 12px; }
+
+.band-title {
+  font-size: 14px; }
+
+.band-container {
+  height: 60px; }
+
+.band-search-conteiner {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -ms-flex-pack: center;
+  justify-content: center; }
 
 .newsfeed-container {
   padding-top: 60px;

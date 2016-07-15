@@ -1,46 +1,28 @@
 .bands-container {
-    padding-top: 60px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    padding-top: 80px;
     padding-bottom: 5px;
     @media all and (max-width: 1130px) {
-      padding-top: 120px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      padding-top: 140px;
     }
     li {
         font-size: 12px;
         flex: 1;
     }
+}
 
-    .band-container {
-        border-bottom: 1.5px $text solid;
-        padding-bottom: 1px;
-        padding-top:1px;
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        height: 60px;
-        li {
-            padding-top: 1px;
-            padding-bottom: 1px;
-            display: flex;
-            align-items: center;
-            p {
-            }
-        }
-        @media all and (max-width: 1130px) {
-            padding-top:1px;
-            padding-bottom: 1px;
-            display: flex;
-            justify-content: flex-start;
-            align-items: center;
-        }
-    }
+.band-title {
+    font-size: 14px;
+}
 
-    .band-title {
-        font-size: 12px;
+.band-container {
+    height: 60px;
+    @media all and (max-width: 1130px) {
+
     }
+}
+
+.band-search-conteiner {
+    display:  flex;
+    flex-direction: row;
+    justify-content: center;
 }

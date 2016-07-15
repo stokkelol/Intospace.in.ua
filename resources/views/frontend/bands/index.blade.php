@@ -3,25 +3,34 @@
 @section('content')
     <div class="container">
         <div class="row bands-container">
-            <ul class="list-unstyled">
-                @foreach($bands as $band)
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 band-container">
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                                <p class="band-title">{{ $band->title }}</p>
-                            </div>
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="col-lg-4 band-search-conteiner">
+                <div class="">
+                    <h3>Bands</h3>
+                    {!! Form::open(['url' => '/bands', 'role' => 'search', 'method' => 'get', 'class' =>'main-search form-inline']) !!}
+                    {!! Form::text('search', null, ['class' => 'form-inline']) !!}
+                    {!! Form::close() !!}
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <ul class="list-unstyled">
+                    @foreach($bands as $band)
+                            <p class="band-title">{{ $band->title }}</p>
+                            <ul>
                                 @foreach($band->posts as $post)
                                     @if($post->status == 'active')
-                                    <li><p><a href="/posts/{{ $post->slug }}">{{ $post->title }}</a></p></li>
+                                    <li><a href="/posts/{{ $post->slug }}">{{ $post->title }}</a></li>
                                     @endif
                                 @endforeach
+                            </ul>
+                            <ul>
                                 @foreach($band->videos as $video)
-                                    <li><p><a href="/videos/{{ $video->slug }}">{{ $video->title }}</a></p></li>
+                                    <li><a href="/videos/{{ $video->slug }}">{{ $video->title }}</a></li>
                                 @endforeach
-                            </div>
-                        </div>
-                @endforeach
-            </ul>
+                            </ul>
+
+                    @endforeach
+                </ul>
+            </div>
         </div>
     </div>
 @endsection
