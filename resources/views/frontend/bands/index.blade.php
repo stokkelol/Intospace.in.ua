@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row bands-container">
-            <div class="col-lg-4 band-search-conteiner">
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 band-search-conteiner">
                 <div class="">
                     <h3>Bands</h3>
                     {!! Form::open(['url' => '/bands', 'role' => 'search', 'method' => 'get', 'class' =>'main-search form-inline']) !!}
@@ -11,7 +11,7 @@
                     {!! Form::close() !!}
                 </div>
             </div>
-            <div class="col-lg-8">
+            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                 <ul class="list-unstyled">
                     @foreach($bands as $band)
                             <p class="band-title">{{ $band->title }}</p>
