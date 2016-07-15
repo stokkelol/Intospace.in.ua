@@ -87,6 +87,7 @@ class VideoController extends Controller
     public function storeOrUpdateVideo(Request $request, $video_id)
     {
         $video = $this->_video->findOrNew($video_id);
+        $video->user_id = Auth::user()->id;
         $video->title = $request->input('title');
         $video->band_id = $request->input('band_id');
         $video->excerpt = $request->input('excerpt');
