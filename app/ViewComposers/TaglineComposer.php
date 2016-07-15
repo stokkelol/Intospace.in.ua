@@ -4,6 +4,7 @@ namespace App\ViewComposers;
 
 use Illuminate\Contracts\View\View;
 use App\Repositories\TagRepository;
+use App\Support\Queries\CountTags;
 
 class TaglineComposer
 {
@@ -16,7 +17,7 @@ class TaglineComposer
 
     public function compose(View $view)
     {
-        $tags = $this->_tag->countTags(10);
+        $tags = (new CountTags)->get(10);
 
         $view->with('tags', $tags);
     }

@@ -11,6 +11,8 @@ use App\Repositories\VideoRepository;
 use App\Repositories\EloquentVideoRepository;
 use App\Repositories\CategoryRepository;
 use App\Repositories\EloquentCategoryRepository;
+use App\Repositories\BandRepository;
+use App\Repositories\EloquentBandRepository;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
@@ -35,5 +37,6 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(TagRepository::class, EloquentTagRepository::class);
         $this->app->bind(VideoRepository::class, EloquentVideoRepository::class);
         $this->app->bind(CategoryRepository::class, EloquentCategoryRepository::class);
+        $this->app->bind(BandRepository::class, EloquentBandRepository::class);
     }
 }

@@ -6,7 +6,6 @@ use App\Repositories\TagRepository;
 use App\Tag;
 use App\Post;
 use App\User;
-use DB;
 
 class EloquentTagRepository implements TagRepository
 {
@@ -27,7 +26,7 @@ class EloquentTagRepository implements TagRepository
         return $tags;
     }
 
-    public function countTags($count)
+    /*public function countTags($count)
     {
         if (!isset($count)) {
             $count = count($this->tag->all());
@@ -41,5 +40,5 @@ class EloquentTagRepository implements TagRepository
             ->get();
 
         return $tags;
-    }
+    }*/
 }

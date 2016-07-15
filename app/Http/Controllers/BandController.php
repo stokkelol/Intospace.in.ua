@@ -6,18 +6,27 @@ use Illuminate\Http\Request;
 use App\Post;
 use App\Band;
 use DB;
+use App\Repositories\BandRepository;
 
 use App\Http\Requests;
 
 class BandController extends Controller
 {
+    protected $band;
+
+    public function __construct(BandRepository $band)
+    {
+        $this->band = $band;
+    }
+
     public function index(Request $request)
     {
         if ($request->has('search')) {
             $query = $request->input('search');
-            $bands = Band::with('posts', 'videos')->where('title', 'like', '%'.$query.'%')->orderBy('title', 'asc')->get();
+            //dd($bands);
+            $bands = $this->band->getAllBandsBySearch($query);
         } else {
-            $bands = Band::with('posts', 'videos')->orderBy('title', 'asc')->get();
+            $bands = $this->band->getAllBands();
         }
 
         return view('frontend.bands.index', compact('bands'));

@@ -47,14 +47,6 @@
 
             <!-- Right Side Of Navbar -->
             <ul class="nav navbar-nav navbar-right">
-                <!--<li class="dropdown cl-effect-1">
-                    <a href="/posts">Категории<span class="caret cl-effect-1"></span></a>
-                    <ul class="dropdown-menu">
-                        @foreach ($categories as $category)
-                            <li><a href="/categories/{{ $category->slug }}">{{ $category->title }}</a></li>
-                        @endforeach
-                    </ul>
-                </li>-->
                 <li class="dropdown cl-effect-1">
                     <a href="/posts">Теги<span class="caret cl-effect-1"></span></a>
                     <ul class="dropdown-menu">

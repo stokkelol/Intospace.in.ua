@@ -47,8 +47,7 @@ class VideoController extends Controller
         if($request->hasFile('img')) {
             $image = $request->file('img');
             $this->saveImage($image);
-            $post->img = $image->getClientOriginalName();
-            $post->img_thumbnail = 'thumbnail_'.$image->getClientOriginalName();
+            $video->img = $image->getClientOriginalName();
         }
 
         $video->save();
