@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Band;
+use App\Repositories\BandRepository;
 use App\Post;
 use DB;
 use Flash;
@@ -14,20 +15,20 @@ use App\Http\Requests;
 class BandController extends Controller
 {
     protected $_band;
+    protected $bandRepository;
 
-    public function __construct(Band $band)
+    public function __construct(Band $band, BandRepository $bandRepository)
     {
         $this->_band = $band;
+        $this->bandRepository = $bandRepository;
     }
 
     public function index(Request $request)
     {
         if ($request->has('search')) {
-            $bands = $this->_band->bySearch($request->get('search'))->paginate(15);
+            $bands = $this->bandRepository->getAllBandsBySearch($request->get('search'))->paginate(15);
         } else {
-        $bands = $this->_band->with('posts', 'videos')
-                             ->orderBy('created_at', 'desc')
-                             ->paginate(15);
+        $bands = $this->bandRepository->getAllBands()->paginate(15);
         }
 
         return view('backend.bands.index', compact('bands'));

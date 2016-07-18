@@ -22,13 +22,11 @@ class BandController extends Controller
     public function index(Request $request)
     {
         if ($request->has('search')) {
-            $query = $request->input('search');
-            //dd($bands);
-            $bands = $this->band->getAllBandsBySearch($query);
-        } else {
-            $bands = $this->band->getAllBands();
+            $bands = $this->band->getAllBandsBySearch($request->input('search'))->get();
+            return view('frontend.bands.index', compact('bands'));
         }
 
+        $bands = $this->band->getAllBands()->get();
         return view('frontend.bands.index', compact('bands'));
     }
 }

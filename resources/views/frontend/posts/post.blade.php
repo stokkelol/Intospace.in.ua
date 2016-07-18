@@ -27,7 +27,6 @@
                 </div>
             </div>
             <br>
-
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div>
                     @if ($post->category->id == '1')
@@ -47,9 +46,9 @@
                 <div class="text-left clearfix main-post-body">
                     {!! $post->excerpt !!}
                     {!! $post->content !!}
-                    </div>
-                    <br>
-                    <div class="js-lazyYT" data-youtube-id="{{$post->video}}" data-ratio="16:9"></div>
+                </div>
+                <br>
+                <div class="js-lazyYT" data-youtube-id="{{$post->video}}" data-ratio="16:9"></div>
             </div>
             <br>
             @if (!empty($post->similar))
