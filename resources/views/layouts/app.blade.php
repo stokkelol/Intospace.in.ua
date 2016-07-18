@@ -10,6 +10,7 @@
     <!-- Styles -->
     <link rel="stylesheet" href="{{ elixir('css/libs.css') }}">
     <link rel="stylesheet" href="{{ elixir('css/styles.css') }}">
+    <script src='https://www.google.com/recaptcha/api.js'></script>
 </head>
 <body>
     @include('frontend.partials.navbar')
