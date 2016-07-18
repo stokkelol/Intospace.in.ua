@@ -66,7 +66,14 @@
                             </div>
                         </div>
 
-                        {!! app('captcha')->display(); !!}
+                        <div class="form-group">
+                            <div class="col-md-4">
+
+                            </div>
+                            <div class="col-md-6">
+                                {!! app('captcha')->display(); !!}
+                            </div>
+                        </div>
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
