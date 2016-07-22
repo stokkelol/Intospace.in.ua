@@ -251,6 +251,9 @@ a {
   .more-link:hover {
     text-decoration: none; }
 
+.regular-post-blockquote {
+  font-size: 14px; }
+
 .social-buttons {
   font-size: 24px;
   text-align: right;

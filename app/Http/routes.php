@@ -61,6 +61,8 @@ Route::get('/bands/{slug}', [
     'uses'  =>  'BandController@show'
 ]);
 
+Route::get('/profile', 'UserController@show');
+
 /**
  * Routes for backend
  */

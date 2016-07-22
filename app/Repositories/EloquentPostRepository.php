@@ -101,4 +101,11 @@ class EloquentPostRepository implements PostRepository
 
         return $posts;
     }
+
+    public function getPostsByUserId($user_id)
+    {
+        $posts = $this->getActivePosts()->where('user_id', '=', $user_id);
+
+        return $posts;
+    }
 }

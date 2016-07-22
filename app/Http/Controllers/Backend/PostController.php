@@ -15,6 +15,7 @@ use Flash;
 use Auth;
 use Carbon\Carbon;
 use DB;
+use App\Support\Images\ImageSaver;
 
 class PostController extends Controller
 {
@@ -91,16 +92,16 @@ class PostController extends Controller
         $post = $this->storeOrUpdatePost($request, $post_id = null);
 
         if($request->hasFile('img')) {
-            $image = $request->file('img');
-            $this->saveImage($image);
-            $post->img = $image->getClientOriginalName();
-            $post->img_thumbnail = 'thumbnail_'.$image->getClientOriginalName();
+            $image = new ImageSaver();
+            $image->save('upload/covers/', $request->file('img'));
+            $post->img = $request->file('img')->getClientOriginalName();
+            $post->img_thumbnail = 'thumbnail_'.$request->file('img')->getClientOriginalName();
         }
 
         if($request->hasFile('logo')) {
-          $image = $request->file('logo');
-          $this->saveLogo($image);
-          $post->logo = $image->getClientOriginalName();
+            $image = new ImageSaver();
+            $image->save('upload/logos/', $request->file('img'));
+            $post->logo = $request->file('logo')->getClientOriginalName();
         }
 
         $post->published_at = $request->input('published_at');
@@ -147,16 +148,16 @@ class PostController extends Controller
         $post->resluggify();
 
         if($request->hasFile('img')) {
-            $image = $request->file('img');
-            $this->saveImage($image);
-            $post->img = $image->getClientOriginalName();
-            $post->img_thumbnail = 'thumbnail_'.$image->getClientOriginalName();
+            $image = new ImageSaver();
+            $image->save('upload/covers/', $request->file('img'));
+            $post->img = $request->file('img')->getClientOriginalName();
+            $post->img_thumbnail = 'thumbnail_'.$request->file('img')->getClientOriginalName();
         }
 
         if($request->hasFile('logo')) {
-            $image = $request->file('logo');
-            $this->saveLogo($image);
-            $post->logo = $image->getClientOriginalName();
+            $image = new ImageSaver();
+            $image->save('upload/logos/', $request->file('logo'));
+            $post->logo = $request->file('logo')->getClientOriginalName();
         }
         $post->updated_at = $request->input('updated_at');
         $post->published_at = $request->input('published_at');
@@ -247,24 +248,6 @@ class PostController extends Controller
         Flash::message('Post is unpinned');
 
         return redirect()->back();
-    }
-
-    public function saveImage($image)
-    {
-        $filename = $image->getClientOriginalName();
-        $path = public_path('upload/covers/' . $filename);
-        Image::make($image->getRealPath())->save($path);
-
-        $filename2 = 'thumbnail_'.$image->getClientOriginalName();
-        $path2 = public_path('upload/covers/' . $filename2);
-        Image::make($image->getRealPath())->resize(300,300)->save($path2);
-    }
-
-    public function saveLogo($image)
-    {
-        $filename = $image->getClientOriginalName();
-        $path = public_path('upload/logos/' . $filename);
-        Image::make($image->getRealPath())->save($path);
     }
 
     public function storeOrUpdatePost(Request $request, $post_id)
