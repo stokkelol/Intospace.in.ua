@@ -19,8 +19,10 @@
 @endsection
 
 @section('toppost')
-    @if(Request::path() == '/' || Request::path() == 'posts' || Request::path() == 'bands/'.$toppost->band->slug)
-        @include('frontend.partials.top_post', ['post' => $toppost])
+    @if (isset($toppost))
+        @if(Request::path() == '/' || Request::path() == 'posts' || Request::path() == 'bands/'.$toppost->band->slug)
+            @include('frontend.partials.top_post', ['post' => $toppost])
+        @endif
     @endif
 @endsection
 
