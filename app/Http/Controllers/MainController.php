@@ -36,12 +36,12 @@ class MainController extends Controller
     {
 
         if ($request->has('search')) {
-          $query = $request->get('search');
-          $postscollection = collect($this->postRepository->getPostsBySearchQuery($query)->get());
-          $videoscollection = collect($this->videoRepository->getVideosBySearchQuery($query)->get());
-        } else {
-          $postscollection = collect($this->postRepository->getActivePosts()->get());
-          $videoscollection = collect($this->videoRepository->getLatestVideos());
+            $query = $request->get('search');
+            $postscollection = collect($this->postRepository->getPostsBySearchQuery($query)->get());
+            $videoscollection = collect($this->videoRepository->getVideosBySearchQuery($query)->get());
+            } else {
+            $postscollection = collect($this->postRepository->getActivePosts()->get());
+            $videoscollection = collect($this->videoRepository->getLatestVideos());
         }
 
         $posts = $postscollection->merge($videoscollection)->sortByDesc('published_at');

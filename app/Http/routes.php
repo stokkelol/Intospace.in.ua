@@ -20,7 +20,7 @@ Route::get('/', 'MainController@index');
 
 Route::get('/posts/{slug}', [
     'as'    =>  'posts',
-    'uses'  =>  'PostController@post'
+    'uses'  =>  'PostController@show'
 ]);
 
 Route::get('/posts', 'PostController@index');
@@ -72,6 +72,11 @@ Route::group(['prefix' => 'backend', 'middleware' => ['role:admin|owner|demo']],
     Route::get('/', [
         'as'    =>  'backend.index',
         'uses'  =>  'Backend\BackendController@index',
+    ]);
+
+    Route::get('/posts/updateall', [
+        'as'    =>  'backend.posts.updateall',
+        'uses'  =>  'Backend\PostController@getAllUpdated'
     ]);
 
     Route::resource('posts', 'Backend\PostController');

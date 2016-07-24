@@ -251,9 +251,6 @@ a {
   .more-link:hover {
     text-decoration: none; }
 
-.regular-post-blockquote {
-  font-size: 14px; }
-
 .social-buttons {
   font-size: 24px;
   text-align: right;
@@ -503,5 +500,11 @@ form.main-search {
   .newsfeed-item-container a {
     text-align: center;
     font-size: 16px; }
+
+.post-filters span {
+  color: #888888; }
+
+.post-filters .label-default {
+  background-color: #060606; }
 
 /*# sourceMappingURL=styles.css.map */

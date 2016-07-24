@@ -13,6 +13,7 @@
                             <li><a href="{{ route('backend.posts.index', ['status'  => 'draft']) }}"><button type="button" class="btn btn-warning">Draft</button></a></li>
                             <li><a href="{{ route('backend.posts.index', ['status'  => 'deleted']) }}"><button type="button" class="btn btn-danger">Deleted</button></a></li>
                             <li><a href="{{ route('backend.posts.index', ['orderby']) }}"><button type="button" class="btn btn-default">OrderBy</button></a></li>
+                            <li><a href="{{ route('backend.posts.updateall') }}"><button type="button" class="btn btn-default">Update all</button></a></li>
                             <li class="pull-right">{!! Form::open(['route' => 'backend.posts.index', 'role' => 'search', 'method' => 'get', 'class' =>'form-inline']) !!}
                                     {!! Form::text('search', null, ['class' => 'form-control']) !!}{!! Form::submit('search', ['class' => 'btn btn-default']) !!}
                                     {!! Form::close() !!}</li>

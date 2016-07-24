@@ -29,10 +29,12 @@ class PostController extends Controller
     {
 
         if ($request->has('search')) {
-          $query = $request->get('search');
-          $posts = $this->postRepository->getPostsBySearchQuery($query);
-        } else {
-          $posts = $this->postRepository->getLatestPublishedPosts();
+            $query = $request->get('search');
+            $posts = $this->postRepository->getPostsBySearchQuery($query);
+            } elseif ($request->has('year_filter')){
+                
+            } else {
+            $posts = $this->postRepository->getLatestPublishedPosts();
         }
 
         $data = [
@@ -51,12 +53,12 @@ class PostController extends Controller
      * @param $slug
      * @return mixed
      */
-    public function post(Post $_post, $slug)
+    public function show(Post $_post, $slug)
     {
         $post = $_post->getBySlug($slug);
 
         if($post == NULL) {
-          App::abort(404);
+            App::abort(404);
         }
 
         if ($post->status == 'active') {

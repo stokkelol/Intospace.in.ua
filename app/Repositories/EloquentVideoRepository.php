@@ -41,4 +41,13 @@ class EloquentVideoRepository implements VideoRepository
 
         return $videos;
     }
+
+    public function getVideosByBandSlug($slug)
+    {
+        $videos = $this->video->whereHas('band', function ($query) use ($slug) {
+                                                  $query->whereSlug($slug);})
+                                                ->latest();
+
+        return $videos;
+    }
 }

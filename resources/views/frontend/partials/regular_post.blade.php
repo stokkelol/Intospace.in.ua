@@ -1,10 +1,12 @@
 @if (count($posts) == 0)
+<!-- Nothing has been found -->
     <div class="col-lg-12 col-md-12 col-sm-12 col-sx-12">
         <p>Что-то тут такого нет...</p>
     </div>
 @endif
 @foreach ($posts as $post)
     @if(isset($post->content))
+    <!-- Post -->
         @if ($post->status == 'active'  && $post->is_pinned == '0')
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="col-lg-9">
@@ -46,6 +48,13 @@
                                 <a href="{{ route('posts', ['slug' => $post->slug]) }}" class="more-link">Читать далее</a>
                             </p>
                         </div>
+                        <div class="clearfix post-filters">
+                            <span class="label label-default pull-right">
+                                Фильтры:
+                                <a href="{{ route('posts', ['year_filter' => $post->title]) }}">По году выпуска</a>
+                                <a href="{{ route('bands', ['slug' => $post->band->slug]) }}">По группе</a>
+                            </span>
+                        </div>
                     </div>
                 </div>
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -53,6 +62,7 @@
             </div>
         @endif
     @else
+    <!-- Video -->
         <div class="col-lg-12">
             <div class="">
                 <div class="col-lg-9">
@@ -82,6 +92,11 @@
                                 <a href="{{ route('videos', ['slug' => $post->slug]) }}" class="more-link">Читать далее</a>
                             </p>
                         </div>
+                        <div class="clearfix post-filters">
+                            <span class="label label-default pull-right">
+                                Фильтры: <a href="{{ route('bands', ['band_slug' => $post->band->slug]) }}">По группе</a>
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -91,10 +106,12 @@
     @endif
 @endforeach
 @if (Request::path() == '/')
+    <!-- Main page paginator -->
     <div class="paginate text-center">
         {!! $links->links() !!}
     </div>
-@else
+@elseif (Request::path() == '/posts')
+    <!-- Posts page paginator -->
     <div class="paginate text-center">
         {!! $posts->links() !!}
     </div>

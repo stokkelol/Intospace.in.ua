@@ -108,4 +108,13 @@ class EloquentPostRepository implements PostRepository
 
         return $posts;
     }
+
+    public function getPostsByBandSlug($slug)
+    {
+        $posts = $this->getActivePosts()->whereHas('band', function ($query) use ($slug) {
+                                                  $query->whereSlug($slug);})
+                                                ->latest();
+
+        return $posts;
+    }
 }

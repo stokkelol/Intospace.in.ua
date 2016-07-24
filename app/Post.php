@@ -16,6 +16,8 @@ class Post extends Entity implements SluggableInterface
 
     protected $table = 'posts';
 
+    protected $fillable = ['year'];
+
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
@@ -63,7 +65,7 @@ class Post extends Entity implements SluggableInterface
 
     public function getPostsByTag($slug)
     {
-        $posts = Post::with('tags', 'category')->whereHas('tags', function ($query) use ($slug) {
+        $posts = Post::with('band', 'tags', 'category')->whereHas('tags', function ($query) use ($slug) {
                                                   $query->whereSlug($slug);})
                                                 ->latest()->paginate(10);
 

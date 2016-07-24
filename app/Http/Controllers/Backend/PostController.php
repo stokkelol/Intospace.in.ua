@@ -93,14 +93,14 @@ class PostController extends Controller
 
         if($request->hasFile('img')) {
             $image = new ImageSaver();
-            $image->save('upload/covers/', $request->file('img'));
+            $image->saveCover('upload/covers/', $request->file('img'));
             $post->img = $request->file('img')->getClientOriginalName();
             $post->img_thumbnail = 'thumbnail_'.$request->file('img')->getClientOriginalName();
         }
 
         if($request->hasFile('logo')) {
             $image = new ImageSaver();
-            $image->save('upload/logos/', $request->file('img'));
+            $image->saveLogo('upload/logos/', $request->file('logo'));
             $post->logo = $request->file('logo')->getClientOriginalName();
         }
 
@@ -149,16 +149,17 @@ class PostController extends Controller
 
         if($request->hasFile('img')) {
             $image = new ImageSaver();
-            $image->save('upload/covers/', $request->file('img'));
+            $image->saveCover('upload/covers/', $request->file('img'));
             $post->img = $request->file('img')->getClientOriginalName();
             $post->img_thumbnail = 'thumbnail_'.$request->file('img')->getClientOriginalName();
         }
 
         if($request->hasFile('logo')) {
             $image = new ImageSaver();
-            $image->save('upload/logos/', $request->file('logo'));
+            $image->saveLogo('upload/logos/', $request->file('logo'));
             $post->logo = $request->file('logo')->getClientOriginalName();
         }
+
         $post->updated_at = $request->input('updated_at');
         $post->published_at = $request->input('published_at');
         //dd($post);
@@ -255,6 +256,8 @@ class PostController extends Controller
         $post = $this->_post->findOrNew($post_id);
         $post->user_id = Auth::user()->id;
         $post->title = $request->input('title');
+        //dd($request->input('title'));
+        $post->year = preg_replace('/[^0-9]/', '', $request->input('title'));
         $post->band_id = $request->input('band_id');
         $post->excerpt = $request->input('excerpt');
         $post->content = $request->input('content');
@@ -269,11 +272,24 @@ class PostController extends Controller
 
     public function postPreviewOnAjaxRequest(Request $request, $post_id)
     {
-        $post= $this->post->findOrFail($post_id);
+        $post = $this->post->findOrFail($post_id);
         $preview = $post->content;
 
         if ($request->ajax()) {
             return view('backend.posts.show', $preview)->renderSection('content');
         }
+    }
+
+    public function getAllUpdated()
+    {
+        $posts = Post::all();
+
+        foreach($posts as $post)
+        {
+            $post->year = preg_replace('/[^0-9]/', '', $post->title);
+            $post->update();
+        }
+
+        return redirect()->back();
     }
 }

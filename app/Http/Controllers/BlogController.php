@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
-class ReviewController extends Controller
+class BlogController extends Controller
 {
     public function index($value='')
     {
