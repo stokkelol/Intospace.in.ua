@@ -51,7 +51,7 @@
                         <div class="clearfix post-filters">
                             <span class="label label-default pull-right">
                                 Фильтры:
-                                <a href="{{ route('posts', ['year_filter' => $post->title]) }}">По году выпуска</a>
+                                <!--<a href="{{ route('posts', ['year_filter' => $post->title]) }}">По году выпуска</a>-->
                                 <a href="{{ route('bands', ['slug' => $post->band->slug]) }}">По группе</a>
                             </span>
                         </div>
