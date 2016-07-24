@@ -55,6 +55,7 @@ class MainController extends Controller
         $links->setPath('/');
 
         $data = [
+            'toppost'       =>  $this->postRepository->getPinnedPost()->first(),
             'links'         =>  $links,
             'posts'         =>  $items,
             'tags'          =>  $this->tagRepository->getAllTags(),

@@ -94,7 +94,7 @@ class EloquentPostRepository implements PostRepository
 
     public function getActivePosts()
     {
-        $posts = $this->post->with('category', 'tags', 'user')
+        $posts = $this->post->with('category', 'tags', 'user', 'band')
                 ->where('status', 'like', 'active')
                 ->groupBy('published_at')
                 ->orderBy('published_at', 'desc');
@@ -116,5 +116,10 @@ class EloquentPostRepository implements PostRepository
                                                 ->latest();
 
         return $posts;
+    }
+
+    public function getPinnedPost()
+    {
+        return $post = $this->getActivePosts()->where('is_pinned', '=', 1);
     }
 }

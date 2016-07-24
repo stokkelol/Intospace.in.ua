@@ -19,12 +19,8 @@
 @endsection
 
 @section('toppost')
-    @if(Request::path() == '/' || Request::path() == 'posts')
-        @foreach($posts as $post)
-            @if($post->is_pinned == '1')
-                @include('frontend.partials.top_post', ['toppost' => $post])
-            @endif
-        @endforeach
+    @if(Request::path() == '/' || Request::path() == 'posts' || Request::path() == 'bands/'.$toppost->band->slug)
+        @include('frontend.partials.top_post', ['post' => $toppost])
     @endif
 @endsection
 

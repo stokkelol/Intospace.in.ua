@@ -16,34 +16,38 @@ use App\Http\Requests;
 
 class BandController extends Controller
 {
-    protected $band;
+    protected $bandRepository;
     protected $post;
     protected $video;
 
     public function __construct(BandRepository $band, PostRepository $post, VideoRepository $video)
     {
-        $this->band = $band;
-        $this->post = $post;
-        $this->video = $video;
+        $this->bandRepository = $band;
+        $this->postRepository = $post;
+        $this->videoRepository = $video;
     }
 
     public function index(Request $request)
     {
         if ($request->has('search')) {
-            $bands = $this->band->getAllBandsBySearch($request->input('search'))->get();
+            $bands = $this->bandRepository->getAllBandsBySearch($request->input('search'))->get();
             return view('frontend.bands.index', compact('bands'));
         }
 
-        $bands = $this->band->getAllBands()->get();
+        $bands = $this->bandRepository->getAllBands()->get();
         return view('frontend.bands.index', compact('bands'));
     }
 
     public function show(Request $request, $slug)
     {
-        $postscollection = collect($this->post->getPostsByBandSlug($slug)->get());
-        $videoscollection = collect($this->video->getVideosByBandSlug($slug)->get());
+        $postscollection = collect($this->postRepository->getPostsByBandSlug($slug)->get());
+        $videoscollection = collect($this->videoRepository->getVideosByBandSlug($slug)->get());
         $posts = $postscollection->merge($videoscollection)->sortByDesc('published_at');
 
-        return view('frontend.main', compact('posts'));
+        $data = [
+            'toppost'       =>  $this->postRepository->getPinnedPost()->first(),
+            'posts'         =>  $posts
+        ];
+        return view('frontend.main', $data);
     }
 }

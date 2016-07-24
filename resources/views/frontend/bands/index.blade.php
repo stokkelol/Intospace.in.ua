@@ -15,7 +15,7 @@
                 <ul class="list-unstyled">
                         @foreach($bands as $band)
                             @if(count($band->posts) || count($band->videos))
-                                <p class="band-title">{{ $band->title }}</p>
+                                <p class="band-title"><a href="/bands/{{ $band->slug }}">{{ $band->title }}</a></p>
                                 <ul>
                                     @foreach($band->posts as $post)
                                         @if($post->status == 'active')
