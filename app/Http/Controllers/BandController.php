@@ -20,7 +20,9 @@ class BandController extends Controller
     protected $post;
     protected $video;
 
-    public function __construct(BandRepository $band, PostRepository $post, VideoRepository $video)
+    public function __construct(BandRepository $band,
+                                PostRepository $post,
+                                VideoRepository $video)
     {
         $this->bandRepository = $band;
         $this->postRepository = $post;
@@ -40,14 +42,27 @@ class BandController extends Controller
 
     public function show(Request $request, $slug)
     {
+        $posts = $this->getCollection($slug);
+        if($posts->count() == 1) {
+            $topPost = $this->postRepository->getPostsByBandSlug($slug)->first();
+            $posts = null;
+        } else {
+            $topPost = null;
+        }
+
+        $data = [
+            'toppost'       =>  $topPost,
+            'posts'         =>  $posts
+        ];
+        return view('frontend.main', $data);
+    }
+
+    public function getCollection($slug)
+    {
         $postscollection = collect($this->postRepository->getPostsByBandSlug($slug)->get());
         $videoscollection = collect($this->videoRepository->getVideosByBandSlug($slug)->get());
         $posts = $postscollection->merge($videoscollection)->sortByDesc('published_at');
 
-        $data = [
-            'toppost'       =>  $this->postRepository->getPinnedPost()->first(),
-            'posts'         =>  $posts
-        ];
-        return view('frontend.main', $data);
+        return $posts;
     }
 }

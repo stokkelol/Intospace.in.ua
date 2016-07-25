@@ -6,10 +6,12 @@ use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\SluggableInterface;
 use Cviebrock\EloquentSluggable\SluggableTrait;
+use App\Traits\ScopesTrait;
 
 class Video extends Entity implements SluggableInterface
 {
     use SluggableTrait;
+    use ScopesTrait;
 
     public function user()
     {

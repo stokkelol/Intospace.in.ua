@@ -20,6 +20,8 @@ class EloquentBandRepository implements BandRepository
 
     public function getAllBandsBySearch($query)
     {
-        return $this->band->with('posts', 'videos')->where('title', 'like', '%'.$query.'%')->orderBy('title', 'asc');
+        return $this->band->with('posts', 'videos')
+            ->where('title', 'like', '%'.$query.'%')
+            ->orderBy('title', 'asc');
     }
 }

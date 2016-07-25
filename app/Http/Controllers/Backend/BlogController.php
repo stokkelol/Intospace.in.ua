@@ -13,23 +13,23 @@ use App\Http\Requests\StoreBlogRequest;
 
 class BlogController extends Controller
 {
-    protected $_blog;
+    protected $blog;
 
     public function __construct(Blog $blog)
     {
-        $this->_blog = $blog;
+        $this->blog = $blog;
     }
 
     public function index()
     {
-        $blogs = $this->_blog->with('user')->paginate(15);
+        $blogs = $this->blog->with('user')->paginate(15);
 
         return view('backend.blogs.index', compact('blogs'));
     }
 
     public function show(Request $request, $id)
     {
-        $blog = $this->_blog->findOrFail($id);
+        $blog = $this->blog->findOrFail($id);
 
         return view('backend.blogs.show', compact('blog'));
     }
@@ -44,13 +44,13 @@ class BlogController extends Controller
 
     public function destroy($id)
     {
-        $review = $this->_blog->findOrFail($id);
+        $review = $this->blog->findOrFail($id);
 
     }
 
     public function update(StoreBlogRequest $request, $id)
     {
-        $review = $this->_blog->findOrNew($id);
+        $review = $this->blog->findOrNew($id);
     }
 
     public function store(StoreBlogRequest $request)
@@ -68,7 +68,7 @@ class BlogController extends Controller
     public function edit($blog_id)
     {
         $data = [
-            'blog'          =>  $this->_blog->find($blog_id),
+            'blog'          =>  $this->blog->find($blog_id),
         ];
 
         return view('backend.blogs.edit', $data);
@@ -76,7 +76,7 @@ class BlogController extends Controller
 
     public function storeOrUpdateBlog(Request $request, $blog_id)
     {
-        $blog = $this->_blog->findOrNew($blog_id);
+        $blog = $this->blog->findOrNew($blog_id);
         $blog->user_id = Auth::user()->id;
         $blog->title = $request->input('title');
         $blog->content = $request->input('content');

@@ -33,6 +33,8 @@ Route::get('/blog', 'BlogController@index');
 
 Route::get('/shortreviews', 'ShortReviewController@index');
 
+Route::get('/search', 'SearchController@index');
+
 Route::get('/videos/{slug}', [
     'as'    =>  'videos',
     'uses'  =>  'VideoController@video'

@@ -31,8 +31,6 @@ class PostController extends Controller
         if ($request->has('search')) {
             $query = $request->get('search');
             $posts = $this->postRepository->getPostsBySearchQuery($query);
-            } elseif ($request->has('year_filter')){
-
             } else {
             $posts = $this->postRepository->getLatestPublishedPosts();
         }

@@ -2,44 +2,44 @@
 
 namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
-use App\Post;
-use App\User;
-use App\Category;
+use App\Repositories\PostRepository;
+use App\Repositories\UserRepository;
+use App\Repositories\CategoryRepository;
 use Auth;
 use DB;
-use App\Video;
+use App\Repositories\VideoRepository;
 use App\Http\Requests;
 use LaravelAnalytics;
 
 class BackendController extends Controller
 {
-    protected $_post;
-    protected $_video;
-    protected $_user;
+    protected $post;
+    protected $video;
+    protected $user;
 
-    public function __construct(Post $post, Video $video, User $user)
+    public function __construct(PostRepository $postRepository,
+                                VideoRepository $videoRepository,
+                                UserRepository $userRepository)
     {
-        $this->_post = $post;
-        $this->_video = $video;
-        $this->_user = $user;
+        $this->post = $postRepository;
+        $this->video = $videoRepository;
+        $this->user = $userRepository;
     }
 
     public function index()
     {
-
         $data = [
-            'title' =>  'Dashboard',
-            'posts_total'         =>  $this->_post->count(),
-            'posts_active'        =>  $this->_post->where('status', 'active')->count(),
-            'posts_draft'         =>  $this->_post->where('status', 'draft')->count(),
-            'posts_moderation'    =>  $this->_post->where('status', 'moderation')->count(),
-            'videos_total'        =>  $this->_video->count(),
-            'users_total'         =>  $this->_user->count(),
-            'recent_posts'        =>  $this->_post->latest()->take(5)->get(),
-            'popular_posts'       =>  $this->_post->latest()->groupBy('views')->orderBy('views')->take(5)->get(),
-            //'analyticsData'     =>  LaravelAnalytics::getVisitorsAndPageViews(7),
+            'title'                 =>  'Dashboard',
+            'posts_total'           =>  $this->post->getAllPosts()->count(),
+            'posts_active'          =>  $this->post->getActivePosts()->count(),
+            'posts_draft'           =>  $this->post->getPostsByStatus('draft')->count(),
+            'posts_moderation'      =>  $this->post->getPostsByStatus('moderation')->count(),
+            'recent_posts'          =>  $this->post->getRecentPosts(5)->get(),
+            'popular_posts'         =>  $this->post->getPopularPosts(5),
+            'videos_total'          =>  $this->video->getAllVideos()->count(),
+            'users_total'           =>  $this->user->getAllUsers()->count(),
+            //'analyticsData'     =>  LaravelAnalytics::getVisitorsAndPageViews(7)
         ];
-        //dd($data);
 
         return view('backend.main', $data);
     }

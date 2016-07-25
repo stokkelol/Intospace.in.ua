@@ -19,17 +19,17 @@ use App\Support\Images\ImageSaver;
 
 class PostController extends Controller
 {
-    protected $_post;
-    protected $_category;
-    protected $_tag;
-    protected $_band;
+    protected $post;
+    protected $category;
+    protected $tag;
+    protected $band;
 
     public function __construct(Post $post, Category $category, Tag $tag, Band $band)
     {
-        $this->_post = $post;
-        $this->_category = $category;
-        $this->_tag = $tag;
-        $this->_band = $band;
+        $this->post = $post;
+        $this->category = $category;
+        $this->tag = $tag;
+        $this->band = $band;
     }
 
 
@@ -43,13 +43,13 @@ class PostController extends Controller
         $posts = (new Post)->recent()->newQuery();
 
         if ($request->has('status')) {
-            $posts = $this->_post->byStatus($request->get('status'));
+            $posts = $this->post->byStatus($request->get('status'));
         }
         if ($request->exists('orderby')){
-            $posts = $this->_post->with('category', 'user')->orderBy('published_at', 'asc');
+            $posts = $this->post->with('category', 'user')->orderBy('published_at', 'asc');
         }
         if ($request->has('search')) {
-            $posts = $this->_post->bySearchQuery($request->get('search'));
+            $posts = $this->post->bySearchQuery($request->get('search'));
         }
 
         //$posts = $this->_post->recent()->paginate(15);
@@ -57,7 +57,7 @@ class PostController extends Controller
 
         $data = [
             'posts'         =>  $posts,
-            'categories'    =>  $this->_category->all(),
+            'categories'    =>  $this->category->all(),
         ];
 
         return view('backend.posts.index', $data);
@@ -71,11 +71,11 @@ class PostController extends Controller
     public function create()
     {
         $data = [
-            'bands'         =>  $this->_band->all(),
-            'categories'    =>  $this->_category->all(),
+            'bands'         =>  $this->band->all(),
+            'categories'    =>  $this->category->all(),
             'save_url'      =>  route('backend.posts.store'),
             //'post'        =>  null,
-            'tags'          =>  $this->_tag->lists('tag', 'id'),
+            'tags'          =>  $this->tag->lists('tag', 'id'),
         ];
         return view('backend.posts.post', $data);
     }
@@ -87,20 +87,18 @@ class PostController extends Controller
      * @param null $post_id
      * @return mixed
      */
-    public function store(StorePostRequest $request, $post_id = null)
+    public function store(StorePostRequest $request, ImageSaver $imageSaver, $post_id = null)
     {
         $post = $this->storeOrUpdatePost($request, $post_id = null);
 
         if($request->hasFile('img')) {
-            $image = new ImageSaver();
-            $image->saveCover('upload/covers/', $request->file('img'));
+            $imageSaver->saveCover('upload/covers/', $request->file('img'));
             $post->img = $request->file('img')->getClientOriginalName();
             $post->img_thumbnail = 'thumbnail_'.$request->file('img')->getClientOriginalName();
         }
 
         if($request->hasFile('logo')) {
-            $image = new ImageSaver();
-            $image->saveLogo('upload/logos/', $request->file('logo'));
+            $imageSaver->saveLogo('upload/logos/', $request->file('logo'));
             $post->logo = $request->file('logo')->getClientOriginalName();
         }
 
@@ -115,7 +113,7 @@ class PostController extends Controller
 
     public function show($post_id)
     {
-        $post = $this->_post->findOrFail($post_id);
+        $post = $this->post->findOrFail($post_id);
         $data = [
             'post'  =>  $post,
         ];
@@ -125,10 +123,10 @@ class PostController extends Controller
     public function edit($post_id)
     {
         $data = [
-            'post'          =>  $this->_post->find($post_id),
-            'bands'         =>  $this->_band->all(),
-            'categories'    =>  $this->_category->all(),
-            'tags'          =>  $this->_tag->lists('tag', 'id'),
+            'post'          =>  $this->post->find($post_id),
+            'bands'         =>  $this->band->all(),
+            'categories'    =>  $this->category->all(),
+            'tags'          =>  $this->tag->lists('tag', 'id'),
         ];
 
         return view('backend.posts.edit', $data);
@@ -136,27 +134,25 @@ class PostController extends Controller
 
     public function destroy($post_id)
     {
-        $post = $this->_post->findOrFail($post_id);
+        $post = $this->post->findOrFail($post_id);
         $post->destroy($post_id);
 
         return redirect('backend/posts');
     }
 
-    public function update(StorePostRequest $request, $post_id)
+    public function update(StorePostRequest $request, ImageSaver $imageSaver, $post_id)
     {
         $post = $this->storeOrUpdatePost($request, $post_id);
         $post->resluggify();
 
         if($request->hasFile('img')) {
-            $image = new ImageSaver();
-            $image->saveCover('upload/covers/', $request->file('img'));
+            $imageSaver->saveCover('upload/covers/', $request->file('img'));
             $post->img = $request->file('img')->getClientOriginalName();
             $post->img_thumbnail = 'thumbnail_'.$request->file('img')->getClientOriginalName();
         }
 
         if($request->hasFile('logo')) {
-            $image = new ImageSaver();
-            $image->saveLogo('upload/logos/', $request->file('logo'));
+            $imageSaver->saveLogo('upload/logos/', $request->file('logo'));
             $post->logo = $request->file('logo')->getClientOriginalName();
         }
 
@@ -171,13 +167,13 @@ class PostController extends Controller
 
     public function setCategory($post_id, $category_id)
     {
-        $category = $this->_category->find($category_id);
+        $category = $this->category->find($category_id);
 
         if (empty($category)) {
             return redirect()->back();
         }
 
-        $post = $this->_post->find($post_id);
+        $post = $this->post->find($post_id);
         $post->category_id = $category_id;
         $post->save();
 
@@ -196,7 +192,7 @@ class PostController extends Controller
 
     public function setPostStatus($post_id, $status)
     {
-        $post = $this->_post->find($post_id);
+        $post = $this->post->find($post_id);
         $post->status = $status;
         $post->save();
 
@@ -229,7 +225,7 @@ class PostController extends Controller
 
     public function setPinnedStatus($post_id, $pinned)
     {
-        $post = $this->_post->findOrFail($post_id);
+        $post = $this->post->findOrFail($post_id);
         $post->is_pinned = $pinned;
         $post->save();
         return $post;
@@ -253,7 +249,7 @@ class PostController extends Controller
 
     public function storeOrUpdatePost(Request $request, $post_id)
     {
-        $post = $this->_post->findOrNew($post_id);
+        $post = $this->post->findOrNew($post_id);
         $post->user_id = Auth::user()->id;
         $post->title = $request->input('title');
         //dd($request->input('title'));
@@ -282,7 +278,7 @@ class PostController extends Controller
 
     public function getAllUpdated()
     {
-        $posts = Post::all();
+        $posts = $this->post->all();
 
         foreach($posts as $post)
         {

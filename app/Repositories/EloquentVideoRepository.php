@@ -17,8 +17,8 @@ class EloquentVideoRepository implements VideoRepository
     public function getAllVideos()
     {
         return $this->video->with('user')->groupBy('published_at')
-                            ->orderBy('published_at', 'desc')
-                            ->paginate(15);
+            ->orderBy('published_at', 'desc')
+            ->paginate(15);
     }
 
     public function getLatestPublishedVideos()
@@ -35,9 +35,9 @@ class EloquentVideoRepository implements VideoRepository
     public function getVideosBySearchQuery($query)
     {
         $videos = $this->video->with('user')
-                ->where('title', 'like', '%'.$query.'%')
-                ->groupBy('published_at')
-                ->orderBy('published_at', 'desc');
+            ->where('title', 'like', '%'.$query.'%')
+            ->groupBy('published_at')
+            ->orderBy('published_at', 'desc');
 
         return $videos;
     }

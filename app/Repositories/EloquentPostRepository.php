@@ -24,29 +24,29 @@ class EloquentPostRepository implements PostRepository
     public function getRandomPosts()
     {
         $randomposts = $this->post->where('status', 'like', 'active')
-                ->where('category_id', '=', '1')
-                ->get()
-                ->random(6);
+            ->where('category_id', '=', '1')
+            ->get()
+            ->random(6);
 
         return $randomposts;
     }
 
     public function getPostsByCategory($slug)
     {
-        $posts = Post::with('tags', 'category')->whereHas('category', function ($query) use ($slug) {
+        $posts = $this->post->with('tags', 'category')->whereHas('category', function ($query) use ($slug) {
             $query->whereSlug($slug);
         })->latest()->paginate(10);
 
         return $posts;
     }
 
-    public function getPopularPosts()
+    public function getPopularPosts($count)
     {
         $posts = $this->post->with('tags')
             ->whereIn('status', ['active'])
             ->groupBy('views')
             ->orderBy('views', 'desc')
-            ->take(10)
+            ->take($count)
             ->get();
 
         return $posts;
@@ -64,13 +64,12 @@ class EloquentPostRepository implements PostRepository
 
     public function getPostsBySearchQuery($query)
     {
-        $posts = $this->post->with('category', 'tags', 'user')
-                ->where('title', 'like', '%'.$query.'%')
-                ->orWhere('excerpt', 'like', '%'.$query,'%')
-                ->orWhere('content', 'like', '%'.$query,'%')
-                ->where('status', 'like', 'active')
-                ->groupBy('published_at')
-                ->orderBy('published_at', 'desc');
+        $posts = $this->post->byStatus('active')
+            ->where('title', 'like', '%'.$query.'%')
+            ->orWhere('excerpt', 'like', '%'.$query,'%')
+            ->orWhere('content', 'like', '%'.$query,'%')
+            ->groupBy('published_at')
+            ->orderBy('published_at', 'desc');
 
         return $posts;
     }
@@ -78,26 +77,39 @@ class EloquentPostRepository implements PostRepository
     public function getLatestPublishedPosts()
     {
         $posts = $this->getActivePosts()
-                ->paginate(15);
+            ->paginate(15);
 
         return $posts;
+    }
+
+    public function getRecentPosts($count)
+    {
+        return $this->post->latest()->take($count);
     }
 
     public function getShortReviewsPosts()
     {
         $posts = $this->getActivePosts()
-                ->where('category_id','=','3')
-                ->paginate(15);
+            ->where('category_id','=','3')
+            ->paginate(15);
 
         return $posts;
     }
 
     public function getActivePosts()
     {
-        $posts = $this->post->with('category', 'tags', 'user', 'band')
-                ->where('status', 'like', 'active')
-                ->groupBy('published_at')
-                ->orderBy('published_at', 'desc');
+        $posts = $this->post->byStatus('active')
+            ->groupBy('published_at')
+            ->orderBy('published_at', 'desc');
+
+        return $posts;
+    }
+
+    public function getPostsByStatus($status)
+    {
+        $posts = $this->post->byStatus($status)
+            ->groupBy('published_at')
+            ->orderBy('published_at', 'desc');
 
         return $posts;
     }
@@ -113,7 +125,7 @@ class EloquentPostRepository implements PostRepository
     {
         $posts = $this->getActivePosts()->whereHas('band', function ($query) use ($slug) {
                                                   $query->whereSlug($slug);})
-                                                ->latest();
+                                                  ->latest();
 
         return $posts;
     }
@@ -121,5 +133,12 @@ class EloquentPostRepository implements PostRepository
     public function getPinnedPost()
     {
         return $post = $this->getActivePosts()->where('is_pinned', '=', 1);
+    }
+
+    public function getMonthlyPosts()
+    {
+        $posts = $this->post->byStatus('active')->getMonthlyItems()->get();
+
+        return $posts;
     }
 }

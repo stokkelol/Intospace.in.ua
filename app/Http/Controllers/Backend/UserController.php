@@ -14,11 +14,11 @@ class UserController extends Controller
      * User controller
      */
 
-     protected $_user;
+     protected $user;
 
      public function __construct(User $user)
      {
-        $this->_user = $user;
+        $this->user = $user;
      }
 
      protected $hidden = [
@@ -28,7 +28,7 @@ class UserController extends Controller
     public function index()
     {
 
-        $users = $this->_user->all();
+        $users = $this->user->all();
 
         return view('backend.users.index', compact('users'));
     }
@@ -44,7 +44,7 @@ class UserController extends Controller
 
     public function store(Request $request, $user_id = 0)
     {
-      $user = $this->_user->findOrFail($user_id);
+      $user = $this->user->findOrFail($user_id);
       $user->name = $request->input('name');
       $user->email = $request->input('email');
       $user->password = Hash::make($request->input('password'));
@@ -56,14 +56,14 @@ class UserController extends Controller
 
     public function edit($user_id)
     {
-      $user = $this->_user->findOrNew($user_id);
+      $user = $this->user->findOrNew($user_id);
 
       return view('backend.users.edit', compact('user'));
     }
 
     public function update(Request $request, $user_id)
     {
-        $user = $this->_user->findOrNew($user_id);
+        $user = $this->user->findOrNew($user_id);
         $user->name = $request->input('name');
         $user->email = $request->input('email');
         $user->password = $request->input('password');

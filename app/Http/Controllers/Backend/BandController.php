@@ -14,12 +14,12 @@ use App\Http\Requests;
 
 class BandController extends Controller
 {
-    protected $_band;
+    protected $band;
     protected $bandRepository;
 
     public function __construct(Band $band, BandRepository $bandRepository)
     {
-        $this->_band = $band;
+        $this->band = $band;
         $this->bandRepository = $bandRepository;
     }
 
@@ -46,7 +46,7 @@ class BandController extends Controller
 
     public function store(Request $request, $band_id = null)
     {
-        $band = $this->_band->findOrNew($band_id);
+        $band = $this->band->findOrNew($band_id);
         $band->title = $request->input('title');
         $band->save();
         Flash::message('Band created!');
@@ -57,7 +57,7 @@ class BandController extends Controller
     public function edit($band_id)
     {
         $data = [
-            'band' => $this->_band->find($band_id),
+            'band' => $this->band->find($band_id),
         ];
 
         return view('backend.bands.edit', $data);
@@ -65,7 +65,7 @@ class BandController extends Controller
 
     public function update(Request $request, $band_id)
     {
-        $band = $this->_band->findOrNew($band_id);
+        $band = $this->band->findOrNew($band_id);
         $band->title = $request->input('title');
         $band->resluggify();
         $band->update();
@@ -76,7 +76,7 @@ class BandController extends Controller
 
     public function show($band_id)
     {
-        $band = $this->_band->findOrFail($band_id);
+        $band = $this->band->findOrFail($band_id);
 
         return view('backend.bands.show', compact('band'));
     }

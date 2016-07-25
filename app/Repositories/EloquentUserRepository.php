@@ -16,8 +16,11 @@ class EloquentUserRepository implements UserRepository
 
     public function getUser()
     {
-        $user = $this->user->findOrFail(Auth::user()->id);
+        return $this->user->findOrFail(Auth::user()->id);
+    }
 
-        return $user;
+    public function getAllUsers()
+    {
+        return $this->user->all();
     }
 }

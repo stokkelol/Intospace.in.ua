@@ -49,14 +49,3 @@
               </section>
             </div>
           </div>
-      <!--
-        <div class="sidebar-posts">
-          <ul class="list-unstyled">
-            @foreach($posts as $post)
-              @if (($post->id) > 75)
-                <li><a href="{{ $post->slug }}">{{ $post->title }}</a></li>
-              @endif
-            @endforeach
-          </ul>
-        </div>
-      -->

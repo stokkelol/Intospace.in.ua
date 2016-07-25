@@ -34,17 +34,16 @@ class MainController extends Controller
 
     public function index(Request $request)
     {
-
-        if ($request->has('search')) {
-            $query = $request->get('search');
-            $postscollection = collect($this->postRepository->getPostsBySearchQuery($query)->get());
-            $videoscollection = collect($this->videoRepository->getVideosBySearchQuery($query)->get());
-            } else {
-            $postscollection = collect($this->postRepository->getActivePosts()->get());
-            $videoscollection = collect($this->videoRepository->getLatestVideos());
+        if($request->has('search')) {
+            return $this->indexSearch($request);
+        } else {
+            return $this->indexMain($request);
         }
+    }
 
-        $posts = $postscollection->merge($videoscollection)->sortByDesc('published_at');
+    public function indexMain(Request $request)
+    {
+        $posts = $this->getCollection($request);
 
         $page = $request->get('page', LengthAwarePaginator::resolveCurrentPage());
         $perPage = 15;
@@ -53,16 +52,57 @@ class MainController extends Controller
 
         $links = new LengthAwarePaginator($posts, count($posts), $perPage);
         $links->setPath('/');
+        $topPost = $this->postRepository->getPinnedPost()->first();
 
         $data = [
-            'toppost'       =>  $this->postRepository->getPinnedPost()->first(),
+            'toppost'       =>  $topPost,
             'links'         =>  $links,
             'posts'         =>  $items,
             'tags'          =>  $this->tagRepository->getAllTags(),
             'randposts'     =>  $this->postRepository->getRandomPosts()
         ];
 
+        //dd($topPost);
+
         return view('frontend.main', $data);
+    }
+
+    public function indexSearch(Request $request)
+    {
+        $posts = $this->getCollection($request);
+        if($posts->count() == 1) {
+            $query = $request->get('search');
+            $topPost = $this->postRepository->getPostsBySearchQuery($query)->first();
+            $posts = null;
+        } else {
+            $topPost = null;
+        }
+
+        $data = [
+            'toppost'       =>  $topPost,
+            'posts'         =>  $posts,
+            'tags'          =>  $this->tagRepository->getAllTags(),
+        ];
+        //dd($topPost);
+        return view('frontend.main', $data);
+    }
+
+    public function getCollection(Request $request)
+    {
+        if($request->has('search')) {
+            $query = $request->get('search');
+            $postscollection = collect($this->postRepository->getPostsBySearchQuery($query)->get());
+            $videoscollection = collect($this->videoRepository->getVideosBySearchQuery($query)->get());
+            $posts = $postscollection->merge($videoscollection)->sortByDesc('published_at');
+
+            return $posts;
+        }
+
+        $postscollection = collect($this->postRepository->getLatestActivePosts());
+        $videoscollection = collect($this->videoRepository->getLatestVideos());
+        $posts = $postscollection->merge($videoscollection)->sortByDesc('published_at');
+
+        return $posts;
     }
 
 

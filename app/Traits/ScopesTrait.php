@@ -6,7 +6,7 @@ trait ScopesTrait
 {
     public function scopeByStatus($query, $statuses)
     {
-        return $query->with('category', 'user')->where('status', $statuses);
+        return $query->with('category', 'tags', 'user', 'band')->where('status', $statuses);
     }
 
     public function scopeBySearchQuery($query, $search)
@@ -23,5 +23,14 @@ trait ScopesTrait
             ->whereIn('status', ['active', 'draft'])
             ->groupBy('id')
             ->orderBy('id', 'desc');
+    }
+
+    public function scopeGetMonthlyItems($query)
+    {
+        $startDate = date('Y-m-1');
+        $endDate = date('Y-m-t');
+
+        return $query->where('published_at', '>=', $startDate)
+                    ->where('published_at', '<=', $endDate);
     }
 }

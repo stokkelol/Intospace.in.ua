@@ -14,18 +14,18 @@ use App\Band;
 
 class VideoController extends Controller
 {
-    protected $_video;
-    protected $_band;
+    protected $video;
+    protected $band;
 
     public function __construct(Video $video, Band $band)
     {
-        $this->_video = $video;
-        $this->_band = $band;
+        $this->video = $video;
+        $this->band = $band;
     }
 
     public function index()
     {
-        $videos = $this->_video->orderBy('id', 'desc')->paginate(15);
+        $videos = $this->video->orderBy('id', 'desc')->paginate(15);
 
         return view('backend.videos.index', compact('videos'));
     }
@@ -35,7 +35,7 @@ class VideoController extends Controller
         $data = [
             'save_url'  =>  route('backend.videos.store'),
             'title'     =>  'New video',
-            'bands'     =>  $this->_band->all(),
+            'bands'     =>  $this->band->all(),
         ];
         return view('backend.videos.video', $data);
     }
@@ -59,8 +59,8 @@ class VideoController extends Controller
 
     public function edit($video_id)
     {
-        $video = $this->_video->find($video_id);
-        $bands = $this->_band->all();
+        $video = $this->video->find($video_id);
+        $bands = $this->band->all();
 
         return view('backend.videos.edit', compact('video', 'bands'));
     }
@@ -86,7 +86,7 @@ class VideoController extends Controller
 
     public function storeOrUpdateVideo(Request $request, $video_id)
     {
-        $video = $this->_video->findOrNew($video_id);
+        $video = $this->video->findOrNew($video_id);
         $video->user_id = Auth::user()->id;
         $video->title = $request->input('title');
         $video->band_id = $request->input('band_id');

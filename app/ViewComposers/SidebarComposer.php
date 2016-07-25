@@ -11,26 +11,29 @@ use App\Support\Queries\CountTags;
 
 class SidebarComposer
 {
-    protected $_post;
-    protected $_video;
-    protected $_tag;
+    protected $post;
+    protected $video;
+    protected $tag;
+    protected $tags;
 
     public function __construct(PostRepository $post,
                                 VideoRepository $video,
-                                TagRepository $tag)
+                                TagRepository $tag,
+                                CountTags $tags)
     {
-        $this->_post = $post;
-        $this->_video = $video;
-        $this->_tag = $tag;
+        $this->post = $post;
+        $this->video = $video;
+        $this->tag = $tag;
+        $this->tags = $tags;
     }
 
     public function compose(View $view)
     {
-        $posts = $this->_post->getLatestActivePosts();
-        $videos = $this->_video->getLatestVideos();
-        $popularposts = $this->_post->getPopularPosts();
+        $posts = $this->post->getLatestActivePosts();
+        $videos = $this->video->getLatestVideos();
+        $popularposts = $this->post->getPopularPosts(10);
         //$counttags = ($this->_tag->countTags(null));
-        $counttags = (new CountTags)->get(null);
+        $counttags = $this->tags->get(null);
 
         $view->with('latestposts', $posts);
         $view->with('latestvideos', $videos);

@@ -13,23 +13,23 @@ use App\Http\Requests;
 
 class TagController extends Controller
 {
-    protected $_tag;
+    protected $tag;
 
-    public function __construct(Tag $_tag)
+    public function __construct(Tag $tag)
     {
-        $this->_tag = $_tag;
+        $this->tag = $tag;
     }
 
     public function index()
     {
-        $tags = $this->_tag->latest()->paginate(15);
+        $tags = $this->tag->latest()->paginate(15);
         return view('backend.tags.index', compact('tags'));
     }
 
     public function create()
     {
         $data = [
-            'tags'      =>  $this->_tag->all(),
+            'tags'      =>  $this->tag->all(),
             'title'     =>  'Create new tag',
             'save_url'  =>  route('backend.tags.store'),
         ];
@@ -39,7 +39,7 @@ class TagController extends Controller
 
     public function store(Request $request, $tag_id = null)
     {
-        $tag = $this->_tag->findOrNew($tag_id);
+        $tag = $this->tag->findOrNew($tag_id);
         $tag->tag = $request->input('tagtitle');
         $tag->save();
 
@@ -48,7 +48,7 @@ class TagController extends Controller
 
     public function remove(PostTag $_posttag, $tag_id)
     {
-        $tag = $this->_tag->findOrFail($tag_id);
+        $tag = $this->tag->findOrFail($tag_id);
         $tag->destroy();
         $_posttag->where(['tag_id' => $tag_id])->delete();
 
@@ -57,7 +57,7 @@ class TagController extends Controller
 
     public function edit($tag_id)
     {
-        $tag = $this->_tag->find($tag_id);
+        $tag = $this->tag->find($tag_id);
 
         $data = [
             'title'     =>  $tag->id.': Edit Tag',
@@ -72,7 +72,7 @@ class TagController extends Controller
 
     public function update(Request $request, $tag_id)
     {
-        $tag = $this->_tag->find($tag_id);
+        $tag = $this->tag->find($tag_id);
         //$category->user_id = Auth::user()->id;
         $tag->tag = $request->input('tagtitle');
         $tag->resluggify();
@@ -83,9 +83,9 @@ class TagController extends Controller
 
     public function show(Post $_post, $slug)
     {
-        $tag = $this->_tag->findBySlug($slug);
+        $tag = $this->tag->findBySlug($slug);
 
-        $posts = $_post->with('tags', 'category')->whereHas('tags', function ($query) use ($slug) {
+        $posts = $post->with('tags', 'category')->whereHas('tags', function ($query) use ($slug) {
             $query->whereSlug($slug);
         })->latest()->paginate(10);
 

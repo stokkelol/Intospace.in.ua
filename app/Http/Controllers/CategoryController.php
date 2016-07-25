@@ -14,7 +14,9 @@ class CategoryController extends Controller
     protected $_post;
     protected $_tag;
 
-    public function __construct(Category $category, PostRepository $post, Tag $tag)
+    public function __construct(Category $category,
+                                PostRepository $post,
+                                Tag $tag)
     {
         $this->_category = $category;
         $this->_post = $post;

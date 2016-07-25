@@ -4,7 +4,8 @@
         <p>Что-то тут такого нет...</p>
     </div>
 @endif
-@foreach ($posts as $post)
+@if(!empty($posts))
+@foreach($posts as $post)
     @if(isset($post->content))
     <!-- Post -->
         @if ($post->status == 'active'  && $post->is_pinned == '0')
@@ -105,11 +106,14 @@
             </div>
     @endif
 @endforeach
+@endif
 @if (Request::path() == '/')
     <!-- Main page paginator -->
-    <div class="paginate text-center">
-        {!! $links->links() !!}
-    </div>
+    @if(isset($links))
+        <div class="paginate text-center">
+            {!! $links->links() !!}
+        </div>
+    @endif
 @elseif (Request::path() == '/posts')
     <!-- Posts page paginator -->
     <div class="paginate text-center">

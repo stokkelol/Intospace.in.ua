@@ -19,26 +19,10 @@ class EloquentTagRepository implements TagRepository
     public function getAllTags()
     {
         $tags = $this->tag->with('posts', 'user')
-                ->groupBy('tag')
-                ->orderBy('tag', 'asc')
-                ->get();
-
-        return $tags;
-    }
-
-    /*public function countTags($count)
-    {
-        if (!isset($count)) {
-            $count = count($this->tag->all());
-        }
-
-        $tags = $this->tag->join('post_tag', 'tags.id', '=', 'post_tag.tag_id')
-            ->groupBy('tags.id')
-            ->select(['tags.*', DB::raw('COUNT(*) as cnt')])
-            ->orderBy('cnt', 'desc')
-            ->take($count)
+            ->groupBy('tag')
+            ->orderBy('tag', 'asc')
             ->get();
 
         return $tags;
-    }*/
+    }
 }

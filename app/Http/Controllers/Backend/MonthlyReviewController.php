@@ -6,15 +6,18 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use App\MonthlyReview;
+use App\Repositories\PostRepository;
 use Auth;
 
 class MonthlyReviewController extends Controller
 {
     protected $review;
+    protected $post;
 
-    public function __construct(MonthlyReview $review)
+    public function __construct(MonthlyReview $review, PostRepository $post)
     {
         $this->review = $review;
+        $this->post = $post;
     }
 
     public function index()
@@ -27,10 +30,11 @@ class MonthlyReviewController extends Controller
     public function create()
     {
         $data = [
-            'title'     =>  'Create new review',
-            'save_url'  =>  route('backend.monthlyreviews.store'),
+            'title'             =>  'Create new review',
+            'save_url'          =>  route('backend.monthlyreviews.store'),
+            'latest_posts'      =>  $this->post->getMonthlyPosts(),
+            'popular_posts'     =>  $this->post->getPopularPosts(5)
         ];
-
         return view('backend.monthlyreviews.create', $data);
     }
 
@@ -45,9 +49,9 @@ class MonthlyReviewController extends Controller
         //return redirect()->route('backend.monthlyreviews.edit', ['review_id' => $review->id]);
     }
 
-    public function update($value='')
+    public function update()
     {
-        
+
     }
 
     public function storeOrUpdateReview(Request $request, $review_id)
