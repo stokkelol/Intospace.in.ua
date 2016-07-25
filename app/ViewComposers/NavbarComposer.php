@@ -29,7 +29,7 @@ class NavbarComposer
     public function compose(View $view)
     {
         $posts = $this->post->getLatestActivePosts();
-        $videos = $this->video->getLatestVideos();
+        $videos = $this->video->getLatestVideos()->get();
         $tags = (new CountTags)->get(20);
 
         $view->with('navbarposts', $posts);
