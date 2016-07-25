@@ -1,3 +1,4 @@
+<!-- Some meta tags. Determine on wich page we are -->
 @if (Request::path() == '/')
     <title>Intospace</title>
     <meta name="description" content="Intospace.in.ua">

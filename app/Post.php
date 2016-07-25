@@ -53,11 +53,6 @@ class Post extends Entity implements SluggableInterface
         return $posts->active()->sort()->paginate(10);
     }
 
-    public function getBySlug($slug)
-    {
-        return $this->with(['user', 'category', 'tags'])->where('slug', $slug)->first();
-    }
-
     public function scopeFindBySlug($query, $slug)
     {
         return $query->whereSlug($slug)->firstOrFail();

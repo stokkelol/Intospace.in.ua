@@ -62,7 +62,7 @@ class MainController extends Controller
             'randposts'     =>  $this->postRepository->getRandomPosts()
         ];
 
-        //dd($topPost);
+        //dd($posts);
 
         return view('frontend.main', $data);
     }

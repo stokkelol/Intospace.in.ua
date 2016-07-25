@@ -1,3 +1,4 @@
+<!-- Tags associated with given post -->
 @unless ($post->tags->isEmpty())
     <ul class="list-inline">
         @foreach ($post->tags as $tag)

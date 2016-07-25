@@ -1,3 +1,4 @@
+<!-- Share buttons for given post -->
 <div class="social-buttons pull-right">
   <a href="https://twitter.com/home?status={{urlencode($app_name.'/posts/'.$post->slug)}}">
       <i class="fa fa-twitter" aria-hidden="true"> </i>

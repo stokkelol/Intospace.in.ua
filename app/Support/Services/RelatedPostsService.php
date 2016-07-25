@@ -1,15 +1,22 @@
 <?php
 
-namespace App\Services;
+namespace App\Support\Services;
 
 use App\Post;
 
 class RelatedPostsService
 {
+    protected $post;
+
+    public function __construct(Post $post)
+    {
+        $this->post = $post;
+    }
+
     public function getRelatedPosts($tags, $id)
     {
         $tagsids = $tags->lists('tag');
-        $relatedposts = Post::whereHas('tags', function ($query) use ($tagsids) {
+        $relatedposts = $this->post->whereHas('tags', function ($query) use ($tagsids) {
             $query->whereIn('tag', $tagsids);
         });
 

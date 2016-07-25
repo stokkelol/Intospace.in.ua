@@ -31,6 +31,11 @@ class EloquentPostRepository implements PostRepository
         return $randomposts;
     }
 
+    public function getBySlug($slug)
+    {
+        return $this->post->with(['user', 'category', 'tags'])->where('slug', $slug)->first();
+    }
+
     public function getPostsByCategory($slug)
     {
         $posts = $this->getActivePosts()->whereHas('category', function ($query) use ($slug) {

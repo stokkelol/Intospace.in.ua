@@ -14,7 +14,6 @@
                             <li><a href="https://www.facebook.com/redwhiteua"><i class="fa fa-facebook-official" aria-hidden="true"></i></a></li>
                             <li><a href="/feed"><i class="fa fa-rss-square" aria-hidden="true"></i></a></li>
                             <li><a href="mailto:redwhite@bigmir.net"><i class="fa fa-envelope" aria-hidden="true"></i></a></li>
-
                         </ul>
                         <!--<p class="text-center"><a href="/sitemap">Карта сайта</a></p>-->
 

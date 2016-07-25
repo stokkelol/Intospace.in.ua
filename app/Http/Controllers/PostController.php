@@ -9,6 +9,7 @@ use App\Tag;
 use App\Repositories\PostRepository;
 use App\Repositories\TagRepository;
 use Illuminate\Http\Request;
+use App\Support\Services\RelatedPostsService;
 
 class PostController extends Controller
 {
@@ -52,23 +53,30 @@ class PostController extends Controller
      * @param $slug
      * @return mixed
      */
-    public function show(Post $_post, $slug)
+    public function show($slug, RelatedPostsService $related)
     {
-        $post = $_post->getBySlug($slug);
+        $post = $this->postRepository->getBySlug($slug);
 
         if($post == NULL) {
             App::abort(404);
         }
 
-        if ($post->status == 'active') {
-            $post->increment('views');
-        }
+        $this->incrementViews($post);
+        $relatedPosts = $related->getRelatedPosts($post->tags, $post->id);
 
         $data = [
-            'post'      => $post,
-            'title'     => $post->title,
+            'posts'     =>  $relatedPosts,
+            'post'      =>  $post,
+            'title'     =>  $post->title,
         ];
 
         return view('frontend.posts.post', $data);
+    }
+
+    protected function incrementViews($post)
+    {
+        if ($post->status == 'active') {
+            $post->increment('views');
+        }
     }
 }
