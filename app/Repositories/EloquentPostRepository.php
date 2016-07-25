@@ -76,8 +76,7 @@ class EloquentPostRepository implements PostRepository
 
     public function getLatestPublishedPosts()
     {
-        $posts = $this->getActivePosts()
-            ->paginate(15);
+        $posts = $this->getActivePosts();
 
         return $posts;
     }

@@ -36,9 +36,9 @@ class MainController extends Controller
     {
         if($request->has('search')) {
             return $this->indexSearch($request);
-        } else {
-            return $this->indexMain($request);
         }
+
+        return $this->indexMain($request);
     }
 
     public function indexMain(Request $request)
@@ -98,8 +98,8 @@ class MainController extends Controller
             return $posts;
         }
 
-        $postscollection = collect($this->postRepository->getLatestActivePosts());
-        $videoscollection = collect($this->videoRepository->getLatestVideos());
+        $postscollection = collect($this->postRepository->getLatestPublishedPosts()->get());
+        $videoscollection = collect($this->videoRepository->getLatestVideos()->get());
         $posts = $postscollection->merge($videoscollection)->sortByDesc('published_at');
 
         return $posts;

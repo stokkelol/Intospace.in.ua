@@ -114,9 +114,9 @@
             {!! $links->links() !!}
         </div>
     @endif
-@elseif (Request::path() == '/posts')
+@elseif(!empty($posts))
     <!-- Posts page paginator -->
     <div class="paginate text-center">
-        {!! $posts->links() !!}
+        {!! $posts->render() !!}
     </div>
 @endif

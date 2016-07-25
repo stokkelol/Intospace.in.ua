@@ -30,9 +30,9 @@ class PostController extends Controller
 
         if ($request->has('search')) {
             $query = $request->get('search');
-            $posts = $this->postRepository->getPostsBySearchQuery($query);
+            $posts = $this->postRepository->getPostsBySearchQuery($query)->get();
             } else {
-            $posts = $this->postRepository->getLatestPublishedPosts();
+            $posts = $this->postRepository->getLatestPublishedPosts()->paginate(15);
         }
 
         $data = [

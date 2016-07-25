@@ -29,7 +29,7 @@ class EloquentVideoRepository implements VideoRepository
 
     public function getLatestVideos()
     {
-        return $this->video->with('user')->latest()->get();
+        return $this->video->with('user')->latest();
     }
 
     public function getVideosBySearchQuery($query)
