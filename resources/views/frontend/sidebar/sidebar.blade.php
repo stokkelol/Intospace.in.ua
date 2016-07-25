@@ -29,23 +29,23 @@
             @endforeach
         </ul>
     </div>
-          <div class="text-center clearfix">
-              <br>
-              <br>
-              <div id="sticky-anchor"></div>
-              <div>
-              <div id="tagscloud"></div>
-              <section class="tagscloud">
+    <div class="text-center clearfix">
+        <br>
+        <br>
+        <div id="sticky-anchor"></div>
+        <div>
+            <div id="tagscloud"></div>
+            <section class="tagscloud">
                 <p><i class="fa fa-tags" aria-hidden="true"></i> Облако тегов:</p>
-                  @foreach ($counttags as $tag)
-                      @if (($tag->cnt) > 5)
-                          <a href="{{ route('tags', ['slug' => $tag->slug]) }}" class="{{ (($tag->id)%3 == 0) ? 'tag-even' : 'tag-odd' }}" style="font-size:14px"><span>{{ $tag->tag }}</span></a>
-                      @elseif (($tag->cnt) > 3)
-                          <a href="{{ route('tags', ['slug' => $tag->slug]) }}" class="{{ (($tag->id)%3 == 1) ? 'tag-even' : 'tag-odd' }}" style="font-size:12px"><span>{{ $tag->tag }}</span></a>
-                      @else
-                          <a href="{{ route('tags', ['slug' => $tag->slug]) }}" class="{{ (($tag->id)%3 == 2) ? 'tag-even' : 'tag-odd' }}" style="font-size:10px">{{ $tag->tag }}</a>
-                      @endif
-                  @endforeach
-              </section>
-            </div>
-          </div>
+                @foreach ($counttags as $tag)
+                    @if (($tag->cnt) > 5)
+                    <a href="{{ route('tags', ['slug' => $tag->slug]) }}" class="{{ (($tag->id)%3 == 0) ? 'tag-even' : 'tag-odd' }}" style="font-size:14px"><span>{{ $tag->tag }}</span></a>
+                    @elseif (($tag->cnt) > 3)
+                    <a href="{{ route('tags', ['slug' => $tag->slug]) }}" class="{{ (($tag->id)%3 == 1) ? 'tag-even' : 'tag-odd' }}" style="font-size:12px"><span>{{ $tag->tag }}</span></a>
+                    @else
+                    <a href="{{ route('tags', ['slug' => $tag->slug]) }}" class="{{ (($tag->id)%3 == 2) ? 'tag-even' : 'tag-odd' }}" style="font-size:10px">{{ $tag->tag }}</a>
+                    @endif
+                @endforeach
+            </section>
+        </div>
+    </div>

@@ -11,7 +11,6 @@ use App\Repositories\PostRepository;
 use App\Repositories\VideoRepository;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
-
 use App\Http\Requests;
 
 class BandController extends Controller
@@ -45,11 +44,10 @@ class BandController extends Controller
         $posts = $this->getCollection($slug);
         if($posts->count() == 1) {
             $topPost = $this->postRepository->getPostsByBandSlug($slug)->first();
-            $posts = null;
+            $posts = [];
         } else {
             $topPost = null;
         }
-
         $data = [
             'toppost'       =>  $topPost,
             'posts'         =>  $posts

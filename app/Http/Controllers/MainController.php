@@ -73,9 +73,9 @@ class MainController extends Controller
         if($posts->count() == 1) {
             $query = $request->get('search');
             $topPost = $this->postRepository->getPostsBySearchQuery($query)->first();
-            $posts = null;
+            $posts = [];
         } else {
-            $topPost = null;
+            $topPost = [];
         }
 
         $data = [
