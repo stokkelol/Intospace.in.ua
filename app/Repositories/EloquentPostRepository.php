@@ -33,9 +33,9 @@ class EloquentPostRepository implements PostRepository
 
     public function getPostsByCategory($slug)
     {
-        $posts = $this->post->with('tags', 'category')->whereHas('category', function ($query) use ($slug) {
+        $posts = $this->getActivePosts()->whereHas('category', function ($query) use ($slug) {
             $query->whereSlug($slug);
-        })->latest()->paginate(10);
+        })->latest();
 
         return $posts;
     }

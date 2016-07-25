@@ -115,7 +115,7 @@
         </div>
     @endif
 @endif
-@if(Request::path() == 'posts')
+@if(Request::path() == 'posts' || starts_with(Request::path(), 'categories'))
     <!-- Posts page paginator -->
     <div class="paginate text-center">
         {!! $posts->links() !!}

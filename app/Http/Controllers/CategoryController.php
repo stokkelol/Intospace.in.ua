@@ -10,26 +10,28 @@ use App\Tag;
 
 class CategoryController extends Controller
 {
-    protected $_category;
-    protected $_post;
-    protected $_tag;
+    protected $category;
+    protected $post;
+    protected $tag;
 
     public function __construct(Category $category,
                                 PostRepository $post,
                                 Tag $tag)
     {
-        $this->_category = $category;
-        $this->_post = $post;
-        $this->_tag = $tag;
+        $this->category = $category;
+        $this->post = $post;
+        $this->tag = $tag;
     }
 
     public function show($slug)
     {
         $data = [
-            'posts' =>  $this->_post->getPostsByCategory($slug),
-            'tags'  =>  $this->_tag->all(),
-            'title' =>  $this->_category->getBySlug($slug)->title,
+            'posts' =>  $this->post->getPostsByCategory($slug)->paginate(15),
+            'tags'  =>  $this->tag->all(),
+            'title' =>  $this->category->getBySlug($slug)->title,
         ];
+
+        //dd($data);
 
         return view('frontend.main', $data);
     }
