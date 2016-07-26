@@ -50,4 +50,11 @@ class EloquentVideoRepository implements VideoRepository
 
         return $videos;
     }
+
+    public function getMonthlyVideos()
+    {
+        $videos = $this->video->getMonthlyItems()->get();
+
+        return $videos;
+    }
 }

@@ -133,6 +133,16 @@ Route::group(['prefix' => 'backend', 'middleware' => ['role:admin|owner|demo']],
 
     Route::resource('monthlyreviews', 'Backend\MonthlyReviewController');
 
+    Route::get('/monthlyreviews/to-draft/{post_id}', [
+        'as'    => 'backend.monthlyreviews.to-draft',
+        'uses'  =>  'Backend\MonthlyReviewController@toDraft'
+    ]);
+
+    Route::get('/monthlyreviews/to-active/{post_id}', [
+       'as'     =>  'backend.monthlyreviews.to-active',
+       'uses'  =>  'Backend\MonthlyReviewController@toActive'
+    ]);
+
     Route::get('posts.set-category/{post_id}/{category_id}', [
         'as'    =>  'backend.post.to.category',
         'uses'  =>  'Backend\PostController@setCategory'

@@ -16,6 +16,7 @@ use Auth;
 use Carbon\Carbon;
 use DB;
 use App\Support\Images\ImageSaver;
+use App\Support\Statuses\StatusChanger;
 
 class PostController extends Controller
 {
@@ -31,7 +32,6 @@ class PostController extends Controller
         $this->tag = $tag;
         $this->band = $band;
     }
-
 
     /**
      * backend.posts.index
@@ -190,35 +190,26 @@ class PostController extends Controller
         $post->tags()->sync($tags);
     }
 
-    public function setPostStatus($post_id, $status)
-    {
-        $post = $this->post->find($post_id);
-        $post->status = $status;
-        $post->save();
-
-        return $post;
-    }
-
     public function toDraft($post_id)
     {
-        $this->setPostStatus($post_id, 'draft');
-        Flash::message('Post sent to draft!');
+        $changer = new StatusChanger($this->post->find($post_id));
+        $changer->setStatus($post_id, 'draft');
 
         return redirect()->back();
     }
 
     public function toActive($post_id)
     {
-        $this->setPostStatus($post_id, 'active');
-        Flash::message('Post sent to active!');
+        $changer = new StatusChanger($this->post->find($post_id));
+        $changer->setStatus($post_id, 'active');
 
         return redirect()->back();
     }
 
     public function toDeleted($post_id)
     {
-        $this->setPostStatus($post_id, 'deleted');
-        Flash::message('Post sent to deleted!');
+        $changer = new StatusChanger($this->post->find($post_id));
+        $changer->setStatus($post_id, 'deleted');
 
         return redirect()->back();
     }

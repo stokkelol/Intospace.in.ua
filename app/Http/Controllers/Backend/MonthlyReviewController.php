@@ -7,17 +7,23 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use App\MonthlyReview;
 use App\Repositories\PostRepository;
+use App\Repositories\VideoRepository;
 use Auth;
+use App\Support\Statuses\StatusChanger;
 
 class MonthlyReviewController extends Controller
 {
     protected $review;
     protected $post;
+    protected $video;
 
-    public function __construct(MonthlyReview $review, PostRepository $post)
+    public function __construct(MonthlyReview $review,
+                                PostRepository $post,
+                                VideoRepository $video)
     {
         $this->review = $review;
         $this->post = $post;
+        $this->video = $video;
     }
 
     public function index()
@@ -33,7 +39,8 @@ class MonthlyReviewController extends Controller
             'title'             =>  'Create new review',
             'save_url'          =>  route('backend.monthlyreviews.store'),
             'latest_posts'      =>  $this->post->getMonthlyPosts(),
-            'popular_posts'     =>  $this->post->getPopularPosts(5)
+            'popular_posts'     =>  $this->post->getPopularPosts(5),
+            'latest_videos'     =>  $this->video->getMonthlyVideos()
         ];
         return view('backend.monthlyreviews.create', $data);
     }
@@ -49,9 +56,12 @@ class MonthlyReviewController extends Controller
         //return redirect()->route('backend.monthlyreviews.edit', ['review_id' => $review->id]);
     }
 
-    public function update()
+    public function update(Request $request)
     {
+        $review = $this->storeOrUpdateReview($request, $review_id);
+        $review->update();
 
+        return redirect()->back();
     }
 
     public function storeOrUpdateReview(Request $request, $review_id)
@@ -61,7 +71,27 @@ class MonthlyReviewController extends Controller
         $review->title = $request->input('title');
         $review->content = $request->input('content');
         $review->published_at = $request->input('published_at');
+        $review->latest_posts = $request->input('latest_posts');
+        $review->latest_videos = $request->input('latest_videos');
+        $review->popular_posts = $request->input('popular_posts');
+        //dd($review);
 
         return $review;
+    }
+
+    public function toDraft($review_id)
+    {
+        $changer = new StatusChanger($this->review->find($review_id));
+        $changer->setStatus($review_id, 'draft');
+
+        return redirect()->back();
+    }
+
+    public function toActive($review_id)
+    {
+        $changer = new StatusChanger($this->review->find($review_id));
+        $changer->setStatus($review_id, 'active');
+
+        return redirect()->back();
     }
 }

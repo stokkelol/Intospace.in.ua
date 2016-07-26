@@ -16,14 +16,29 @@
     <div class="col-lg-4">
         <div class="panel panel-primary">
             <div class="panel-heading">
-                This months posts
+                Posts
             </div>
             <div class="panel-body">
                 <div class="form-group">
-                    <label for="inputLinks">Posts:</label>
-                    <textarea name="latestPosts" class="form-control links" id="latestPosts" cols="50" rows="10">
+                    <label for="inputLatest_posts">Posts:</label>
+                    <textarea name="latest_posts" class="form-control links" id="latest_posts" cols="50" rows="10">
                         @foreach($latest_posts as $post)
                             <li><a href="/posts/{{ $post->slug }}">{{ $post->title }}</a></li>
+                        @endforeach
+                    </textarea>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                Videos
+            </div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <label for="inputLatest_videos">Posts:</label>
+                    <textarea name="latest_videos" class="form-control links" id="latest_videos" cols="50" rows="10">
+                        @foreach($latest_videos as $video)
+                            <li><a href="/videos/{{ $video->slug }}">{{ $video->title }}</a></li>
                         @endforeach
                     </textarea>
                 </div>
@@ -35,8 +50,8 @@
             </div>
             <div class="panel-body">
                 <div class="form-group">
-                    <label for="inputLinks">Posts:</label>
-                    <textarea name="latestPosts" class="form-control links" id="latestPosts" cols="50" rows="10">
+                    <label for="inputPopular_posts">Posts:</label>
+                    <textarea name="popular_posts" class="form-control links" id="latest_posts" cols="50" rows="10">
                         @foreach($popular_posts as $post)
                             <li><a href="/posts/{{ $post->slug }}">{{ $post->title }}</a></li>
                         @endforeach
@@ -45,10 +60,10 @@
             </div>
         </div>
     </div>
-</div>
-<div class="row">
-    <div>
-        <input type="submit" value="Save" class="btn btn-block btn-success" >
+    <div class="row">
+        <div>
+            <input type="submit" value="Save" class="btn btn-block btn-success" >
+        </div>
     </div>
 </div>
 
