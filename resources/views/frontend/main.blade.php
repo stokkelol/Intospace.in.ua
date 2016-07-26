@@ -20,6 +20,14 @@
     @endif
 @endsection
 
+@section('review')
+    <div class="container">
+        <div class="row">
+            @include('frontend.partials.review')
+        </div>
+    </div>
+@endsection
+
 @section('toppost')
     @if(!empty($toppost))
         @include('frontend.partials.top_post', ['post' => $toppost])

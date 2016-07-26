@@ -125,6 +125,13 @@ class EloquentPostRepository implements PostRepository
         return $posts;
     }
 
+    public function getPostsById(...$id)
+    {
+        $posts = $this->getActivePosts()->whereIn('id', $id);
+
+        return $posts;
+    }
+
     public function getPostsByBandSlug($slug)
     {
         $posts = $this->getActivePosts()->whereHas('band', function ($query) use ($slug) {

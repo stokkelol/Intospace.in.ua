@@ -16,6 +16,7 @@
     @include('frontend.partials.navbar')
     @yield('tagline')
     @yield('random')
+    @yield('review')
     @yield('toppost')
     @yield('content')
     @include('frontend.partials.footer')

@@ -9,7 +9,6 @@ use App\Repositories\PostRepository;
 
 class FooterComposer
 {
-
     protected $post;
 
     public function __construct(PostRepository $post)

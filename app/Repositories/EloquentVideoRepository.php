@@ -57,4 +57,11 @@ class EloquentVideoRepository implements VideoRepository
 
         return $videos;
     }
+
+    public function getVideosById(...$_id)
+    {
+        $videos = $this->video->where('id', '=', $id);
+
+        return $videos;
+    }
 }

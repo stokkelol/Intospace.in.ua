@@ -12,6 +12,11 @@
             {!! Form::label('inputPublished_at', 'Published at:') !!}
             {!! Form::input('datetime', 'published_at', isset($post->published_at) ? $post->published_at : Carbon\Carbon::now(), ['class' => 'form-control']) !!}
         </div>
+        <div class="row">
+            <div>
+                <input type="submit" value="Save" class="btn btn-block btn-success" >
+            </div>
+        </div>
     </div>
     <div class="col-lg-4">
         <div class="panel panel-primary">
@@ -19,14 +24,9 @@
                 Posts
             </div>
             <div class="panel-body">
-                <div class="form-group">
-                    <label for="inputLatest_posts">Posts:</label>
-                    <textarea name="latest_posts" class="form-control links" id="latest_posts" cols="50" rows="10">
-                        @foreach($latest_posts as $post)
-                            <li><a href="/posts/{{ $post->slug }}">{{ $post->title }}</a></li>
-                        @endforeach
-                    </textarea>
-                </div>
+                @foreach($latest_posts as $post)
+                    <li><a href="/posts/{{ $post->slug }}">{{ $post->title }}</a></li>
+                @endforeach
             </div>
         </div>
         <div class="panel panel-primary">
@@ -34,14 +34,9 @@
                 Videos
             </div>
             <div class="panel-body">
-                <div class="form-group">
-                    <label for="inputLatest_videos">Posts:</label>
-                    <textarea name="latest_videos" class="form-control links" id="latest_videos" cols="50" rows="10">
-                        @foreach($latest_videos as $video)
-                            <li><a href="/videos/{{ $video->slug }}">{{ $video->title }}</a></li>
-                        @endforeach
-                    </textarea>
-                </div>
+                @foreach($latest_videos as $video)
+                    <li><a href="/videos/{{ $video->slug }}">{{ $video->title }}</a></li>
+                @endforeach
             </div>
         </div>
         <div class="panel panel-primary">
@@ -49,20 +44,10 @@
                 Popular posts
             </div>
             <div class="panel-body">
-                <div class="form-group">
-                    <label for="inputPopular_posts">Posts:</label>
-                    <textarea name="popular_posts" class="form-control links" id="latest_posts" cols="50" rows="10">
-                        @foreach($popular_posts as $post)
-                            <li><a href="/posts/{{ $post->slug }}">{{ $post->title }}</a></li>
-                        @endforeach
-                    </textarea>
-                </div>
+                @foreach($popular_posts as $post)
+                    <li><a href="/posts/{{ $post->slug }}">{{ $post->title }}</a></li>
+                @endforeach
             </div>
-        </div>
-    </div>
-    <div class="row">
-        <div>
-            <input type="submit" value="Save" class="btn btn-block btn-success" >
         </div>
     </div>
 </div>

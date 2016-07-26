@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Repositories\PostRepository;
 use App\Repositories\TagRepository;
 use App\Repositories\VideoRepository;
+use App\Repositories\MonthlyReviewRepository;
 use App\Video;
 use App\Http\Requests;
 use DB;
@@ -18,6 +19,7 @@ class MainController extends Controller
     protected $postRepository;
     protected $tagRepository;
     protected $videoRepository;
+    protected $reviewRepository;
 
     /**
      * PostController constructor.
@@ -25,11 +27,13 @@ class MainController extends Controller
      */
     public function __construct(PostRepository $postRepository,
                                 TagRepository $tagRepository,
-                                VideoRepository $videoRepository)
+                                VideoRepository $videoRepository,
+                                MonthlyReviewRepository $reviewRepository)
     {
         $this->postRepository = $postRepository;
         $this->tagRepository = $tagRepository;
         $this->videoRepository = $videoRepository;
+        $this->reviewRepository = $reviewRepository;
     }
 
     public function index(Request $request)
@@ -62,7 +66,7 @@ class MainController extends Controller
             'randposts'     =>  $this->postRepository->getRandomPosts()
         ];
 
-        //dd($posts);
+        //dd($data);
 
         return view('frontend.main', $data);
     }

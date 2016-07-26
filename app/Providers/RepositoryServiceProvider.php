@@ -15,6 +15,8 @@ use App\Repositories\BandRepository;
 use App\Repositories\EloquentBandRepository;
 use App\Repositories\UserRepository;
 use App\Repositories\EloquentUserRepository;
+use App\Repositories\MonthlyReviewRepository;
+use App\Repositories\EloquentMonthlyReviewRepository;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
@@ -41,5 +43,6 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(CategoryRepository::class, EloquentCategoryRepository::class);
         $this->app->bind(BandRepository::class, EloquentBandRepository::class);
         $this->app->bind(UserRepository::class, EloquentUserRepository::class);
+        $this->app->bind(MonthlyReviewRepository::class, EloquentMonthlyReviewRepository::class);
     }
 }

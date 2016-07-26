@@ -35,12 +35,16 @@ class MonthlyReviewController extends Controller
 
     public function create()
     {
+        $latest_posts = $this->post->getMonthlyPosts();
+        $popular_posts = $this->post->getPopularPosts(5);
+        $latest_videos = $this->video->getMonthlyVideos();
+
         $data = [
             'title'             =>  'Create new review',
             'save_url'          =>  route('backend.monthlyreviews.store'),
-            'latest_posts'      =>  $this->post->getMonthlyPosts(),
-            'popular_posts'     =>  $this->post->getPopularPosts(5),
-            'latest_videos'     =>  $this->video->getMonthlyVideos()
+            'latest_posts'      =>  $latest_posts,
+            'popular_posts'     =>  $popular_posts,
+            'latest_videos'     =>  $latest_videos
         ];
         return view('backend.monthlyreviews.create', $data);
     }
@@ -71,9 +75,10 @@ class MonthlyReviewController extends Controller
         $review->title = $request->input('title');
         $review->content = $request->input('content');
         $review->published_at = $request->input('published_at');
-        $review->latest_posts = $request->input('latest_posts');
-        $review->latest_videos = $request->input('latest_videos');
-        $review->popular_posts = $request->input('popular_posts');
+        $review->latest_posts = $this->getItemsForReview($this->post->getMonthlyPosts());
+        $review->popular_posts = $this->getItemsForReview($this->post->getPopularPosts(5));
+        $review->latest_videos = $this->getItemsForReview($this->video->getMonthlyVideos());
+
         //dd($review);
 
         return $review;
@@ -93,5 +98,15 @@ class MonthlyReviewController extends Controller
         $changer->setStatus($review_id, 'active');
 
         return redirect()->back();
+    }
+
+    public function getItemsForReview($items)
+    {
+        $array = [];
+        foreach($items as $item)
+        {
+            $array[] = $item->id;
+        }
+        return implode(",", $array);
     }
 }

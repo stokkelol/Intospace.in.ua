@@ -8,11 +8,11 @@ use App\Support\Queries\CountTags;
 
 class TaglineComposer
 {
-    protected $_tag;
+    protected $tag;
 
     public function __construct(TagRepository $tag)
     {
-        $this->_tag = $tag;
+        $this->tag = $tag;
     }
 
     public function compose(View $view)
