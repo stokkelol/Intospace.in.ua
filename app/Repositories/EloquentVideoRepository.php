@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Video;
 use App\Repositories\VideoRepository;
+use App\Support\CustomCollections\CollectionByIds;
 
 class EloquentVideoRepository implements VideoRepository
 {
@@ -53,15 +54,15 @@ class EloquentVideoRepository implements VideoRepository
 
     public function getMonthlyVideos()
     {
-        $videos = $this->video->getMonthlyItems()->get();
+        $videos = $this->video->getMonthlyItems()->orderBy('published_at', 'desc')->get();
 
         return $videos;
     }
 
-    public function getVideosById(...$_id)
+    public function getVideosById($video_id)
     {
-        $videos = $this->video->where('id', '=', $id);
-
-        return $videos;
+        $videos = new CollectionByIds($this->video);
+        //dd($video_id);
+        return $videos->find($video_id);
     }
 }

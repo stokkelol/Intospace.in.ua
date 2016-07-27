@@ -21,11 +21,9 @@
 @endsection
 
 @section('review')
-    <div class="container">
-        <div class="row">
+
             @include('frontend.partials.review')
-        </div>
-    </div>
+
 @endsection
 
 @section('toppost')

@@ -6,6 +6,7 @@ use App\Post;
 use App\User;
 use App\Category;
 use App\Repositories\PostRepository;
+use App\Support\CustomCollections\CollectionByIds;
 
 class EloquentPostRepository implements PostRepository
 {
@@ -125,11 +126,11 @@ class EloquentPostRepository implements PostRepository
         return $posts;
     }
 
-    public function getPostsById(...$id)
+    public function getPostsById($post_id)
     {
-        $posts = $this->getActivePosts()->whereIn('id', $id);
-
-        return $posts;
+        $posts = new CollectionByIds($this->post);
+        //dd($video_id);
+        return $posts->find($post_id);
     }
 
     public function getPostsByBandSlug($slug)
@@ -148,7 +149,11 @@ class EloquentPostRepository implements PostRepository
 
     public function getMonthlyPosts()
     {
-        $posts = $this->post->byStatus('active')->getMonthlyItems()->get();
+        $posts = $this->post->byStatus('active')
+            ->getMonthlyItems()
+            ->groupBy('published_at')
+            ->orderBy('published_at', 'desc')
+            ->get();
 
         return $posts;
     }

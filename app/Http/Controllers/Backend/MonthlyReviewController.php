@@ -35,16 +35,12 @@ class MonthlyReviewController extends Controller
 
     public function create()
     {
-        $latest_posts = $this->post->getMonthlyPosts();
-        $popular_posts = $this->post->getPopularPosts(5);
-        $latest_videos = $this->video->getMonthlyVideos();
-
         $data = [
             'title'             =>  'Create new review',
             'save_url'          =>  route('backend.monthlyreviews.store'),
-            'latest_posts'      =>  $latest_posts,
-            'popular_posts'     =>  $popular_posts,
-            'latest_videos'     =>  $latest_videos
+            'latest_posts'      =>  $this->post->getMonthlyPosts(),
+            'popular_posts'     =>  $this->post->getPopularPosts(5),
+            'latest_videos'     =>  $this->video->getMonthlyVideos()
         ];
         return view('backend.monthlyreviews.create', $data);
     }
@@ -55,17 +51,31 @@ class MonthlyReviewController extends Controller
 
         $review->save();
 
-        return redirect()->back();
+        return redirect()->route('backend.monthlyreviews.edit', ['review_id' => $review->id]);
 
         //return redirect()->route('backend.monthlyreviews.edit', ['review_id' => $review->id]);
     }
 
-    public function update(Request $request)
+    public function edit($review_id)
+    {
+        $review = $this->review->find($review_id);
+        $data = [
+            'title'             =>  'Edit review',
+            'review'            =>  $review,
+            'latest_posts'      =>  $this->post->getPostsById($review->latest_posts),
+            'popular_posts'     =>  $this->post->getPostsById($review->popular_posts),
+            'latest_videos'     =>  $this->video->getVideosById($review->latest_videos)
+        ];
+        //dd($data);
+        return view('backend.monthlyreviews.edit', $data);
+    }
+
+    public function update(Request $request, $review_id)
     {
         $review = $this->storeOrUpdateReview($request, $review_id);
         $review->update();
 
-        return redirect()->back();
+        return redirect()->back() ;
     }
 
     public function storeOrUpdateReview(Request $request, $review_id)
@@ -75,11 +85,11 @@ class MonthlyReviewController extends Controller
         $review->title = $request->input('title');
         $review->content = $request->input('content');
         $review->published_at = $request->input('published_at');
-        $review->latest_posts = $this->getItemsForReview($this->post->getMonthlyPosts());
-        $review->popular_posts = $this->getItemsForReview($this->post->getPopularPosts(5));
-        $review->latest_videos = $this->getItemsForReview($this->video->getMonthlyVideos());
-
-        //dd($review);
+        if(empty($review->latest_posts)) {
+            $review->latest_posts = $this->getItemsForReview($this->post->getMonthlyPosts());
+            $review->popular_posts = $this->getItemsForReview($this->post->getPopularPosts(5));
+            $review->latest_videos = $this->getItemsForReview($this->video->getMonthlyVideos());
+        }
 
         return $review;
     }
