@@ -16,6 +16,8 @@ elixir(function(mix) {
 
     mix.sass(['style.scss'], 'public/css/styles.css');
 
+    mix.sass(['backend.scss'], 'public/css/backend.css');
+
     mix.styles([
         'font-awesome.min.css',
         'bootstrap.min.css',
@@ -47,6 +49,7 @@ elixir(function(mix) {
         'public/js/all.js',
         'public/css/app.css',
         'public/css/styles.css',
-        'public/css/libs.css'
+        'public/css/libs.css',
+        'public/css/backend.css',
     ]);
 });

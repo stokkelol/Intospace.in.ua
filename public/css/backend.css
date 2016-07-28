@@ -1,0 +1,13 @@
+.files-container {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-flow: wrap;
+  flex-flow: wrap;
+  -ms-flex-align: center;
+  align-items: center;
+  -ms-flex-pack: distribute;
+  justify-content: space-around; }
+  .files-container p {
+    padding: 4px; }
+
+/*# sourceMappingURL=backend.css.map */

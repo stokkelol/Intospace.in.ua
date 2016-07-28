@@ -133,6 +133,8 @@ Route::group(['prefix' => 'backend', 'middleware' => ['role:admin|owner|demo']],
 
     Route::resource('monthlyreviews', 'Backend\MonthlyReviewController');
 
+    Route::get('files', 'Backend\FileController@index');
+
     Route::get('/monthlyreviews/to-draft/{post_id}', [
         'as'    => 'backend.monthlyreviews.to-draft',
         'uses'  =>  'Backend\MonthlyReviewController@toDraft'

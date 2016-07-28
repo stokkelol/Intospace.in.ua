@@ -8,6 +8,7 @@
     <title> Intospace.in.ua</title>
     <!-- Styles -->
     <link rel="stylesheet" href="{{ elixir("css/all.css") }}">
+    <link rel="stylesheet" href="{{ elixir("css/backend.css") }}">
 </head>
 <body>
 <nav class="navbar navbar-static-top navbar-inverse">
@@ -44,6 +45,7 @@
                 <li><a href="{{ url('/backend/bands') }}"><i class="fa fa-music" aria-hidden="true"></i><span>Bands</span></a></li>
                 <li><a href="{{ url('/backend/blogs') }}"><i class="fa fa-th-large" aria-hidden="true"></i><span>Blog posts</span></a></li>
                 <li><a href="{{ url('/backend/monthlyreviews') }}"><i class="fa fa-file-text" aria-hidden="true"></i><span>Monthly reviews</span></a></li>
+                <li><a href="{{ url('/backend/files') }}"><i class="fa fa-file-image-o" aria-hidden="true"></i><span>Files</span></a></li>
             </ul>
 
             <!-- Right Side Of Navbar -->
