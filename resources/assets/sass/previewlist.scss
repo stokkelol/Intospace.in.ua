@@ -10,6 +10,7 @@
 .preview-element {
   font-size: 12px;
   margin: 2px;
+  min-height: 220px;
   display: flex;
   flex-direction: column;
   @media only screen and (max-width: 1170px) {
