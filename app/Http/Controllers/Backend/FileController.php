@@ -39,9 +39,12 @@ class FileController extends Controller
         $links = new LengthAwarePaginator($files, count($files), $perPage);
         $links->setPath('/backend/files');
 
+        $dirSize = $this->getDirectorySize('upload/covers');
+
         $data = [
             'files' =>  $items,
             'links' =>  $links,
+            'dir_size'  =>  $dirSize
         ];
 
         return view('backend.files.index', $data);
@@ -49,13 +52,13 @@ class FileController extends Controller
 
     public function getDirectorySize($path)
     {
-        $filesInFolder = $this->file->files($path);
-
-        foreach($filesInFolder as $file)
+        $total = (int) 0;
+        $files = $this->file->files($path);
+        foreach($files as $filepath)
         {
-            $total += $file->size();
+            $total += $this->file->size($filepath);
         }
 
-        return $total;
+        return round($total/1048576, 2);
     }
 }
