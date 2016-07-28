@@ -8,7 +8,6 @@ use App\Http\Requests;
 use Illuminate\Filesystem\Filesystem;
 use App\Support\Images\ImageSaver;
 use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Pagination\Paginator;
 
 class FileController extends Controller
 {
@@ -26,7 +25,9 @@ class FileController extends Controller
         foreach($filesInFolder as $file)
         {
             $path = pathinfo($file);
-            $filesArray[] = $path;
+            if(! starts_with($path['filename'], 'thumbnail')) {
+                $filesArray[] = $path;
+            }
         }
 
         $files = collect($filesArray);
@@ -40,11 +41,13 @@ class FileController extends Controller
         $links->setPath('/backend/files');
 
         $dirSize = $this->getDirectorySize('upload/covers');
+        $files_count = $this->countFiles('upload/covers');
 
         $data = [
             'files' =>  $items,
             'links' =>  $links,
-            'dir_size'  =>  $dirSize
+            'dir_size'  =>  $dirSize,
+            'count'     =>  $files_count
         ];
 
         return view('backend.files.index', $data);
@@ -59,6 +62,11 @@ class FileController extends Controller
             $total += $this->file->size($filepath);
         }
 
-        return round($total/1048576, 2);
+        return round($total/1048576, 3);
+    }
+
+    public function countFiles($path)
+    {
+        return count($this->file->files($path));
     }
 }

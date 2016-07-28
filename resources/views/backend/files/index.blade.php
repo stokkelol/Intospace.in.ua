@@ -6,6 +6,7 @@
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <h5>Total directory size: {{ $dir_size }}Mb</h5>
+                    <p>Total files: {{ $count }}</p>
                 </div>
                 <div class="panel-body">
                     @foreach($files as $file)
