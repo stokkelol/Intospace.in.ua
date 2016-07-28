@@ -9,6 +9,10 @@
   justify-content: space-around;
   min-height: 400px; }
   .files-container p {
+    font-size: 16px;
     padding: 4px; }
+    .files-container p a:hover {
+      text-decoration: none;
+      opacity: 0.6; }
 
 /*# sourceMappingURL=backend.css.map */

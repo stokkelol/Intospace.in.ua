@@ -32,7 +32,7 @@ class FileController extends Controller
         $files = collect($filesArray);
 
         $page = $request->get('page', LengthAwarePaginator::resolveCurrentPage());
-        $perPage = 16;
+        $perPage = 28;
         $offSet = ($page * $perPage) - $perPage;
         $items = $files->slice($offSet, $perPage)->all();
 
