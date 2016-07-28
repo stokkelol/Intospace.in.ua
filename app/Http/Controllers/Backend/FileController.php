@@ -33,7 +33,7 @@ class FileController extends Controller
         $files = collect($filesArray);
 
         $page = $request->get('page', LengthAwarePaginator::resolveCurrentPage());
-        $perPage = 16;
+        $perPage = 32;
         $offSet = ($page * $perPage) - $perPage;
         $items = $files->slice($offSet, $perPage)->all();
 
@@ -44,8 +44,8 @@ class FileController extends Controller
         $files_count = $this->countFiles('upload/covers');
 
         $data = [
-            'files' =>  $items,
-            'links' =>  $links,
+            'files'     =>  $items,
+            'links'     =>  $links,
             'dir_size'  =>  $dirSize,
             'count'     =>  $files_count
         ];
@@ -62,7 +62,7 @@ class FileController extends Controller
             $total += $this->file->size($filepath);
         }
 
-        return round($total/1048576, 3);
+        return round($total/1048576, 2);
     }
 
     public function countFiles($path)

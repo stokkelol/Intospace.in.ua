@@ -30,7 +30,8 @@ elixir(function(mix) {
         'bootstrap.min.css',
         'normalize.css',
         'component.css',
-        'lazyYT.css'
+        'lazyYT.css',
+        'lightslider.css'
     ], 'public/css/libs.css');
 
     mix.scripts([
@@ -41,7 +42,8 @@ elixir(function(mix) {
         'jquery.sticky-kit.min.js',
         'lazyYT.js',
         'scripts.js',
-        'vue.min.js'
+        'vue.min.js',
+        'lightslider.js'
         ], 'public/js/all.js');
 
     mix.version([

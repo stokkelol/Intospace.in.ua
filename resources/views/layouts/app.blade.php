@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="{{ elixir('css/libs.css') }}">
     <link rel="stylesheet" href="{{ elixir('css/styles.css') }}">
     <script src='https://www.google.com/recaptcha/api.js'></script>
+
 </head>
 <body>
     @include('frontend.partials.navbar')
@@ -22,6 +23,39 @@
     @include('frontend.partials.footer')
     <!-- JavaScripts -->
     <script src="{{ elixir('js/all.js') }}"></script>
+
+    <script>
+    $(document).ready(function() {
+$('#lightSlider').lightSlider({
+    item:6,
+    auto:true,
+    loop:true,
+    slideMove:2,
+    easing: 'cubic-bezier(0.25, 0, 0.25, 1)',
+    speed:600,
+    onSliderLoad: function() {
+            $('#lightSlider').removeClass('cS-hidden');
+        },
+    responsive : [
+        {
+            breakpoint:800,
+            settings: {
+                item:3,
+                slideMove:1,
+                slideMargin:6,
+              }
+        },
+        {
+            breakpoint:480,
+            settings: {
+                item:2,
+                slideMove:1
+              }
+        }
+    ]
+});
+});
+    </script>
     @include('frontend.partials.analytics')
     <script>
     var popupSize = {
@@ -47,5 +81,7 @@
 
     });
     </script>
+
+
 </body>
 </html>

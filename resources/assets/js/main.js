@@ -1,4 +1,4 @@
-this.tooltip = function(){	
+this.tooltip = function(){
 	/* CONFIG */
 		xOffset = 10;
 		yOffset = 20;

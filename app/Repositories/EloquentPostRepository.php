@@ -27,7 +27,7 @@ class EloquentPostRepository implements PostRepository
         $randomposts = $this->post->where('status', 'like', 'active')
             ->where('category_id', '=', '1')
             ->get()
-            ->random(6);
+            ->random(18);
 
         return $randomposts;
     }
