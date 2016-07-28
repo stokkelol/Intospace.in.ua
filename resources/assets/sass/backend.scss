@@ -1,9 +1,11 @@
 .files-container {
     display: flex;
     flex-flow: wrap;
-    align-items: center;
+    align-items: flex-end;
     justify-content: space-around;
     min-height: 400px;
+    margin: 5px;
+    border-bottom: 1px grey solid;
     p {
         font-size: 16px;
         padding: 4px;

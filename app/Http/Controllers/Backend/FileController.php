@@ -41,9 +41,21 @@ class FileController extends Controller
 
         $data = [
             'files' =>  $items,
-            'links' =>  $links
+            'links' =>  $links,
         ];
 
         return view('backend.files.index', $data);
+    }
+
+    public function getDirectorySize($path)
+    {
+        $filesInFolder = $this->file->files($path);
+
+        foreach($filesInFolder as $file)
+        {
+            $total += $file->size();
+        }
+
+        return $total;
     }
 }

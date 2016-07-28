@@ -3,11 +3,13 @@
   display: flex;
   -ms-flex-flow: wrap;
   flex-flow: wrap;
-  -ms-flex-align: center;
-  align-items: center;
+  -ms-flex-align: end;
+  align-items: flex-end;
   -ms-flex-pack: distribute;
   justify-content: space-around;
-  min-height: 400px; }
+  min-height: 400px;
+  margin: 5px;
+  border-bottom: 1px grey solid; }
   .files-container p {
     font-size: 16px;
     padding: 4px; }
