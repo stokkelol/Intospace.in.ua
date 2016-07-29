@@ -2,6 +2,19 @@
 
 }
 
+
 .review-title {
-    font-size: 18px;
+    font-size: 20px;
+}
+
+.review-items {
+    display: flex;
+    justify-content: space-around;
+    flex-flow: column;
+    font-size: 12px;
+    a {
+        &:hover {
+            text-decoration: none;
+        }
+    }
 }
