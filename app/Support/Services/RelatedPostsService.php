@@ -25,9 +25,9 @@ class RelatedPostsService
             ->orderBy('created_at', 'desc')
             ->get();
 
-        $count = (count($relatedposts));
-
-        $relatedposts = $relatedposts->random($count);
+        if(count($relatedposts) > 24) {
+            return $relatedposts->random(24);
+        }
 
         return $relatedposts;
     }
