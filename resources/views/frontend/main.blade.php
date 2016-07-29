@@ -21,9 +21,7 @@
 @endsection
 
 @section('review')
-
-            @include('frontend.partials.review')
-
+    @include('frontend.partials.review')
 @endsection
 
 @section('toppost')

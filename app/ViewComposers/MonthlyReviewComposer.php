@@ -28,12 +28,16 @@ class MonthlyReviewComposer
     public function compose(View $view)
     {
         $review        = $this->review->getActiveReview()->first();
-        $latest_posts  = $this->post->getPostsById($review->latest_posts);
-        $popular_posts = $this->post->getPostsById($review->popular_posts);
-        $latest_videos = $this->video->getVideosById($review->latest_videos);
+        if(! empty($this->post->getPostsById($review->latest_posts))) {
+            $latest_posts  = $this->post->getPostsById($review->latest_posts);
+            $popular_posts = $this->post->getPostsById($review->popular_posts);
+            $latest_videos = $this->video->getVideosById($review->latest_videos);
 
-        $view->with('review', $review)->with('latest_posts', $latest_posts)
-            ->with('popular_posts', $popular_posts)
-            ->with('latest_videos', $latest_videos);
+            return $view->with('review', $review)->with('latest_posts', $latest_posts)
+                ->with('popular_posts', $popular_posts)
+                ->with('latest_videos', $latest_videos);
+        }
+
+        $view->with('review', $review);
     }
 }
