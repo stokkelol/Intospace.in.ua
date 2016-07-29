@@ -3,7 +3,7 @@
 namespace App\ViewComposers;
 
 use Illuminate\Contracts\View\View;
-use App\Repositories\TagRepository;
+use App\Repositories\Tags\TagRepository;
 use App\Support\Queries\CountTags;
 
 class TaglineComposer

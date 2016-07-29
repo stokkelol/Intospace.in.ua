@@ -3,9 +3,9 @@
 namespace App\ViewComposers;
 
 use Illuminate\Contracts\View\View;
-use App\Repositories\PostRepository;
-use App\Repositories\TagRepository;
-use App\Repositories\VideoRepository;
+use App\Repositories\Posts\PostRepository;
+use App\Repositories\Tags\TagRepository;
+use App\Repositories\Videos\VideoRepository;
 use DB;
 use App\Support\Queries\CountTags;
 

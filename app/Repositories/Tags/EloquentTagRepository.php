@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Repositories\Tags;
 
-use App\Repositories\TagRepository;
+use App\Repositories\Tags\TagRepository;
 use App\Tag;
 use App\Post;
 use App\User;

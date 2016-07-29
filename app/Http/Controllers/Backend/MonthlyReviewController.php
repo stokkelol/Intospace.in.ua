@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use App\MonthlyReview;
-use App\Repositories\PostRepository;
-use App\Repositories\VideoRepository;
+use App\Repositories\Posts\PostRepository;
+use App\Repositories\Videos\VideoRepository;
 use Auth;
 use App\Support\Statuses\StatusChanger;
 

@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Repositories\Bands;
 
 use App\Band;
+use App\Repositories\Bands\BandRepository;
 
 class EloquentBandRepository implements BandRepository
 {

@@ -3,9 +3,9 @@
 namespace App\ViewComposers;
 
 use Illuminate\Contracts\View\View;
-use App\Repositories\MonthlyReviewRepository;
-use App\Repositories\PostRepository;
-use App\Repositories\VideoRepository;
+use App\Repositories\MonthlyReviews\MonthlyReviewRepository;
+use App\Repositories\Posts\PostRepository;
+use App\Repositories\Videos\VideoRepository;
 
 class MonthlyReviewComposer
 {
@@ -27,8 +27,15 @@ class MonthlyReviewComposer
      */
     public function compose(View $view)
     {
-        $review        = $this->review->getActiveReview()->first();
+        if(!empty($this->review->getActiveReview()->first())) {
+            $review        = $this->review->getActiveReview()->first();
+            $latest_posts  = $this->post->getPostsById($review->latest_posts);
+            $popular_posts = $this->post->getPostsById($review->popular_posts);
+            $latest_videos = $this->video->getVideosById($review->latest_videos);
 
-        $view->with('review', $review);
+            $view->with('review', $review)->with('latest_posts', $latest_posts)
+                ->with('popular_posts', $popular_posts)
+                ->with('latest_videos', $latest_videos);
+        }
     }
 }

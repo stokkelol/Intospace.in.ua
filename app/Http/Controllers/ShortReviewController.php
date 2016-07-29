@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Repositories\PostRepository;
+use App\Repositories\Posts\PostRepository;
 use Illuminate\Http\Request;
 use App\Post;
 use App\Http\Requests;

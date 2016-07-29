@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Repositories\PostRepository;
-use App\Repositories\TagRepository;
-use App\Repositories\VideoRepository;
-use App\Repositories\MonthlyReviewRepository;
+use App\Repositories\Posts\PostRepository;
+use App\Repositories\Tags\TagRepository;
+use App\Repositories\Videos\VideoRepository;
+use App\Repositories\MonthlyReviews\MonthlyReviewRepository;
 use App\Video;
 use App\Http\Requests;
 use DB;

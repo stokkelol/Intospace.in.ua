@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Repositories\Posts;
 
 use App\Post;
 use App\User;
 use App\Category;
-use App\Repositories\PostRepository;
+use App\Repositories\Posts\PostRepository;
 use App\Support\CustomCollections\CollectionByIds;
 
 class EloquentPostRepository implements PostRepository

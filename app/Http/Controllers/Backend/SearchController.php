@@ -8,8 +8,6 @@ use App\Post;
 use App\Category;
 use Input;
 
-
-
 class SearchController extends Controller
 {
     public function index()

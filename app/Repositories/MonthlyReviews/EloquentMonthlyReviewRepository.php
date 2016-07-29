@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Repositories\MonthlyReviews;
 
 use App\MonthlyReview;
+use App\Repositories\MonthlyReviews\MonthlyReviewRepository;
 
 class EloquentMonthlyReviewRepository implements MonthlyReviewRepository
 {

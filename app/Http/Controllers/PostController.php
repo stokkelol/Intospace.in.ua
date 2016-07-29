@@ -6,8 +6,8 @@ use App;
 use App\Http\Requests;
 use App\Post;
 use App\Tag;
-use App\Repositories\PostRepository;
-use App\Repositories\TagRepository;
+use App\Repositories\Posts\PostRepository;
+use App\Repositories\Tags\TagRepository;
 use Illuminate\Http\Request;
 use App\Support\Services\RelatedPostsService;
 

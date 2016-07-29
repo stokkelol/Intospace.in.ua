@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Repositories\PostRepository;
+use App\Repositories\Posts\PostRepository;
 use App\Http\Requests;
 use App\Category;
 use App\Tag;

@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use Auth;
-use App\Repositories\UserRepository;
-use App\Repositories\PostRepository;
+use App\Repositories\Users\UserRepository;
+use App\Repositories\Posts\PostRepository;
 
 class UserController extends Controller
 {

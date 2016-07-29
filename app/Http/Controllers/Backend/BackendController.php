@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
-use App\Repositories\PostRepository;
-use App\Repositories\UserRepository;
-use App\Repositories\CategoryRepository;
+use App\Repositories\Posts\PostRepository;
+use App\Repositories\Users\UserRepository;
+use App\Repositories\Categories\CategoryRepository;
 use Auth;
 use DB;
-use App\Repositories\VideoRepository;
+use App\Repositories\Videos\VideoRepository;
 use App\Http\Requests;
 use LaravelAnalytics;
 

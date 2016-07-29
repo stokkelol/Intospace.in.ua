@@ -3,20 +3,20 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use App\Repositories\PostRepository;
-use App\Repositories\EloquentPostRepository;
-use App\Repositories\TagRepository;
-use App\Repositories\EloquentTagRepository;
-use App\Repositories\VideoRepository;
-use App\Repositories\EloquentVideoRepository;
-use App\Repositories\CategoryRepository;
-use App\Repositories\EloquentCategoryRepository;
-use App\Repositories\BandRepository;
-use App\Repositories\EloquentBandRepository;
-use App\Repositories\UserRepository;
-use App\Repositories\EloquentUserRepository;
-use App\Repositories\MonthlyReviewRepository;
-use App\Repositories\EloquentMonthlyReviewRepository;
+use App\Repositories\Posts\PostRepository;
+use App\Repositories\Posts\EloquentPostRepository;
+use App\Repositories\Tags\TagRepository;
+use App\Repositories\Tags\EloquentTagRepository;
+use App\Repositories\Videos\VideoRepository;
+use App\Repositories\Videos\EloquentVideoRepository;
+use App\Repositories\Categories\CategoryRepository;
+use App\Repositories\Categories\EloquentCategoryRepository;
+use App\Repositories\Bands\BandRepository;
+use App\Repositories\Bands\EloquentBandRepository;
+use App\Repositories\Users\UserRepository;
+use App\Repositories\Users\EloquentUserRepository;
+use App\Repositories\MonthlyReviews\MonthlyReviewRepository;
+use App\Repositories\MonthlyReviews\EloquentMonthlyReviewRepository;
 
 class RepositoryServiceProvider extends ServiceProvider
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Repositories\Videos;
 
 use App\Video;
-use App\Repositories\VideoRepository;
+use App\Repositories\Videos\VideoRepository;
 use App\Support\CustomCollections\CollectionByIds;
 
 class EloquentVideoRepository implements VideoRepository
