@@ -2,16 +2,6 @@
 
 .related-posts {
   display: flex;
-  flex-flow: row wrap;
+  flex-direction: column;
   justify-content: space-around;
-
-  .related-post-item {
-    width: 200px;
-    height: 220px;
-
-    .related-post-title {
-      text-align: center;
-      font-size: 14px;
-    }
-  }
 }

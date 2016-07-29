@@ -1,10 +1,16 @@
 <div class="related-posts">
-    @foreach ($posts as $post)
-        <div class="col-lg-4 col-sm-12 col-sx-12 related-post-item">
-            <a href="{{ $post->slug }}"><img src="/upload/covers/{{ $post->img_thumbnail }}" alt="" class="related-post-img img-thumbnail img-responsive"></a>
-            <br>
-            <p class="text-center"><a href="{{ $post->slug }}" class="related-post-title">{{ $post->title }}</a></p>
-        </div>
-    @endforeach
+    <span class="text-center">Похожие обзоры:</span>
+    <ul id="lightSlider" class="gallery content-slider list-unstyled list-inline clearfix cS-hidden">
+        @foreach($posts as $post)
+          <li>
+              <div class="preview-element">
+                  <a href="{{ route('posts', ['slug' => $post->slug]) }}">
+                    <img src="/upload/covers/{{ $post->img_thumbnail }}" class="img-responsive img-thumbnail img-preview " alt="" />
+                </a><br>
+                  <a href="{{ route('posts', ['slug' => $post->slug]) }}"><em>{{ $post->title }}</em></a>
+              </div>
+        </li>
+        @endforeach
+    </ul>
 </div>
 <br>

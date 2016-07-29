@@ -24,7 +24,7 @@ class RelatedPostsService
             ->whereIn('status', ['active'])
             ->orderBy('created_at', 'desc')
             ->get()
-            ->random(4);
+            ->random(12);
 
         return $relatedposts;
     }
