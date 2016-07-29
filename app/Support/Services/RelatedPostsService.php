@@ -23,8 +23,11 @@ class RelatedPostsService
         $relatedposts = $relatedposts->where('id', '<>', $id)
             ->whereIn('status', ['active'])
             ->orderBy('created_at', 'desc')
-            ->get()
-            ->random(6);
+            ->get();
+
+        $count = (count($relatedposts));
+
+        $relatedposts = $relatedposts->random($count);
 
         return $relatedposts;
     }
