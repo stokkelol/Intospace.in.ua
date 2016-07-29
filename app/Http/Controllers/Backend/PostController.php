@@ -75,7 +75,7 @@ class PostController extends Controller
             'categories'    =>  $this->category->all(),
             'save_url'      =>  route('backend.posts.store'),
             //'post'        =>  null,
-            'tags'          =>  $this->tag->lists('tag', 'id'),
+            'tags'          =>  $this->tag->pluck('tag', 'id')
         ];
         return view('backend.posts.post', $data);
     }
@@ -126,7 +126,7 @@ class PostController extends Controller
             'post'          =>  $this->post->find($post_id),
             'bands'         =>  $this->band->all(),
             'categories'    =>  $this->category->all(),
-            'tags'          =>  $this->tag->lists('tag', 'id'),
+            'tags'          =>  $this->tag->pluck('tag', 'id')
         ];
 
         return view('backend.posts.edit', $data);
