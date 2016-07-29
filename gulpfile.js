@@ -43,7 +43,8 @@ elixir(function(mix) {
         'lazyYT.js',
         'scripts.js',
         'vue.min.js',
-        'lightslider.js'
+        'lightslider.js',
+        'vuemain.js'
         ], 'public/js/all.js');
 
     mix.version([
