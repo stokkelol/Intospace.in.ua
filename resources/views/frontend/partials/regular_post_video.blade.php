@@ -8,7 +8,7 @@
         <br>
         <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 clearfix">
             <div class="text-center">
-                <a href="/upload/covers/{{ $post->img }}"><img src="/upload/covers/{{ $post->img }}" class="img-responsive img-thumbnail"></a>
+                <a href="/upload/covers/{{ $post->img }}" class="fancybox"><img src="/upload/covers/{{ $post->img }}" class="img-responsive img-thumbnail"></a>
             </div>
         </div>
         <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12 clearfix">
