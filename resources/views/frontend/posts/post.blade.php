@@ -48,7 +48,6 @@
                     {!! $post->excerpt !!}
                     {!! $post->content !!}
                 </div>
-                <br>
                 <div class="js-lazyYT" data-youtube-id="{{$post->video}}" data-ratio="16:9"></div>
             </div>
             <br>
