@@ -31,7 +31,10 @@ elixir(function(mix) {
         'normalize.css',
         'component.css',
         'lazyYT.css',
-        'lightslider.css'
+        'lightslider.css',
+        'jquery.fancybox.css',
+        'jquery.fancybox-buttons.css',
+        'jquery.fancybox-thumbs.css'
     ], 'public/css/libs.css');
 
     mix.scripts([
@@ -44,7 +47,13 @@ elixir(function(mix) {
         'scripts.js',
         'vue.min.js',
         'lightslider.js',
-        'vuemain.js'
+        'vuemain.js',
+        'jquery.mousewheel-3.0.6.pack.js',
+        'jquery.fancybox.js',
+        'jquery.fancybox.pack.js',
+        'jquery.fancybox-buttons.js',
+        'jquery.fancybox-media.js',
+        'jquery.fancybox-thumbs.js'
         ], 'public/js/all.js');
 
     mix.version([

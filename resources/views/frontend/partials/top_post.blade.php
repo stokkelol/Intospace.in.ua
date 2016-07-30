@@ -7,7 +7,7 @@
             </div>
         </div>
         <div class="col-lg-4 col-md-4 col-sm-12 col-sx-12 top-post-img">
-          <img src="/upload/covers/{{ $post->img }}" class="img-thumbnail img-responsive center-block">
+          <a href="/upload/covers/{{ $post->img }}" class="fancybox"><img src="/upload/covers/{{ $post->img }}" class="img-thumbnail img-responsive center-block"></a>
         </div>
         <div class="col-lg-8 col-md-8 col-sm-12 col-sx-12 top-post-textarea">
             <div><em class="top-post-date">{{ $post->published_at->diffForHumans() }} - <strong>{{ $post->user->name }}</strong></em>

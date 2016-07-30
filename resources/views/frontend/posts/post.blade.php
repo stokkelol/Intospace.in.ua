@@ -3,7 +3,7 @@
 @section('content')
     <div class="container main-post">
         <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 main-post-img">
-            <img src="/upload/covers/{{ $post->img }}" class="img-responsive img-thumbnail">
+            <a href="/upload/covers/{{ $post->img }}" class="fancybox"><img src="/upload/covers/{{ $post->img }}" class="img-responsive img-thumbnail"></a>
             <br>
             <div class="post-links text-center">
                 <br>

@@ -81,7 +81,22 @@ $('#lightSlider').lightSlider({
 
     });
     </script>
-
+    <script type="text/javascript">
+	$(document).ready(function() {
+        $(".fancybox").fancybox({
+            openEffect	: 'elastic',
+            closeEffect	: 'elastic',
+            padding: 0,
+            helpers : {
+                overlay : {
+                    css : {
+                        'background' : 'rgba(73, 69, 69, 0.95)'
+                    }
+                }
+            }
+        });
+	});
+</script>
 
 </body>
 </html>
