@@ -43,9 +43,9 @@
                 <div class="regular-post-tags clearfix pull-left">
                     @include('frontend.partials.tags', ['tags' => $post->tags])
                 </div>
-                <br>
                 <div class="text-left clearfix main-post-body">
                     {!! $post->excerpt !!}
+                    <br>
                     {!! $post->content !!}
                 </div>
                 <div class="js-lazyYT" data-youtube-id="{{$post->video}}" data-ratio="16:9"></div>
