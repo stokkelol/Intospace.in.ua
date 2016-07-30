@@ -44,9 +44,13 @@
                     @include('frontend.partials.tags', ['tags' => $post->tags])
                 </div>
                 <div class="text-left clearfix main-post-body">
-                    {!! $post->excerpt !!}
+                    <div class="clearfix">
+                        {!! $post->excerpt !!}
+                    </div>
                     <br>
-                    {!! $post->content !!}
+                    <div class="clearfix">
+                        {!! $post->content !!}
+                    </div>
                 </div>
                 <div class="js-lazyYT" data-youtube-id="{{$post->video}}" data-ratio="16:9"></div>
             </div>
