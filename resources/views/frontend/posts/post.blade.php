@@ -40,7 +40,7 @@
                 <div  class="main-post-author clearfix">
                     <em> {{ $post->published_at->diffForHumans() }}</em> <em>|</em> <em><strong>{{ $post->user->name }}</strong></em>
                 </div>
-                <div class="regular-post-tags clearfix pull-left">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 regular-post-tags clearfix pull-left">
                     @include('frontend.partials.tags', ['tags' => $post->tags])
                 </div>
                 <div class="text-justify clearfix main-post-body">
