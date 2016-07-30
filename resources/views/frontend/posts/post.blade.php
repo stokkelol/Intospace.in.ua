@@ -43,6 +43,7 @@
                 <div class="regular-post-tags clearfix pull-left">
                     @include('frontend.partials.tags', ['tags' => $post->tags])
                 </div>
+                <br>
                 <div class="text-left clearfix main-post-body">
                     <div class="clearfix">
                         {!! $post->excerpt !!}
