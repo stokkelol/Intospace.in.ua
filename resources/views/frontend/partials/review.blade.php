@@ -1,13 +1,12 @@
 <!-- Monthly review section -->
 @if(isset($review) && $review->status == 'active')
-    <div class="container">
+    <div class="container monthly-review-container">
         <div class="row">
-            <div class="monthly-review-container">
                 <div class="text-center">
-                    <a href="" class="review-title">{{ $review->title }}</a>
+                    <a href="" class="review-title">{!! $review->title !!}</a>
                 </div>
                 <div class="col-lg-10 col-lg-offset-1">
-                    {{ $review->content }}
+                    {!! $review->content !!}
                 </div>
                 <div class="review-links">
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
@@ -35,10 +34,6 @@
                         </ul>
                     </div>
                 </div>
-                <div class="col-lg-12">
-                    <hr>
-                </div>
-            </div>
         </div>
     </div>
 @endif

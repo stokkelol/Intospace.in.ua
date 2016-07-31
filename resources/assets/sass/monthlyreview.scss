@@ -1,10 +1,22 @@
 .monthly-review-container {
-
+    border-bottom: white 3px solid;
+    margin-bottom: 15px;
 }
 
+.review-post {
+    padding: 10px;
+}
 
 .review-title {
     font-size: 20px;
+}
+
+.review-img-align {
+    @media all and (max-width: 970px) {
+      text-align: center;
+    }
+
+    text-align: right;
 }
 
 .review-items {
