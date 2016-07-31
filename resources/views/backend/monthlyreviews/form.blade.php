@@ -6,7 +6,7 @@
         </div>
         <div class="form-group">
             {!! Form::label('inputContent', 'Content:') !!}
-            {!! Form::textarea('content', null, ['class' => 'form-control ckeditor']) !!}
+            {!! Form::textarea('content', null, ['class' => 'form-control']) !!}
         </div>
         <div class="form-group">
             {!! Form::label('inputPublished_at', 'Published at:') !!}
