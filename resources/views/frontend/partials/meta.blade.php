@@ -6,7 +6,7 @@
     <meta property="og:type" content="website" />
     <meta property="og:description" content="intospace.in.ua - мрак и блог, вот это вот." />
     <meta property="og:title" content="Intospace" />
-    <meta property="og:image" content="http://www.intospace.in.ua/upload/images/logo.jpg" />
+    <meta property="og:image" content="http://www.intospace.in.ua/upload/images/intospace.jpg" />
 @else
     <title>{{ isset($title) ? $title : 'Intospace' }}</title>
     <meta name="description" content="{{ isset($post->excerpt) ? $post->excerpt : '' }}">
