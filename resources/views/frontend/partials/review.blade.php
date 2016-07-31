@@ -13,7 +13,7 @@
                         <p>Обзоры за прошедший месяц:</p>
                             <ul class="list-unstyled cl-effect-1 review-items">
                                 @foreach($latest_posts as $post)
-                                    <li><a href="{{ $post->slug }}">{{ $post->title }}</a></li>
+                                    <li><a href="/posts/{{ $post->slug }}">{{ $post->title }}</a></li>
                                 @endforeach
                             </ul>
                     </div>
@@ -21,7 +21,7 @@
                         <p>Видео за прошедший месяц:</p>
                         <ul class="list-unstyled cl-effect-1 review-items">
                             @foreach($latest_videos as $video)
-                                <li><a href="{{ $video->slug }}">{{ $video->title }}</a></li>
+                                <li><a href="/videos/{{ $video->slug }}">{{ $video->title }}</a></li>
                             @endforeach
                         </ul>
                     </div>
@@ -29,7 +29,7 @@
                         <p>Популярные обзоры:</p>
                         <ul class="list-unstyled cl-effect-1 review-items">
                             @foreach($popular_posts as $post)
-                                <li><a href="{{ $post->slug }}">{{ $post->title }}</a></li>
+                                <li><a href="/posts/{{ $post->slug }}">{{ $post->title }}</a></li>
                             @endforeach
                         </ul>
                     </div>
