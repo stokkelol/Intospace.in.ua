@@ -3,6 +3,10 @@
     margin-bottom: 15px;
 }
 
+.review-container {
+    padding-top: 60px;
+}
+
 .review-post {
     padding: 10px;
 }
@@ -11,9 +15,17 @@
     font-size: 20px;
 }
 
+.main-review-title {
+    font-size: 24px;
+}
+
+.review-title-strong {
+    font-size: 28px;
+}
+
 .review-img-align {
     @media all and (max-width: 970px) {
-      text-align: center;
+      text-align: left;
     }
 
     text-align: right;

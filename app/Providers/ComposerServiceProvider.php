@@ -18,7 +18,7 @@ class ComposerServiceProvider extends ServiceProvider
         $view->composer('frontend.sidebar.sidebar', \App\ViewComposers\SidebarComposer::class);
         $view->composer('frontend.partials.footer', \App\ViewComposers\FooterComposer::class);
         $view->composer('frontend.partials.tagline', \App\ViewComposers\TaglineComposer::class);
-        $view->composer('frontend.partials.review', \App\ViewComposers\MonthlyReviewComposer::class);
+        $view->composer('frontend.partials.review_short', \App\ViewComposers\MonthlyReviewComposer::class);
     }
 
     /**

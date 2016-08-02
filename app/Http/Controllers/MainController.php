@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Repositories\Posts\PostRepository;
 use App\Repositories\Tags\TagRepository;
 use App\Repositories\Videos\VideoRepository;
-use App\Repositories\MonthlyReviews\MonthlyReviewRepository;
 use App\Video;
 use App\Http\Requests;
 use DB;
@@ -19,7 +18,6 @@ class MainController extends Controller
     protected $postRepository;
     protected $tagRepository;
     protected $videoRepository;
-    protected $reviewRepository;
 
     /**
      * PostController constructor.
@@ -27,13 +25,11 @@ class MainController extends Controller
      */
     public function __construct(PostRepository $postRepository,
                                 TagRepository $tagRepository,
-                                VideoRepository $videoRepository,
-                                MonthlyReviewRepository $reviewRepository)
+                                VideoRepository $videoRepository)
     {
         $this->postRepository = $postRepository;
         $this->tagRepository = $tagRepository;
         $this->videoRepository = $videoRepository;
-        $this->reviewRepository = $reviewRepository;
     }
 
     public function index(Request $request)

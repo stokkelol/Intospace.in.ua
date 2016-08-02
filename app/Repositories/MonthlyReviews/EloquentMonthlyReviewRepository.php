@@ -25,4 +25,16 @@ class EloquentMonthlyReviewRepository implements MonthlyReviewRepository
 
         return $this->review->whereIn('id', $ids)->get();
     }
+
+    public function getAllReviews()
+    {
+        return $this->review->get();
+    }
+
+    public function getReviewBySlug($slug)
+    {
+        $review = $this->review->where('slug', '=', $slug)->first();
+
+        return $review;
+    }
 }

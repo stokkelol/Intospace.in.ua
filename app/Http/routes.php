@@ -33,6 +33,10 @@ Route::get('/blog', 'BlogController@index');
 
 Route::get('/shortreviews', 'ShortReviewController@index');
 
+Route::get('/monthlyreviews', 'MonthlyReviewController@index');
+
+Route::get('/monthlyreviews/{slug}', 'MonthlyReviewController@show');
+
 Route::get('/search', 'SearchController@index');
 
 Route::get('/videos/{slug}', [

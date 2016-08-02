@@ -6,19 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\SluggableInterface;
 use Cviebrock\EloquentSluggable\SluggableTrait;
 
-class MonthlyReview extends Model implements SluggableInterface
+class MonthlyReview extends Entity implements SluggableInterface
 {
     use SluggableTrait;
-
-    protected $fillable = [
-        'title', 'content', 'published_at'
-    ];
-
-    protected $sluggable = [
-        'build_from'    =>  'title',
-        'save_to'       =>  'slug',
-        'unique'        =>  true,
-    ];
 
     public function user()
     {
