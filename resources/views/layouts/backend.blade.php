@@ -15,15 +15,22 @@
 
 @include('backend.partials.navbar')
 
-
-
-<div class="container" style="height:50px;">
-    @include('flash::message')
+<div class="container">
+    <div class="row backend-page">
+        <div class="row">
+            <div class="col-lg-8 col-md-7 col-sm-6">
+                <h1>Intospace backend</h1>
+            </div>
+        </div>
+        <div class="col-lg-2">
+            @include('backend.partials.links')
+        </div>
+        <div class="col-lg-10">
+            @include('flash::message')
+            @yield('content')
+        </div>
+    </div>
 </div>
-@yield('content')
-@yield('partials.footer')
-
-
         <!-- JavaScripts -->
 <script src="{{ elixir("js/all.js") }}"></script>
 <script>

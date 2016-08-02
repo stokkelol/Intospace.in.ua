@@ -1,9 +1,7 @@
 @extends ('layouts.backend')
 
 @section('content')
-    <div class="container">
-        <div class="row">
-            <div class="panel panel-default">
+            <div class="panel panel-info">
                 <div class="panel-heading">Dashboard</div>
                 <div class="panel-body">
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
@@ -37,7 +35,7 @@
                     </div>
                 </div>
             </div>
-            <div class="panel panel-default">
+            <div class="panel panel-primary">
                 <div class="panel-heading">Analytics</div>
                 <div class="panel-body"></div>
             </div>
@@ -88,8 +86,6 @@
                   </div>
                 </div>
             </div>
-        </div>
-    </div>
 @endsection
 
 @include('backend.partials.footer')

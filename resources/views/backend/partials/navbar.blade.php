@@ -1,61 +1,57 @@
-<nav class="navbar navbar-default navbar-fixed-top navbar-custom">
-    <div class="container-fluid navbar-container">
-        <div class="navbar-header page-scroll">
-
-            <!-- Collapsed Hamburger -->
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
-                <span class="sr-only">Toggle Navigation</span>
+<div class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a href="../" class="navbar-brand"><i class="fa fa-home" aria-hidden="true"></i></a>
+            <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-
-            <!-- Branding Image -->
-            <a class="navbar-brand" href="{{ url('/') }}">
-                Intospace
-            </a>
         </div>
-
-        <ul class="nav navbar-nav navbar-flex-container">
-            <li class="navbar-flex-container"><a href="{{ url('/backend') }}">
-                    <i class="fa fa-code" aria-hidden="true"></i>
-                    <span>Backend</span>
-                </a></li>
-            <li><a href="{{ url('/backend/posts') }}"><i class="fa fa-list" aria-hidden="true"></i><span>Posts</span></a></li>
-            <li><a href="{{ url('/backend/videos') }}"><i class="fa fa-video-camera" aria-hidden="true"></i><span>Videos</span></a></li>
-            <li><a href="{{ url('/backend/categories') }}"><i class="fa fa-columns" aria-hidden="true"></i><span>Categories</span></a></li>
-            <li><a href="{{ url('/backend/tags') }}"><i class="fa fa-tags" aria-hidden="true"></i><span>Tags</span></a></li>
-            <li><a href="{{ url('/backend/users') }}"><i class="fa fa-users" aria-hidden="true"></i><span>Users</span></a></li>
-            <li><a href="{{ url('/backend/bands') }}"><i class="fa fa-music" aria-hidden="true"></i><span>Bands</span></a></li>
-            <li><a href="{{ url('/backend/blogs') }}"><i class="fa fa-th-large" aria-hidden="true"></i><span>Blog posts</span></a></li>
-            <li><a href="{{ url('/backend/monthlyreviews') }}"><i class="fa fa-file-text" aria-hidden="true"></i><span>Monthly reviews</span></a></li>
-            <li><a href="{{ url('/backend/files') }}"><i class="fa fa-file-image-o" aria-hidden="true"></i><span>Files</span></a></li>
-        </ul>
-
-        <div class="collapse navbar-collapse" id="app-navbar-collapse">
-
-
-
-            <!-- Right Side Of Navbar -->
-            <ul class="nav navbar-nav navbar-right">
-
-                <li><a href="/feed" class="feed-icon"><i class="fa fa-rss-square" aria-hidden="true"></i></a></li>
-                <!-- Authentication Links -->
-                @if (Auth::guest())
-                    <li><a href="{{ url('/login') }}">Login</a></li>
-                    <li><a href="{{ url('/register') }}">Register</a></li>
-                @else
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                            Привет, {{ Auth::user()->name }} ! <span class="caret"></span>
-                        </a>
-
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
-                        </ul>
-                    </li>
-                @endif
+        <div class="navbar-collapse collapse" id="navbar-main">
+            <ul class="nav navbar-nav">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">Main pages <span class="caret"></span></a>
+                    <ul class="dropdown-menu" aria-labelledby="themes">
+                        <li><a href="/">Home</a></li>
+                        <li class="divider"></li>
+                        <li><a href="/posts">Posts</a></li>
+                        <li><a href="/videos">Videos</a></li>
+                        <li><a href="/bands">Bands</a></li>
+                        <li><a href="/categories/new-reviews">New reviews</a></li>
+                        <li><a href="/categories/old-reviews">Old reviews</a></li>
+                        <li><a href="/categories/short-reviews">Short reviews</a></li>
+                        <li><a href="/monthlyreviews">Monthly reviews</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="../help/">Help</a>
+                </li>
+                <li>
+                    <a href="http://news.bootswatch.com">Blog</a>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="download">Cyborg <span class="caret"></span></a>
+                    <ul class="dropdown-menu" aria-labelledby="download">
+                        <li><a href="http://jsfiddle.net/bootswatch/q0gdqa1q/">Open Sandbox</a></li>
+                        <li class="divider"></li>
+                        <li><a href="./bootstrap.min.css">bootstrap.min.css</a></li>
+                        <li><a href="./bootstrap.css">bootstrap.css</a></li>
+                        <li class="divider"></li>
+                        <li><a href="./variables.less">variables.less</a></li>
+                        <li><a href="./bootswatch.less">bootswatch.less</a></li>
+                        <li class="divider"></li>
+                        <li><a href="./_variables.scss">_variables.scss</a></li>
+                        <li><a href="./_bootswatch.scss">_bootswatch.scss</a></li>
+                    </ul>
+                </li>
             </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="http://builtwithbootstrap.com/" target="_blank">Built With Bootstrap</a></li>
+                <li><a href="https://wrapbootstrap.com/?ref=bsw" target="_blank">WrapBootstrap</a></li>
+            </ul>
+
         </div>
     </div>
-</nav>
+</div>
