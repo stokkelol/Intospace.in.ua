@@ -77,7 +77,7 @@ class PostController extends Controller
             //'post'        =>  null,
             'tags'          =>  $this->tag->pluck('tag', 'id')
         ];
-        return view('backend.posts.post', $data);
+        return view('backend.posts.create', $data);
     }
 
     /**

@@ -39,7 +39,7 @@ class BlogController extends Controller
         $data = [
             'save_url'      =>  route('backend.blogs.store'),
         ];
-        return view('backend.blogs.blogpost', $data);
+        return view('backend.blogs.create', $data);
     }
 
     public function destroy($id)

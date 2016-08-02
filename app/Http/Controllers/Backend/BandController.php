@@ -41,7 +41,7 @@ class BandController extends Controller
             'save_url'  =>  route('backend.bands.store'),
         ];
 
-        return view('backend.bands.band', $data);
+        return view('backend.bands.create', $data);
     }
 
     public function store(Request $request, $band_id = null)

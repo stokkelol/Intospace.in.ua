@@ -39,7 +39,7 @@ class UserController extends Controller
             'title' =>  'Create new user',
             'url' =>    route('backend.users.store'),
         ];
-        return view('backend.users.user', $data);
+        return view('backend.users.create', $data);
     }
 
     public function store(Request $request, $user_id = 0)

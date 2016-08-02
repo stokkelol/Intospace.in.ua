@@ -37,7 +37,7 @@ class VideoController extends Controller
             'title'     =>  'New video',
             'bands'     =>  $this->band->all(),
         ];
-        return view('backend.videos.video', $data);
+        return view('backend.videos.create', $data);
     }
 
     public function store(StoreVideoRequest $request)

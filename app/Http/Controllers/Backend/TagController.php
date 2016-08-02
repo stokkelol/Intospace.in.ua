@@ -34,7 +34,7 @@ class TagController extends Controller
             'save_url'  =>  route('backend.tags.store'),
         ];
 
-        return view('backend.tags.tag', $data);
+        return view('backend.tags.create', $data);
     }
 
     public function store(Request $request, $tag_id = null)

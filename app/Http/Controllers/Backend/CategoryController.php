@@ -34,7 +34,7 @@ class CategoryController extends Controller
             'save_url'  =>  route('backend.categories.store'),
         ];
 
-        return view('backend.categories.category', $data);
+        return view('backend.categories.create', $data);
     }
 
     public function store(Request $request, $category_id = null)
