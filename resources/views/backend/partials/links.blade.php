@@ -1,4 +1,4 @@
-<div class="row backend-navbar">
+<div class="row">
     <div class="list-group table-of-contents">
         <a class="list-group-item" href="{{ url('/backend/') }}">Backend</a>
         <a class="list-group-item" href="{{ url('/backend/posts') }}">Posts</a>
