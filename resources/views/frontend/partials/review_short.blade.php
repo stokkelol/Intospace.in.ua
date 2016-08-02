@@ -10,7 +10,7 @@
                         <a href="" class="main-review-title">{!! $review->title !!}</a>
                     </p>
                     <p>
-                        {!! str_limit($review->content, $limit = 740, $end = '') !!}
+                        {!! str_limit($review->content, $limit = 800, $end = '') !!}
                         <br>
                         <a href="/monthlyreviews/">Читать далее...</a>
                     </p>
