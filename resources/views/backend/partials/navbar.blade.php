@@ -24,34 +24,23 @@
                         <li><a href="/monthlyreviews">Monthly reviews</a></li>
                     </ul>
                 </li>
-                <li>
-                    <a href="../help/">Help</a>
-                </li>
-                <li>
-                    <a href="http://news.bootswatch.com">Blog</a>
-                </li>
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="download">Cyborg <span class="caret"></span></a>
-                    <ul class="dropdown-menu" aria-labelledby="download">
-                        <li><a href="http://jsfiddle.net/bootswatch/q0gdqa1q/">Open Sandbox</a></li>
-                        <li class="divider"></li>
-                        <li><a href="./bootstrap.min.css">bootstrap.min.css</a></li>
-                        <li><a href="./bootstrap.css">bootstrap.css</a></li>
-                        <li class="divider"></li>
-                        <li><a href="./variables.less">variables.less</a></li>
-                        <li><a href="./bootswatch.less">bootswatch.less</a></li>
-                        <li class="divider"></li>
-                        <li><a href="./_variables.scss">_variables.scss</a></li>
-                        <li><a href="./_bootswatch.scss">_bootswatch.scss</a></li>
-                    </ul>
-                </li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="http://builtwithbootstrap.com/" target="_blank">Built With Bootstrap</a></li>
-                <li><a href="https://wrapbootstrap.com/?ref=bsw" target="_blank">WrapBootstrap</a></li>
+                <!-- Authentication Links -->
+                @if(Auth::guest())
+                    <li><a href="{{ url('/login') }}">Login</a></li>
+                    <li><a href="{{ url('/register') }}">Register</a></li>
+                @else
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                            Привет, {{ Auth::user()->name }} ! <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
+                        </ul>
+                @endif
             </ul>
-
         </div>
     </div>
 </div>
