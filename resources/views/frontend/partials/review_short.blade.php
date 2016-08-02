@@ -7,7 +7,7 @@
             <div>
                 @if(!empty($review))
                     <p class="text-center">
-                        <a href="" class="main-review-title">{!! $review->title !!}</a>
+                        <a href="/monthlyreviews/" class="main-review-title">{!! $review->title !!}</a>
                     </p>
                     <p>
                         {!! str_limit($review->content, $limit = 770, $end = '...') !!}
