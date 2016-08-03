@@ -5,6 +5,10 @@
             {!! Form::text('title', null, ['class' => 'form-control']) !!}
         </div>
         <div class="form-group">
+            {!! Form::label('inputExcerpt', 'Excerpt:') !!}
+            {!! Form::textarea('excerpt', null, ['class' => 'form-control']) !!}
+        </div>
+        <div class="form-group">
             {!! Form::label('inputTitles', 'Titles:') !!}
             {!! Form::textarea('titles', null, ['class' => 'form-control']) !!}
         </div>
@@ -19,6 +23,13 @@
         <div class="form-group">
             {!! Form::label('inputPublished_at', 'Published at:') !!}
             {!! Form::input('datetime', 'published_at', isset($post->published_at) ? $post->published_at : Carbon\Carbon::now(), ['class' => 'form-control']) !!}
+        </div>
+        <div class="form-group">
+            <label for="inputImg">Img</label>
+            @if (!empty($review) && !empty($review->img))
+                <img src="/upload/images/{{ $review->img }}" alt="" class="img-responsive">
+            @endif
+            <input type="file" id="inputImg" name="img" class="">
         </div>
         <div class="row">
             <div>

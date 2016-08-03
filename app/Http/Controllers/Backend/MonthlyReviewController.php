@@ -10,6 +10,7 @@ use App\Repositories\Posts\PostRepository;
 use App\Repositories\Videos\VideoRepository;
 use Auth;
 use App\Support\Statuses\StatusChanger;
+use App\Support\Images\ImageSaver;
 
 class MonthlyReviewController extends Controller
 {
@@ -47,9 +48,14 @@ class MonthlyReviewController extends Controller
         return view('backend.monthlyreviews.create', $data);
     }
 
-    public function store(Request $request, $review_id = null)
+    public function store(Request $request, $review_id = null, ImageSaver $imageSaver)
     {
         $review = $this->storeOrUpdateReview($request, $review_id = null);
+
+        if($request->hasFile('img')) {
+            $imageSaver->saveCover('upload/images/', $request->file('img'));
+            $review->img = $request->file('img')->getClientOriginalName();
+        }
 
         $review->save();
 
@@ -72,9 +78,15 @@ class MonthlyReviewController extends Controller
         return view('backend.monthlyreviews.edit', $data);
     }
 
-    public function update(Request $request, $review_id)
+    public function update(Request $request, $review_id, ImageSaver $imageSaver)
     {
         $review = $this->storeOrUpdateReview($request, $review_id);
+
+        if($request->hasFile('img')) {
+            $imageSaver->saveCover('upload/images/', $request->file('img'));
+            $review->img = $request->file('img')->getClientOriginalName();
+        }
+
         $review->update();
 
         return redirect()->back() ;
@@ -85,8 +97,10 @@ class MonthlyReviewController extends Controller
         $review = $this->review->findOrNew($review_id);
         $review->user_id = Auth::user()->id;
         $review->title = $request->input('title');
+        $review->excerpt = $request->input('excerpt');
         $review->titles = $request->input('titles');
         $review->content = $request->input('content');
+        $review->img = $request->input('img');
         $review->imgs = $request->input('imgs');
         $review->published_at = $request->input('published_at');
         if(empty($review->latest_posts)) {
