@@ -5,8 +5,16 @@
             {!! Form::text('title', null, ['class' => 'form-control']) !!}
         </div>
         <div class="form-group">
+            {!! Form::label('inputTitles', 'Titles:') !!}
+            {!! Form::textarea('titles', null, ['class' => 'form-control']) !!}
+        </div>
+        <div class="form-group">
             {!! Form::label('inputContent', 'Content:') !!}
             {!! Form::textarea('content', null, ['class' => 'form-control']) !!}
+        </div>
+        <div class="form-group">
+            {!! Form::label('inputImgs', 'Imgs:') !!}
+            {!! Form::textarea('imgs', null, ['class' => 'form-control']) !!}
         </div>
         <div class="form-group">
             {!! Form::label('inputPublished_at', 'Published at:') !!}

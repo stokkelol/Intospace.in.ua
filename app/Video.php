@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\SluggableInterface;
 use Cviebrock\EloquentSluggable\SluggableTrait;
 use App\Traits\ScopesTrait;
+use App\Core\Entity;
 
 class Video extends Entity implements SluggableInterface
 {

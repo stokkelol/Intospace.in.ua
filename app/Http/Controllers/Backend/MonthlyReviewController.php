@@ -42,6 +42,8 @@ class MonthlyReviewController extends Controller
             'popular_posts'     =>  $this->post->getPopularPosts(5),
             'latest_videos'     =>  $this->video->getMonthlyVideos()
         ];
+
+        //dd($data);
         return view('backend.monthlyreviews.create', $data);
     }
 
@@ -83,7 +85,9 @@ class MonthlyReviewController extends Controller
         $review = $this->review->findOrNew($review_id);
         $review->user_id = Auth::user()->id;
         $review->title = $request->input('title');
+        $review->titles = $request->input('titles');
         $review->content = $request->input('content');
+        $review->imgs = $request->input('imgs');
         $review->published_at = $request->input('published_at');
         if(empty($review->latest_posts)) {
             $review->latest_posts = $this->getItemsForReview($this->post->getMonthlyPosts());

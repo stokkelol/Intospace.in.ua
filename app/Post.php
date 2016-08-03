@@ -8,6 +8,7 @@ use Cviebrock\EloquentSluggable\SluggableInterface;
 use Cviebrock\EloquentSluggable\SluggableTrait;
 use Cache;
 use App\Traits\ScopesTrait;
+use App\Core\Entity;
 
 class Post extends Entity implements SluggableInterface
 {

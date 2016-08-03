@@ -27,12 +27,18 @@
                             <br>
                         <span class="label label-default"><a href="{{ route('backend.posts.edit', ['post_id' => $post->id]) }}">
                                                         <i class="fa fa-pencil" aria-hidden="true"></i>Edit</a></span>
-<span class="label label-default"><a href="{{ route('backend.posts.to-draft', ['post_id' => $post->id]) }}">
-                                                    <i class="fa fa-outdent" aria-hidden="true"></i>To draft</a></span>
-<span class="label label-default"><a href="{{ route('backend.posts.to-active', ['post_id' => $post->id]) }}">
-                                                    <i class="fa fa-indent" aria-hidden="true"></i>To active</a></span>
-<span class="label label-default"><a href="{{ route('backend.posts.to-deleted', ['post_id' => $post->id]) }}">
-                                                    <i class="fa fa-trash" aria-hidden="true"></i>To Deleted</a></span>
+
+                            @if($post->status == 'active')
+                            <span class="label label-default"><a href="{{ route('backend.posts.to-draft', ['post_id' => $post->id]) }}">
+                                <i class="fa fa-outdent" aria-hidden="true"></i>To draft</a></span>
+
+                            @elseif($post->status == 'draft')
+                            <span class="label label-default"><a href="{{ route('backend.posts.to-active', ['post_id' => $post->id]) }}">
+                                <i class="fa fa-indent" aria-hidden="true"></i>To active</a></span>
+                            @endif
+                            
+                            <span class="label label-default"><a href="{{ route('backend.posts.to-deleted', ['post_id' => $post->id]) }}">
+                            <i class="fa fa-trash" aria-hidden="true"></i>To Deleted</a></span>
                         <!--<span class="label label-default"><a href="#" onClick="preview_post('{{$post->id}}')">
                                                     <i class="fa fa-trash" aria-hidden="true"></i>Preview</a></span>-->
                             @if ($post->is_pinned == '0')

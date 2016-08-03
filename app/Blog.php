@@ -7,6 +7,7 @@ use AlgoliaSearch\Laravel\AlgoliaEloquentTrait;
 use Cviebrock\EloquentSluggable\SluggableInterface;
 use Cviebrock\EloquentSluggable\SluggableTrait;
 use Cache;
+use App\Core\Entity;
 
 class Blog extends Entity implements SluggableInterface
 {
