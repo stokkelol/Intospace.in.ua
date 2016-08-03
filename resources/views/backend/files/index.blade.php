@@ -6,15 +6,14 @@
             <h5>Total directory size: {{ $dir_size }}Mb</h5>
             <p>Total files: {{ $count }}</p>
         </div>
-        <div class="panel-body">
+        <div class="panel-body files-flex-container">
             @foreach ($files as $file)
-                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
                     <div class="files-container">
                         <img src="/{{ $file['dirname'] }}/{{ $file['basename'] }}" alt="" class="img-thumbnail img-responsive"/>
                     </div>
                     <div class="file-dirname">
                         <p>Directory: {{ $file['dirname'] }}</p>
-
                     </div>
                     <div class="file-filename">
                         <p>Filename: <a href="/{{ $file['dirname'] }}/{{ $file['basename'] }}">{{ $file['filename'] }}</a>

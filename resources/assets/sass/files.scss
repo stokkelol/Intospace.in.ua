@@ -1,9 +1,15 @@
+.files-flex-container {
+    display: flex;
+    justify-content: space-around;
+    flex-flow: row wrap;
+}
+
 .files-container {
   display: flex;
   flex-flow: wrap;
   align-items: flex-end;
   justify-content: space-around;
-  min-height: 300px;
+  height: 300px;
   border-bottom: 1px grey solid;
 }
 
