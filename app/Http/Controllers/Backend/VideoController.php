@@ -44,7 +44,7 @@ class VideoController extends Controller
     {
         $video = $this->storeOrUpdateVideo($request, null);
 
-        if($request->hasFile('img')) {
+        if ($request->hasFile('img')) {
             $image = $request->file('img');
             $this->saveImage($image);
             $video->img = $image->getClientOriginalName();
@@ -52,9 +52,9 @@ class VideoController extends Controller
 
         $video->save();
         //dd($video);
-        Flash::message('Video created!');
+        flash()->message('Video created!');
+
         return redirect()->route('backend.videos.edit', ['video_id' => $video->id]);
-        //return Redirect::back();
     }
 
     public function edit($video_id)
@@ -69,10 +69,9 @@ class VideoController extends Controller
     {
         $video = $this->storeOrUpdateVideo($request, $video_id);
 
-        if($request->hasFile('img')) {
+        if ($request->hasFile('img')) {
             $image = $request->file('img');
             $this->saveImage($image);
-            //dd($image);
             $video->img = $image->getClientOriginalName();
         }
 
@@ -80,7 +79,8 @@ class VideoController extends Controller
         //dd($video->band_id);
         $video->update();
 
-        Flash::message('Video updated!');
+        flash()->message('Video updated!');
+        
         return redirect()->route('backend.videos.edit', ['video_id' => $video->id]);
     }
 

@@ -1,7 +1,7 @@
 <div class="related-posts">
     <span class="text-center">Похожие обзоры:</span>
     <ul id="lightSlider" class="gallery content-slider list-unstyled list-inline clearfix cS-hidden">
-        @foreach($posts as $post)
+        @foreach ($posts as $post)
           <li>
               <div class="preview-element">
                   <a href="{{ route('posts', ['slug' => $post->slug]) }}">

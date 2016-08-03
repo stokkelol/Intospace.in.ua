@@ -26,7 +26,7 @@
                     <li class="dropdown cl-effect-1">
                         <a href="/posts">Последние обзоры<span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            @foreach($navbarposts as $post)
+                            @foreach ($navbarposts as $post)
                                 <li><a href="/posts/{{ $post->slug }}">{{ $post->title }}</a></li>
                             @endforeach
                         </ul>
@@ -34,7 +34,7 @@
                     <li class="dropdown cl-effect-1">
                         <a href="/videos">Последние видео<span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            @foreach($navbarvideos as $video)
+                            @foreach ($navbarvideos as $video)
                                 <li><a href="{{ route('videos', ['slug' => $video->slug])}}">{{ $video->title }}</a></li>
                             @endforeach
                         </ul>
@@ -42,7 +42,7 @@
                     <li class="dropdown cl-effect-1">
                         <a href="/monthlyreviews">Достойно внимания<span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            @foreach($reviews as $review)
+                            @foreach ($reviews as $review)
                                 <li><a href="{{ route('monthlyreviews', ['slug' => $review->slug])}}">{{ $review->title }}</a></li>
                             @endforeach
                         </ul>

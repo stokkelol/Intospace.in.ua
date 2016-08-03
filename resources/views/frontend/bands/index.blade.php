@@ -13,23 +13,23 @@
             </div>
             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                 <ul class="list-unstyled">
-                        @foreach($bands as $band)
-                            @if(count($band->posts) || count($band->videos))
-                                <p class="band-title"><a href="/bands/{{ $band->slug }}">{{ $band->title }}</a></p>
-                                <ul>
-                                    @foreach($band->posts as $post)
-                                        @if($post->status == 'active')
-                                            <li><a href="/posts/{{ $post->slug }}">{{ $post->title }}</a></li>
+                    @foreach ($bands as $band)
+                        @if (count($band->posts) || count($band->videos))
+                            <p class="band-title"><a href="/bands/{{ $band->slug }}">{{ $band->title }}</a></p>
+                            <ul>
+                                @foreach ($band->posts as $post)
+                                    @if ($post->status == 'active')
+                                        <li><a href="/posts/{{ $post->slug }}">{{ $post->title }}</a></li>
                                         @endif
                                     @endforeach
                                 </ul>
                                 <ul>
-                                    @foreach($band->videos as $video)
+                                    @foreach ($band->videos as $video)
                                         <li><a href="/videos/{{ $video->slug }}">{{ $video->title }}</a></li>
                                     @endforeach
                                 </ul>
-                            @endif
-                        @endforeach
+                        @endif
+                    @endforeach
                 </ul>
             </div>
         </div>

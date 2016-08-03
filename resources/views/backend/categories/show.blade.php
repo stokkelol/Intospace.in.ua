@@ -6,7 +6,7 @@
             <div class="col-lg-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">{{ $title }}</div>
-                    @foreach($posts as $post)
+                    @foreach ($posts as $post)
                         <div>{{ $post->id }}</div>
                         <div>{{ $post->title }}</div>
                         <br>

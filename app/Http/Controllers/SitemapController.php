@@ -22,7 +22,7 @@ class SitemapController extends Controller
         $sitemap->setCache('laravel.sitemap', 60);
 
         // check if there is cached sitemap and build new only if is not
-        if (!$sitemap->isCached())
+        if (! $sitemap->isCached())
         {
             // add item to the sitemap (url, date, priority, freq)
             $sitemap->add(URL::to('/'), '2012-08-25T20:10:00+02:00', '1.0', 'daily');

@@ -4,7 +4,7 @@
 <div class="container">
     <hr>
     <div class="row main-body">
-        @if(Request::path() != '/')
+        @if (Request::path() != '/')
             <div class="regular-post-padding"></div>
         @endif
             <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">

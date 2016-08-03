@@ -1,0 +1,16 @@
+.files-container {
+  display: flex;
+  flex-flow: wrap;
+  align-items: flex-end;
+  justify-content: space-around;
+  min-height: 300px;
+  border-bottom: 1px grey solid;
+}
+
+.file-dirname {
+  font-size: 10px;
+}
+
+.file-filename {
+  font-size: 10px;
+}

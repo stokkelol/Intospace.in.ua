@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container review-container">
-        @foreach($reviews as $review)
+        @foreach ($reviews as $review)
             <div class="review-items">
                 <div class="text-center">
                     <p class="review-title-strong"><a href="/monthlyreviews/{{ $review->slug }}">{{ $review->title }}</a></p>

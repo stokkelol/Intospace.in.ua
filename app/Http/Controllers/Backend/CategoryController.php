@@ -23,6 +23,7 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = $this->category->categoriesWithPostsCount();
+
         return view('backend.categories.index', compact('categories'));
     }
 
@@ -45,7 +46,7 @@ class CategoryController extends Controller
         $category->title = $request->input('title');
 
         $category->save();
-        Flash::message('Category created!');
+        flash()->message('Category created!');
 
         return redirect()->route('backend.categories.index');
     }
@@ -80,7 +81,8 @@ class CategoryController extends Controller
         $category = $this->category->findOrFail($category_id);
         Category::destroy($category_id);
 
-        Flash::message('Category deleted!');
+        flash()->message('Category deleted!');
+
         return redirect('backend/posts');
     }
 
@@ -91,9 +93,9 @@ class CategoryController extends Controller
         $category->title = $request->input('title');
         $category->resluggify();
         $category->update();
+        
+        flash()->message('Category updated!');
 
-
-        Flash::message('Category updated!');
         return redirect()->route('backend.categories.index');
     }
 }

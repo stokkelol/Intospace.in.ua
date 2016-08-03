@@ -5,7 +5,7 @@
         <div class="row">
             <h4>{{ $user->name }}</h4>
             <ul>
-                @foreach($posts as $post)
+                @foreach ($posts as $post)
                     <li>{{ $post->title }}</li>
                 @endforeach
             </ul>

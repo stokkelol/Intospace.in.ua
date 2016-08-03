@@ -34,7 +34,7 @@ class MainController extends Controller
 
     public function index(Request $request)
     {
-        if($request->has('search')) {
+        if ($request->has('search')) {
             return $this->indexSearch($request);
         }
 
@@ -70,7 +70,7 @@ class MainController extends Controller
     public function indexSearch(Request $request)
     {
         $posts = $this->getCollection($request);
-        if($posts->count() == 1) {
+        if ($posts->count() == 1) {
             $query = $request->get('search');
             $topPost = $this->postRepository->getPostsBySearchQuery($query)->first();
             $posts = [];
@@ -89,7 +89,7 @@ class MainController extends Controller
 
     public function getCollection(Request $request)
     {
-        if($request->has('search')) {
+        if ($request->has('search')) {
             $query = $request->get('search');
             $postscollection = collect($this->postRepository->getPostsBySearchQuery($query)->get());
             $videoscollection = collect($this->videoRepository->getVideosBySearchQuery($query)->get());

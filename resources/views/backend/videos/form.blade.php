@@ -7,7 +7,7 @@
         <div class="form-group">
             <label for="inputBand">Band title:</label>
             <select name="band_id" id="inputBand" class="select2-container form-control">
-                @foreach($bands as $band)
+                @foreach ($bands as $band)
                     <option value="{{ $band->id }}"
                         {{ (!empty($video) && $video->band_id == $band->id) ? 'selected' : '' }}>
                         {{ $band->title }}

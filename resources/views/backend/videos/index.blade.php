@@ -10,7 +10,7 @@
                 <li><a href="{{ route('backend.videos.create') }}"><button type="button" class="btn btn-primary">Create new video</button></a></li>
             </ul>
             <hr>
-            @foreach($videos as $video)
+            @foreach ($videos as $video)
                 <div class="backend-item">
                     <div class="col-lg-1">{{ $video->id }}</div>
                     <div class="col-lg-8"><strong>{{ $video->title }}</strong>

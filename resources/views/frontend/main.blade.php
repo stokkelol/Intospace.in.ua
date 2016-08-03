@@ -9,8 +9,8 @@
 @endsection
 
 @section('random')
-    @if(isset($randposts))
-        @if(Request::path() == '/')
+    @if (isset($randposts))
+        @if (Request::path() == '/')
             <div class="container">
                 <div class="row">
                     @include('frontend.partials.random')
@@ -25,17 +25,17 @@
 @endsection
 
 @section('toppost')
-    @if(!empty($toppost))
+    @if (!empty($toppost))
         @include('frontend.partials.top_post', ['post' => $toppost])
     @endif
 @endsection
 
 @section('content')
-    @if(!empty($posts))
+    @if (!empty($posts))
     <div class="container">
         <hr>
         <div class="row main-body">
-            @if(Request::path() != '/')
+            @if (Request::path() != '/')
                 <div class="regular-post-padding"></div>
             @endif
             <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">

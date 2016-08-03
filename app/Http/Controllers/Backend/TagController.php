@@ -23,6 +23,7 @@ class TagController extends Controller
     public function index()
     {
         $tags = $this->tag->latest()->paginate(15);
+
         return view('backend.tags.index', compact('tags'));
     }
 
@@ -73,7 +74,6 @@ class TagController extends Controller
     public function update(Request $request, $tag_id)
     {
         $tag = $this->tag->find($tag_id);
-        //$category->user_id = Auth::user()->id;
         $tag->tag = $request->input('tagtitle');
         $tag->resluggify();
         $tag->update();

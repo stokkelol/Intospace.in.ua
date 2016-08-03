@@ -9,7 +9,7 @@
             <p><a href="{{ route('backend.blogs.create') }}">
                 <button type="button" class="btn btn-primary">Create review</button></a>
             </p>
-        @foreach($blogs as $blog)
+        @foreach ($blogs as $blog)
             <div style="min-height:40px">
             <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">{{ $blog->id}} </div>
             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"><span>{{ $blog->user->name }}</span></div>

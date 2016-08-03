@@ -4,9 +4,9 @@
         <p>Что-то тут такого нет...</p>
     </div>
 @endif
-@if(!empty($posts))
-    @foreach($posts as $post)
-        @if(isset($post->content))
+@if (!empty($posts))
+    @foreach ($posts as $post)
+        @if (isset($post->content))
         <!-- Post -->
             @if ($post->status == 'active'  && $post->is_pinned == '0')
                 @include('frontend.partials.regular_post_post', ['post' => $post])
@@ -17,15 +17,15 @@
         @endif
     @endforeach
 @endif
-@if(Request::path() == '/')
+@if (Request::path() == '/')
     <!-- Main page paginator -->
-    @if(!empty($links))
+    @if (!empty($links))
         <div class="paginate text-center">
             {!! $links->links() !!}
         </div>
     @endif
 @endif
-@if(Request::path() == 'posts' || starts_with(Request::path(), 'categories'))
+@if (Request::path() == 'posts' || starts_with(Request::path(), 'categories'))
     <!-- Posts & category pages paginator -->
     <div class="paginate text-center">
         {!! $posts->links() !!}

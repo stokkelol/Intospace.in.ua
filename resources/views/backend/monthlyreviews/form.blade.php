@@ -43,7 +43,7 @@
                 Posts
             </div>
             <div class="panel-body">
-                @foreach($latest_posts as $post)
+                @foreach ($latest_posts as $post)
                     <li><a href="/posts/{{ $post->slug }}">{{ $post->title }}</a></li>
                 @endforeach
             </div>
@@ -53,7 +53,7 @@
                 Videos
             </div>
             <div class="panel-body">
-                @foreach($latest_videos as $video)
+                @foreach ($latest_videos as $video)
                     <li><a href="/videos/{{ $video->slug }}">{{ $video->title }}</a></li>
                 @endforeach
             </div>
@@ -63,7 +63,7 @@
                 Popular posts
             </div>
             <div class="panel-body">
-                @foreach($popular_posts as $post)
+                @foreach ($popular_posts as $post)
                     <li><a href="/posts/{{ $post->slug }}">{{ $post->title }}</a></li>
                 @endforeach
             </div>

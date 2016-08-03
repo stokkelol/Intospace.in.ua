@@ -10,7 +10,7 @@
             <li>  <a href="{{ route('backend.categories.create') }}"><button type="button" class="btn btn-primary">Create category</button></a></li>
         </ul>
         <hr>
-        @foreach($categories as $category)
+        @foreach ($categories as $category)
             <div class="backend-item">
                 <div class="col-lg-1">{{ $category->id }}</div>
                 <div class="col-lg-8"><strong>{{ $category->title }}</strong>

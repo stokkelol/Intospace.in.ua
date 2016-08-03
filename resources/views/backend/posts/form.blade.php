@@ -6,18 +6,18 @@
             </div>
         </div>
         <div class="col-lg-4 col-md-4 col-sm-12 col-sx-12 top-post-img">
-            @if(isset($post))
+            @if (isset($post))
                 <img src="/upload/covers/{{ $post->img }}" class="img-thumbnail img-responsive center-block">
             @endif
         </div>
         <div class="col-lg-8 col-md-8 col-sm-12 col-sx-12 top-post-textarea">
-            @if(isset($post))
+            @if (isset($post))
                 <div><em class="top-post-date">{{ $post->published_at->diffForHumans() }} - <strong>{{ $post->user->name }}</strong></em>
                     @include('frontend.partials.tags', ['tags' => $post->tags])
                 </div>
             @endif
             <ul class="nav nav-pills cl-effect-1" id="post-tabs">
-                @if(isset($post))
+                @if (isset($post))
                     <li class="active"><a data-toggle="tab" href="#{{ $post->id}}tab1">Обзор</a></li>
                     <li><a data-toggle="tab" href="#{{ $post->id}}tab2">Видео</a></li>
                     <li><a data-toggle="tab" href="#{{ $post->id}}tab3">Ссылки</a></li>
@@ -25,7 +25,7 @@
                 @endif
             </ul>
                 <div class="tab-content">
-                    @if(isset($post))
+                    @if (isset($post))
                         <div id="{{ $post->id}}tab1" class="tab-pane fade in active">
                             <p>@{{ excerpt }}</p>
                             <p>@{{ content }}</p>
@@ -51,7 +51,7 @@
                 </div>
                 <div class="clearfix post-filters">
                     <span class="label label-default pull-right">
-                        @if(isset($post))
+                        @if (isset($post))
                             Фильтры: <a href="{{ route('bands', ['slug' => $post->band->slug]) }}">По группе</a>
                         @endif
                             </span>
@@ -66,7 +66,7 @@
         <div class="form-group">
             <label for="inputBand">Band title:</label>
             <select name="band_id" id="inputBand" class="select2-container form-control">
-                @foreach($bands as $band)
+                @foreach ($bands as $band)
                     <option value="{{ $band->id }}"
                             {{ (!empty($post) && $post->band_id == $band->id) ? 'selected' : '' }}>
                         {{ $band->title }}
@@ -124,7 +124,7 @@
         <div class="form-group">
             <label for="inputCategory">Categories</label>
             <select name="category_id" id="inputCategory" class="select2-container form-control">
-                @foreach($categories as $category)
+                @foreach ($categories as $category)
                     <option value="{{ $category->id }}"
                             {{ (!empty($post) && $post->category_id == $category->id) ? 'selected' : '' }}>
                         {{ $category->title }}

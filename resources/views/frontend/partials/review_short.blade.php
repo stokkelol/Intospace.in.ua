@@ -1,6 +1,6 @@
 <div class="container">
     <div class="row">
-        @if(!empty($review))
+        @if (!empty($review))
             <div class="col-lg-offset-3 col-lg-6">
                 <hr>
             </div>

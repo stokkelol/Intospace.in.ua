@@ -16,7 +16,7 @@ class FeedController extends Controller
 
       $feed->setCache(60, 'laravelFeedKey');
 
-      if (!$feed->isCached()) {
+      if (! $feed->isCached()) {
           $posts = Post::with('category', 'tags', 'user')
               ->whereIn('status', ['active'])
               ->groupBy('published_at')

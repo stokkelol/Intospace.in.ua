@@ -2,7 +2,7 @@
 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
     <div class="col-lg-12 preview-panel">
         <ul id="lightSlider" class="gallery content-slider list-unstyled list-inline clearfix cS-hidden">
-            @foreach($randposts as $post)
+            @foreach ($randposts as $post)
               <li>
                 <div class="preview-element">
                   <a href="{{ route('posts', ['slug' => $post->slug]) }}">

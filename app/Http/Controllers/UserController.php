@@ -22,7 +22,7 @@ class UserController extends Controller
 
     public function show()
     {
-        if (!Auth::user()) {
+        if (! Auth::user()) {
             return redirect('/');
         }
 

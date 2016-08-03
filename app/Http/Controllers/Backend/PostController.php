@@ -77,6 +77,7 @@ class PostController extends Controller
             //'post'        =>  null,
             'tags'          =>  $this->tag->pluck('tag', 'id')
         ];
+
         return view('backend.posts.create', $data);
     }
 
@@ -91,13 +92,13 @@ class PostController extends Controller
     {
         $post = $this->storeOrUpdatePost($request, $post_id = null);
 
-        if($request->hasFile('img')) {
+        if ($request->hasFile('img')) {
             $imageSaver->saveCover('upload/covers/', $request->file('img'));
             $post->img = $request->file('img')->getClientOriginalName();
             $post->img_thumbnail = 'thumbnail_'.$request->file('img')->getClientOriginalName();
         }
 
-        if($request->hasFile('logo')) {
+        if ($request->hasFile('logo')) {
             $imageSaver->saveLogo('upload/logos/', $request->file('logo'));
             $post->logo = $request->file('logo')->getClientOriginalName();
         }
@@ -107,7 +108,8 @@ class PostController extends Controller
         $post->save();
         $this->syncTags($post, $request->input('tagList'));
 
-        Flash::message('Post created!');
+        flash()->message('Post created!');
+
         return redirect()->route('backend.posts.edit', ['post_id' => $post->id]);
     }
 
@@ -161,7 +163,8 @@ class PostController extends Controller
         //dd($post);
         $post->update();
 
-        Flash::message('Post updated!');
+        flash()->message('Post updated!');
+
         return redirect()->route('backend.posts.index');
     }
 
@@ -219,13 +222,14 @@ class PostController extends Controller
         $post = $this->post->findOrFail($post_id);
         $post->is_pinned = $pinned;
         $post->save();
+
         return $post;
     }
 
     public function toPinned($post_id)
     {
         $this->setPinnedStatus($post_id, '1');
-        Flash::message('Post is pinned');
+        flash()->message('Post is pinned');
 
         return redirect()->back();
     }
@@ -233,7 +237,7 @@ class PostController extends Controller
     public function toRegular($post_id)
     {
         $this->setPinnedStatus($post_id, '0');
-        Flash::message('Post is unpinned');
+        flash()->message('Post is unpinned');
 
         return redirect()->back();
     }
@@ -243,7 +247,6 @@ class PostController extends Controller
         $post = $this->post->findOrNew($post_id);
         $post->user_id = Auth::user()->id;
         $post->title = $request->input('title');
-        //dd($request->input('title'));
         $post->year = preg_replace('/[^0-9]/', '', $request->input('title'));
         $post->band_id = $request->input('band_id');
         $post->excerpt = $request->input('excerpt');
@@ -271,7 +274,7 @@ class PostController extends Controller
     {
         $posts = $this->post->all();
 
-        foreach($posts as $post)
+        foreach ($posts as $post)
         {
             $post->year = preg_replace('/[^0-9]/', '', $post->title);
             $post->update();

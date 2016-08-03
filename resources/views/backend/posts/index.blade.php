@@ -18,7 +18,7 @@
                     {!! Form::close() !!}</li>
             </ul>
             <hr>
-                @foreach($posts as $post)
+                @foreach ($posts as $post)
                     <div class="backend-item">
                         <div class="col-md-1">{{ $post->id }}</div>
                         <div class="col-md-1">{{ $post->user->name }}</div>
@@ -28,11 +28,11 @@
                         <span class="label label-default"><a href="{{ route('backend.posts.edit', ['post_id' => $post->id]) }}">
                                                         <i class="fa fa-pencil" aria-hidden="true"></i>Edit</a></span>
 
-                            @if($post->status == 'active')
+                            @if ($post->status == 'active')
                             <span class="label label-default"><a href="{{ route('backend.posts.to-draft', ['post_id' => $post->id]) }}">
                                 <i class="fa fa-outdent" aria-hidden="true"></i>To draft</a></span>
 
-                            @elseif($post->status == 'draft')
+                            @elseif ($post->status == 'draft')
                             <span class="label label-default"><a href="{{ route('backend.posts.to-active', ['post_id' => $post->id]) }}">
                                 <i class="fa fa-indent" aria-hidden="true"></i>To active</a></span>
                             @endif

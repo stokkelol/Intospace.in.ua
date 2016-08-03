@@ -10,7 +10,7 @@
                           <li><a href="{{ route('backend.monthlyreviews.create') }}"><button type="button" class="btn btn-primary">Create new review</button></a></li>
                     </ul>
                     <hr>
-                    @foreach($reviews as $review)
+                    @foreach ($reviews as $review)
                         <div class="backend-item">
                             <div class="col-lg-2">
                                 {{ $review->id }}

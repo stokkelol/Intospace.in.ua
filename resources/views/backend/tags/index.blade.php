@@ -10,7 +10,7 @@
                 <li>  <a href="{{ route('backend.tags.create') }}"><button type="button" class="btn btn-primary">Create tag</button></a></li>
             </ul>
             <hr>
-            @foreach($tags as $tag)
+            @foreach ($tags as $tag)
             <div class="backend-item">
                 <div class="col-lg-1 element">{{ $tag->id }}</div>
                 <div class="col-lg-6 element"><a href="" class="categories-title"><strong>{{ $tag->tag }}</strong></a>

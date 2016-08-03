@@ -57,7 +57,7 @@ class PostController extends Controller
     {
         $post = $this->postRepository->getBySlug($slug);
 
-        if($post == NULL) {
+        if ($post == NULL) {
             App::abort(404);
         }
 

@@ -60,8 +60,6 @@ class MonthlyReviewController extends Controller
         $review->save();
 
         return redirect()->route('backend.monthlyreviews.edit', ['review_id' => $review->id]);
-
-        //return redirect()->route('backend.monthlyreviews.edit', ['review_id' => $review->id]);
     }
 
     public function edit($review_id)
@@ -74,7 +72,7 @@ class MonthlyReviewController extends Controller
             'popular_posts'     =>  $this->post->getPostsById($review->popular_posts),
             'latest_videos'     =>  $this->video->getVideosById($review->latest_videos)
         ];
-        //dd($data);
+
         return view('backend.monthlyreviews.edit', $data);
     }
 

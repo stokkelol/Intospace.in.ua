@@ -42,7 +42,7 @@ class BandController extends Controller
     public function show(Request $request, $slug)
     {
         $posts = $this->getCollection($slug);
-        if($posts->count() == 1) {
+        if ($posts->count() == 1) {
             $topPost = $this->postRepository->getPostsByBandSlug($slug)->first();
             $posts = [];
         } else {

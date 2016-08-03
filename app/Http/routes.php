@@ -142,6 +142,16 @@ Route::group(['prefix' => 'backend', 'middleware' => ['role:admin|owner|demo']],
 
     Route::get('files', 'Backend\FileController@index');
 
+    Route::get('files/image/', [
+        'as'    =>  'backend.files.open-image',
+        'uses'  =>  'Backend\FileController@openImage'
+    ]);
+
+    Route::post('files/image/store', [
+        'as'    =>  'backend.files.store',
+        'uses'  =>  'Backend\FileController@store'
+    ]);
+
     Route::get('/monthlyreviews/to-draft/{post_id}', [
         'as'    => 'backend.monthlyreviews.to-draft',
         'uses'  =>  'Backend\MonthlyReviewController@toDraft'
