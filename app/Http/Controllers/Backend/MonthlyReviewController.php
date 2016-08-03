@@ -101,7 +101,6 @@ class MonthlyReviewController extends Controller
         $review->excerpt = $request->input('excerpt');
         $review->titles = $request->input('titles');
         $review->content = $request->input('content');
-        $review->img = $request->input('img');
         $review->imgs = $request->input('imgs');
         $review->published_at = $request->input('published_at');
         if(empty($review->latest_posts)) {
