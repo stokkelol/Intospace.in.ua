@@ -99,7 +99,9 @@ class FileController extends Controller
     public function store(Request $request)
     {
         $newFile = 'upload/covers/'.$request->get('title').'.jpg';
+        $newFileThumbnail = 'upload/covers/'.'thumbnail_'.$request->get('title').'.jpg';
         $move = $this->file->move('upload/covers/'.$request->get('old_title'), $newFile);
+        $move = $this->file->move('upload/covers/'.'thumbnail_'.$request->get('old_title'), $newFileThumbnail);
         $post = $this->post->getPostByImg($request->get('old_title'));
         $post->img = $request->get('title').'.jpg';
         $post->img_thumbnail = 'thumbnail_'.$request->get('title').'jpg';
