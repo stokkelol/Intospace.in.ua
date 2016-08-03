@@ -110,9 +110,7 @@ class FileController extends Controller
 
     public function updatePost($img, $newImg)
     {
-        //dd($newImg);
         $post = $this->post->getPostByImg($img);
-        //dd($title);
         $post->img = $newImg.'.jpg';
         $post->img_thumbnail = 'thumbnail_'.$newImg.'.jpg';
         $post->update();
