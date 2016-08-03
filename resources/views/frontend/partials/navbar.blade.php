@@ -48,8 +48,6 @@
                         </ul>
                     </li>
                 @endif
-                <li class="hidden-sm hidden-xs"><a href="/pages/top-2015">Топ 2015</a></li>
-                <!--<li class="hidden-sm hidden-xs"><a href="#tagscloud">Облако тегов</a></li>-->
             </ul>
 
 

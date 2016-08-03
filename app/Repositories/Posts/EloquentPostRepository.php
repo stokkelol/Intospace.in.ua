@@ -158,8 +158,8 @@ class EloquentPostRepository implements PostRepository
         return $posts;
     }
 
-    public function getPostByImg($imgPath)
+    public function getPostByImg($img)
     {
-        return $this->post->where('img', '=', $imgPath)->first();
+        return $this->post->where('img', '=', $img)->first();
     }
 }

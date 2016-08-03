@@ -79,7 +79,7 @@ class FileController extends Controller
         $file = pathinfo($path);
         $file['dirname'] = $request->get('dir');
 
-        $post = $this->associateWithPost($file['basename']);
+        $post = $this->getAssociatedPost($file['basename']);
 
         $data = [
             'file'  =>  $file,
@@ -91,9 +91,9 @@ class FileController extends Controller
         return view('backend.files.show', $data);
     }
 
-    public function associateWithPost($imgPath)
+    public function getAssociatedPost($img)
     {
-        return $this->post->getPostByImg($imgPath);
+        return $this->post->getPostByImg($img);
     }
 
     public function store(Request $request)
