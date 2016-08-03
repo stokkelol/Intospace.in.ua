@@ -7,7 +7,9 @@
         </div>
         <div class="col-lg-4">
             Post associated with img:
-            <a href="/posts/{{ $post->slug }}"><p>{{ $post->title }}</p></a>
+            @if (isset($post))
+                <a href="/posts/{{ $post->slug }}"><p>{{ $post->title }}</p></a>
+            @endif
             {!! Form::open(['route' => 'backend.files.store', 'enctype' => 'multipart/form-data']) !!}
             <div class="form-group">
                 {!! Form::label('inputTitle', 'New title:') !!}
