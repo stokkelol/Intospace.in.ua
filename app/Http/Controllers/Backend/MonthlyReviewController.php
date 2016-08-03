@@ -87,6 +87,7 @@ class MonthlyReviewController extends Controller
             $review->img = $request->file('img')->getClientOriginalName();
         }
 
+        $review->resluggify();
         $review->update();
 
         return redirect()->back() ;
