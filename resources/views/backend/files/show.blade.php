@@ -12,7 +12,7 @@
             <div class="form-group">
                 {!! Form::label('inputTitle', 'New title:') !!}
                 {!! Form::text('title', null, ['class' => 'form-control']) !!}
-                <input type="hidden" name="old_title" value="{{ $file['dirname'] }}/{{ $file['basename'] }}">
+                <input type="hidden" name="old_title" value="{{ $file['basename'] }}">
                 <div class="row">
                     {!! Form::submit('Save', ['class' => 'btn btn-primary form-control']) !!}
                 </div>
