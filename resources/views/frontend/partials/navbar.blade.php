@@ -39,6 +39,14 @@
                             @endforeach
                         </ul>
                     </li>
+                    <li class="dropdown cl-effect-1">
+                        <a href="/monthlyreviews">Достойно внимания<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            @foreach($reviews as $review)
+                                <li><a href="{{ route('monthlyreviews', ['slug' => $review->slug])}}">{{ $review->title }}</a></li>
+                            @endforeach
+                        </ul>
+                    </li>
                 @endif
                 <li class="hidden-sm hidden-xs"><a href="/pages/top-2015">Топ 2015</a></li>
                 <!--<li class="hidden-sm hidden-xs"><a href="#tagscloud">Облако тегов</a></li>-->

@@ -35,7 +35,10 @@ Route::get('/shortreviews', 'ShortReviewController@index');
 
 Route::get('/monthlyreviews', 'MonthlyReviewController@index');
 
-Route::get('/monthlyreviews/{slug}', 'MonthlyReviewController@show');
+Route::get('/monthlyreviews/{slug}', [
+    'as'    =>  'monthlyreviews',
+    'uses'  =>  'MonthlyReviewController@show'
+]);
 
 Route::get('/search', 'SearchController@index');
 
