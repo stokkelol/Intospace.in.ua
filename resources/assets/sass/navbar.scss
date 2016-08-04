@@ -2,7 +2,7 @@
 
 .navbar {
   position: absolute;
-  height: 60px;
+  height: 50px;
   font-size: 14px;
 }
 
@@ -10,9 +10,6 @@
   width:90%;
 }
 
-.navbar-collapse {
-    background-color: #060606;
-}
 
 @media only screen and (min-width: 1170px) {
   .navbar-custom {
@@ -27,9 +24,8 @@
   .navbar-custom.is-fixed {
     /* when the user scrolls down, we hide the header right above the viewport */
     position: fixed;
-    top: -61px;
+    top: -50px;
     background-color: #060606;
-    border-bottom: 1px solid #f2f2f2;
     transition: -webkit-transform 0.3s;
     transition: transform 0.3s;
   }
@@ -59,14 +55,13 @@ form.main-search {
       padding-right: 8px;
       font-size: 24px;
       height:32px;
-      color: white;
+      color: $text;
     }
 }
 
 .navbar-brand {
     font-family: 'Orbitron', sans-serif;
     font-size: 24px;
-    text-shadow: 0px 3px 2px rgba(136, 136, 119, 0.6);
 }
 
 .navbar-dropdown-menu {
