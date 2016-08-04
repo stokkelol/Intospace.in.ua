@@ -57,6 +57,7 @@ form.main-search {
       padding-right: 8px;
       font-size: 24px;
       height:32px;
+      color: white;
     }
 }
 
@@ -66,5 +67,9 @@ form.main-search {
 }
 
 .navbar-dropdown-menu {
+    color: white;
+}
+
+.navbar-default .navbar-nav>li>a, .navbar-default .navbar-text {
     color: white;
 }
