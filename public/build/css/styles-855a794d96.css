@@ -9,9 +9,6 @@ blockquote {
   border-left: 5px solid #337ab7;
   text-align: justify; }
 
-.main-container {
-  padding-top: 75px; }
-
 a {
   transition: color .4s ease-out, background .2s ease-in;
   color: #337ab7; }
@@ -400,54 +397,36 @@ a {
   font-size: 22px; }
 
 .navbar {
-  position: absolute;
-  height: 60px;
-  font-size: 14px; }
+  height: 20px;
+  font-size: 12px;
+  color: #888888; }
 
 .navbar-container {
   width: 90%; }
 
-.navbar-collapse {
-  background-color: #060606; }
+.main-search {
+  height: 32px; }
+  .main-search input {
+    border-radius: 4px;
+    border: 1.5px solid #888888;
+    height: 32px;
+    color: #888888;
+    background-color: #060606; }
+  .main-search i {
+    padding-top: 10px;
+    padding-left: 8px;
+    padding-right: 8px;
+    font-size: 24px;
+    height: 30px;
+    color: white; }
 
-@media only screen and (min-width: 1170px) {
-  .navbar-custom {
-    transition: background-color 0.3s;
-    /* Force Hardware Acceleration in WebKit */
-    transform: translate3d(0, 0, 0);
-    backface-visibility: hidden; }
-  .navbar-custom.is-fixed {
-    /* when the user scrolls down, we hide the header right above the viewport */
-    position: fixed;
-    top: -61px;
-    background-color: #060606;
-    border-bottom: 1px solid #f2f2f2;
-    transition: transform 0.3s; }
-  .navbar-custom.is-visible {
-    /* if the user changes the scrolling direction, we show the header */
-    transform: translate3d(0, 100%, 0); } }
-
-form.main-search {
+.main-search-container {
   display: -ms-flexbox;
   display: flex;
   -ms-flex-align: center;
   align-items: center;
   -ms-flex-line-pack: center;
-  align-content: center;
-  height: 52px; }
-  form.main-search input {
-    border-radius: 4px;
-    border: 1.5px solid #888888;
-    height: 30px;
-    color: #888888;
-    background-color: #060606; }
-  form.main-search i {
-    padding-top: 2px;
-    padding-left: 8px;
-    padding-right: 8px;
-    font-size: 24px;
-    height: 32px;
-    color: white; }
+  align-content: center; }
 
 .navbar-brand {
   font-family: 'Orbitron', sans-serif;
@@ -461,7 +440,7 @@ form.main-search {
 
 .tagline {
   padding-bottom: 0px;
-  margin-bottom: 0px;
+  margin-top: 10px;
   padding-bottom: 10px;
   display: -ms-flexbox;
   display: flex;
@@ -594,5 +573,89 @@ form.main-search {
 
 .file-filename {
   font-size: 10px; }
+
+.navpanel {
+  margin-top: 60px;
+  height: 80px;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border-bottom: 2px solid #888888; }
+  .navpanel .dropdown:hover {
+    text-decoration: none; }
+  .navpanel .navbar-dropdown-menu {
+    text-decoration: none; }
+    .navpanel .navbar-dropdown-menu:hover {
+      text-decoration: none; }
+
+.brand-container {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+  justify-content: space-around;
+  -ms-flex-align: center;
+  align-items: center;
+  color: white;
+  font-size: 28px;
+  font-family: 'Orbitron', sans-serif; }
+  .brand-container span {
+    border-left: 3px solid #337ab7;
+    padding-left: 10px;
+    text-shadow: white 0.05em 0.05em 0.1em; }
+
+.upper-panel {
+  border-bottom: 1px solid #282828;
+  height: 30px;
+  font-size: 12px;
+  color: #888888;
+  padding-bottom: 0px;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  -ms-flex-align: center;
+  align-items: center; }
+  .upper-panel .flex-container {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    height: 40px; }
+
+.lower-panel {
+  font-size: 12px;
+  height: 50px;
+  color: #888888;
+  padding-bottom: 0px;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  -ms-flex-align: center;
+  align-items: center; }
+  .lower-panel .flex-container {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    height: 40px; }
+
+.panel-container {
+  height: 80px;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+  justify-content: space-around;
+  -ms-flex-align: center;
+  align-items: center;
+  -ms-flex-flow: wrap;
+  flex-flow: wrap;
+  color: #888888;
+  font-size: 12px; }
+  .panel-container a {
+    color: #888888; }
 
 /*# sourceMappingURL=styles.css.map */

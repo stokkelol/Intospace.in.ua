@@ -9,9 +9,6 @@ blockquote {
   border-left: 5px solid #337ab7;
   text-align: justify; }
 
-.main-container {
-  padding-top: 75px; }
-
 a {
   transition: color .4s ease-out, background .2s ease-in;
   color: #337ab7; }
@@ -400,32 +397,8 @@ a {
   font-size: 22px; }
 
 .navbar {
-  position: absolute;
-  height: 60px;
-  font-size: 14px; }
-
-.navbar-container {
-  width: 90%; }
-
-.navbar-collapse {
-  background-color: #060606; }
-
-@media only screen and (min-width: 1170px) {
-  .navbar-custom {
-    transition: background-color 0.3s;
-    /* Force Hardware Acceleration in WebKit */
-    transform: translate3d(0, 0, 0);
-    backface-visibility: hidden; }
-  .navbar-custom.is-fixed {
-    /* when the user scrolls down, we hide the header right above the viewport */
-    position: fixed;
-    top: -61px;
-    background-color: #060606;
-    border-bottom: 1px solid #f2f2f2;
-    transition: transform 0.3s; }
-  .navbar-custom.is-visible {
-    /* if the user changes the scrolling direction, we show the header */
-    transform: translate3d(0, 100%, 0); } }
+  height: 10px;
+  font-size: 12px; }
 
 form.main-search {
   display: -ms-flexbox;
@@ -450,8 +423,13 @@ form.main-search {
     color: white; }
 
 .navbar-brand {
-  font-family: 'Orbitron', sans-serif;
-  font-size: 24px; }
+  border-left: 3px solid #337ab7; }
+  .navbar-brand a {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 28px;
+    color: white; }
+    .navbar-brand a:hover {
+      text-decoration: none; }
 
 .navbar-dropdown-menu {
   color: white; }
@@ -459,8 +437,25 @@ form.main-search {
 .navbar-default .navbar-nav > li > a, .navbar-default .navbar-text {
   color: white; }
 
+.navbar-custom {
+  margin-top: 60px;
+  color: #888888;
+  border-bottom: 1px solid #888888;
+  min-height: 90px; }
+
+.navbar-custom-container {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -ms-flex-align: center;
+  align-items: center; }
+
+.navbar-dropdown-menu:hover {
+  text-decoration: none; }
+
 .tagline {
-  padding-bottom: 0px;
+  margin-top: 10px;
   margin-bottom: 0px;
   padding-bottom: 10px;
   display: -ms-flexbox;
