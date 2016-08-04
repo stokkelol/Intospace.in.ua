@@ -37,9 +37,6 @@
                         <em class="main-post-author"><a href="/categories/short-reviews">Мини-обзор</a></em>
                     @endif
                 </div>
-                <div  class="main-post-author clearfix">
-                    <em> {{ $post->published_at->diffForHumans() }}</em> <em>|</em> <em><strong>{{ $post->user->name }}</strong></em>
-                </div>
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 regular-post-tags clearfix pull-left">
                     @include('frontend.partials.tags', ['tags' => $post->tags])
                 </div>
@@ -50,6 +47,18 @@
                     <br>
                     <div class="clearfix">
                         {!! $post->content !!}
+                    </div>
+                    <div class="clearfix">
+                        <span class="pull-right" >
+                            <p>
+                                @include('frontend.partials.datetime', ['post' => $post])
+                                |
+                                @include('frontend.partials.author', ['post' => $post])
+                                |
+                                <span class="post-filters-filter">Фильтры:</span>
+                                <span class="post-filters"><a href="{{ route('bands', ['slug' => $post->band->slug]) }}" class="post-filters"> По группе</a></span>
+                            </p>
+                        </span>
                     </div>
                 </div>
                 <div class="js-lazyYT" data-youtube-id="{{$post->video}}" data-ratio="16:9"></div>
