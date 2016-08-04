@@ -16,20 +16,25 @@
                 <em class="regular-post-author"> <a href="/videos">Видео</a></em>
             </div>
             <div>
-                <em class="regular-post-author">{{ $post->published_at->diffForHumans() }} - <strong>{{ $post->user->name }}</strong></em>
+                <em class="regular-post-author"><i class="fa fa-clock-o" aria-hidden="true"></i> {{ $post->published_at->diffForHumans() }}</em>
             </div>
             <br>
             <div class="clearfix">
                 {!! $post->excerpt !!}
             </div>
             <div class="clearfix cl-effect-1">
+                <br>
                 <p>
                     <a href="{{ route('videos', ['slug' => $post->slug]) }}" class="more-link">Читать далее</a>
                 </p>
             </div>
             <div class="clearfix post-filters">
                 <span class="label label-default pull-right">
-                    Фильтры: <a href="{{ route('bands', ['band_slug' => $post->band->slug]) }}">По группе</a>
+                    <p>
+                        @include('frontend.partials.author', ['post' => $post])
+                        |
+                        Фильтры:<a href="{{ route('bands', ['slug' => $post->band->slug]) }}"> По группе</a>
+                    </p>
                 </span>
             </div>
         </div>

@@ -24,25 +24,29 @@
             @endif
         </div>
         <div>
-            <em class="regular-post-author">{{ $post->published_at->diffForHumans() }} - <strong>{{ $post->user->name }}</strong></em>
+            <em class="regular-post-author"><i class="fa fa-clock-o" aria-hidden="true"></i> {{ $post->published_at->diffForHumans() }}</em>
         </div>
         <div class="regular-post-tags clearfix">
-            @include('frontend.partials.tags', ['tags' => $post->tags])
+            @include('frontend.partials.tags', ['tags' => $post->tags])</span>
         </div>
         <div class="clearfix">
             {!! $post->excerpt !!}
         </div>
 
         <div class="clearfix cl-effect-1">
+            <br>
             <p>
                 <a href="{{ route('posts', ['slug' => $post->slug]) }}" class="more-link">Читать далее</a>
             </p>
         </div>
         <div class="clearfix post-filters">
             <span class="label label-default pull-right">
-                Фильтры:
                 <!--<a href="{{ route('posts', ['year_filter' => $post->title]) }}">По году выпуска</a>-->
-                <a href="{{ route('bands', ['slug' => $post->band->slug]) }}">По группе</a>
+                <p>
+                    @include('frontend.partials.author', ['post' => $post])
+                    |
+                    Фильтры:<a href="{{ route('bands', ['slug' => $post->band->slug]) }}"> По группе</a>
+                </p>
             </span>
         </div>
     </div>
