@@ -6,17 +6,11 @@
   font-size: 14px;
   display: flex;
   align-items: center;
-  color: white;
-  a {
-      color: white;
-  }
 }
 
 .navbar-container {
   width:90%;
-  color: white;
 }
-
 
 @media only screen and (min-width: 1170px) {
   .navbar-custom {
@@ -69,4 +63,8 @@ form.main-search {
 .navbar-brand {
     font-family: 'Orbitron', sans-serif;
     font-size: 24px;
+}
+
+.navbar-dropdown-menu {
+    color: white;
 }

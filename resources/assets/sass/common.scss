@@ -39,7 +39,15 @@ a {
     height: 300px;
 }
 
+.dropdown {
+    color: white;
+    a {
+        color: white;
+    }
+}
+
 .dropdown:hover .dropdown-menu {
+    color: white;
     display: block;
     margin-top: 0;
     @include default-hover;

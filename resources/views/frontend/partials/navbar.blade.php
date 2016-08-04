@@ -24,7 +24,7 @@
                 @elseif (Request::path() == 'register')
                 @else
                     <li class="dropdown cl-effect-17">
-                        <a href="/posts">Обзоры<span class="caret"></span></a>
+                        <a href="/posts" class="navbar-dropdown-menu">Обзоры<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             @foreach ($navbarposts as $post)
                                 <li><a href="/posts/{{ $post->slug }}">{{ $post->title }}</a></li>
@@ -32,7 +32,7 @@
                         </ul>
                     </li>
                     <li class="dropdown cl-effect-17">
-                        <a href="/videos">Видео<span class="caret"></span></a>
+                        <a href="/videos" class="navbar-dropdown-menu">Видео<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             @foreach ($navbarvideos as $video)
                                 <li><a href="{{ route('videos', ['slug' => $video->slug])}}">{{ $video->title }}</a></li>
@@ -40,7 +40,7 @@
                         </ul>
                     </li>
                     <li class="dropdown cl-effect-17">
-                        <a href="/monthlyreviews">Достойно внимания<span class="caret"></span></a>
+                        <a href="/monthlyreviews" class="navbar-dropdown-menu">Достойно внимания<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             @foreach ($reviews as $review)
                                 <li><a href="{{ route('monthlyreviews', ['slug' => $review->slug])}}">{{ $review->title }}</a></li>
