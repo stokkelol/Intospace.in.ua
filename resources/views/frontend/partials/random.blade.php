@@ -8,7 +8,7 @@
                   <a href="{{ route('posts', ['slug' => $post->slug]) }}">
                     <img src="/upload/covers/{{ $post->img_thumbnail }}" class="img-responsive img-thumbnail img-preview " alt="" />
                 </a><br>
-                  <a href="{{ route('posts', ['slug' => $post->slug]) }}"><em>{{ $post->title }}</em></a>
+                  <a href="{{ route('posts', ['slug' => $post->slug]) }}">{{ $post->title }}</a>
                 </div>
             </li>
             @endforeach
