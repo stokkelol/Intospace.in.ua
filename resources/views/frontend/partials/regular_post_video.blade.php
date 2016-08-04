@@ -15,9 +15,6 @@
             <div>
                 <em class="regular-post-author"> <a href="/videos">Видео</a></em>
             </div>
-            <div>
-                <em class="regular-post-author"><i class="fa fa-clock-o" aria-hidden="true"></i> {{ $post->published_at->diffForHumans() }}</em>
-            </div>
             <br>
             <div class="clearfix">
                 {!! $post->excerpt !!}
@@ -29,11 +26,14 @@
                 </p>
             </div>
             <div class="clearfix post-filters">
-                <span class="pull-right">
+                <span class="pull-right" >
                     <p>
+                        @include('frontend.partials.datetime', ['post' => $post])
+                        |
                         @include('frontend.partials.author', ['post' => $post])
                         |
-                        Фильтры:<a href="{{ route('bands', ['slug' => $post->band->slug]) }}"> По группе</a>
+                        <span class="post-filters-filter">Фильтры:</span>
+                        <span class="post-filters"><a href="{{ route('bands', ['slug' => $post->band->slug]) }}" class="post-filters"> По группе</a></span>
                     </p>
                 </span>
             </div>

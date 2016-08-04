@@ -23,9 +23,6 @@
                 <em class="regular-post-author"><a href="/categories/short-reviews">Мини-обзор</a></em>
             @endif
         </div>
-        <div>
-            <em class="regular-post-author"><i class="fa fa-clock-o" aria-hidden="true"></i> {{ $post->published_at->diffForHumans() }}</em>
-        </div>
         <div class="regular-post-tags clearfix">
             @include('frontend.partials.tags', ['tags' => $post->tags])</span>
         </div>
@@ -40,12 +37,14 @@
             </p>
         </div>
         <div class="clearfix post-filters">
-            <span class="pull-right">
-                <!--<a href="{{ route('posts', ['year_filter' => $post->title]) }}">По году выпуска</a>-->
+            <span class="pull-right" >
                 <p>
+                    @include('frontend.partials.datetime', ['post' => $post])
+                    |
                     @include('frontend.partials.author', ['post' => $post])
                     |
-                    Фильтры:<a href="{{ route('bands', ['slug' => $post->band->slug]) }}"> По группе</a>
+                    <span class="post-filters-filter">Фильтры:</span>
+                    <span class="post-filters"><a href="{{ route('bands', ['slug' => $post->band->slug]) }}" class="post-filters"> По группе</a></span>
                 </p>
             </span>
         </div>

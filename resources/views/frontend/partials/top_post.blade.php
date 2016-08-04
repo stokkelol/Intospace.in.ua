@@ -10,7 +10,7 @@
           <a href="/upload/covers/{{ $post->img }}" class="fancybox"><img src="/upload/covers/{{ $post->img }}" class="img-thumbnail img-responsive center-block"></a>
         </div>
         <div class="col-lg-8 col-md-8 col-sm-12 col-sx-12 top-post-textarea">
-            <div><em class="top-post-date"><i class="fa fa-clock-o" aria-hidden="true"></i> {{ $post->published_at->diffForHumans() }}</em>
+            <div>
                 @include('frontend.partials.tags', ['tags' => $post->tags])
             </div>
             <ul class="nav nav-pills cl-effect-1" id="post-tabs">
@@ -42,12 +42,15 @@
                     </div>
                 </div>
             </div>
-            <div class="clearfix post-filters">
+            <div class="clearfix">
                 <span class="pull-right" >
-                    <p style="font-size: 10.5px">
+                    <p>
+                        @include('frontend.partials.datetime', ['post' => $post])
+                        |
                         @include('frontend.partials.author', ['post' => $post])
                         |
-                        Фильтры:<a href="{{ route('bands', ['slug' => $post->band->slug]) }}"> По группе</a>
+                        <span class="post-filters-filter">Фильтры:</span>
+                        <span class="post-filters"><a href="{{ route('bands', ['slug' => $post->band->slug]) }}" class="post-filters"> По группе</a></span>
                     </p>
                 </span>
             </div>
