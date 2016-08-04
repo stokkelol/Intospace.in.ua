@@ -40,7 +40,6 @@ class MonthlyReviewController extends Controller
         $imgsArray = explode(';', $review->imgs);
         $presenter = new ReviewPresenter($titlesArray, $contentsArray, $imgsArray);
         $presenter->merge();
-        $counter = count($contentsArray);
 
         $latest_posts  = $this->post->getPostsById($review->latest_posts);
         $popular_posts = $this->post->getPostsById($review->popular_posts);
@@ -49,7 +48,7 @@ class MonthlyReviewController extends Controller
         $data = [
             'review'    =>  $review,
             'presenter' =>  $presenter,
-            'counter'   =>  $counter,
+            'counter'   =>  count($contentsArray),
             'latest_posts'  =>  $latest_posts,
             'latest_videos' =>  $latest_videos,
             'popular_posts' =>  $popular_posts

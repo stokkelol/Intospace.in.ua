@@ -1,5 +1,4 @@
 .tagline {
-  padding-top: 61px;
   padding-bottom: 0px;
 
   margin-bottom: 0px;
@@ -10,14 +9,6 @@
   justify-content: center;
 
   @include default-hover;
-  @media all and (max-width: 1130px) {
-    padding-top:120px;
-  }
-
-  @media all and (max-width: 768px) {
-      padding-top: 60px;
-  }
-
   a {
     color: #blue;
     font-size: 12px;

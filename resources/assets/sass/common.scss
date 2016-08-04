@@ -1,7 +1,7 @@
 //COMMON
 
 html {
-  font-family: 'Open Sans' !important;
+
 }
 
 body {
@@ -15,6 +15,10 @@ blockquote {
     font-size:10px;
     border-left:5px solid #337ab7;
     text-align: justify;
+}
+
+.main-container {
+    padding-top: 75px;
 }
 
 a {

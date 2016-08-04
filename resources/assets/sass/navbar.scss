@@ -2,10 +2,19 @@
 
 .navbar {
   position: absolute;
+  height: 60px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  color: white;
+  a {
+      color: white;
+  }
 }
 
 .navbar-container {
   width:90%;
+  color: white;
 }
 
 
@@ -55,4 +64,9 @@ form.main-search {
       font-size: 24px;
       height:32px;
     }
+}
+
+.navbar-brand {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 24px;
 }

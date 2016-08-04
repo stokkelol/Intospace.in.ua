@@ -11,16 +11,19 @@
     <link rel="stylesheet" href="{{ elixir('css/libs.css') }}">
     <link rel="stylesheet" href="{{ elixir('css/styles.css') }}">
     <script src='https://www.google.com/recaptcha/api.js'></script>
+    <link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
 
 </head>
 <body>
     @include('frontend.partials.navbar')
-    @yield('tagline')
-    @yield('random')
-    @yield('review')
-    @yield('toppost')
-    @yield('content')
-    @include('frontend.partials.footer')
+    <div class="main-container">
+        @yield('tagline')
+        @yield('random')
+        @yield('review')
+        @yield('toppost')
+        @yield('content')
+        @include('frontend.partials.footer')
+    </div>
     <!-- JavaScripts -->
     <script src="{{ elixir('js/all.js') }}"></script>
 

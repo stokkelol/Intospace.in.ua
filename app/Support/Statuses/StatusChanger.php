@@ -5,7 +5,7 @@ namespace App\Support\Statuses;
 class StatusChanger
 {
     protected $model;
-    
+
     public function __construct($model)
     {
         $this->model = $model;
@@ -20,6 +20,4 @@ class StatusChanger
 
         return $model;
     }
-
-
 }

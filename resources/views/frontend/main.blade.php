@@ -11,11 +11,11 @@
 @section('random')
     @if (isset($randposts))
         @if (Request::path() == '/')
-            <div class="container">
-                <div class="row">
-                    @include('frontend.partials.random')
+                <div class="container">
+                    <div class="row">
+                        @include('frontend.partials.random')
+                    </div>
                 </div>
-            </div>
         @endif
     @endif
 @endsection
