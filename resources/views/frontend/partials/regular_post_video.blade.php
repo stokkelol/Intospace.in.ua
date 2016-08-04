@@ -29,7 +29,7 @@
                 </p>
             </div>
             <div class="clearfix post-filters">
-                <span class="label label-default pull-right">
+                <span class="pull-right">
                     <p>
                         @include('frontend.partials.author', ['post' => $post])
                         |

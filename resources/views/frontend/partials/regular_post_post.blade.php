@@ -40,7 +40,7 @@
             </p>
         </div>
         <div class="clearfix post-filters">
-            <span class="label label-default pull-right">
+            <span class="pull-right">
                 <!--<a href="{{ route('posts', ['year_filter' => $post->title]) }}">По году выпуска</a>-->
                 <p>
                     @include('frontend.partials.author', ['post' => $post])

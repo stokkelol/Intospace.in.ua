@@ -43,8 +43,8 @@
                 </div>
             </div>
             <div class="clearfix post-filters">
-                <span class="label label-default pull-right">
-                    <p class="top-post-filters">
+                <span class="pull-right" >
+                    <p style="font-size: 10.5px">
                         @include('frontend.partials.author', ['post' => $post])
                         |
                         Фильтры:<a href="{{ route('bands', ['slug' => $post->band->slug]) }}"> По группе</a>
