@@ -1,13 +1,21 @@
 //NAVBAR
 
 .navbar {
-  position: absolute;
-  height: 50px;
-  font-size: 14px;
+      position: absolute;
+      font-size: 14px;
+      border-bottom: 1px solid #282828 !important;
+}
+
+.navbar-default {
+    border-bottom: 1px solid #282828;
 }
 
 .navbar-container {
-  width:90%;
+    width:90%;
+}
+
+.navbar-fixed-top {
+    border-bottom: 1px solid #282828;
 }
 
 
@@ -20,6 +28,7 @@
     transform: translate3d(0, 0, 0);
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
+    border-bottom: 1px solid #282828;
   }
   .navbar-custom.is-fixed {
     /* when the user scrolls down, we hide the header right above the viewport */
@@ -28,12 +37,14 @@
     background-color: #060606;
     transition: -webkit-transform 0.3s;
     transition: transform 0.3s;
+    border-bottom: 1px solid #282828;
   }
   .navbar-custom.is-visible {
     /* if the user changes the scrolling direction, we show the header */
     -webkit-transform: translate3d(0, 100%, 0);
     -ms-transform: translate3d(0, 100%, 0);
     transform: translate3d(0, 100%, 0);
+    border-bottom: 1px solid #282828;
   }
 }
 
