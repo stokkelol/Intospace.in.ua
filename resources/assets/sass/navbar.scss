@@ -37,6 +37,14 @@
   }
 }
 
+.navbar-collapse {
+    background-color: #060606;
+}
+
+.navbar-collapse.in {
+    overflow-y:hidden;
+}
+
 form.main-search {
     display: flex;
     align-items: center;
