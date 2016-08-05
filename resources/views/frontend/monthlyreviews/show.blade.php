@@ -5,7 +5,23 @@
         <div class="row">
             <div class="review-presenter-container">
                 <div class="text-center review-title-strong clearfix">
-                    <a href="{{ $review->slug }}" class="review-title-strong ">{!! $review->title !!}</a>
+                    <a href="{{ $review->slug }}" class="review-title-strong">{!! $review->title !!}</a>
+                        <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
+                            <img src="/upload/images/{{ $review->img }}" alt="" / class="text-center img-responsive img-thumbnail">
+                        </div>
+                        <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12 review-content">
+                            <div class="text-left">
+                                {!! $review->excerpt !!}
+                            </div>
+                            <br>
+                            <a href="/monthlyreviews/{{ $review->slug }}">Читать далее...</a>
+                            <div class="clearfix pull-right">
+                                <strong class="post-filters">{{ $review->published_at->diffForHumans() }} | <i class="fa fa-user" aria-hidden="true"> </i> {{ $review->user->name }}</strong>
+                            </div>
+                        </div>
+                    <div class="col-lg-offset-3 col-lg-6">
+                        <hr>
+                    </div>
                 </div>
                 <br>
                 @for ($x = 0; $x < $counter; $x++)
