@@ -14,7 +14,9 @@
                                 {!! $review->excerpt !!}
                             </div>
                             <br>
-                            <a href="/monthlyreviews/{{ $review->slug }}">Читать далее...</a>
+                            @if (Request::path() == '/monthlyreviews')
+                                <a href="/monthlyreviews/{{ $review->slug }}">Читать далее...</a>
+                            @endif
                             <div class="clearfix pull-right">
                                 <strong class="post-filters">{{ $review->published_at->diffForHumans() }} | <i class="fa fa-user" aria-hidden="true"> </i> {{ $review->user->name }}</strong>
                             </div>
