@@ -15,7 +15,7 @@ class RelatedPostsService
 
     public function getRelatedPosts($tags, $id)
     {
-        $tagsids = $tags->lists('tag');
+        $tagsids = $tags->pluck('tag');
         $relatedposts = $this->post->whereHas('tags', function ($query) use ($tagsids) {
             $query->whereIn('tag', $tagsids);
         });

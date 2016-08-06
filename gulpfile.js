@@ -53,7 +53,9 @@ elixir(function(mix) {
         'jquery.fancybox.pack.js',
         'jquery.fancybox-buttons.js',
         'jquery.fancybox-media.js',
-        'jquery.fancybox-thumbs.js'
+        'jquery.fancybox-thumbs.js',
+        'turbolinks.js',
+        'turbolinksinit.js'
         ], 'public/js/all.js');
 
     mix.version([

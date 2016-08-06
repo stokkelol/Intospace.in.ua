@@ -193,7 +193,7 @@ class PostController extends Controller
         $post->tags()->sync($tags);
     }
 
-    public function toDraft($post_id)
+    protected function toDraft($post_id)
     {
         $changer = new StatusChanger($this->post->find($post_id));
         $changer->setStatus($post_id, 'draft');
@@ -201,7 +201,7 @@ class PostController extends Controller
         return redirect()->back();
     }
 
-    public function toActive($post_id)
+    protected function toActive($post_id)
     {
         $changer = new StatusChanger($this->post->find($post_id));
         $changer->setStatus($post_id, 'active');
@@ -209,7 +209,7 @@ class PostController extends Controller
         return redirect()->back();
     }
 
-    public function toDeleted($post_id)
+    protected function toDeleted($post_id)
     {
         $changer = new StatusChanger($this->post->find($post_id));
         $changer->setStatus($post_id, 'deleted');
@@ -242,7 +242,7 @@ class PostController extends Controller
         return redirect()->back();
     }
 
-    public function storeOrUpdatePost(Request $request, $post_id)
+    private function storeOrUpdatePost(Request $request, $post_id)
     {
         $post = $this->post->findOrNew($post_id);
         $post->user_id = Auth::user()->id;

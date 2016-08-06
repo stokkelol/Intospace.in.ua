@@ -3,6 +3,7 @@
 namespace App\Core;
 
 use Illuminate\Database\Eloquent\Model;
+use App\User;
 
 abstract class Entity extends Model
 {
@@ -22,4 +23,9 @@ abstract class Entity extends Model
         'save_to'       =>  'slug',
         'unique'        =>   true,
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

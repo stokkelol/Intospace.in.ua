@@ -21,7 +21,6 @@
                 <div class="col-lg-3"> {{ $category->slug }}</div>
                 <br>
             </div>
-            <hr>
         @endforeach
     </div>
 </div>

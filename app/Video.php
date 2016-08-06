@@ -14,11 +14,6 @@ class Video extends Entity implements SluggableInterface
     use SluggableTrait;
     use ScopesTrait;
 
-    public function user()
-    {
-        return $this->belongsTo(User::class, 'user_id');
-    }
-
     public function band()
     {
         return $this->belongsTo(Band::class, 'band_id');

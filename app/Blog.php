@@ -14,9 +14,4 @@ class Blog extends Entity implements SluggableInterface
     use SluggableTrait;
 
     protected $table = 'blogposts';
-
-    public function user()
-    {
-        return $this->belongsTo(User::class, 'user_id');
-    }
 }

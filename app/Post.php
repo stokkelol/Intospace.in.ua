@@ -19,11 +19,6 @@ class Post extends Entity implements SluggableInterface
 
     protected $fillable = ['year'];
 
-    public function user()
-    {
-        return $this->belongsTo(User::class, 'user_id');
-    }
-
     public function tags()
     {
         return $this->belongsToMany(Tag::class)->withTimestamps();

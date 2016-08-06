@@ -16,7 +16,7 @@ class StatusChanger
         $model = $this->model->find($id);
         $model->status = $status;
         $model->save();
-        flash()->message("$model->title sent to $status!");
+        flash()->message("{$model->title} sent to $status!");
 
         return $model;
     }

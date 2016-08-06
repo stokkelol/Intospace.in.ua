@@ -26,7 +26,7 @@ class Category extends Model implements SluggableInterface
 
     public function categoriesWithPostsCount()
     {
-        return static::leftJoin('posts', 'posts.category_id', '=', 'categories.id')
+        return $this->leftJoin('posts', 'posts.category_id', '=', 'categories.id')
             ->groupBy('categories.id')
             ->orderBy('categories.title')
             ->get(['categories.*', DB::raw('COUNT(posts.id) as num')]);
