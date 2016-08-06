@@ -48,12 +48,6 @@ elixir(function(mix) {
         'vue.min.js',
         'lightslider.js',
         'vuemain.js',
-        'jquery.mousewheel-3.0.6.pack.js',
-        'jquery.fancybox.js',
-        'jquery.fancybox.pack.js',
-        'jquery.fancybox-buttons.js',
-        'jquery.fancybox-media.js',
-        'jquery.fancybox-thumbs.js',
         'turbolinks.js',
         'turbolinksinit.js'
         ], 'public/js/all.js');
