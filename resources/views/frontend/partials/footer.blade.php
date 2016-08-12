@@ -17,7 +17,7 @@
                         <!--<p class="text-center"><a href="/sitemap">Карта сайта</a></p>-->
                     </div>
                 </div>
-                <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3">
+                <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
                     <p class="footer-column-title">Навигация:</p>
                     <div class="footer-column cl-effect-1">
                         <ul class="list-unstyled">
@@ -29,7 +29,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3">
+                <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
                     <p class="footer-column-title">Материалы:</p>
                     <div class="footer-column">
                         <ul class="list-unstyled cl-effect-1">
@@ -39,7 +39,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3">
+                <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
                     <p class="footer-column-title">Разделы:</p>
                     <div class="footer-column">
                         <ul class="list-unstyled cl-effect-1">
@@ -50,7 +50,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3">
+                <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
                     <p class="footer-column-title">Друзья:</p>
                     <div class="footer-column">
                         <ul class="list-unstyled cl-effect-1">
