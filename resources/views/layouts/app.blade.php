@@ -22,8 +22,8 @@
         @yield('review')
         @yield('toppost')
         @yield('content')
-        @include('frontend.partials.footer')
     </div>
+    @include('frontend.partials.footer')
     <!-- JavaScripts -->
     <script src="{{ elixir('js/all.js') }}"></script>
 

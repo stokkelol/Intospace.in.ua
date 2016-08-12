@@ -3,7 +3,6 @@
 <footer>
     <div class="container">
         <div class="row">
-            <div class="footer-container">
                 <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                     <blockquote><p><a href="http://www.intospace.in.ua">Intospace</a> - это попытка вернуться во времена когда обзоры читали, а жесткие диски не ломились от гигабайт mp3.</p>
                     </blockquote>
@@ -16,7 +15,6 @@
                             <li><a href="mailto:redwhite@bigmir.net"><i class="fa fa-envelope" aria-hidden="true"></i></a></li>
                         </ul>
                         <!--<p class="text-center"><a href="/sitemap">Карта сайта</a></p>-->
-
                     </div>
                 </div>
                 <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3">
@@ -61,9 +59,12 @@
                         </ul>
                     </div>
                 </div>
-            </div>
         </div>
+    </div>
+    <div>
         <hr>
+    </div>
+    <div class="container">
         <div class="row">
             <div class="text-left">
                 <div class="footer-copyright">
