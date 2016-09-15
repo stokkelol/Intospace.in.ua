@@ -71,7 +71,7 @@
     });
 </script>
 <script>
-    $('#delete-post').click(function(e) {
+    $('.delete-post').click(function(e) {
         e.preventDefault();
 
         var id = $(this).attr('data-id');

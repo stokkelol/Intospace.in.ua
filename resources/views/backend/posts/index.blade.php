@@ -38,7 +38,7 @@
                             @endif
 
                             <span class="label label-default"><a href="{{ route('backend.posts.to-deleted', ['post_id' => $post->id]) }}"
-                                id="delete-post" data-id="{{ $post->id }}" data-token="{{ csrf_token() }}">
+                                id="delete-post" data-id="{{ $post->id }}" data-token="{{ csrf_token() }}" class="delete-post">
                             <i class="fa fa-trash" aria-hidden="true"></i>To Deleted</a></span>
                         <!--<span class="label label-default"><a href="#" onClick="preview_post('{{$post->id}}')">
                                                     <i class="fa fa-trash" aria-hidden="true"></i>Preview</a></span>-->
