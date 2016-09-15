@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="_token" content="{!! csrf_token() !!}">
 
     <title> Intospace.in.ua</title>
     <!-- Styles -->
@@ -67,6 +68,31 @@
         data: {
 
         }
+    });
+</script>
+<script>
+    $('#delete-post').click(function(e) {
+        e.preventDefault();
+
+        var id = $(this).attr('data-id');
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+            }
+        });
+
+        $.ajax({
+            type: 'get',
+            url: 'posts/to-deleted/' + id,
+            success: function(data) {
+                console.log(data);
+                $("#post-" + id).remove();
+            },
+            error: function(data) {
+                console.log('Error:', data);
+            }
+        });
     });
 </script>
 </body>

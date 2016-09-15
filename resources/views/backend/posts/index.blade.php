@@ -19,7 +19,7 @@
             </ul>
             <hr>
                 @foreach ($posts as $post)
-                    <div class="backend-item">
+                    <div class="backend-item" id="post-{{ $post->id }}">
                         <div class="col-md-1">{{ $post->id }}</div>
                         <div class="col-md-1">{{ $post->user->name }}</div>
                         <div class="col-md-1">{{ $post->status }}</div>
@@ -36,8 +36,9 @@
                             <span class="label label-default"><a href="{{ route('backend.posts.to-active', ['post_id' => $post->id]) }}">
                                 <i class="fa fa-indent" aria-hidden="true"></i>To active</a></span>
                             @endif
-                            
-                            <span class="label label-default"><a href="{{ route('backend.posts.to-deleted', ['post_id' => $post->id]) }}">
+
+                            <span class="label label-default"><a href="{{ route('backend.posts.to-deleted', ['post_id' => $post->id]) }}"
+                                id="delete-post" data-id="{{ $post->id }}" data-token="{{ csrf_token() }}">
                             <i class="fa fa-trash" aria-hidden="true"></i>To Deleted</a></span>
                         <!--<span class="label label-default"><a href="#" onClick="preview_post('{{$post->id}}')">
                                                     <i class="fa fa-trash" aria-hidden="true"></i>Preview</a></span>-->
