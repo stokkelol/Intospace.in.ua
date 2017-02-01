@@ -9,15 +9,19 @@ use Cviebrock\EloquentSluggable\SluggableTrait;
 use Cache;
 use App\Traits\ScopesTrait;
 use App\Core\Entity;
+use Sofa\Eloquence\Eloquence;
 
 class Post extends Entity implements SluggableInterface
 {
     use SluggableTrait;
     use ScopesTrait;
+    use Eloquence;
 
     protected $table = 'posts';
 
     protected $fillable = ['year'];
+
+    protected $searchableColumns = ['title'];
 
     public function tags()
     {

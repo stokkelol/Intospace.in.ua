@@ -70,12 +70,16 @@ class EloquentPostRepository implements PostRepository
 
     public function getPostsBySearchQuery($query)
     {
-        $posts = $this->post->byStatus('active')
-            ->where('title', 'like', '%'.$query.'%')
-            ->orWhere('excerpt', 'like', '%'.$query,'%')
-            ->orWhere('content', 'like', '%'.$query,'%')
-            ->groupBy('published_at')
-            ->orderBy('published_at', 'desc');
+        $posts = $this->post->search($query)->groupBy('published_at')->orderBy('published_at', 'desc');
+
+        if ($posts === null) {
+            $posts = $this->post->byStatus('active')
+                ->where('title', 'like', '%'.$query.'%')
+                ->orWhere('excerpt', 'like', '%'.$query,'%')
+                ->orWhere('content', 'like', '%'.$query,'%')
+                ->groupBy('published_at')
+                ->orderBy('published_at', 'desc');
+        }
 
         return $posts;
     }
