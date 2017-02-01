@@ -3,6 +3,7 @@
 /public/storage
 /public/upload
 /storage
+/public/phpmyadmin
 Homestead.yaml
 Homestead.json
 .env

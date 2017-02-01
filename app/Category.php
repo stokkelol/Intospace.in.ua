@@ -5,8 +5,12 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\SluggableInterface;
 use Cviebrock\EloquentSluggable\SluggableTrait;
-use DB;
+use Illuminate\Support\Facades\DB;
 
+/**
+ * Class Category
+ * @package App
+ */
 class Category extends Model implements SluggableInterface
 {
     use SluggableTrait;

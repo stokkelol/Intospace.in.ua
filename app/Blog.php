@@ -9,6 +9,10 @@ use Cviebrock\EloquentSluggable\SluggableTrait;
 use Cache;
 use App\Core\Entity;
 
+/**
+ * Class Blog
+ * @package App
+ */
 class Blog extends Entity implements SluggableInterface
 {
     use SluggableTrait;

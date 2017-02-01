@@ -7,6 +7,10 @@ use Cviebrock\EloquentSluggable\SluggableInterface;
 use Cviebrock\EloquentSluggable\SluggableTrait;
 use DB;
 
+/**
+ * Class Band
+ * @package App
+ */
 class Band extends Model implements SluggableInterface
 {
     use SluggableTrait;
