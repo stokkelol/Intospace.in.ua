@@ -3,9 +3,9 @@
 namespace App\Repositories\Tags;
 
 use App\Repositories\Tags\TagRepository;
-use App\Tag;
-use App\Post;
-use App\User;
+use App\Models\Tag;
+use App\Models\Post;
+use App\Models\User;
 
 class EloquentTagRepository implements TagRepository
 {

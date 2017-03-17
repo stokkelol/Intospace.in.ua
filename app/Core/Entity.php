@@ -3,7 +3,7 @@
 namespace App\Core;
 
 use Illuminate\Database\Eloquent\Model;
-use App\User;
+use App\Models\User;
 
 abstract class Entity extends Model
 {

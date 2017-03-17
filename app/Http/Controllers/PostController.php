@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App;
+use Illuminate\Support\Facades\App;
 use App\Http\Requests;
-use App\Post;
-use App\Tag;
+use App\Models\Post;
+use App\Models\Tag;
 use App\Repositories\Posts\PostRepository;
 use App\Repositories\Tags\TagRepository;
 use Illuminate\Http\Request;
@@ -18,7 +18,8 @@ class PostController extends Controller
 
     /**
      * PostController constructor.
-     * @param PostRepository $repository
+     * @param PostRepository $postRepository
+     * @param TagRepository $tagRepository
      */
     public function __construct(PostRepository $postRepository, TagRepository $tagRepository)
     {
@@ -48,10 +49,9 @@ class PostController extends Controller
 
 
     /**
-     * Get single post page by slug
-     *
      * @param $slug
-     * @return mixed
+     * @param RelatedPostsService $related
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function show($slug, RelatedPostsService $related)
     {

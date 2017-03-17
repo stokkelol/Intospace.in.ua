@@ -3,7 +3,6 @@
 namespace App\Support\Paginators;
 
 use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Pagination\Paginator;
 use Illuminate\Http\Request;
 
 class Paginator

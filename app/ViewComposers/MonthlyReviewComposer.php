@@ -13,9 +13,11 @@ class MonthlyReviewComposer
     protected $post;
     protected $video;
 
-    public function __construct(MonthlyReviewRepository $review,
-                                PostRepository $post,
-                                VideoRepository $video)
+    public function __construct(
+        MonthlyReviewRepository $review,
+        PostRepository $post,
+        VideoRepository $video
+    )
     {
         $this->review = $review;
         $this->post = $post;

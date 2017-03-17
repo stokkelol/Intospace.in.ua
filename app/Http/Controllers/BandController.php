@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Post;
-use App\Band;
-use DB;
+use App\Models\Post;
+use App\Models\Band;
+use Illuminate\Support\Facades\DB;
 use App\Repositories\Bands\BandRepository;
 use App\Repositories\Posts\PostRepository;
 use App\Repositories\Videos\VideoRepository;
@@ -16,12 +16,14 @@ use App\Http\Requests;
 class BandController extends Controller
 {
     protected $bandRepository;
-    protected $post;
-    protected $video;
+    protected $postRepository;
+    protected $videoRepository;
 
-    public function __construct(BandRepository $band,
-                                PostRepository $post,
-                                VideoRepository $video)
+    public function __construct(
+        BandRepository $band,
+        PostRepository $post,
+        VideoRepository $video
+    )
     {
         $this->bandRepository = $band;
         $this->postRepository = $post;

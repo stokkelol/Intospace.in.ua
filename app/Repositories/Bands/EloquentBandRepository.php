@@ -2,7 +2,7 @@
 
 namespace App\Repositories\Bands;
 
-use App\Band;
+use App\Models\Band;
 use App\Repositories\Bands\BandRepository;
 
 class EloquentBandRepository implements BandRepository

@@ -1,12 +1,9 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use AlgoliaSearch\Laravel\AlgoliaEloquentTrait;
 use Cviebrock\EloquentSluggable\SluggableInterface;
 use Cviebrock\EloquentSluggable\SluggableTrait;
-use Illuminate\Support\Facades\Cache;
 use App\Traits\ScopesTrait;
 use App\Core\Entity;
 use Sofa\Eloquence\Eloquence;

@@ -5,10 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use App\Post;
+use App\Models\Post;
 use App;
-use URL;
-use DB;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\DB;
 
 class SitemapController extends Controller
 {

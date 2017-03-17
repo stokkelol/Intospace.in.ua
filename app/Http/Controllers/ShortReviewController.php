@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Repositories\Posts\PostRepository;
-use Illuminate\Http\Request;
-use App\Post;
+use App\Models\Post;
 use App\Http\Requests;
 
 class ShortReviewController extends Controller

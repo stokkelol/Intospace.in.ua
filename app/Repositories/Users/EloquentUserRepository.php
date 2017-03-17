@@ -2,9 +2,8 @@
 
 namespace App\Repositories\Users;
 
-use Auth;
-use App\User;
-use App\Repositories\Users\UserRepository;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class EloquentUserRepository implements UserRepository
 {

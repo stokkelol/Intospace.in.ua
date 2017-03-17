@@ -30,7 +30,8 @@
         "doctrine/dbal": "~2.3",
         "algolia/algoliasearch-laravel": "^1.1",
         "predis/predis": "^1.1",
-        "sofa/eloquence": "5.2.*"
+        "sofa/eloquence": "5.2.*",
+        "irazasyed/telegram-bot-sdk": "^2.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

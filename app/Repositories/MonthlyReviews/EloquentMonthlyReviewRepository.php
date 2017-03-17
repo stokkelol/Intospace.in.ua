@@ -2,7 +2,7 @@
 
 namespace App\Repositories\MonthlyReviews;
 
-use App\MonthlyReview;
+use App\Models\MonthlyReview;
 use App\Repositories\MonthlyReviews\MonthlyReviewRepository;
 
 class EloquentMonthlyReviewRepository implements MonthlyReviewRepository

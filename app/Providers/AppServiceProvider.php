@@ -3,10 +3,10 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use View;
-use App\Post;
-use Auth;
-use App\User;
+use Illuminate\Support\Facades\View;
+use App\Models\Post;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class AppServiceProvider extends ServiceProvider
 {

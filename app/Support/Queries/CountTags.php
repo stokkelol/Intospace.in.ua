@@ -2,8 +2,8 @@
 
 namespace App\Support\Queries;
 
-use DB;
-use App\Tag;
+use Illuminate\Support\Facades\DB;
+use App\Models\Tag;
 
 class CountTags
 {

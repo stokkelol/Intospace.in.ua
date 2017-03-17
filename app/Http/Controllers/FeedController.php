@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Post;
+use App\Models\Post;
 use App\Http\Requests;
-use App;
-use URL;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\URL;
 
 class FeedController extends Controller
 {

@@ -2,9 +2,9 @@
 
 namespace App\Repositories\Posts;
 
-use App\Post;
-use App\User;
-use App\Category;
+use App\Models\Post;
+use App\Models\User;
+use App\Models\Category;
 use App\Repositories\Posts\PostRepository;
 use App\Support\CustomCollections\CollectionByIds;
 

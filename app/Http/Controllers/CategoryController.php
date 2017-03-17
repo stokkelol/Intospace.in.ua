@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Repositories\Posts\PostRepository;
 use App\Http\Requests;
-use App\Category;
-use App\Tag;
+use App\Models\Category;
+use App\Models\Tag;
 
 class CategoryController extends Controller
 {
@@ -14,9 +14,11 @@ class CategoryController extends Controller
     protected $post;
     protected $tag;
 
-    public function __construct(Category $category,
-                                PostRepository $post,
-                                Tag $tag)
+    public function __construct(
+        Category $category,
+        PostRepository $post,
+        Tag $tag
+    )
     {
         $this->category = $category;
         $this->post = $post;

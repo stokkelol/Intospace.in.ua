@@ -1,9 +1,8 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
-use App\User;
-use Illuminate\Database\Eloquent\Model;
+use App\Models\Band;
 use Cviebrock\EloquentSluggable\SluggableInterface;
 use Cviebrock\EloquentSluggable\SluggableTrait;
 use App\Traits\ScopesTrait;

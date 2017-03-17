@@ -12,8 +12,8 @@ trait ScopesTrait
     public function scopeBySearchQuery($query, $search)
     {
         return $query->with('category', 'user')
-                    ->where('title', 'like', '%'.$search.'%')
-                    ->orWhere('excerpt', 'like', '%'.$search.'%')
+                    ->where('title', 'like', '%' . $search . '%')
+                    ->orWhere('excerpt', 'like', '%' . $search . '%')
                     ->orderBy('id', 'desc');
     }
 

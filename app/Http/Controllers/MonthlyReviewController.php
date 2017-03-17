@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Repositories\MonthlyReviews\MonthlyReviewRepository;
 use App\Http\Requests;
 use App\Support\Presenters\ReviewPresenter;

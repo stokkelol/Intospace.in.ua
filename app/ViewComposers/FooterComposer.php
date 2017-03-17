@@ -3,8 +3,8 @@
 namespace App\ViewComposers;
 
 use Illuminate\Contracts\View\View;
-use App\Category;
-use App\Tag;
+use App\Models\Category;
+use App\Models\Tag;
 use App\Repositories\Posts\PostRepository;
 
 class FooterComposer

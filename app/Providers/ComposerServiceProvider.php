@@ -2,6 +2,11 @@
 
 namespace App\Providers;
 
+use App\ViewComposers\FooterComposer;
+use App\ViewComposers\MonthlyReviewComposer;
+use App\ViewComposers\NavbarComposer;
+use App\ViewComposers\SidebarComposer;
+use App\ViewComposers\TaglineComposer;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Contracts\View\Factory as ViewFactory;
 
@@ -14,11 +19,11 @@ class ComposerServiceProvider extends ServiceProvider
      */
     public function boot(ViewFactory $view)
     {
-        $view->composer('frontend.partials.navbar', \App\ViewComposers\NavbarComposer::class);
-        $view->composer('frontend.sidebar.sidebar', \App\ViewComposers\SidebarComposer::class);
-        $view->composer('frontend.partials.footer', \App\ViewComposers\FooterComposer::class);
-        $view->composer('frontend.partials.tagline', \App\ViewComposers\TaglineComposer::class);
-        $view->composer('frontend.partials.review_short', \App\ViewComposers\MonthlyReviewComposer::class);
+        $view->composer('frontend.partials.navbar', NavbarComposer::class);
+        $view->composer('frontend.sidebar.sidebar', SidebarComposer::class);
+        $view->composer('frontend.partials.footer', FooterComposer::class);
+        $view->composer('frontend.partials.tagline', TaglineComposer::class);
+        $view->composer('frontend.partials.review_short', MonthlyReviewComposer::class);
     }
 
     /**

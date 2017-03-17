@@ -198,7 +198,9 @@ return [
         //https://github.com/algolia/algoliasearch-laravel
         AlgoliaSearch\Laravel\AlgoliaServiceProvider::class,
         //https://github.com/jarektkaczyk/eloquence
-        Sofa\Eloquence\ServiceProvider::class
+        Sofa\Eloquence\ServiceProvider::class,
+        //https://telegram-bot-sdk.readme.io/
+        Telegram\Bot\Laravel\TelegramServiceProvider::class
 
 
     ],
@@ -261,6 +263,7 @@ return [
         'LaravelAnalytics' => Spatie\LaravelAnalytics\LaravelAnalyticsFacade::class,
         'Feed' => Roumen\Feed\Feed::class,
         'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
+        'Telegram'  => Telegram\Bot\Laravel\Facades\Telegram::class
 
     ],
 

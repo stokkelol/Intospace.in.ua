@@ -2,7 +2,7 @@
 
 namespace App\Support;
 
-use DB;
+use Illuminate\Support\Facades\DB;
 
 class Search
 {

@@ -2,7 +2,7 @@
 
 namespace App\Support\Presenters;
 
-use App\MonthlyReview;
+use App\Models\MonthlyReview;
 
 class ReviewPresenter
 {

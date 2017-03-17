@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
 use App\Http\Requests;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use App\Repositories\Users\UserRepository;
 use App\Repositories\Posts\PostRepository;
 

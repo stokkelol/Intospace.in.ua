@@ -2,12 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Post;
-use App\Repositories\PostRepositoryInterface;
-use App\Repositories\VideoRepositoryInterface;
+use App\Repositories\Posts\PostRepository;
+use App\Repositories\Videos\VideoRepository;
 use App\Http\Requests;
-use App\Video;
 
 class NewsfeedController extends Controller
 {
@@ -15,8 +12,8 @@ class NewsfeedController extends Controller
     protected $videoRepository;
 
     public function __construct(
-                                PostRepositoryInterface $postRepository,
-                                VideoRepositoryInterface $videoRepository
+        PostRepository$postRepository,
+        VideoRepository $videoRepository
     )
     {
         $this->postRepository = $postRepository;

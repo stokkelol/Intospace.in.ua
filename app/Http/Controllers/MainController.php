@@ -6,10 +6,10 @@ use Illuminate\Http\Request;
 use App\Repositories\Posts\PostRepository;
 use App\Repositories\Tags\TagRepository;
 use App\Repositories\Videos\VideoRepository;
-use App\Video;
+use App\Models\Video;
 use App\Http\Requests;
-use DB;
-use Input;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
 
@@ -20,18 +20,26 @@ class MainController extends Controller
     protected $videoRepository;
 
     /**
-     * PostController constructor.
-     * @param PostRepository $repository
+     * MainController constructor.
+     * @param PostRepository $postRepository
+     * @param TagRepository $tagRepository
+     * @param VideoRepository $videoRepository
      */
-    public function __construct(PostRepository $postRepository,
-                                TagRepository $tagRepository,
-                                VideoRepository $videoRepository)
+    public function __construct(
+        PostRepository $postRepository,
+        TagRepository $tagRepository,
+        VideoRepository $videoRepository
+    )
     {
         $this->postRepository = $postRepository;
         $this->tagRepository = $tagRepository;
         $this->videoRepository = $videoRepository;
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index(Request $request)
     {
         if ($request->has('search')) {
@@ -41,6 +49,10 @@ class MainController extends Controller
         return $this->indexMain($request);
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function indexMain(Request $request)
     {
         $posts = $this->getCollection($request);
@@ -67,6 +79,10 @@ class MainController extends Controller
         return view('frontend.main', $data);
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function indexSearch(Request $request)
     {
         $posts = $this->getCollection($request);
@@ -87,6 +103,10 @@ class MainController extends Controller
         return view('frontend.main', $data);
     }
 
+    /**
+     * @param Request $request
+     * @return static
+     */
     public function getCollection(Request $request)
     {
         if ($request->has('search')) {

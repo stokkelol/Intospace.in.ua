@@ -2,7 +2,7 @@
 
 namespace App\Support\Services;
 
-use App\Post;
+use App\Models\Post;
 
 class RelatedPostsService
 {

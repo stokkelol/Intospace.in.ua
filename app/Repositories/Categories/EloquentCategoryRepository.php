@@ -2,7 +2,7 @@
 
 namespace App\Repositories\Categories;
 
-use App\Category;
+use App\Models\Category;
 use App\Repositories\Categories\CategoryRepository;
 
 class EloquentCategoryRepository implements CategoryRepository
