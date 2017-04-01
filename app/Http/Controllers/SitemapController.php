@@ -5,13 +5,19 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use App\Models\Post;
 use App;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\DB;
 
+/**
+ * Class SitemapController
+ * @package App\Http\Controllers
+ */
 class SitemapController extends Controller
 {
+    /**
+     * @return mixed
+     */
     public function sitemap()
     {
         // create new sitemap object

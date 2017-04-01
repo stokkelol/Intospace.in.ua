@@ -8,12 +8,22 @@ use App\Support\Presenters\ReviewPresenter;
 use App\Repositories\Posts\PostRepository;
 use App\Repositories\Videos\VideoRepository;
 
+/**
+ * Class MonthlyReviewController
+ * @package App\Http\Controllers
+ */
 class MonthlyReviewController extends Controller
 {
     protected $review;
     protected $post;
     protected $video;
 
+    /**
+     * MonthlyReviewController constructor.
+     * @param MonthlyReviewRepository $review
+     * @param PostRepository $post
+     * @param VideoRepository $video
+     */
     public function __construct(MonthlyReviewRepository $review,
                                 PostRepository $post,
                                 VideoRepository $video)
@@ -23,6 +33,9 @@ class MonthlyReviewController extends Controller
         $this->video = $video;
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index()
     {
         $reviews = $this->review->getAllReviews();
@@ -31,6 +44,10 @@ class MonthlyReviewController extends Controller
         return view('frontend.monthlyreviews.index', compact('reviews'));
     }
 
+    /**
+     * @param $slug
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function show($slug)
     {
         $review = $this->review->getReviewBySlug($slug);

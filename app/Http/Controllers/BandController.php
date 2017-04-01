@@ -30,6 +30,10 @@ class BandController extends Controller
         $this->videoRepository = $video;
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index(Request $request)
     {
         if ($request->has('search')) {
@@ -41,6 +45,11 @@ class BandController extends Controller
         return view('frontend.bands.index', compact('bands'));
     }
 
+    /**
+     * @param Request $request
+     * @param $slug
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function show(Request $request, $slug)
     {
         $posts = $this->getCollection($slug);
@@ -57,6 +66,10 @@ class BandController extends Controller
         return view('frontend.main', $data);
     }
 
+    /**
+     * @param $slug
+     * @return static
+     */
     public function getCollection($slug)
     {
         $postscollection = collect($this->postRepository->getPostsByBandSlug($slug)->get());

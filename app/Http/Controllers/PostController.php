@@ -11,6 +11,10 @@ use App\Repositories\Tags\TagRepository;
 use Illuminate\Http\Request;
 use App\Support\Services\RelatedPostsService;
 
+/**
+ * Class PostController
+ * @package App\Http\Controllers
+ */
 class PostController extends Controller
 {
     protected $postRepository;
@@ -27,6 +31,10 @@ class PostController extends Controller
         $this->tagRepository = $tagRepository;
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index(Request $request)
     {
 
@@ -73,6 +81,9 @@ class PostController extends Controller
         return view('frontend.posts.post', $data);
     }
 
+    /**
+     * @param $post
+     */
     protected function incrementViews($post)
     {
         if ($post->status == 'active') {

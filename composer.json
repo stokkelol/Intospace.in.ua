@@ -31,7 +31,8 @@
         "algolia/algoliasearch-laravel": "^1.1",
         "predis/predis": "^1.1",
         "sofa/eloquence": "5.2.*",
-        "irazasyed/telegram-bot-sdk": "^2.0"
+        "irazasyed/telegram-bot-sdk": "^2.0",
+        "facebook/graph-sdk": "^5.4"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

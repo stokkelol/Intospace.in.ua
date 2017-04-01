@@ -13,6 +13,9 @@ use App\Core\Entity;
 class Blog extends Entity implements SluggableInterface
 {
     use SluggableTrait;
-
+    
+    /**
+     * @var string
+     */
     protected $table = 'blogposts';
 }

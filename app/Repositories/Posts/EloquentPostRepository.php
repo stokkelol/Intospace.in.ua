@@ -74,9 +74,9 @@ class EloquentPostRepository implements PostRepository
 
         if ($posts === null) {
             $posts = $this->post->byStatus('active')
-                ->where('title', 'like', '%'.$query.'%')
-                ->orWhere('excerpt', 'like', '%'.$query,'%')
-                ->orWhere('content', 'like', '%'.$query,'%')
+                ->where('title', 'like', '%' . $query . '%')
+                ->orWhere('excerpt', 'like', '%' . $query . '%')
+                ->orWhere('content', 'like', '%' . $query . '%')
                 ->groupBy('published_at')
                 ->orderBy('published_at', 'desc');
         }
@@ -140,8 +140,7 @@ class EloquentPostRepository implements PostRepository
     public function getPostsByBandSlug($slug)
     {
         $posts = $this->getActivePosts()->whereHas('band', function ($query) use ($slug) {
-                                                  $query->whereSlug($slug);})
-                                                  ->latest();
+            $query->whereSlug($slug);})->latest();
 
         return $posts;
     }

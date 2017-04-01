@@ -8,12 +8,22 @@ use App\Http\Requests;
 use App\Models\Category;
 use App\Models\Tag;
 
+/**
+ * Class CategoryController
+ * @package App\Http\Controllers
+ */
 class CategoryController extends Controller
 {
     protected $category;
     protected $post;
     protected $tag;
 
+    /**
+     * CategoryController constructor.
+     * @param Category $category
+     * @param PostRepository $post
+     * @param Tag $tag
+     */
     public function __construct(
         Category $category,
         PostRepository $post,
@@ -25,6 +35,10 @@ class CategoryController extends Controller
         $this->tag = $tag;
     }
 
+    /**
+     * @param $slug
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function show($slug)
     {
         $data = [

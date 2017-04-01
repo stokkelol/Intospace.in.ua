@@ -8,8 +8,15 @@ use App\Http\Requests;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\URL;
 
+/**
+ * Class FeedController
+ * @package App\Http\Controllers
+ */
 class FeedController extends Controller
 {
+    /**
+     * @return mixed
+     */
     public function feed() {
 
       $feed = App::make('feed');

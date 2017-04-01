@@ -8,6 +8,9 @@ use App\Http\Requests;
 
 class BlogController extends Controller
 {
+    /**
+     * @param string $value
+     */
     public function index($value='')
     {
         # code...

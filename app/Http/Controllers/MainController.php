@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
 
+/**
+ * Class MainController
+ * @package App\Http\Controllers
+ */
 class MainController extends Controller
 {
     protected $postRepository;
