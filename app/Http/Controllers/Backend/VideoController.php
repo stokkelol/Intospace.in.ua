@@ -6,11 +6,11 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StoreVideoRequest;
 use App\Http\Controllers\Controller;
 use Intervention\Image\Facades\Image;
-use App\Video;
+use App\Models\Video;
 use Carbon\Carbon;
 use Flash;
 use Auth;
-use App\Band;
+use App\Models\Band;
 
 class VideoController extends Controller
 {

@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Category;
-use App\Post;
+use App\Models\Category;
+use App\Models\Post;
 use Auth;
 use Flash;
 use DB;

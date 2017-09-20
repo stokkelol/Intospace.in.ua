@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Models\PostTag;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Post;
-use App\Tag;
+use App\Models\Post;
+use App\Models\Tag;
 use Redirect;
 use DB;
 use Cache;

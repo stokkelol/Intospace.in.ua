@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Band;
+use App\Models\Band;
 use App\Repositories\Bands\BandRepository;
-use App\Post;
+use App\Models\Post;
 use DB;
 use Flash;
 

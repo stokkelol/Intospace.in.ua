@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Backend;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
-use App\MonthlyReview;
+use App\Models\MonthlyReview;
 use App\Repositories\Posts\PostRepository;
 use App\Repositories\Videos\VideoRepository;
 use Auth;

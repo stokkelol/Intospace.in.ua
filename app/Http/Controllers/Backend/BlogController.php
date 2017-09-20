@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
-use App\Blog;
+use App\Models\Blog;
 use Auth;
 use Flash;
 use Carbon\Carbon;
