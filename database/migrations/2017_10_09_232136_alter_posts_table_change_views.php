@@ -12,9 +12,7 @@ class AlterPostsTableChangeViews extends Migration
      */
     public function up()
     {
-        Schema::table('posts', function (Blueprint $table) {
-            $table->unsignedInteger('views')->change();
-        });
+        DB::statement('ALTER TABLE posts CHANGE views INT');
     }
 
     /**
@@ -24,8 +22,6 @@ class AlterPostsTableChangeViews extends Migration
      */
     public function down()
     {
-        Schema::table('posts', function (Blueprint $table) {
-            $table->tinyInteger('views')->change();
-        });
+        
     }
 }
