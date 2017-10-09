@@ -12,7 +12,7 @@ class AlterPostsTableChangeViews extends Migration
      */
     public function up()
     {
-        DB::statement('ALTER TABLE posts CHANGE views INT');
+        DB::statement('ALTER TABLE posts CHANGE views INT UNSIGNED NOT NULL');
     }
 
     /**
@@ -22,6 +22,6 @@ class AlterPostsTableChangeViews extends Migration
      */
     public function down()
     {
-        
+
     }
 }
