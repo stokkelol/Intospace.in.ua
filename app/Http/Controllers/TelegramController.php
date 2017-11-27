@@ -58,6 +58,11 @@ class TelegramController extends Controller
 
     public function processWebhook(Request $request)
     {
-        \logger('message', $request->input());
+        $result = $request->input('result');
+
+        return $this->telegram->sendMessage([
+            'chat_id' => $result['message']['chat']['id'],
+            'text' => 'Hi!'
+        ]);
     }
 }
