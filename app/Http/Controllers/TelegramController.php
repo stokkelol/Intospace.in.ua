@@ -58,7 +58,7 @@ class TelegramController extends Controller
 
     public function processWebhook(Request $request)
     {
-        $result = $request->input();
+        $result = \json_decode($request->input());
 
         \logger('message', $result);
 
