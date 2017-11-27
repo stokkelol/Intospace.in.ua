@@ -74,6 +74,8 @@ Route::get('/profile', 'UserController@show');
 
 Route::get('/telegram', ['uses' => 'TelegramController@init']);
 
+Route::post('telegram-webhook', ['uses' => 'TelegramController@processWebhook']);
+
 /**
  * Routes for backend
  */

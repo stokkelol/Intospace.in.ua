@@ -3,7 +3,10 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Bot\Bot;
+use Illuminate\Http\Request;
 use Telegram\Bot\Api;
+use Telegram\Bot\Objects\User;
 
 /**
  * Class TelegramController
@@ -15,25 +18,35 @@ class TelegramController extends Controller
     /**
      * @var Api
      */
-    protected $telegram;
+    private $telegram;
+
+    /**
+     * @var Bot
+     */
+    private $bot;
 
     /**
      * TelegramController constructor.
      *
      * @param Api $telegram
      */
-    public function __construct(Api $telegram)
+    public function __construct(Api $telegram, Bot $bot)
     {
         $this->telegram = $telegram;
+        $this->bot = $bot;
     }
 
 
-    public function init()
+    /**
+     * @return User
+     */
+    public function init(): User
     {
-        $response = $this->telegram->getMe();
-        dd($response);
-        $botId = $response->getId();
-        $firstName = $response->getFirstName();
-        $username = $response->getUserName();
+        return $this->telegram->getMe();
+    }
+
+    public function processWebhook(Request $request)
+    {
+        dd($request);
     }
 }
