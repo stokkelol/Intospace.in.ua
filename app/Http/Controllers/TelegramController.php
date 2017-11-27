@@ -48,7 +48,7 @@ class TelegramController extends Controller
     public function setWebhook()
     {
         $response = $this->telegram->setWebhook([
-            'url' => 'https://www.intospace.in.ua/' . config('telegram.bot_token') . '/webhook'
+            'url' => 'https://www.intospace.in.ua/telegram/' . config('telegram.bot_token') . '/webhook'
         ]);
 
         print_r($response);

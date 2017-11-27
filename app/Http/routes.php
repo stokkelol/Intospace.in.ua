@@ -72,7 +72,7 @@ Route::get('/bands/{slug}', [
 
 Route::get('/profile', 'UserController@show');
 
-Route::group(['prefix' => config('telegram.bot_token'), 'middleware' => ['guest']], function () {
+Route::group(['prefix' => 'telegram/' . config('telegram.bot_token'), 'middleware' => ['guest']], function () {
     Route::get('/init', ['uses' => 'TelegramController@init']);
     Route::post('/webhook', ['uses' => 'TelegramController@processWebhook']);
     Route::get('/set-webhook', ['uses' => 'TelegramController@setWebhook']);
