@@ -60,7 +60,7 @@ class TelegramController extends Controller
     {
         $result = \json_decode($request->input('result'));
 
-//        \logger('message', $request->input());
+        \logger('message', $result);
 
         return $this->telegram->sendMessage([
             'chat_id' => $result->message->chat->id,
