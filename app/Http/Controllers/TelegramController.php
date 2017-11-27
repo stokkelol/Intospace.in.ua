@@ -58,6 +58,6 @@ class TelegramController extends Controller
 
     public function processWebhook(Request $request)
     {
-        return 'hello';
+        log($request->input());
     }
 }
