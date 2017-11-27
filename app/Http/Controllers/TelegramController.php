@@ -40,7 +40,7 @@ class TelegramController extends Controller
     /**
      * @return User
      */
-    public function init(): User
+    public function init()
     {
         return $this->telegram->getMe();
     }
