@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Backend;
+
 use App\Http\Controllers\Controller;
 use App\Repositories\Posts\PostRepository;
 use App\Repositories\Users\UserRepository;
@@ -37,8 +38,7 @@ class BackendController extends Controller
             'recent_posts'          =>  $this->post->getRecentPosts(5)->get(),
             'popular_posts'         =>  $this->post->getPopularPosts(5),
             'videos_total'          =>  $this->video->getAllVideos()->count(),
-            'users_total'           =>  $this->user->getAllUsers()->count(),
-            //'analyticsData'     =>  LaravelAnalytics::getVisitorsAndPageViews(7)
+            'users_total'           =>  $this->user->getAllUsers()->count()
         ];
 
         return view('backend.main', $data);

@@ -72,7 +72,7 @@ Route::get('/bands/{slug}', [
 
 Route::get('/profile', 'UserController@show');
 
-Route::get('/fb-test', 'FacebookController@test');
+Route::get('/telegram', ['uses' => 'TelegramController@init']);
 
 /**
  * Routes for backend
