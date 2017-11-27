@@ -62,9 +62,9 @@ class TelegramController extends Controller
 
         \logger('message', $result);
 
-//        return $this->telegram->sendMessage([
-//            'chat_id' => $result->message->chat->id,
-//            'text' => 'Hi!'
-//        ]);
+        return $this->telegram->sendMessage([
+            'chat_id' => $result->message->chat->id,
+            'text' => 'Hi!'
+        ]);
     }
 }
