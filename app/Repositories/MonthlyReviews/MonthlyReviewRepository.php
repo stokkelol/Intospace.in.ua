@@ -1,39 +1,64 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Repositories\MonthlyReviews;
 
 use App\Models\MonthlyReview;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 
+/**
+ * Class MonthlyReviewRepository
+ *
+ * @package App\Repositories\MonthlyReviews
+ */
 class MonthlyReviewRepository
 {
+    /**
+     * @var MonthlyReview
+     */
     protected $review;
 
+    /**
+     * MonthlyReviewRepository constructor.
+     * @param MonthlyReview $review
+     */
     public function __construct(MonthlyReview $review)
     {
         $this->review = $review;
     }
 
-    public function getActiveReview()
+    /**
+     * @return Builder
+     */
+    public function getActiveReview(): Builder
     {
         return $this->review->where('status', '=', 'active');
     }
 
-    public function getReviewsPopularPosts($review)
+    /**
+     * @param $review
+     * @return Collection
+     */
+    public function getReviewsPopularPosts($review): Collection
     {
-        $ids = $review->popular_posts;
-
-        return $this->review->whereIn('id', $ids)->get();
+        return $this->review->whereIn('id', $review->popular_posts)->get();
     }
 
-    public function getAllReviews()
+    /**
+     * @return mixed
+     */
+    public function getAllReviews(): Collection
     {
         return $this->review->get();
     }
 
-    public function getReviewBySlug($slug)
+    /**
+     * @param $slug
+     * @return MonthlyReview
+     */
+    public function getReviewBySlug($slug): MonthlyReview
     {
-        $review = $this->review->where('slug', '=', $slug)->first();
-
-        return $review;
+        return $this->review->where('slug', '=', $slug)->first();
     }
 }

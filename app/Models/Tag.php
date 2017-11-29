@@ -1,15 +1,24 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 
+/**
+ * Class Tag
+ *
+ * @package App\Models
+ */
 class Tag extends Model
 {
     use Sluggable;
 
-    public function sluggable()
+    /**
+     * @return array
+     */
+    public function sluggable(): array
     {
         return [
             'slug' => [

@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Support\Presenters\ReviewPresenter;
 use App\Repositories\Posts\PostRepository;
 use App\Repositories\Videos\VideoRepository;
+use Illuminate\View\View;
 
 /**
  * Class MonthlyReviewController
@@ -16,8 +17,19 @@ use App\Repositories\Videos\VideoRepository;
  */
 class MonthlyReviewController extends Controller
 {
+    /**
+     * @var MonthlyReviewRepository
+     */
     protected $review;
+
+    /**
+     * @var PostRepository
+     */
     protected $post;
+
+    /**
+     * @var VideoRepository
+     */
     protected $video;
 
     /**
@@ -26,10 +38,11 @@ class MonthlyReviewController extends Controller
      * @param PostRepository $post
      * @param VideoRepository $video
      */
-    public function __construct(MonthlyReviewRepository $review,
-                                PostRepository $post,
-                                VideoRepository $video)
-    {
+    public function __construct(
+        MonthlyReviewRepository $review,
+        PostRepository $post,
+        VideoRepository $video
+    ) {
         $this->review = $review;
         $this->post = $post;
         $this->video = $video;
@@ -38,11 +51,10 @@ class MonthlyReviewController extends Controller
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index()
+    public function index(): View
     {
         $reviews = $this->review->getAllReviews();
 
-        //dd($reviews);
         return view('frontend.monthlyreviews.index', compact('reviews'));
     }
 
@@ -50,7 +62,7 @@ class MonthlyReviewController extends Controller
      * @param $slug
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function show($slug)
+    public function show($slug): View
     {
         $review = $this->review->getReviewBySlug($slug);
         $titlesArray = explode(';', $review->titles);
@@ -64,12 +76,12 @@ class MonthlyReviewController extends Controller
         $latest_videos = $this->video->getVideosById($review->latest_videos);
 
         $data = [
-            'review'    =>  $review,
-            'presenter' =>  $presenter,
-            'counter'   =>  count($contentsArray),
-            'latest_posts'  =>  $latest_posts,
-            'latest_videos' =>  $latest_videos,
-            'popular_posts' =>  $popular_posts
+            'review' => $review,
+            'presenter' => $presenter,
+            'counter' => count($contentsArray),
+            'latest_posts' => $latest_posts,
+            'latest_videos' => $latest_videos,
+            'popular_posts' => $popular_posts
         ];
 
         return view('frontend.monthlyreviews.show', $data);

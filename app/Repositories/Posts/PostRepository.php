@@ -7,8 +7,15 @@ use App\Support\CustomCollections\CollectionByIds;
 
 class PostRepository
 {
+    /**
+     * @var Post
+     */
     protected $post;
 
+    /**
+     * PostRepository constructor.
+     * @param Post $post
+     */
     public function __construct(Post $post)
     {
         $this->post = $post;
@@ -83,9 +90,7 @@ class PostRepository
 
     public function getLatestPublishedPosts()
     {
-        $posts = $this->getActivePosts();
-
-        return $posts;
+        return $this->getActivePosts();
     }
 
     public function getRecentPosts($count)
@@ -95,43 +100,33 @@ class PostRepository
 
     public function getShortReviewsPosts()
     {
-        $posts = $this->getActivePosts()
+        return $this->getActivePosts()
             ->where('category_id','=','3')
             ->paginate(15);
-
-        return $posts;
     }
 
     public function getActivePosts()
     {
-        $posts = $this->post->byStatus('active')
+        return $this->post->byStatus('active')
             ->groupBy('published_at')
             ->orderBy('published_at', 'desc');
-
-        return $posts;
     }
 
     public function getPostsByStatus($status)
     {
-        $posts = $this->post->byStatus($status)
+        return $this->post->byStatus($status)
             ->groupBy('published_at')
             ->orderBy('published_at', 'desc');
-
-        return $posts;
     }
 
     public function getPostsByUserId($user_id)
     {
-        $posts = $this->getActivePosts()->where('user_id', '=', $user_id);
-
-        return $posts;
+        return $this->getActivePosts()->where('user_id', '=', $user_id);
     }
 
     public function getPostsById($post_id)
     {
-        $posts = new CollectionByIds($this->post);
-        //dd($video_id);
-        return $posts->find($post_id);
+        return (new CollectionByIds($this->post))->find($post_id);
     }
 
     public function getPostsByBandSlug($slug)
@@ -144,7 +139,7 @@ class PostRepository
 
     public function getPinnedPost()
     {
-        return $post = $this->getActivePosts()->where('is_pinned', '=', 1);
+        return $this->getActivePosts()->where('is_pinned', '=', 1);
     }
 
     public function getMonthlyPosts()

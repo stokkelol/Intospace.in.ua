@@ -1,18 +1,22 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\DB;
 use Cviebrock\EloquentSluggable\Sluggable;
 
 /**
  * Class Category
+ *
  * @package App
  */
 class Category extends Model
 {
     use Sluggable;
+
     /**
      * @var array
      */
@@ -22,7 +26,10 @@ class Category extends Model
         'unique'        =>  true,
     ];
 
-    public function sluggable()
+    /**
+     * @return array
+     */
+    public function sluggable(): array
     {
         return [
             'slug' => [
@@ -39,7 +46,7 @@ class Category extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function posts()
+    public function posts(): HasMany
     {
         return $this->hasMany(Post::class, 'category_id');
     }
@@ -57,9 +64,9 @@ class Category extends Model
 
     /**
      * @param $slug
-     * @return mixed
+     * @return static
      */
-    public function getBySlug($slug)
+    public function getBySlug($slug): self
     {
         return static::where('slug', 'like', $slug)->first();
     }

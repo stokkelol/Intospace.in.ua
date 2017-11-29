@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Models;
 
@@ -6,12 +7,21 @@ use App\Models\Band;
 use Cviebrock\EloquentSluggable\Sluggable;
 use App\Traits\ScopesTrait;
 use App\Core\Entity;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+/**
+ * Class Video
+ *
+ * @package App\Models
+ */
 class Video extends Entity
 {
     use ScopesTrait, Sluggable;
 
-    public function sluggable()
+    /**
+     * @return array
+     */
+    public function sluggable(): array
     {
         return [
             'slug' => [
@@ -23,7 +33,7 @@ class Video extends Entity
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function band()
+    public function band(): BelongsTo
     {
         return $this->belongsTo(Band::class, 'band_id');
     }
@@ -32,7 +42,7 @@ class Video extends Entity
      * @param $slug
      * @return \Illuminate\Database\Eloquent\Model|null|static
      */
-    public function getBySlug($slug)
+    public function getBySlug($slug): self
     {
         return $this->with(['user'])->where('slug', $slug)->first();
     }

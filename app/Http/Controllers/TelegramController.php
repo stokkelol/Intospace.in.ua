@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use App\Bot\Bot;
 use Illuminate\Http\Request;
 use Telegram\Bot\Api;
+use Telegram\Bot\Objects\Message;
 use Telegram\Bot\Objects\User;
 
 /**
@@ -40,23 +41,29 @@ class TelegramController extends Controller
     /**
      * @return User
      */
-    public function init()
+    public function init(): User
     {
         return $this->telegram->getMe();
     }
 
-    public function setWebhook()
+    /**
+     * @return bool
+     * @throws \Telegram\Bot\Exceptions\TelegramSDKException
+     */
+    public function setWebhook(): bool
     {
         $response = $this->telegram->setWebhook([
             'url' => 'https://www.intospace.in.ua/telegram/' . config('telegram.bot_token') . '/webhook'
         ]);
 
-        print_r($response);
-
-        return;
+        return true;
     }
 
-    public function processWebhook(Request $request)
+    /**
+     * @param Request $request
+     * @return Message
+     */
+    public function processWebhook(Request $request): Message
     {
         $result = $request->input();
 

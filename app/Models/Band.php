@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Models;
 
@@ -7,6 +8,7 @@ use Cviebrock\EloquentSluggable\Sluggable;
 
 /**
  * Class Band
+ *
  * @package App
  */
 class Band extends Model

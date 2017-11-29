@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Models;
 
@@ -6,6 +7,11 @@ use App\Traits\ScopesTrait;
 use App\Core\Entity;
 use Cviebrock\EloquentSluggable\Sluggable;
 
+/**
+ * Class Post
+ *
+ * @package App\Models
+ */
 class Post extends Entity
 {
     use ScopesTrait, Sluggable;

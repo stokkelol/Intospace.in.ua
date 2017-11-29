@@ -1,15 +1,21 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Repositories\Bands;
 
 use App\Models\Band;
+use Illuminate\Database\Eloquent\Builder;
 
 /**
  * Class EloquentBandRepository
+ *
  * @package App\Repositories\Bands
  */
 class BandRepository
 {
+    /**
+     * @var Band
+     */
     protected $band;
 
     /**
@@ -22,18 +28,18 @@ class BandRepository
     }
 
     /**
-     * @return mixed
+     * @return Builder
      */
-    public function getAllBands()
+    public function getAllBands(): Builder
     {
         return $this->band->with('posts', 'videos')->orderBy('title', 'asc');
     }
 
     /**
-     * @param $query
-     * @return mixed
+     * @param Builder $query
+     * @return Builder
      */
-    public function getAllBandsBySearch($query)
+    public function getAllBandsBySearch(Builder $query): Builder
     {
         return $this->band->with('posts', 'videos')
             ->where('title', 'like', '%' . $query . '%')

@@ -34,17 +34,15 @@ class UserController extends Controller
      */
     public function show()
     {
-        if (! Auth::user()) {
+        if (!Auth::user()) {
             return redirect('/');
         }
 
         $user_id = Auth::id();
 
-        //dd($user_id);
-
         $data = [
-            'user'  =>  $this->user->getUser(),
-            'posts' =>  $this->post->getPostsByUserId($user_id)->get()
+            'user' => $this->user->getUser(),
+            'posts' => $this->post->getPostsByUserId($user_id)->get()
         ];
         return view('frontend.users.show', $data);
     }

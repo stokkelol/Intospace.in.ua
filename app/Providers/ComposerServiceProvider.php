@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Providers;
 
@@ -10,6 +11,11 @@ use App\ViewComposers\TaglineComposer;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Contracts\View\Factory as ViewFactory;
 
+/**
+ * Class ComposerServiceProvider
+ *
+ * @package App\Providers
+ */
 class ComposerServiceProvider extends ServiceProvider
 {
     /**
@@ -17,7 +23,7 @@ class ComposerServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot(ViewFactory $view)
+    public function boot(ViewFactory $view): void
     {
         $view->composer('frontend.partials.navbar', NavbarComposer::class);
         $view->composer('frontend.sidebar.sidebar', SidebarComposer::class);
@@ -31,7 +37,7 @@ class ComposerServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function register()
+    public function register(): void
     {
         //
     }

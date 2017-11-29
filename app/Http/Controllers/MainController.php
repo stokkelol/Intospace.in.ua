@@ -3,16 +3,13 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Collection;
 use Illuminate\Http\Request;
 use App\Repositories\Posts\PostRepository;
 use App\Repositories\Tags\TagRepository;
 use App\Repositories\Videos\VideoRepository;
-use App\Models\Video;
-use App\Http\Requests;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Input;
 use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Pagination\Paginator;
+use Illuminate\View\View;
 
 /**
  * Class MainController
@@ -21,12 +18,26 @@ use Illuminate\Pagination\Paginator;
  */
 class MainController extends Controller
 {
-    protected $postRepository;
-    protected $tagRepository;
-    protected $videoRepository;
+    const POSTS_PER_PAGE = 15;
+
+    /**
+     * @var PostRepository
+     */
+    protected $post;
+
+    /**
+     * @var TagRepository
+     */
+    protected $tag;
+
+    /**
+     * @var VideoRepository
+     */
+    protected $video;
 
     /**
      * MainController constructor.
+     *
      * @param PostRepository $postRepository
      * @param TagRepository $tagRepository
      * @param VideoRepository $videoRepository
@@ -37,16 +48,16 @@ class MainController extends Controller
         VideoRepository $videoRepository
     )
     {
-        $this->postRepository = $postRepository;
-        $this->tagRepository = $tagRepository;
-        $this->videoRepository = $videoRepository;
+        $this->post = $postRepository;
+        $this->tag = $tagRepository;
+        $this->video = $videoRepository;
     }
 
     /**
      * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index(Request $request)
+    public function index(Request $request): View
     {
         if ($request->has('search')) {
             return $this->indexSearch($request);
@@ -59,28 +70,26 @@ class MainController extends Controller
      * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function indexMain(Request $request)
+    public function indexMain(Request $request): View
     {
         $posts = $this->getCollection($request);
 
         $page = $request->get('page', LengthAwarePaginator::resolveCurrentPage());
-        $perPage = 15;
+        $perPage = static::POSTS_PER_PAGE;
         $offSet = ($page * $perPage) - $perPage;
         $items = $posts->slice($offSet, $perPage)->all();
 
         $links = new LengthAwarePaginator($posts, count($posts), $perPage);
         $links->setPath('/');
-        $topPost = $this->postRepository->getPinnedPost()->first();
+        $topPost = $this->post->getPinnedPost()->first();
 
         $data = [
             'toppost'       =>  $topPost,
             'links'         =>  $links,
             'posts'         =>  $items,
-            'tags'          =>  $this->tagRepository->getAllTags(),
-            'randposts'     =>  $this->postRepository->getRandomPosts()
+            'tags'          =>  $this->tag->getAllTags(),
+            'randposts'     =>  $this->post->getRandomPosts()
         ];
-
-        //dd($data);
 
         return view('frontend.main', $data);
     }
@@ -89,43 +98,43 @@ class MainController extends Controller
      * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function indexSearch(Request $request)
+    public function indexSearch(Request $request): View
     {
         $posts = $this->getCollection($request);
         if ($posts->count() == 1) {
             $query = $request->get('search');
-            $topPost = $this->postRepository->getPostsBySearchQuery($query)->first();
+            $topPost = $this->post->getPostsBySearchQuery($query)->first();
             $posts = [];
         } else {
             $topPost = [];
         }
 
         $data = [
-            'toppost'       =>  $topPost,
-            'posts'         =>  $posts,
-            'tags'          =>  $this->tagRepository->getAllTags(),
+            'toppost' => $topPost,
+            'posts' => $posts,
+            'tags' => $this->tag->getAllTags(),
         ];
-        //dd($topPost);
+
         return view('frontend.main', $data);
     }
 
     /**
      * @param Request $request
-     * @return static
+     * @return Collection
      */
-    public function getCollection(Request $request)
+    public function getCollection(Request $request): Collection
     {
         if ($request->has('search')) {
             $query = $request->get('search');
-            $postscollection = collect($this->postRepository->getPostsBySearchQuery($query)->get());
-            $videoscollection = collect($this->videoRepository->getVideosBySearchQuery($query)->get());
+            $postscollection = collect($this->post->getPostsBySearchQuery($query)->get());
+            $videoscollection = collect($this->video->getVideosBySearchQuery($query)->get());
             $posts = $postscollection->merge($videoscollection)->sortByDesc('published_at');
 
             return $posts;
         }
 
-        $postscollection = collect($this->postRepository->getLatestPublishedPosts()->get());
-        $videoscollection = collect($this->videoRepository->getLatestVideos()->get());
+        $postscollection = collect($this->post->getLatestPublishedPosts()->get());
+        $videoscollection = collect($this->video->getLatestVideos()->get());
         $posts = $postscollection->merge($videoscollection)->sortByDesc('published_at');
 
         return $posts;
@@ -135,9 +144,9 @@ class MainController extends Controller
     /**
      * Custom 503 page for a little bit of maintenance
      *
-     * @return mixed
+     * @return View
      */
-    public function maintenance()
+    public function maintenance(): View
     {
       return view('errors.503-custom');
     }
