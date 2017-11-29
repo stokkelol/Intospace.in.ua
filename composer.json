@@ -27,7 +27,8 @@
         "predis/predis": "^1.1",
         "sofa/eloquence": "5.5.*",
         "irazasyed/telegram-bot-sdk": "^2.0",
-        "facebook/graph-sdk": "^5.4"
+        "facebook/graph-sdk": "^5.4",
+        "arcanedev/log-viewer": "^4.4"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

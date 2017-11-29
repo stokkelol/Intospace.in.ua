@@ -191,7 +191,8 @@ return [
         //https://github.com/jarektkaczyk/eloquence
         Sofa\Eloquence\BaseServiceProvider::class,
         //https://telegram-bot-sdk.readme.io/
-        Telegram\Bot\Laravel\TelegramServiceProvider::class
+        Telegram\Bot\Laravel\TelegramServiceProvider::class,
+        Arcanedev\LogViewer\LogViewerServiceProvider::class,
 
 
     ],
