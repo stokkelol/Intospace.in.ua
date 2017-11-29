@@ -70,7 +70,7 @@
                 <div class="footer-copyright">
                     <blockquote>
                         <br>
-                        <i class="fa fa-copyright" aria-hidden="true"></i> 2015-16 Intospace.in.ua. Большая просьба, при использовании материалов с сайта добавьте активную гиперссылку на <a href="http://www.intospace.in.ua">intospace.in.ua</a>
+                        <i class="fa fa-copyright" aria-hidden="true"></i> 2015-17 Intospace.in.ua. Большая просьба, при использовании материалов с сайта добавьте активную гиперссылку на <a href="http://www.intospace.in.ua">intospace.in.ua</a>
                     </blockquote>
                     <p>Powered by <a href="https://laravel.com/">Laravel</a>.</p>
                     <p class="load-timer">This page took {{ round((microtime(true) - LARAVEL_START), 3) }} seconds to render</p>

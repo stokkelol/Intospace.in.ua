@@ -3,15 +3,22 @@
 namespace App\Models;
 
 use App\Models\Band;
-use Cviebrock\EloquentSluggable\SluggableInterface;
-use Cviebrock\EloquentSluggable\SluggableTrait;
+use Cviebrock\EloquentSluggable\Sluggable;
 use App\Traits\ScopesTrait;
 use App\Core\Entity;
 
-class Video extends Entity implements SluggableInterface
+class Video extends Entity
 {
-    use SluggableTrait;
-    use ScopesTrait;
+    use ScopesTrait, Sluggable;
+
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'title'
+            ]
+        ];
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

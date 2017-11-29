@@ -2,19 +2,21 @@
 
 namespace App\Models;
 
-use Cviebrock\EloquentSluggable\SluggableInterface;
-use Cviebrock\EloquentSluggable\SluggableTrait;
 use Illuminate\Database\Eloquent\Model;
+use Cviebrock\EloquentSluggable\Sluggable;
 
-class Tag extends Model implements SluggableInterface
+class Tag extends Model
 {
-    use SluggableTrait;
+    use Sluggable;
 
-    protected $sluggable = [
-        'build_from'    =>  'tag',
-        'save_to'       =>  'slug',
-        'unique'        => true,
-    ];
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'title'
+            ]
+        ];
+    }
 
     /**
      * @var string

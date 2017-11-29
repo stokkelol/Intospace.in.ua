@@ -2,23 +2,21 @@
 
 namespace App\ViewComposers;
 
+use App\Models\Post;
 use Illuminate\Contracts\View\View;
-use App\Models\Category;
-use App\Models\Tag;
-use App\Repositories\Posts\PostRepository;
 
 class FooterComposer
 {
     protected $post;
 
-    public function __construct(PostRepository $post)
+    public function __construct(Post $post)
     {
         $this->post = $post;
     }
 
     public function compose(View $view)
     {
-        $randompost = $this->post->getLatestActivePosts()->random(1);
+        $randompost = $this->post->inRandomOrder()->first();
 
         $view->with('randompost', $randompost);
     }

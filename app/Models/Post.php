@@ -2,17 +2,22 @@
 
 namespace App\Models;
 
-use Cviebrock\EloquentSluggable\SluggableInterface;
-use Cviebrock\EloquentSluggable\SluggableTrait;
 use App\Traits\ScopesTrait;
 use App\Core\Entity;
-use Sofa\Eloquence\Eloquence;
+use Cviebrock\EloquentSluggable\Sluggable;
 
-class Post extends Entity implements SluggableInterface
+class Post extends Entity
 {
-    use SluggableTrait;
-    use ScopesTrait;
-    use Eloquence;
+    use ScopesTrait, Sluggable;
+
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'title'
+            ]
+        ];
+    }
 
     /**
      * @var string

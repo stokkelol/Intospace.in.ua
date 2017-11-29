@@ -3,17 +3,15 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Cviebrock\EloquentSluggable\SluggableInterface;
-use Cviebrock\EloquentSluggable\SluggableTrait;
+use Cviebrock\EloquentSluggable\Sluggable;
 
 /**
  * Class Band
  * @package App
  */
-class Band extends Model implements SluggableInterface
+class Band extends Model
 {
-    use SluggableTrait;
-
+    use Sluggable;
     /**
      * @var array
      */
@@ -27,6 +25,15 @@ class Band extends Model implements SluggableInterface
      * @var string
      */
     protected $table = 'bands';
+
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'title'
+            ]
+        ];
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

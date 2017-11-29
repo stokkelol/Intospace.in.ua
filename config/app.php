@@ -173,14 +173,10 @@ return [
         Jenssegers\Agent\AgentServiceProvider::class,
         //https://github.com/YOzaz/Laravel-SwiftMailer
         YOzaz\LaravelSwiftmailer\ServiceProvider::class,
-        //https://github.com/StydeNet/blade-pagination
-        Styde\BladePagination\ServiceProvider::class,
         //https://github.com/barryvdh/laravel-debugbar
         Barryvdh\Debugbar\ServiceProvider::class,
-        //https://github.com/gaaarfild/laravel-pinger
-        Gaaarfild\LaravelPinger\LaravelPingerServiceProvider::class,
         //https://github.com/cviebrock/eloquent-sluggable
-        Cviebrock\EloquentSluggable\SluggableServiceProvider::class,
+        Cviebrock\EloquentSluggable\ServiceProvider::class,
         //https://github.com/laracasts/flash
         Laracasts\Flash\FlashServiceProvider::class,
         //https://github.com/spatie/laravel-analytics
@@ -189,16 +185,12 @@ return [
         Unisharp\Ckeditor\ServiceProvider::class,
         //https://github.com/RoumenDamianoff/laravel-feed
         Roumen\Feed\FeedServiceProvider::class,
-        //https://github.com/teamtnt/tntsearch
-        TeamTNT\TNTSearch\TNTSearchServiceProvider::class,
         //https://github.com/Zizaco/entrust
         Zizaco\Entrust\EntrustServiceProvider::class,
         //https://github.com/RoumenDamianoff/laravel-sitemap
         Roumen\Sitemap\SitemapServiceProvider::class,
-        //https://github.com/algolia/algoliasearch-laravel
-        AlgoliaSearch\Laravel\AlgoliaServiceProvider::class,
         //https://github.com/jarektkaczyk/eloquence
-        Sofa\Eloquence\ServiceProvider::class,
+        Sofa\Eloquence\BaseServiceProvider::class,
         //https://telegram-bot-sdk.readme.io/
         Telegram\Bot\Laravel\TelegramServiceProvider::class
 
@@ -258,7 +250,6 @@ return [
         'Agent' => Jenssegers\Agent\Facades\Agent::class,
         'Mail' => YOzaz\LaravelSwiftmailer\Facade::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
-        'Pinger' => Gaaarfild\LaravelPinger\PingerFacade::class,
         'Flash' => Laracasts\Flash\Flash::class,
         'LaravelAnalytics' => Spatie\LaravelAnalytics\LaravelAnalyticsFacade::class,
         'Feed' => Roumen\Feed\Feed::class,

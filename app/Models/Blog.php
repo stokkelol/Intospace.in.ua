@@ -10,10 +10,8 @@ use App\Core\Entity;
  * Class Blog
  * @package App
  */
-class Blog extends Entity implements SluggableInterface
+class Blog extends Entity
 {
-    use SluggableTrait;
-    
     /**
      * @var string
      */

@@ -3,18 +3,16 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Cviebrock\EloquentSluggable\SluggableInterface;
-use Cviebrock\EloquentSluggable\SluggableTrait;
 use Illuminate\Support\Facades\DB;
+use Cviebrock\EloquentSluggable\Sluggable;
 
 /**
  * Class Category
  * @package App
  */
-class Category extends Model implements SluggableInterface
+class Category extends Model
 {
-    use SluggableTrait;
-
+    use Sluggable;
     /**
      * @var array
      */
@@ -23,6 +21,15 @@ class Category extends Model implements SluggableInterface
         'save_to'       =>  'slug',
         'unique'        =>  true,
     ];
+
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'title'
+            ]
+        ];
+    }
 
     /**
      * @var string
