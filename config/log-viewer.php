@@ -41,7 +41,7 @@ return [
         'enabled'    => true,
 
         'attributes' => [
-            'prefix'     => 'log-viewer',
+            'prefix'     => env('ARCANEDEV_LOGVIEWER_ROUTE'),
 
             'middleware' => env('ARCANEDEV_LOGVIEWER_MIDDLEWARE') ? explode(',', env('ARCANEDEV_LOGVIEWER_MIDDLEWARE')) : null,
         ],
