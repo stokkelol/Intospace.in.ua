@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
@@ -13,6 +14,11 @@ use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
 use App\Http\Requests;
 
+/**
+ * Class BandController
+ *
+ * @package App\Http\Controllers
+ */
 class BandController extends Controller
 {
     protected $bandRepository;

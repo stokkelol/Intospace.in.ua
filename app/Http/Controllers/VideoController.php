@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
@@ -7,6 +8,7 @@ use App\Models\Video;
 
 /**
  * Class VideoController
+ *
  * @package App\Http\Controllers
  */
 class VideoController extends Controller

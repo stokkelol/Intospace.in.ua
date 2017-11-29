@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
@@ -9,6 +10,7 @@ use App\Repositories\Posts\PostRepository;
 
 /**
  * Class UserController
+ *
  * @package App\Http\Controllers
  */
 class UserController extends Controller

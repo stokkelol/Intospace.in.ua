@@ -1,9 +1,15 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
 use Facebook\Facebook;
 
+/**
+ * Class FacebookController
+ *
+ * @package App\Http\Controllers
+ */
 class FacebookController extends Controller
 {
     public function test()

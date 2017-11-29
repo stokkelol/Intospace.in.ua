@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
@@ -10,6 +11,7 @@ use App\Models\Tag;
 
 /**
  * Class SidebarController
+ *
  * @package App\Http\Controllers
  */
 class SidebarController extends Controller

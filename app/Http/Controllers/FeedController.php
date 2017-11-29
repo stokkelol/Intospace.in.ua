@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
@@ -10,6 +11,7 @@ use Illuminate\Support\Facades\URL;
 
 /**
  * Class FeedController
+ *
  * @package App\Http\Controllers
  */
 class FeedController extends Controller

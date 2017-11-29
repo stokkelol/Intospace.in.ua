@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
@@ -15,6 +16,7 @@ use Illuminate\Pagination\Paginator;
 
 /**
  * Class MainController
+ *
  * @package App\Http\Controllers
  */
 class MainController extends Controller

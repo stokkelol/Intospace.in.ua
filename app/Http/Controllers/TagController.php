@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
@@ -8,6 +9,7 @@ use App\Models\Post;
 
 /**
  * Class TagController
+ *
  * @package App\Http\Controllers
  */
 class TagController extends Controller

@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
@@ -6,6 +7,7 @@ use App\Http\Requests;
 
 /**
  * Class PageController
+ *
  * @package App\Http\Controllers
  */
 class PageController extends Controller

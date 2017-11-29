@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
@@ -11,6 +12,7 @@ use Illuminate\Support\Facades\DB;
 
 /**
  * Class SitemapController
+ *
  * @package App\Http\Controllers
  */
 class SitemapController extends Controller
