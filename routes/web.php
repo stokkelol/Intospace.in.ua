@@ -175,3 +175,7 @@ Route::group(['prefix' => 'backend', 'middleware' => ['role:admin|owner|demo']],
 });
 
 Route::get('pages/{page_title}', 'PageController@index');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
