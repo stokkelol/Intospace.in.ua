@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Core;
 
@@ -7,6 +8,7 @@ use App\Models\User;
 
 /**
  * Class Entity
+ *
  * @package App\Core
  */
 abstract class Entity extends Model

@@ -10,5 +10,8 @@ namespace App\Bot;
  */
 class Bot
 {
-
+    public function __construct()
+    {
+        
+    }
 }

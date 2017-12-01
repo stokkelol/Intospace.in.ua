@@ -1,8 +1,12 @@
 <?php
+declare(strict_types=1);
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
+/**
+ * Class CreateBandsTable
+ */
 class CreateBandsTable extends Migration
 {
     /**

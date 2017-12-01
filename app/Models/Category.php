@@ -17,14 +17,12 @@ class Category extends Model
 {
     use Sluggable;
 
+    const TABLE_NAMES = 'categories';
+
     /**
-     * @var array
+     * @var string
      */
-    protected $sluggable = [
-        'build_from'    =>  'title',
-        'save_to'       =>  'slug',
-        'unique'        =>  true,
-    ];
+    protected $table = self::TABLE_NAMES;
 
     /**
      * @return array
@@ -37,11 +35,6 @@ class Category extends Model
             ]
         ];
     }
-
-    /**
-     * @var string
-     */
-    protected $table = 'categories';
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

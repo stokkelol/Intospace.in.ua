@@ -14,14 +14,6 @@ use Cviebrock\EloquentSluggable\Sluggable;
 class Band extends Model
 {
     use Sluggable;
-    /**
-     * @var array
-     */
-    protected $sluggable = [
-        'build_from'    =>  'title',
-        'save_to'       =>  'slug',
-        'unique'        =>  true,
-    ];
 
     /**
      * @var string
