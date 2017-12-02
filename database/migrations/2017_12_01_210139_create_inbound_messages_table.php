@@ -8,7 +8,7 @@ use Illuminate\Database\Migrations\Migration;
 /**
  * Class CreateMessagesTable
  */
-class CreateMessagesTable extends Migration
+class CreateInboundMessagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -17,7 +17,7 @@ class CreateMessagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('messages', function (Blueprint $table) {
+        Schema::create('inbound_messages', function (Blueprint $table) {
             $table->unsignedBigInteger('id');
             $table->unsignedBigInteger('chat_id');
             $table->unsignedBigInteger('user_id');
@@ -27,20 +27,8 @@ class CreateMessagesTable extends Migration
             $table->timestamp('forward_timestamp')->nullable();
             $table->unsignedBigInteger('reply_to_chat')->nullable();
             $table->unsignedBigInteger('reply_to_message')->nullable();
-            $table->text('text')->nullable();
-            $table->text('entities')->nullable();
-            $table->text('audio')->nullable();
-            $table->text('document')->nullable();
-            $table->text('photo')->nullable();
-            $table->text('sticker')->nullable();
-            $table->text('video')->nullable();
-            $table->text('voice')->nullable();
-            $table->text('video_note')->nullable();
-            $table->text('contact')->nullable();
-            $table->text('location')->nullable();
-            $table->text('venue')->nullable();
-            $table->text('caption')->nullable();
-            $table->text('new_chat_members')->nullable();
+            $table->unsignedInteger('message_type_id');
+            $table->text('message_text')->nullable();
             $table->unsignedBigInteger('left_chat_user_id')->nullable();
             $table->string('new_chat_title', 191)->nullable();
             $table->text('new_chat_photo')->nullable();
@@ -70,6 +58,10 @@ class CreateMessagesTable extends Migration
             $table->foreign('forward_from_chat')
                 ->references('id')
                 ->on('chats');
+
+            $table->foreign('message_type_id')
+                ->references('id')
+                ->on('message_types');
 
             $table->foreign('left_chat_user_id')
                 ->references('id')

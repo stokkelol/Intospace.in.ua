@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @package App
  */
-class Message extends Model
+class InboundMessage extends Model
 {
     const TABLE_NAME = 'messages';
 
