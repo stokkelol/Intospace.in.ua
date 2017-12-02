@@ -69,7 +69,7 @@ class Bot
         $chat = $this->chat->where('id', $fromChat['id'])->first();
 
         if ($user === null) {
-            $this->saveUser($user);
+            $this->saveUser($from);
         }
 
         if ($chat === null) {
