@@ -52,7 +52,7 @@ class Bot
 
         $this->telegram->sendMessage([
             'chat_id' => $chat->id,
-            'text' => 'Hi ' . $user->user_name . '!'
+            'text' => 'Hi ' . $user->user_name !== null ? $user->user_name : $user->first_name . '!'
         ]);
     }
 
