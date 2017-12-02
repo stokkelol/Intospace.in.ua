@@ -22,6 +22,6 @@ class Chat extends Model
      */
     public function users(): BelongsToMany
     {
-        return $this->belongsToMany(TelegramUser::class);
+        return $this->belongsToMany(TelegramUser::class, 'chat_user', 'chat_id', 'user_id');
     }
 }
