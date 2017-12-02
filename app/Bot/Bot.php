@@ -73,7 +73,7 @@ class Bot
         }
 
         if ($chat === null) {
-            $chat = $this->saveChat($fromChat);
+            $chat = $this->saveChat($fromChat, $user);
         }
 
         return [$user, $chat];
@@ -98,9 +98,10 @@ class Bot
 
     /**
      * @param array $fromChat
+     * @param TelegramUser $user
      * @return Chat
      */
-    private function saveChat(array $fromChat): Chat
+    private function saveChat(array $fromChat, TelegramUser $user): Chat
     {
         $chat = new Chat();
         $chat->id = $fromChat['id'];
@@ -110,6 +111,8 @@ class Bot
         $chat->is_all_admins = false;
         $chat->old_chat_id = null;
         $chat->save();
+
+        $chat->users()->sync($user);
 
         return $chat;
     }
