@@ -50,9 +50,12 @@ class Bot
     {
         [$user, $chat] = $this->processInitialRequest($request);
 
+
+        $name =  $user->user_name ?? $user->first_name;
+
         $this->telegram->sendMessage([
             'chat_id' => $chat->id,
-            'text' => 'Hi ' . $user->user_name !== null ? $user->user_name . '!' : $user->first_name . '!'
+            'text' => 'Hi ' . $name . '!'
         ]);
     }
 
