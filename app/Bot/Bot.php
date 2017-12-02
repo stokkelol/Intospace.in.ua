@@ -51,7 +51,7 @@ class Bot
         [$user, $chat] = $this->processInitialRequest($request);
 
         $this->telegram->sendMessage([
-            'chat_id' =>$chat->id,
+            'chat_id' => $chat->id,
             'text' => 'Hi ' . $user->user_name . '!'
         ]);
     }
@@ -69,11 +69,11 @@ class Bot
         $chat = $this->chat->where('id', $fromChat['id'])->first();
 
         if ($user === null) {
-            $this->saveUser($from);
+            $user = $this->saveUser($from);
         }
 
         if ($chat === null) {
-            $this->saveChat($fromChat);
+            $chat = $this->saveChat($fromChat);
         }
 
         return [$user, $chat];
