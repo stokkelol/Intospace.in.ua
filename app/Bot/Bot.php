@@ -48,8 +48,6 @@ class Bot
 
     public function processWebhook($request)
     {
-        $this->processRequest($request);
-
         [$user, $chat] = $this->processInitialRequest($request);
 
         $this->telegram->sendMessage([
