@@ -86,6 +86,7 @@ class Bot
     private function saveUser(array $from): TelegramUser
     {
         $user = new TelegramUser();
+        $user->id = $from['id'];
         $user->first_name = $from['first_name'] ?? null;
         $user->last_name = $from['last_name'] ?? null;
         $user->user_name = $from['username'] ?? null;
@@ -102,6 +103,7 @@ class Bot
     private function saveChat(array $fromChat): Chat
     {
         $chat = new Chat();
+        $chat->id = $fromChat['id'];
         $chat->type = $fromChat['type'];
         $chat->title = $fromChat['first_name'] ?? null;
         $chat->name = $fromChat['username'] ?? null;
