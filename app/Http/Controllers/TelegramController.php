@@ -30,6 +30,7 @@ class TelegramController extends Controller
      * TelegramController constructor.
      *
      * @param Api $telegram
+     * @param Bot $bot
      */
     public function __construct(Api $telegram, Bot $bot)
     {
@@ -52,7 +53,7 @@ class TelegramController extends Controller
      */
     public function setWebhook(): bool
     {
-        $response = $this->telegram->setWebhook([
+        $this->telegram->setWebhook([
             'url' => 'https://www.intospace.in.ua/telegram/' . config('telegram.bot_token') . '/webhook'
         ]);
 
@@ -61,17 +62,12 @@ class TelegramController extends Controller
 
     /**
      * @param Request $request
-     * @return Message
      */
-    public function processWebhook(Request $request): Message
+    public function processWebhook(Request $request)
     {
         $result = $request->input();
+        \logger('message', $request->input());
 
-        \logger('message', $result);
-
-        return $this->telegram->sendMessage([
-            'chat_id' => $result['message']['chat']['id'],
-            'text' => 'Hi!'
-        ]);
+        return $this->bot->processWebhook($result);
     }
 }
