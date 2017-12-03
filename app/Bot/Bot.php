@@ -134,7 +134,7 @@ class Bot
     private function saveMessage(array $request, TelegramUser $user, Chat $chat)
     {
         if (isset($request['message']['entities'])) {
-            if ($request['message']['entities']['type'] === 'bot_command') {
+            if ($request['message']['entities'][0]['type'] === 'bot_command') {
                 return $this->saveBotCommand($request, $user, $chat);
             }
         }
@@ -163,7 +163,7 @@ class Bot
      */
     private function saveTextMessage(array $request, TelegramUser $user, Chat $chat)
     {
-        $messageType = MessageType::query()->find(MessageType::ENTITIES);
+        $messageType = MessageType::query()->find(MessageType::TEXT);
 
         $message = $this->prepareMessageToSave($request, $user, $chat);
         $message->messageType()->associate($messageType);
@@ -179,6 +179,7 @@ class Bot
     private function prepareMessageToSave(array $request, TelegramUser $user, Chat $chat)
     {
         $message = new InboundMessage();
+        $message->id = $request['update_id'];
         $message->chat_id = $chat->id;
         $message->user_id = $user->id;
         $message->message_text = $request['message']['text'];
