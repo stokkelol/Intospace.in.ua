@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace App\Bot\ResponseMessages;
 
-use Illuminate\Http\JsonResponse;
-use Predis\Response\ResponseInterface;
+use App\Bot\Interfaces\ResponseMessage;
+use Illuminate\Container\Container;
 use Telegram\Bot\Api;
 use Telegram\Bot\Objects\Message;
 
@@ -30,27 +30,35 @@ abstract class Factory
         $this->telegram = $telegram;
     }
     /**
-     * @param int $type
+     * @param $request
      */
-    abstract protected function createResponse(int $type);
+    abstract protected function createResponse($request);
 
     /**
      * @param int $type
-     * @return Message
+     * @return TextResponse
      */
-    public function create(int $type)
+    public static function factory(int $type)
     {
-        $object = $this->createResponse($type);
-
-        return $this->send($object);
+        return new TextResponse(Container::getInstance()->make(Api::class));
     }
 
     /**
-     * @param ResponseInterface $object
      * @return Message
      */
-    protected function send(ResponseInterface $object): Message
+    public function create($request)
     {
-        $this->telegram->sendMessage($object);
+        $this->createResponse($request);
+
+        return $this->send($this);
+    }
+
+    /**
+     * @param ResponseMessage $object
+     * @return Message
+     */
+    protected function send(ResponseMessage $object): Message
+    {
+        return $this->telegram->sendMessage($object);
     }
 }
