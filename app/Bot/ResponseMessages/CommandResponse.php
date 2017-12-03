@@ -34,7 +34,7 @@ class CommandResponse extends Response
     {
         $type = $this->extractType();
 
-        if ($type === BotCommand::LATEST) {
+        if ($type == BotCommand::LATEST) {
             return $this->responseMessage = 'https://www.youtube.com/watch?v=yCUx5WKIZ1E';
         }
     }
