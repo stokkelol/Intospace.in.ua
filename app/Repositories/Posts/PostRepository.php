@@ -62,11 +62,11 @@ class PostRepository
         return $posts;
     }
 
-    public function getLatestActivePosts()
+    public function getLatestActivePosts($limit = 10)
     {
         $posts = $this->post->latest()
             ->whereIn('status', ['active'])
-            ->take(10)
+            ->take($limit)
             ->get();
 
         return $posts;

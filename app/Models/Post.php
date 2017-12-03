@@ -102,9 +102,10 @@ class Post extends Entity
      */
     public function getPostsByTag($slug)
     {
-        $posts = Post::with('band', 'tags', 'category')->whereHas('tags', function ($query) use ($slug) {
-                                                  $query->whereSlug($slug);})
-                                                ->latest()->paginate(10);
+        $posts = Post::with('band', 'tags', 'category')
+            ->whereHas('tags', function ($query) use ($slug) {
+                $query->whereSlug($slug);
+            })->latest()->paginate(10);
 
         return $posts;
     }

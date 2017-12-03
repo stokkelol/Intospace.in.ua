@@ -4,6 +4,8 @@ declare(strict_types=1);
 namespace App\Bot\ResponseMessages;
 
 use App\Models\BotCommand;
+use App\Models\Post;
+use App\Repositories\Posts\PostRepository;
 
 /**
  * Class CommandResponse
@@ -12,6 +14,8 @@ use App\Models\BotCommand;
  */
 class CommandResponse extends Response
 {
+    const ENDPOINT = 'https://www.intospace.in.ua/posts/';
+
     public function createResponse()
     {
         $this->determineCommand();
@@ -35,7 +39,13 @@ class CommandResponse extends Response
         $type = $this->extractType();
 
         if ($type == BotCommand::LATEST) {
-            return $this->responseMessage = 'https://www.youtube.com/watch?v=yCUx5WKIZ1E';
+            $posts = (new PostRepository(new Post()))->getLatestActivePosts(5);
+
+            foreach ($posts as $post) {
+                $this->responseMessage = static::ENDPOINT . $post->slug;
+
+                $this->send();
+            }
         }
     }
 }
