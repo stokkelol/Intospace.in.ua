@@ -13,12 +13,17 @@ use Telegram\Bot\Objects\Message;
  *
  * @package App\Bot\ResponseMessages
  */
-abstract class Factory
+abstract class Response implements ResponseMessage
 {
     /**
      * @var Api
      */
     protected $telegram;
+
+    /**
+     * @var string
+     */
+    protected $text;
 
     /**
      * Factory constructor.
@@ -60,5 +65,13 @@ abstract class Factory
     protected function send(ResponseMessage $object): Message
     {
         return $this->telegram->sendMessage($object);
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString(): string
+    {
+        return $this->text;
     }
 }

@@ -14,5 +14,5 @@ interface ResponseMessage
 
     public function prepare();
 
-    public function send();
+    public function send(ResponseMessage $object);
 }

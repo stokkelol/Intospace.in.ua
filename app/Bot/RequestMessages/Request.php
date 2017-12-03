@@ -8,7 +8,7 @@ namespace App\Bot\Messages;
  *
  * @package app\Bot\Messages
  */
-abstract class Factory
+abstract class Request
 {
 
 }

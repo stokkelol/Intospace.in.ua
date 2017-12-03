@@ -8,7 +8,7 @@ namespace App\Bot\ResponseMessages;
  *
  * @package app\Bot\ResponseMessages
  */
-class TextResponse extends Factory
+class TextResponse extends Response
 {
     public function createResponse()
     {
