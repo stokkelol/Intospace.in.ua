@@ -10,20 +10,6 @@ use Illuminate\Database\Seeder;
 class BotCommandsSeeder extends Seeder
 {
     /**
-     * @var BotCommand
-     */
-    protected $command;
-
-    /**
-     * BotCommandsSeeder constructor.
-     *
-     * @param BotCommand $command
-     */
-    public function __construct(BotCommand $command)
-    {
-        $this->command = $command;
-    }
-    /**
      * @var array
      */
     private $map = [
@@ -38,9 +24,10 @@ class BotCommandsSeeder extends Seeder
     public function run(): void
     {
         foreach ($this->map as $command) {
-            if (!$this->command->where('title', '=', $command)->exists()) {
-                $this->command->title = $command;
-                $this->command->save();
+            if (!BotCommand::where('title', '=', $command)->exists()) {
+                $model = new BotCommand();
+                $model->title = $command;
+                $model->save();
             }
         }
     }
