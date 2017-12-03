@@ -51,7 +51,7 @@ abstract class Response implements ResponseMessage
     /**
      * @return Message
      */
-    public function create($request)
+    public function prepare(array $request)
     {
         $this->createResponse($request);
 
@@ -62,7 +62,7 @@ abstract class Response implements ResponseMessage
      * @param ResponseMessage $object
      * @return Message
      */
-    protected function send(ResponseMessage $object): Message
+    public function send(ResponseMessage $object): Message
     {
         return $this->telegram->sendMessage($object);
     }

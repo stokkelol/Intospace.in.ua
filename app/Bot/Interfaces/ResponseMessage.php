@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace App\Bot\Interfaces;
 
+use Telegram\Bot\Objects\Message;
+
 /**
  * Interface ResponseMessage
  *
@@ -10,9 +12,7 @@ namespace App\Bot\Interfaces;
  */
 interface ResponseMessage
 {
-    public function determineType();
+    public function prepare(array $request);
 
-    public function prepare();
-
-    public function send(ResponseMessage $object);
+    public function send(ResponseMessage $object): Message;
 }
