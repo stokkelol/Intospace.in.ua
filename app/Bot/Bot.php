@@ -3,9 +3,9 @@ declare(strict_types=1);
 
 namespace App\Bot;
 
-use App\MessageType;
 use App\Models\Chat;
 use App\Models\InboundMessage;
+use App\Models\MessageType;
 use App\Models\TelegramUser;
 use Illuminate\Http\Request;
 use Telegram\Bot\Api;
