@@ -152,7 +152,7 @@ class Bot
         $messageType = MessageType::query()->find(MessageType::ENTITIES);
 
         $message = $this->prepareMessageToSave($request, $user, $chat);
-        $message->messageType()->sync($messageType);
+        $message->messageType()->associate($messageType);
         $message->save();
     }
 
@@ -166,7 +166,7 @@ class Bot
         $messageType = MessageType::query()->find(MessageType::ENTITIES);
 
         $message = $this->prepareMessageToSave($request, $user, $chat);
-        $message->messageType()->sync($messageType);
+        $message->messageType()->associate($messageType);
         $message->save();
     }
 

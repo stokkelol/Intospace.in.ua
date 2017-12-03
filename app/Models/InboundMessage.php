@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
@@ -36,10 +37,10 @@ class InboundMessage extends Model
     ];
 
     /**
-     * @return BelongsToMany
+     * @return BelongsTo
      */
-    public function messageType(): BelongsToMany
+    public function messageType(): BelongsTo
     {
-        return $this->belongsToMany(MessageType::class);
+        return $this->belongsTo(MessageType::class);
     }
 }
