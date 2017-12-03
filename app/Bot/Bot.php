@@ -88,7 +88,7 @@ class Bot
 
         $message = InboundMessage::query()->where('id', $request['update_id'])->first();
         
-        if (!empty($message)) {
+        if ($message === null) {
             $this->saveMessage($request, $user, $chat);
         }
 
