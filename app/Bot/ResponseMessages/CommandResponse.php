@@ -24,7 +24,7 @@ class CommandResponse extends Response
      */
     protected function extractType()
     {
-        return $this->request['message']['entities'][0]['type'];
+        return $this->request['message']['text'];
     }
 
     /**
