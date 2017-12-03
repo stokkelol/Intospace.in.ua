@@ -19,11 +19,17 @@ class CommandResponse extends Response
         return $this->send();
     }
 
+    /**
+     * @return mixed
+     */
     protected function extractType()
     {
         return $this->request['message']['entities'][0]['type'];
     }
 
+    /**
+     * @return string
+     */
     private function determineCommand()
     {
         $type = $this->extractType();
