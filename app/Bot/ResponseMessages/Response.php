@@ -26,13 +26,24 @@ abstract class Response implements ResponseMessage
     protected $text;
 
     /**
+     * @var array
+     */
+    protected $request;
+
+    /**
+     * @var array
+     */
+    protected $responseMessage;
+
+    /**
      * Factory constructor.
      *
      * @param Api $telegram
      */
-    public function __construct(Api $telegram)
+    public function __construct(Api $telegram, array $request)
     {
         $this->telegram = $telegram;
+        $this->request = $request;
     }
     /**
      * @param $request
@@ -41,30 +52,30 @@ abstract class Response implements ResponseMessage
 
     /**
      * @param int $type
+     * @param array $request
      * @return TextResponse
      */
-    public static function factory(int $type)
+    public static function factory(int $type, array $request)
     {
-        return new TextResponse(Container::getInstance()->make(Api::class));
+        return new TextResponse(Container::getInstance()->make(Api::class), $request);
+    }
+
+    /**
+     * @return Response
+     */
+    public function prepare(): self
+    {
+        $this->createResponse($this->request);
+
+        return $this;
     }
 
     /**
      * @return Message
      */
-    public function prepare(array $request)
+    public function send(): Message
     {
-        $this->createResponse($request);
-
-        return $this->send($this);
-    }
-
-    /**
-     * @param ResponseMessage $object
-     * @return Message
-     */
-    public function send(ResponseMessage $object): Message
-    {
-        return $this->telegram->sendMessage($object);
+        return $this->telegram->sendMessage($this->responseMessage);
     }
 
     /**

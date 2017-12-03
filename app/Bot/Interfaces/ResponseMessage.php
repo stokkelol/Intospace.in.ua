@@ -12,7 +12,7 @@ use Telegram\Bot\Objects\Message;
  */
 interface ResponseMessage
 {
-    public function prepare(array $request);
+    public function prepare();
 
-    public function send(ResponseMessage $object): Message;
+    public function send(): Message;
 }
