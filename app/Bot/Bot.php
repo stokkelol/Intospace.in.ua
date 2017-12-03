@@ -3,11 +3,14 @@ declare(strict_types=1);
 
 namespace App\Bot;
 
+use App\Models\BotCommand;
+use App\Models\BotCommandMessage;
 use App\Models\Chat;
 use App\Models\InboundMessage;
 use App\Models\MessageType;
 use App\Models\TelegramUser;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Telegram\Bot\Api;
 
 /**
@@ -151,9 +154,16 @@ class Bot
     {
         $messageType = MessageType::query()->find(MessageType::ENTITIES);
 
+        $command = BotCommand::query()->where('title', '=', $request['message']['text'])->first();
+
         $message = $this->prepareMessageToSave($request, $user, $chat);
         $message->messageType()->associate($messageType);
         $message->save();
+
+        $pivot = new BotCommandMessage();
+        $pivot->inbound_message_id = $message->id;
+        $pivot->bot_command_id = $command->id;
+        $pivot->save();
     }
 
     /**
