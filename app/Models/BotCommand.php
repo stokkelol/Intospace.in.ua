@@ -3,12 +3,14 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Model;
+
 /**
  * Class BotCommand
  *
  * @package app\Models
  */
-class BotCommand
+class BotCommand extends Model
 {
     const LATEST_ID = 1;
     const LATEST = '/latest';

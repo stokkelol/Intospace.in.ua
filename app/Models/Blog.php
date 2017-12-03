@@ -3,9 +3,8 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-use Cviebrock\EloquentSluggable\SluggableInterface;
-use Cviebrock\EloquentSluggable\SluggableTrait;
 use App\Core\Entity;
+use Cviebrock\EloquentSluggable\Sluggable;
 
 /**
  * Class Blog
@@ -14,8 +13,22 @@ use App\Core\Entity;
  */
 class Blog extends Entity
 {
+    use Sluggable;
+
     /**
      * @var string
      */
     protected $table = 'blogposts';
+
+    /**
+     * @return array
+     */
+    public function sluggable(): array
+    {
+        return [
+            'slug' => [
+                'source' => 'title'
+            ]
+        ];
+    }
 }
