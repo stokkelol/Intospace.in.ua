@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Bot;
 
+use App\Bot\ResponseMessages\Response;
 use App\Models\BotCommand;
 use App\Models\BotCommandMessage;
 use App\Models\Chat;
@@ -52,15 +53,11 @@ class Bot
 
     public function processWebhook(array $request)
     {
-        [$user, $chat] = $this->processInitialRequest($request);
+        [$user, $chat, $messageType] = $this->processInitialRequest($request);
 
+        $message = Response::factory($messageType, $request, $this->telegram, $chat)->prepare();
 
-        $name =  $user->user_name ?? $user->first_name;
-
-        $this->telegram->sendMessage([
-            'chat_id' => $chat->id,
-            'text' => 'Hi ' . $name . '!'
-        ]);
+        $message->send();
     }
 
     /**
@@ -88,10 +85,10 @@ class Bot
         $message = InboundMessage::query()->where('id', $request['update_id'])->first();
         
         if ($message === null) {
-            $this->saveMessage($request, $user, $chat);
+            $messageType = $this->saveMessage($request, $user, $chat);
         }
 
-        return [$user, $chat];
+        return [$user, $chat, $messageType];
     }
 
     /**
@@ -136,6 +133,7 @@ class Bot
      * @param array $request
      * @param TelegramUser $user
      * @param Chat $chat
+     * @return Bot|\Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model|null|static[]
      */
     private function saveMessage(array $request, TelegramUser $user, Chat $chat)
     {
@@ -152,6 +150,7 @@ class Bot
      * @param array $request
      * @param TelegramUser $user
      * @param Chat $chat
+     * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model|null|static|static[]
      */
     private function saveBotCommand(array $request, TelegramUser $user, Chat $chat)
     {
@@ -167,12 +166,15 @@ class Bot
         $pivot->inbound_message_id = $request['update_id'];
         $pivot->bot_command_id = $command->id;
         $pivot->save();
+
+        return $messageType;
     }
 
     /**
      * @param array $request
      * @param TelegramUser $user
      * @param Chat $chat
+     * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model|null|static|static[]
      */
     private function saveTextMessage(array $request, TelegramUser $user, Chat $chat)
     {
@@ -181,6 +183,8 @@ class Bot
         $message = $this->prepareMessageToSave($request, $user, $chat);
         $message->messageType()->associate($messageType);
         $message->save();
+
+        return $messageType;
     }
 
     /**

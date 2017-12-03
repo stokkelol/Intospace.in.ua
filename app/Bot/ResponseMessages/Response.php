@@ -4,7 +4,8 @@ declare(strict_types=1);
 namespace App\Bot\ResponseMessages;
 
 use App\Bot\Interfaces\ResponseMessage;
-use Illuminate\Container\Container;
+use App\Models\Chat;
+use App\Models\MessageType;
 use Telegram\Bot\Api;
 use Telegram\Bot\Objects\Message;
 
@@ -31,6 +32,11 @@ abstract class Response implements ResponseMessage
     protected $request;
 
     /**
+     * @var
+     */
+    protected $chat;
+
+    /**
      * @var array
      */
     protected $responseMessage;
@@ -40,24 +46,35 @@ abstract class Response implements ResponseMessage
      *
      * @param Api $telegram
      */
-    public function __construct(Api $telegram, array $request)
+    public function __construct(Api $telegram, array $request, Chat $chat)
     {
         $this->telegram = $telegram;
         $this->request = $request;
+        $this->chat = $chat;
     }
     /**
-     * @param $request
+     * @return void
      */
-    abstract protected function createResponse($request);
+    abstract protected function createResponse();
 
     /**
      * @param int $type
      * @param array $request
-     * @return TextResponse
+     * @param Api $telegram
+     * @return ResponseMessage
      */
-    public static function factory(int $type, array $request)
+    public static function factory(int $type, array $request, Api $telegram, Chat $chat)
     {
-        return new TextResponse(Container::getInstance()->make(Api::class), $request);
+        switch ($type) {
+            case MessageType::TEXT:
+                return new TextResponse($telegram, $request, $chat);
+                break;
+            case MessageType::ENTITIES:
+                return new CommandResponse($telegram, $request, $chat);
+                break;
+        }
+
+
     }
 
     /**
@@ -65,17 +82,17 @@ abstract class Response implements ResponseMessage
      */
     public function prepare(): self
     {
-        $this->createResponse($this->request);
+        $this->createResponse();
 
         return $this;
     }
 
-    /**
-     * @return Message
-     */
-    public function send(): Message
+    public function send()
     {
-        return $this->telegram->sendMessage($this->responseMessage);
+        return $this->telegram->sendMessage([
+            'chat_id' => $this->chat->id,
+            'text' => $this->responseMessage
+        ]);
     }
 
     /**
