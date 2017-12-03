@@ -1,9 +1,8 @@
 <?php
 declare(strict_types=1);
 
-namespace App;
+namespace App\Models;
 
-use App\Models\InboundMessage;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 

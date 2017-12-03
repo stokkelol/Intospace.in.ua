@@ -5,7 +5,6 @@ namespace App\Bot;
 
 use App\MessageType;
 use App\Models\Chat;
-use App\Models\ChatUser;
 use App\Models\InboundMessage;
 use App\Models\TelegramUser;
 use Illuminate\Http\Request;
