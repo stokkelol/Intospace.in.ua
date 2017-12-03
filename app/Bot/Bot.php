@@ -85,8 +85,12 @@ class Bot
         }
 
         $user->chats()->sync($chat);
+
+        $message = InboundMessage::query()->where('id', $request['update_id'])->first();
         
-        $this->saveMessage($request, $user, $chat);
+        if (!empty($message)) {
+            $this->saveMessage($request, $user, $chat);
+        }
 
         return [$user, $chat];
     }
