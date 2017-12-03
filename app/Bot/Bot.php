@@ -3,7 +3,10 @@ declare(strict_types=1);
 
 namespace App\Bot;
 
+use App\MessageType;
 use App\Models\Chat;
+use App\Models\ChatUser;
+use App\Models\InboundMessage;
 use App\Models\TelegramUser;
 use Illuminate\Http\Request;
 use Telegram\Bot\Api;
@@ -46,7 +49,7 @@ class Bot
         $this->chat = $chat;
     }
 
-    public function processWebhook($request)
+    public function processWebhook(Request $request)
     {
         [$user, $chat] = $this->processInitialRequest($request);
 
@@ -78,6 +81,10 @@ class Bot
         if ($chat === null) {
             $chat = $this->saveChat($fromChat, $user);
         }
+
+        $user->chats()->sync($chat);
+        
+        $this->saveMessage($request, $user, $chat);
 
         return [$user, $chat];
     }
@@ -118,5 +125,59 @@ class Bot
         $chat->users()->sync($user);
 
         return $chat;
+    }
+
+    /**
+     * @param Request $request
+     * @param TelegramUser $user
+     * @param Chat $chat
+     */
+    private function saveMessage(Request $request, TelegramUser $user, Chat $chat)
+    {
+        if (isset($request['message']['entities'])) {
+            if ($request['message']['entities']['type'] === 'bot_command') {
+                return $this->saveBotCommand($request, $user, $chat);
+            }
+        }
+
+        return $this->saveTextMessage($request, $user, $chat);
+    }
+
+    /**
+     * @param Request $request
+     * @param TelegramUser $user
+     * @param Chat $chat
+     */
+    private function saveBotCommand(Request $request, TelegramUser $user, Chat $chat)
+    {
+        $messageType = MessageType::query()->find(MessageType::ENTITIES);
+
+        $message = $this->prepareMessageToSave($request, $user, $chat);
+        $message->messageType()->sync($messageType);
+        $message->save();
+    }
+
+    /**
+     * @param Request $request
+     * @param TelegramUser $user
+     * @param Chat $chat
+     */
+    private function saveTextMessage(Request $request, TelegramUser $user, Chat $chat)
+    {
+        $messageType = MessageType::query()->find(MessageType::ENTITIES);
+
+        $message = $this->prepareMessageToSave($request, $user, $chat);
+        $message->messageType()->sync($messageType);
+        $message->save();
+    }
+
+    private function prepareMessageToSave(Request $request, TelegramUser $user, Chat $chat)
+    {
+        $message = new InboundMessage();
+        $message->chat_id = $chat->id;
+        $message->user_id = $user->id;
+        $message->message_text = $request['message']['text'];
+
+        return $message;
     }
 }
