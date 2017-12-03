@@ -5,7 +5,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
  * Class Message
@@ -14,7 +13,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  */
 class InboundMessage extends Model
 {
-    const TABLE_NAME = 'messages';
+    const TABLE_NAME = 'inbound_messages';
 
     /**
      * @var string
