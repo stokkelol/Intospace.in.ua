@@ -55,7 +55,7 @@ class Bot
     {
         [$user, $chat, $messageType] = $this->processInitialRequest($request);
 
-        $message = Response::factory($messageType, $request, $this->telegram, $chat)->prepare();
+        $message = Response::factory($messageType->id, $request, $this->telegram, $chat)->prepare();
 
         $message->send();
     }
