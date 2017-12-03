@@ -15,4 +15,6 @@ class BotCommandMessage extends Model
     const TABLE_NAME = 'bot_command_message';
 
     protected $table = self::TABLE_NAME;
+
+    public $timestamps = false;
 }
