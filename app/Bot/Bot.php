@@ -165,7 +165,7 @@ class Bot
         $message->save();
 
         $pivot = new BotCommandMessage();
-        $pivot->inbound_message_id = $message->id;
+        $pivot->inbound_message_id = $request['update_id'];
         $pivot->bot_command_id = $command->id;
         $pivot->save();
     }
