@@ -82,11 +82,7 @@ class Bot
 
         $user->chats()->sync($chat);
 
-        $message = InboundMessage::query()->where('id', $request['update_id'])->first();
-        
-        if ($message === null) {
-            $messageType = $this->saveMessage($request, $user, $chat);
-        }
+        $messageType = $this->saveMessage($request, $user, $chat);
 
         return [$user, $chat, $messageType];
     }
@@ -137,6 +133,12 @@ class Bot
      */
     private function saveMessage(array $request, TelegramUser $user, Chat $chat)
     {
+        $message = InboundMessage::query()->where('id', $request['update_id'])->first();
+
+        if ($message !== null) {
+            return $message->messageType;
+        }
+
         if (isset($request['message']['entities'])) {
             if ($request['message']['entities'][0]['type'] === 'bot_command') {
                 return $this->saveBotCommand($request, $user, $chat);
