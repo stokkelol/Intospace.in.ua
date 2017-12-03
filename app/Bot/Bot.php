@@ -128,11 +128,11 @@ class Bot
     }
 
     /**
-     * @param Request $request
+     * @param array $request
      * @param TelegramUser $user
      * @param Chat $chat
      */
-    private function saveMessage(Request $request, TelegramUser $user, Chat $chat)
+    private function saveMessage(array $request, TelegramUser $user, Chat $chat)
     {
         if (isset($request['message']['entities'])) {
             if ($request['message']['entities']['type'] === 'bot_command') {
@@ -144,11 +144,11 @@ class Bot
     }
 
     /**
-     * @param Request $request
+     * @param array $request
      * @param TelegramUser $user
      * @param Chat $chat
      */
-    private function saveBotCommand(Request $request, TelegramUser $user, Chat $chat)
+    private function saveBotCommand(array $request, TelegramUser $user, Chat $chat)
     {
         $messageType = MessageType::query()->find(MessageType::ENTITIES);
 
@@ -158,11 +158,11 @@ class Bot
     }
 
     /**
-     * @param Request $request
+     * @param array $request
      * @param TelegramUser $user
      * @param Chat $chat
      */
-    private function saveTextMessage(Request $request, TelegramUser $user, Chat $chat)
+    private function saveTextMessage(array $request, TelegramUser $user, Chat $chat)
     {
         $messageType = MessageType::query()->find(MessageType::ENTITIES);
 
@@ -171,7 +171,13 @@ class Bot
         $message->save();
     }
 
-    private function prepareMessageToSave(Request $request, TelegramUser $user, Chat $chat)
+    /**
+     * @param array $request
+     * @param TelegramUser $user
+     * @param Chat $chat
+     * @return InboundMessage
+     */
+    private function prepareMessageToSave(array $request, TelegramUser $user, Chat $chat)
     {
         $message = new InboundMessage();
         $message->chat_id = $chat->id;
