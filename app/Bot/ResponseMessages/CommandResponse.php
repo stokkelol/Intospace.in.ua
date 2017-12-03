@@ -39,13 +39,18 @@ class CommandResponse extends Response
         $type = $this->extractType();
 
         if ($type == BotCommand::LATEST) {
-            $posts = (new PostRepository(new Post()))->getLatestActivePosts(5);
+            $this->sendLatestPosts();
+        }
+    }
 
-            foreach ($posts as $post) {
-                $this->responseMessage = static::ENDPOINT . $post->slug;
+    private function sendLatestPosts()
+    {
+        $posts = (new PostRepository(new Post()))->getLatestActivePosts(5);
 
-                $this->send();
-            }
+        foreach ($posts as $post) {
+            $this->responseMessage = static::ENDPOINT . $post->slug;
+
+            $this->send();
         }
     }
 }
