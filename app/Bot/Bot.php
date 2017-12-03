@@ -49,7 +49,7 @@ class Bot
         $this->chat = $chat;
     }
 
-    public function processWebhook(Request $request)
+    public function processWebhook(array $request)
     {
         [$user, $chat] = $this->processInitialRequest($request);
 
