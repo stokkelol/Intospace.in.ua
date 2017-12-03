@@ -10,7 +10,6 @@ use App\Models\InboundMessage;
 use App\Models\MessageType;
 use App\Models\TelegramUser;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Telegram\Bot\Api;
 
 /**

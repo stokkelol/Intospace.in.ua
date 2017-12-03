@@ -1,14 +1,14 @@
 <?php
 declare(strict_types=1);
 
-namespace app\Bot\Messages;
+namespace App\Bot\Messages;
 
 /**
  * Class Factory
  *
  * @package app\Bot\Messages
  */
-class Factory
+abstract class Factory
 {
 
 }
