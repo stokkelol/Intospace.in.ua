@@ -13,7 +13,15 @@ class BotCommandsSeeder extends Seeder
      * @var array
      */
     private $map = [
-        '/latest'
+        '/latest',
+        '/black-metal',
+        '/death-metal',
+        '/sludge',
+        '/technical-death-metal',
+        '/sludge-doom',
+        '/experimental',
+        '/psychedelic',
+        '/doom-metal'
     ];
 
     /**

@@ -87,7 +87,10 @@ abstract class Response implements ResponseMessage
         return $this;
     }
 
-    public function send()
+    /**
+     * @return Message
+     */
+    public function send(): Message
     {
         return $this->telegram->sendMessage([
             'chat_id' => $this->chat->id,
