@@ -14,14 +14,14 @@ class BotCommandsSeeder extends Seeder
      */
     private $map = [
         '/latest',
-        '/black-metal',
-        '/death-metal',
+        '/black_metal',
+        '/death_metal',
         '/sludge',
-        '/technical-death-metal',
-        '/sludge-doom',
+        '/technical_death_metal',
+        '/sludge_doom',
         '/experimental',
         '/psychedelic',
-        '/doom-metal'
+        '/doom_metal'
     ];
 
     /**

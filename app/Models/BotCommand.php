@@ -16,19 +16,19 @@ class BotCommand extends Model
     const LATEST = '/latest';
 
     const BLACK_METAL_ID = 2;
-    const BLACK_METAL = '/black-metal';
+    const BLACK_METAL = '/black_metal';
 
     const DEATH_METAL_id = 3;
-    const DEATH_METAL = '/death-metal';
+    const DEATH_METAL = '/death_metal';
 
     const SLUDGE_ID = 4;
     const SLUDGE = '/sludge';
 
     const TECHNICAL_DEATH_METAL_ID = 5;
-    const TECHNICAL_DEATH_METAL = '/technical-death-metal';
+    const TECHNICAL_DEATH_METAL = '/technical_death_metal';
 
     const SLUDGE_DOOM_ID = 6;
-    const SLUDGE_DOOM = '/sludge-doom';
+    const SLUDGE_DOOM = '/sludge_doom';
 
     const EXPERIMENTAL_ID = 7;
     const EXPERIMENTAL = '/experimental';
@@ -37,7 +37,7 @@ class BotCommand extends Model
     const PSYCHEDELIC = '/psychedelic';
 
     const DOOM_METAL_ID = 10;
-    const DOOM_METAL = '/doom-metal';
+    const DOOM_METAL = '/doom_metal';
 
     const TABLE_NAME = 'bot_commands';
 
