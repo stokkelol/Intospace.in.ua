@@ -92,6 +92,8 @@ abstract class Response implements ResponseMessage
      */
     public function send(): Message
     {
+        \logger($this->responseMessage);
+
         return $this->telegram->sendMessage([
             'chat_id' => $this->chat->id,
             'text' => $this->responseMessage

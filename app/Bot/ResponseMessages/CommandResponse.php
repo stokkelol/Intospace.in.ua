@@ -19,8 +19,6 @@ class CommandResponse extends Response
     public function createResponse()
     {
         $this->determineCommand();
-
-        return $this->send();
     }
 
     /**
@@ -53,10 +51,6 @@ class CommandResponse extends Response
 
         foreach ($posts as $post) {
             $this->responseMessage = static::ENDPOINT . $post->slug;
-
-            if ($this->send()) {
-                \logger($this->responseMessage);
-            }
         }
     }
 
@@ -67,9 +61,5 @@ class CommandResponse extends Response
         })->inRandomOrder()->first();
 
         $this->responseMessage = static::ENDPOINT . $post->slug;
-
-        if ($this->send()) {
-            \logger($this->responseMessage);
-        }
     }
 }
