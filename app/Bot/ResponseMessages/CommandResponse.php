@@ -37,12 +37,14 @@ class CommandResponse extends Response
         $type = $this->extractType();
 
         if ($type == BotCommand::LATEST) {
-            $this->sendLatestPosts();
+            return $this->sendLatestPosts();
         }
 
         if ($type == BotCommand::BLACK_METAL) {
-            $this->sendBlackMetal();
+            return $this->sendBlackMetal();
         }
+
+        return true;
     }
 
     private function sendLatestPosts()
@@ -66,5 +68,10 @@ class CommandResponse extends Response
         })->inRandomOrder()->first();
 
         $this->responseMessage = static::ENDPOINT . $post->slug;
+
+        $this->telegram->sendMessage([
+            'chat_id' => $this->chat->id,
+            'text' => $this->responseMessage
+        ]);
     }
 }

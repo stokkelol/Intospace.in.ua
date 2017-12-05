@@ -91,8 +91,8 @@ abstract class Response implements ResponseMessage
     /**
      * @return Response
      */
-    public function sendResponse(): self
+    public function sendResponse()
     {
-        $this->createResponse();
+        return $this->createResponse();
     }
 }
