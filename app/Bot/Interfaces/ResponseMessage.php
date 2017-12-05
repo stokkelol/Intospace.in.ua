@@ -10,5 +10,5 @@ namespace App\Bot\Interfaces;
  */
 interface ResponseMessage
 {
-    public function send();
+    public function sendResponse();
 }

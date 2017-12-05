@@ -6,8 +6,8 @@ namespace App\Bot\ResponseMessages;
 use App\Bot\Interfaces\ResponseMessage;
 use App\Models\Chat;
 use App\Models\MessageType;
+use App\Models\TelegramUser;
 use Telegram\Bot\Api;
-use Telegram\Bot\Objects\Message;
 
 /**
  * Class Factory
@@ -42,15 +42,26 @@ abstract class Response implements ResponseMessage
     protected $responseMessage;
 
     /**
+     * @var TelegramUser
+     */
+    protected $user;
+
+    /**
+     * @var bool
+     */
+    protected $responseIsArray = false;
+
+    /**
      * Factory constructor.
      *
      * @param Api $telegram
      */
-    public function __construct(Api $telegram, array $request, Chat $chat)
+    public function __construct(Api $telegram, array $request, Chat $chat, TelegramUser $user)
     {
         $this->telegram = $telegram;
         $this->request = $request;
         $this->chat = $chat;
+        $this->user = $user;
     }
     /**
      * @return void
@@ -63,14 +74,14 @@ abstract class Response implements ResponseMessage
      * @param Api $telegram
      * @return ResponseMessage
      */
-    public static function factory(int $type, array $request, Api $telegram, Chat $chat)
+    public static function factory(int $type, array $request, Api $telegram, Chat $chat, TelegramUser $user)
     {
         switch ($type) {
             case MessageType::TEXT:
-                return new TextResponse($telegram, $request, $chat);
+                return new TextResponse($telegram, $request, $chat, $user);
                 break;
             case MessageType::ENTITIES:
-                return new CommandResponse($telegram, $request, $chat);
+                return new CommandResponse($telegram, $request, $chat, $user);
                 break;
         }
 
@@ -80,15 +91,8 @@ abstract class Response implements ResponseMessage
     /**
      * @return Response
      */
-    public function prepare(): self
+    public function sendResponse(): self
     {
         $this->createResponse();
-
-        return $this;
-    }
-
-    public function send()
-    {
-        
     }
 }
