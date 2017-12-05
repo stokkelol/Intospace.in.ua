@@ -41,6 +41,10 @@ class CommandResponse extends Response
         if ($type == BotCommand::LATEST) {
             $this->sendLatestPosts();
         }
+
+        if ($type == BotCommand::BLACK_METAL) {
+            $this->sendBlackMetal();
+        }
     }
 
     private function sendLatestPosts()
@@ -52,5 +56,16 @@ class CommandResponse extends Response
 
             $this->send();
         }
+    }
+
+    private function sendBlackMetal()
+    {
+        $post = Post::query()->whereHas('tags', function ($query) {
+            $query->where('tag', 'black metal');
+        })->inRandomOrder()->first();
+
+        $this->responseMessage = static::ENDPOINT . $post->slug;
+
+        $this->send();
     }
 }
