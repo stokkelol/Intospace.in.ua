@@ -13,5 +13,10 @@ class TextResponse extends Response
     public function createResponse()
     {
         $this->responseMessage = 'Silence is golden!';
+
+        $this->telegram->sendMessage([
+            'chat_id' => $this->chat->id,
+            'text' => $this->responseMessage
+        ]);
     }
 }

@@ -51,6 +51,11 @@ class CommandResponse extends Response
 
         foreach ($posts as $post) {
             $this->responseMessage = static::ENDPOINT . $post->slug;
+
+            $this->telegram->sendMessage([
+                'chat_id' => $this->chat->id,
+                'text' => $this->responseMessage
+            ]);
         }
     }
 
@@ -61,5 +66,10 @@ class CommandResponse extends Response
         })->inRandomOrder()->first();
 
         $this->responseMessage = static::ENDPOINT . $post->slug;
+
+        $this->telegram->sendMessage([
+            'chat_id' => $this->chat->id,
+            'text' => $this->responseMessage
+        ]);
     }
 }
