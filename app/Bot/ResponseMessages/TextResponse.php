@@ -14,6 +14,8 @@ class TextResponse extends Response
     {
         $this->responseMessage = 'Yo!';
 
-        $this->send();
+        if ($this->send()) {
+            \logger($this->responseMessage);
+        }
     }
 }

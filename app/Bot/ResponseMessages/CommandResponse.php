@@ -54,7 +54,9 @@ class CommandResponse extends Response
         foreach ($posts as $post) {
             $this->responseMessage = static::ENDPOINT . $post->slug;
 
-            $this->send();
+            if ($this->send()) {
+                \logger($this->responseMessage);
+            }
         }
     }
 
