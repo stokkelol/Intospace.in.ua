@@ -13,15 +13,15 @@ class BotCommandsSeeder extends Seeder
      * @var array
      */
     private $map = [
-        '/latest',
-        '/black_metal',
-        '/death_metal',
-        '/sludge',
-        '/technical_death_metal',
-        '/sludge_doom',
-        '/experimental',
-        '/psychedelic',
-        '/doom_metal'
+        1 => '/latest',
+        2 => '/blackmetal',
+        3 => '/deathmetal',
+        4 => '/sludge',
+        5 => '/technicaldeathmetal',
+        6 => '/sludgedoom',
+        7 => '/experimental',
+        8 => '/psychedelic',
+        9 => '/doommetal'
     ];
 
     /**
@@ -31,10 +31,14 @@ class BotCommandsSeeder extends Seeder
      */
     public function run(): void
     {
-        foreach ($this->map as $command) {
-            if (!BotCommand::where('title', '=', $command)->exists()) {
+        foreach ($this->map as $k => $v) {
+            if (BotCommand::where('id', '=', $k)->exists()) {
+                $model = BotCommand::query()->where('id', '=', $k)->first();
+                $model->title = $v;
+                $model->save();
+            } else {
                 $model = new BotCommand();
-                $model->title = $command;
+                $model->title = $v;
                 $model->save();
             }
         }
