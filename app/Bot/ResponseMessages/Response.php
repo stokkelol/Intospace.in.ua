@@ -97,12 +97,4 @@ abstract class Response implements ResponseMessage
             'text' => $this->responseMessage
         ]);
     }
-
-    /**
-     * @return string
-     */
-    public function __toString(): string
-    {
-        return $this->text;
-    }
 }
