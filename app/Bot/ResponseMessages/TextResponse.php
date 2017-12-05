@@ -12,6 +12,8 @@ class TextResponse extends Response
 {
     public function createResponse()
     {
+        $this->responseMessage = 'Yo!';
 
+        $this->send();
     }
 }
