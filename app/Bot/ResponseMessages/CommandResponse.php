@@ -66,6 +66,8 @@ class CommandResponse extends Response
 
         $this->responseMessage = static::ENDPOINT . $post->slug;
 
-        $this->send();
+        if ($this->send()) {
+            \logger($this->responseMessage);
+        }
     }
 }
