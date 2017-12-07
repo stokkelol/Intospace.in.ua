@@ -19,14 +19,6 @@ class AlterOutboundMessagesTableAddTextId extends Migration
     {
         Schema::table('outbound_messages', function (Blueprint $table) {
             $table->dropColumn('text');
-
-            $table->unsignedInteger('outbound_message_text_id')->nullable();
-
-            $table->foreign('outbound_message_text_id')
-                  ->references('id')
-                  ->on('outbound_message_texts')
-                  ->onUpdate('cascade')
-                  ->onDelete('cascade');
         });
     }
 
@@ -38,9 +30,6 @@ class AlterOutboundMessagesTableAddTextId extends Migration
     public function down()
     {
         Schema::table('outbound_messages', function (Blueprint $table) {
-            $table->dropForeign(['outbound_message_text_id']);
-            $table->dropColumn('outbound_message_text_id');
-
             $table->text('text');
         });
     }

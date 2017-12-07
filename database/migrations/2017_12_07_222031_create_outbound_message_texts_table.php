@@ -19,8 +19,15 @@ class CreateOutboundMessageTextsTable extends Migration
     {
         Schema::create('outbound_message_texts', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('outbound_message_id');
             $table->text('message');
             $table->timestamps();
+
+            $table->foreign('outbound_message_id')
+                  ->references('id')
+                  ->on('outbound_messages')
+                  ->onUpdate('cascade')
+                  ->onDelete('cascade');
         });
     }
 
