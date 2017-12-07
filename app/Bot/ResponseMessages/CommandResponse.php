@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace App\Bot\ResponseMessages;
 
-use app\Bot\ResponseMessages\CommandResponses\BlackMetal;
-use app\Bot\ResponseMessages\CommandResponses\Latest;
+use App\Bot\ResponseMessages\CommandResponses\BlackMetal;
+use App\Bot\ResponseMessages\CommandResponses\Latest;
 use App\Models\BotCommand;
 
 /**
