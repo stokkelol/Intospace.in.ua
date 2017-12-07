@@ -109,7 +109,7 @@ abstract class Response implements ResponseMessage
         $this->createResponse();
         $this->beforeResponse();
 
-        return $this->send();
+        $this->send();
     }
 
     /**
