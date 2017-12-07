@@ -3,9 +3,9 @@ declare(strict_types=1);
 
 namespace App\Bot\ResponseMessages;
 
+use app\Bot\ResponseMessages\CommandResponses\BlackMetal;
+use app\Bot\ResponseMessages\CommandResponses\Latest;
 use App\Models\BotCommand;
-use App\Models\Post;
-use App\Repositories\Posts\PostRepository;
 
 /**
  * Class CommandResponse
@@ -16,7 +16,7 @@ class CommandResponse extends Response
 {
     const ENDPOINT = 'https://www.intospace.in.ua/posts/';
 
-    public function createResponse()
+    public function createResponse(): void
     {
         $this->determineCommand();
     }
@@ -37,41 +37,11 @@ class CommandResponse extends Response
         $type = $this->extractType();
 
         if ($type == BotCommand::LATEST) {
-            return $this->sendLatestPosts();
+            $this->responseMessage = (new BlackMetal())->prepare();
         }
 
         if ($type == BotCommand::BLACK_METAL) {
-            return $this->sendBlackMetal();
+            $this->responseMessage = (new Latest())->prepare();
         }
-
-        return true;
-    }
-
-    private function sendLatestPosts()
-    {
-        $posts = (new PostRepository(new Post()))->getLatestActivePosts(5);
-
-        foreach ($posts as $post) {
-            $this->responseMessage = static::ENDPOINT . $post->slug;
-
-            $this->telegram->sendMessage([
-                'chat_id' => $this->chat->id,
-                'text' => $this->responseMessage
-            ]);
-        }
-    }
-
-    private function sendBlackMetal()
-    {
-        $post = Post::query()->whereHas('tags', function ($query) {
-            $query->where('tag', 'black metal');
-        })->inRandomOrder()->first();
-
-        $this->responseMessage = static::ENDPOINT . $post->slug;
-
-        $this->telegram->sendMessage([
-            'chat_id' => $this->chat->id,
-            'text' => $this->responseMessage
-        ]);
     }
 }

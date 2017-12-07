@@ -6,6 +6,7 @@ namespace App\Bot\ResponseMessages;
 use App\Bot\Interfaces\ResponseMessage;
 use App\Models\Chat;
 use App\Models\MessageType;
+use App\Models\OutboundMessage;
 use App\Models\TelegramUser;
 use Telegram\Bot\Api;
 
@@ -39,7 +40,7 @@ abstract class Response implements ResponseMessage
     /**
      * @var array
      */
-    protected $responseMessage;
+    protected $responseMessage = [];
 
     /**
      * @var TelegramUser
@@ -52,47 +53,83 @@ abstract class Response implements ResponseMessage
     protected $responseIsArray = false;
 
     /**
+     * @var int
+     */
+    protected $type;
+
+    /**
+     * @param int $type
+     * @param Api $telegram
+     * @return ResponseMessage
+     */
+    public static function factory(int $type, Api $telegram)
+    {
+        switch ($type) {
+            case MessageType::TEXT:
+                return new TextResponse($telegram, $type);
+                break;
+            case MessageType::ENTITIES:
+                return new CommandResponse($telegram, $type);
+                break;
+        }
+    }
+
+
+    /**
      * Factory constructor.
      *
      * @param Api $telegram
      */
-    public function __construct(Api $telegram, array $request, Chat $chat, TelegramUser $user)
+    public function __construct(Api $telegram, int $type)
     {
         $this->telegram = $telegram;
+        $this->type = $type;
+    }
+
+    /**
+     * @param array $request
+     * @param Chat $chat
+     * @param TelegramUser $user
+     */
+    public function setParameters(array $request, Chat $chat, TelegramUser $user): void
+    {
         $this->request = $request;
         $this->chat = $chat;
         $this->user = $user;
     }
+
     /**
      * @return void
      */
-    abstract protected function createResponse();
+    abstract protected function createResponse(): void;
 
     /**
-     * @param int $type
-     * @param array $request
-     * @param Api $telegram
-     * @return ResponseMessage
+     * @return void
      */
-    public static function factory(int $type, array $request, Api $telegram, Chat $chat, TelegramUser $user)
+    public function sendResponse(): void
     {
-        switch ($type) {
-            case MessageType::TEXT:
-                return new TextResponse($telegram, $request, $chat, $user);
-                break;
-            case MessageType::ENTITIES:
-                return new CommandResponse($telegram, $request, $chat, $user);
-                break;
-        }
+        $this->createResponse();
+        $this->beforeResponse();
 
+        $this->send();
+    }
+
+    protected function beforeResponse()
+    {
+        $outboundMessage = new OutboundMessage();
+        $outboundMessage->message_type_id = $this->type;
+        $outboundMessage->user_id = $this->user->id;
+        $outboundMessage->chat_id = $this->chat->id;
 
     }
 
-    /**
-     * @return Response
-     */
-    public function sendResponse()
+    protected function send(): void
     {
-        return $this->createResponse();
+        foreach ($this->responseMessage as $message) {
+            $this->telegram->sendMessage([
+                'chat_id' => $this->chat->id,
+                'text' => $message
+            ]);
+        }
     }
 }

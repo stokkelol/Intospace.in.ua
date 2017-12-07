@@ -10,13 +10,8 @@ namespace App\Bot\ResponseMessages;
  */
 class TextResponse extends Response
 {
-    public function createResponse()
+    public function createResponse(): void
     {
         $this->responseMessage = 'Silence is golden!';
-
-        return $this->telegram->sendMessage([
-            'chat_id' => $this->chat->id,
-            'text' => $this->responseMessage
-        ]);
     }
 }
