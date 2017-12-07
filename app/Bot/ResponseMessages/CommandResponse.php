@@ -18,6 +18,7 @@ class CommandResponse extends Response
 
     public function createResponse(): void
     {
+        \logger(123);
         $this->determineCommand();
     }
 
@@ -35,8 +36,7 @@ class CommandResponse extends Response
     private function determineCommand()
     {
         $type = $this->extractType();
-        \logger($type);
-        \logger($this->responseMessage);
+
         if ($type == BotCommand::LATEST) {
             $this->responseMessage = (new BlackMetal())->prepare();
         }
