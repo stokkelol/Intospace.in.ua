@@ -54,7 +54,7 @@ class Bot
     public function processWebhook(array $request)
     {
         if (InboundMessage::query()->where('id', '=', $request['update_id'])->exists()) {
-            return true;
+            return \response('', 204);
         }
 
         [$user, $chat, $messageType] = $this->processInitialRequest($request);
