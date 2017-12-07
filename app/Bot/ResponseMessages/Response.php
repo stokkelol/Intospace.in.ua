@@ -7,6 +7,7 @@ use App\Bot\Interfaces\ResponseMessage;
 use App\Models\Chat;
 use App\Models\MessageType;
 use App\Models\OutboundMessage;
+use App\Models\OutboundMessageText;
 use App\Models\TelegramUser;
 use Telegram\Bot\Api;
 
@@ -114,13 +115,23 @@ abstract class Response implements ResponseMessage
         $this->send();
     }
 
-    protected function beforeResponse()
+    /**
+     * @return void
+     */
+    protected function beforeResponse(): void
     {
         $outboundMessage = new OutboundMessage();
         $outboundMessage->message_type_id = $this->type;
         $outboundMessage->user_id = $this->user->id;
         $outboundMessage->chat_id = $this->chat->id;
+        $outboundMessage->save();
 
+        foreach ($this->responseMessage as $message) {
+            $text = new OutboundMessageText();
+            $text->message = $message;
+            $text->outboundMessage()->associate($outboundMessage);
+            $text->save();
+        }
     }
 
     protected function send(): void

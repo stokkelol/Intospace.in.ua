@@ -5,6 +5,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * Class OutboundMessage
@@ -39,5 +40,13 @@ class OutboundMessage extends Model
     public function messageType(): BelongsTo
     {
         return $this->belongsTo(MessageType::class, 'message_type_id');
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function texts(): HasMany
+    {
+        return $this->hasMany(OutboundMessageText::class);
     }
 }
