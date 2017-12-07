@@ -15,7 +15,10 @@ class Latest
 {
     const ENDPOINT = 'https://www.intospace.in.ua/posts/';
 
-    public function prepare()
+    /**
+     * @return array
+     */
+    public function prepare(): array
     {
         $posts = (new PostRepository(new Post()))->getLatestActivePosts(5);
 

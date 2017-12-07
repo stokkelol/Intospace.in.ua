@@ -16,6 +16,9 @@ class CommandResponse extends Response
 {
     const ENDPOINT = 'https://www.intospace.in.ua/posts/';
 
+    /**
+     * @return void
+     */
     public function createResponse(): void
     {
         $this->determineCommand();

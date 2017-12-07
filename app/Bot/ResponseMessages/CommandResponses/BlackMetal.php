@@ -14,7 +14,10 @@ class BlackMetal
 {
     const ENDPOINT = 'https://www.intospace.in.ua/posts/';
 
-    public function prepare()
+    /**
+     * @return array
+     */
+    public function prepare(): array
     {
         $post = Post::query()->whereHas('tags', function ($query) {
             $query->where('tag', 'black metal');
