@@ -37,11 +37,11 @@ class CommandResponse extends Response
         $type = $this->extractType();
 
         if ($type == BotCommand::LATEST) {
-            $this->responseMessage = (new BlackMetal())->prepare();
+            $this->responseMessage[] = (new BlackMetal())->prepare();
         }
 
         if ($type == BotCommand::BLACK_METAL) {
-            $this->responseMessage = (new Latest())->prepare();
+            $this->responseMessage[] = (new Latest())->prepare();
         }
     }
 }
