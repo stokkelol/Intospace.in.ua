@@ -104,15 +104,12 @@ abstract class Response implements ResponseMessage
      */
     abstract protected function createResponse(): void;
 
-    /**
-     * @return void
-     */
-    public function sendResponse(): void
+    public function sendResponse()
     {
         $this->createResponse();
         $this->beforeResponse();
 
-        $this->send();
+        return $this->send();
     }
 
     /**
@@ -134,6 +131,9 @@ abstract class Response implements ResponseMessage
         }
     }
 
+    /**
+     * @return void
+     */
     protected function send(): void
     {
         foreach ($this->responseMessage as $message) {
