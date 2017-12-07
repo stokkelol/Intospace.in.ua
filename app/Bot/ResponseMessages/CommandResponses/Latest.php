@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace app\Bot\ResponseMessages\CommandResponses;
+namespace App\Bot\ResponseMessages\CommandResponses;
 
 use App\Models\Post;
 use App\Repositories\Posts\PostRepository;
