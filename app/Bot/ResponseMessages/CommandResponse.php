@@ -18,7 +18,6 @@ class CommandResponse extends Response
 
     public function createResponse(): void
     {
-        \logger(123);
         $this->determineCommand();
     }
 
