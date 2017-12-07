@@ -20,6 +20,6 @@ class BlackMetal
             $query->where('tag', 'black metal');
         })->inRandomOrder()->first();
 
-        return static::ENDPOINT . $post->slug;
+        return [static::ENDPOINT . $post->slug];
     }
 }
