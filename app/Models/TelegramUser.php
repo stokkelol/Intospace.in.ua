@@ -43,6 +43,16 @@ class TelegramUser extends Model
      */
     public function chats(): BelongsToMany
     {
-        return $this->belongsToMany(Chat::class, 'chat_user', 'user_id', 'chat_id');
+        return $this->belongsToMany(Chat::class,
+            'chat_user', 'user_id', 'chat_id');
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function socials(): BelongsToMany
+    {
+        return $this->belongsToMany(Social::class,
+            'social_telegram_user', 'user_id', 'social_id');
     }
 }

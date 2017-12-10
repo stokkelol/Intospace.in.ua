@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace App\Bot\ResponseMessages;
 
+use app\Bot\ResponseMessages\TextResponses\Parser;
+
 /**
  * Class TextResponse
  *
@@ -10,8 +12,16 @@ namespace App\Bot\ResponseMessages;
  */
 class TextResponse extends Response
 {
+    /**
+     * @return void
+     */
     public function createResponse(): void
     {
-        $this->responseMessage[] = 'Silence is golden!';
+        $this->parseText();
+    }
+
+    private function parseText()
+    {
+        return new Parser($this->text);
     }
 }

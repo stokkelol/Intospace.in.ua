@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Bot\ResponseMessages\CommandResponses;
 
+use app\Bot\ResponseMessages\Interfaces\Command;
 use App\Models\Post;
 
 /**
@@ -10,7 +11,7 @@ use App\Models\Post;
  *
  * @package app\Bot\ResponseMessages\CommandResponses
  */
-class BlackMetal
+class BlackMetal implements Command
 {
     const ENDPOINT = 'https://www.intospace.in.ua/posts/';
 

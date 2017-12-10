@@ -3,9 +3,8 @@ declare(strict_types=1);
 
 namespace App\Bot\ResponseMessages;
 
-use App\Bot\ResponseMessages\CommandResponses\BlackMetal;
-use App\Bot\ResponseMessages\CommandResponses\Latest;
-use App\Models\BotCommand;
+use app\Bot\ResponseMessages\CommandResponses\Factory;
+use app\Bot\ResponseMessages\Interfaces\Command;
 
 /**
  * Class CommandResponse
@@ -17,11 +16,24 @@ class CommandResponse extends Response
     const ENDPOINT = 'https://www.intospace.in.ua/posts/';
 
     /**
+     * @var Command
+     */
+    private $command;
+
+    /**
      * @return void
      */
     public function createResponse(): void
     {
         $this->determineCommand();
+    }
+
+    /**
+     * @param Command $command
+     */
+    public function setCommand(Command $command): void
+    {
+        $this->command = $command;
     }
 
     /**
@@ -33,18 +45,16 @@ class CommandResponse extends Response
     }
 
     /**
-     * @return string
+     * @return array
      */
     private function determineCommand()
     {
-        $type = $this->extractType();
+        $this->setCommand(Factory::build($this->extractType()));
 
-        if ($type == BotCommand::LATEST) {
-            $this->responseMessage = (new Latest())->prepare();
+        if (!$this->command) {
+            throw new \LogicException('Command is not set');
         }
 
-        if ($type == BotCommand::BLACK_METAL) {
-            $this->responseMessage = (new BlackMetal())->prepare();
-        }
+        return $this->command->prepare();
     }
 }

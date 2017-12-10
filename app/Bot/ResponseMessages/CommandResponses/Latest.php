@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Bot\ResponseMessages\CommandResponses;
 
+use app\Bot\ResponseMessages\Interfaces\Command;
 use App\Models\Post;
 use App\Repositories\Posts\PostRepository;
 
@@ -11,7 +12,7 @@ use App\Repositories\Posts\PostRepository;
  *
  * @package app\Bot\ResponseMessages\CommandResponses
  */
-class Latest
+class Latest implements Command
 {
     const ENDPOINT = 'https://www.intospace.in.ua/posts/';
 

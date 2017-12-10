@@ -10,6 +10,7 @@ use App\Models\OutboundMessage;
 use App\Models\OutboundMessageText;
 use App\Models\TelegramUser;
 use Telegram\Bot\Api;
+use Telegram\Bot\Objects\Message;
 
 /**
  * Class Factory
@@ -104,6 +105,9 @@ abstract class Response implements ResponseMessage
      */
     abstract protected function createResponse(): void;
 
+    /**
+     * @return Message
+     */
     public function sendResponse()
     {
         $this->createResponse();
