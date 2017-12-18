@@ -3,15 +3,14 @@ declare(strict_types=1);
 
 namespace App\Bot\ResponseMessages\CommandResponses;
 
-use app\Bot\ResponseMessages\Interfaces\Command;
-use App\Models\Post;
+use App\Bot\ResponseMessages\Interfaces\Command;
 
 /**
  * Class BlackMetal
  *
  * @package app\Bot\ResponseMessages\CommandResponses
  */
-class BlackMetal implements Command
+class BlackMetal extends BaseCommand implements Command
 {
     const ENDPOINT = 'https://www.intospace.in.ua/posts/';
 
@@ -20,9 +19,7 @@ class BlackMetal implements Command
      */
     public function prepare(): array
     {
-        $post = Post::query()->whereHas('tags', function ($query) {
-            $query->where('tag', 'black metal');
-        })->inRandomOrder()->first();
+        $post = $this->post->getBlackMetal();
 
         return [static::ENDPOINT . $post->slug];
     }

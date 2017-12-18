@@ -5,6 +5,7 @@ namespace App\Bot\ResponseMessages;
 
 use app\Bot\ResponseMessages\CommandResponses\Factory;
 use app\Bot\ResponseMessages\Interfaces\Command;
+use LogicException;
 
 /**
  * Class CommandResponse
@@ -25,7 +26,13 @@ class CommandResponse extends Response
      */
     public function createResponse(): void
     {
-        $this->determineCommand();
+        $messages = $this->determineCommand();
+
+        if (\is_array($messages)) {
+            $this->responseMessage = $messages;
+        } else {
+            $this->responseMessage[] = $messages;
+        }
     }
 
     /**
@@ -52,7 +59,7 @@ class CommandResponse extends Response
         $this->setCommand(Factory::build($this->extractType()));
 
         if (!$this->command) {
-            throw new \LogicException('Command is not set');
+            throw new LogicException('Command is not set');
         }
 
         return $this->command->prepare();

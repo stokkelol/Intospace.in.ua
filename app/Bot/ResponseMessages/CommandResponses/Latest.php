@@ -3,16 +3,14 @@ declare(strict_types=1);
 
 namespace App\Bot\ResponseMessages\CommandResponses;
 
-use app\Bot\ResponseMessages\Interfaces\Command;
-use App\Models\Post;
-use App\Repositories\Posts\PostRepository;
+use App\Bot\ResponseMessages\Interfaces\Command;
 
 /**
  * Class Latest
  *
  * @package app\Bot\ResponseMessages\CommandResponses
  */
-class Latest implements Command
+class Latest extends BaseCommand implements Command
 {
     const ENDPOINT = 'https://www.intospace.in.ua/posts/';
 
@@ -21,7 +19,7 @@ class Latest implements Command
      */
     public function prepare(): array
     {
-        $posts = (new PostRepository(new Post()))->getLatestActivePosts(5);
+        $posts = $this->post->getLatestActivePosts(5);
 
         foreach ($posts as $post) {
             $result[] = static::ENDPOINT . $post->slug;

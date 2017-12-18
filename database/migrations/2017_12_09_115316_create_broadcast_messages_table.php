@@ -21,8 +21,20 @@ class CreateBroadcastMessagesTable extends Migration
             $table->increments('id');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('chat_id');
-
+            $table->unsignedInteger('outbound_message_id');
             $table->timestamps();
+
+            $table->foreign('outbound_message_id')
+                ->references('id')
+                ->on('outbound_messages');
+
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('telegram_users');
+
+            $table->foreign('chat_id')
+                ->references('id')
+                ->on('chats');
         });
     }
 

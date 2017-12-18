@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace app\ApiConnection;
+namespace App\ApiConnection;
 
 use app\ApiConnection\Interfaces\Connector;
 use GuzzleHttp\Client;
@@ -9,7 +9,7 @@ use GuzzleHttp\Client;
 /**
  * Class Connection
  *
- * @package app\ApiConnection
+ * @package App\ApiConnection
  */
 class Connection implements Connector
 {
@@ -17,6 +17,7 @@ class Connection implements Connector
      * @var Client
      */
     private $client;
+
     /**
      * Connection constructor.
      */
@@ -24,6 +25,7 @@ class Connection implements Connector
     {
         $this->client = new Client();
     }
+    
     /**
      * @return Client
      */

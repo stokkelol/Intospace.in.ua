@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace app\Bot\ResponseMessages\Interfaces;
+namespace App\Bot\ResponseMessages\Interfaces;
 
 /**
  * Interface Text

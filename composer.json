@@ -28,7 +28,9 @@
         "sofa/eloquence": "5.5.*",
         "irazasyed/telegram-bot-sdk": "^2.0",
         "facebook/graph-sdk": "^5.4",
-        "arcanedev/log-viewer": "^4.4"
+        "arcanedev/log-viewer": "^4.4",
+        "squizlabs/php_codesniffer": "*",
+        "laravel/tinker": "^1.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

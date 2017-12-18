@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use App\ApiConnection\Connection;
+use App\ApiConnection\Interfaces\Connector;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 use App\Models\Post;
@@ -33,6 +35,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-
+        $this->app->bind(Connector::class, Connection::class);
     }
 }

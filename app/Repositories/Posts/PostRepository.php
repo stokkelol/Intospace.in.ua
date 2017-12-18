@@ -157,4 +157,14 @@ class PostRepository
     {
         return $this->post->where('img', '=', $img)->first();
     }
+
+    /**
+     * @return Post
+     */
+    public function getBlackMetal(): Post
+    {
+        return $this->post->whereHas('tags', function ($query) {
+            $query->where('tag', 'black metal');
+        })->inRandomOrder()->first();
+    }
 }

@@ -10,7 +10,13 @@ namespace App\Bot\Interfaces;
  */
 interface RequestMessage
 {
+    /**
+     * @return mixed
+     */
     public function processRequest();
 
+    /**
+     * @return mixed
+     */
     public function determineType();
 }

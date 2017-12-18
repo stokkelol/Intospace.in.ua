@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace app\Bot\ResponseMessages\TextResponses;
 
+use App\Bot\ResponseMessages\Interfaces\Text;
+
 /**
  * Class Parser
  * 
@@ -34,7 +36,10 @@ class Parser
         $this->text = $text;
     }
 
-    public function parse()
+    /**
+     * @return Text
+     */
+    public function parse(): Text
     {
         if (!\preg_match(self::SEPARATOR, $this->text)) {
             return new Unknown();
