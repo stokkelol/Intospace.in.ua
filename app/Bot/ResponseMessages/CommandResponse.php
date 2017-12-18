@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace App\Bot\ResponseMessages;
 
-use app\Bot\ResponseMessages\CommandResponses\Factory;
-use app\Bot\ResponseMessages\Interfaces\Command;
+use App\Bot\ResponseMessages\CommandResponses\Factory;
+use App\Bot\ResponseMessages\Interfaces\Command;
 use LogicException;
 
 /**
