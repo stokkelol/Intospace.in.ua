@@ -10,10 +10,10 @@ use App\Bot\ResponseMessages\Interfaces\Command;
  *
  * @package App\Bot\ResponseMessages\CommandResponses
  */
-class TechnicalDeathMetal implements Command
+class TechnicalDeathMetal extends BaseCommand implements Command
 {
     public function prepare(): array
     {
-
+        return [static::POSTS_ENDPOINT . $this->post->getRandomPostByTag('technical death metal')->slug];
     }
 }

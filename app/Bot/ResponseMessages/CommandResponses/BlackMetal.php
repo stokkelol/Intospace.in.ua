@@ -17,8 +17,6 @@ class BlackMetal extends BaseCommand implements Command
      */
     public function prepare(): array
     {
-        $post = $this->post->getBlackMetal();
-
-        return [static::POSTS_ENDPOINT . $post->slug];
+        return [static::POSTS_ENDPOINT . $this->post->getBlackMetal()->slug];
     }
 }

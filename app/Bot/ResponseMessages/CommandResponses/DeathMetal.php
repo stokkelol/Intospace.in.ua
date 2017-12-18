@@ -17,8 +17,6 @@ class DeathMetal extends BaseCommand implements Command
      */
     public function prepare(): array
     {
-        $post = $this->post->getRandomPostByTag('death metal');
-
-        return [static::POSTS_ENDPOINT . $post->slug];
+        return [static::POSTS_ENDPOINT . $this->post->getRandomPostByTag('death metal')->slug];
     }
 }

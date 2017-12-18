@@ -14,6 +14,6 @@ class Experimental extends BaseCommand implements Command
 {
     public function prepare(): array
     {
-
+        return [static::POSTS_ENDPOINT . $this->post->getRandomPostByTag('experimental')->slug];
     }
 }

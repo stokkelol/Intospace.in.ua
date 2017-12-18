@@ -10,10 +10,10 @@ use App\Bot\ResponseMessages\Interfaces\Command;
  *
  * @package app\Bot\ResponseMessages\CommandResponses
  */
-class SludgeDoom implements Command
+class SludgeDoom extends BaseCommand implements Command
 {
     public function prepare(): array
     {
-
+        return [static::POSTS_ENDPOINT . $this->post->getRandomPostByTag('sludge doom')->slug];
     }
 }

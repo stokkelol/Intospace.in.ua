@@ -12,8 +12,6 @@ use App\Bot\ResponseMessages\Interfaces\Command;
  */
 class Latest extends BaseCommand implements Command
 {
-    const POSTS_ENDPOINT = 'https://www.intospace.in.ua/posts/';
-
     /**
      * @return array
      */
