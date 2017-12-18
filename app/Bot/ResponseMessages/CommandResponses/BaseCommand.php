@@ -15,6 +15,8 @@ use App\Repositories\Videos\VideoRepository;
  */
 abstract class BaseCommand
 {
+    const POSTS_ENDPOINT = 'https://www.intospace.in.ua/posts/';
+
     /**
      * @var Post
      */

@@ -12,7 +12,7 @@ use App\Bot\ResponseMessages\Interfaces\Command;
  */
 class Latest extends BaseCommand implements Command
 {
-    const ENDPOINT = 'https://www.intospace.in.ua/posts/';
+    const POSTS_ENDPOINT = 'https://www.intospace.in.ua/posts/';
 
     /**
      * @return array
@@ -22,7 +22,7 @@ class Latest extends BaseCommand implements Command
         $posts = $this->post->getLatestActivePosts(5);
 
         foreach ($posts as $post) {
-            $result[] = static::ENDPOINT . $post->slug;
+            $result[] = static::POSTS_ENDPOINT . $post->slug;
         }
 
         return $result;

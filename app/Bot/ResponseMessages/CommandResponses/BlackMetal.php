@@ -12,8 +12,6 @@ use App\Bot\ResponseMessages\Interfaces\Command;
  */
 class BlackMetal extends BaseCommand implements Command
 {
-    const ENDPOINT = 'https://www.intospace.in.ua/posts/';
-
     /**
      * @return array
      */
@@ -21,6 +19,6 @@ class BlackMetal extends BaseCommand implements Command
     {
         $post = $this->post->getBlackMetal();
 
-        return [static::ENDPOINT . $post->slug];
+        return [static::POSTS_ENDPOINT . $post->slug];
     }
 }
