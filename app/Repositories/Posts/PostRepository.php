@@ -1,12 +1,25 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Repositories\Posts;
 
 use App\Models\Post;
 use App\Support\CustomCollections\CollectionByIds;
+use Illuminate\Database\Eloquent\Collection;
 
+/**
+ * Class PostRepository
+ *
+ * @package App\Repositories\Posts
+ */
 class PostRepository
 {
+    const STATUS_ACTIVE = 'active';
+    const STATUS_MODERATION = 'moderation';
+    const STATUS_DELETED = 'deleted';
+    const STATUS_REFUSED = 'refused';
+    const STATUS_DRAFT = 'draft';
+
     /**
      * @var Post
      */
@@ -14,6 +27,7 @@ class PostRepository
 
     /**
      * PostRepository constructor.
+     *
      * @param Post $post
      */
     public function __construct(Post $post)
@@ -21,14 +35,20 @@ class PostRepository
         $this->post = $post;
     }
 
-    public function getAllPosts()
+    /**
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function getAllPosts(): Collection
     {
         return $this->post->all();
     }
 
-    public function getRandomPosts()
+    /**
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function getRandomPosts(): Collection
     {
-        $randomposts = $this->post->where('status', 'like', 'active')
+        $randomposts = $this->post->where('status', 'active')
             ->where('category_id', '=', '1')
             ->get()
             ->random(18);
@@ -50,7 +70,11 @@ class PostRepository
         return $posts;
     }
 
-    public function getPopularPosts($count)
+    /**
+     * @param $count
+     * @return Collection|\Illuminate\Support\Collection
+     */
+    public function getPopularPosts($count): Collection
     {
         $posts = $this->post->with('tags')
             ->whereIn('status', ['active'])
@@ -62,7 +86,11 @@ class PostRepository
         return $posts;
     }
 
-    public function getLatestActivePosts($limit = 10)
+    /**
+     * @param int $limit
+     * @return Collection|\Illuminate\Support\Collection
+     */
+    public function getLatestActivePosts($limit = 10): Collection
     {
         $posts = $this->post->latest()
             ->whereIn('status', ['active'])
@@ -153,7 +181,11 @@ class PostRepository
         return $posts;
     }
 
-    public function getPostByImg($img)
+    /**
+     * @param $img
+     * @return Post
+     */
+    public function getPostByImg($img): Post
     {
         return $this->post->where('img', '=', $img)->first();
     }
@@ -165,6 +197,17 @@ class PostRepository
     {
         return $this->post->whereHas('tags', function ($query) {
             $query->where('tag', 'black metal');
+        })->inRandomOrder()->first();
+    }
+
+    /**
+     * @param string $tag
+     * @return Post
+     */
+    public function getRandomPostByTag(string $tag): Post
+    {
+        return $this->post->whereHas('tags', function ($query) use ($tag) {
+            $query->where('tag', $tag);
         })->inRandomOrder()->first();
     }
 }

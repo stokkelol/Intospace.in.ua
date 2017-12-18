@@ -15,6 +15,9 @@ class Chat extends Model
 {
     const TABLE_NAME = 'chats';
 
+    /**
+     * @var string
+     */
     protected $table = self::TABLE_NAME;
 
     /**
@@ -22,6 +25,11 @@ class Chat extends Model
      */
     public function users(): BelongsToMany
     {
-        return $this->belongsToMany(TelegramUser::class, 'chat_user', 'chat_id', 'user_id');
+        return $this->belongsToMany(
+            TelegramUser::class,
+            'chat_user',
+            'chat_id',
+            'user_id'
+        );
     }
 }

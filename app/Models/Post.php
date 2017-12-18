@@ -6,6 +6,9 @@ namespace App\Models;
 use App\Traits\ScopesTrait;
 use App\Core\Entity;
 use Cviebrock\EloquentSluggable\Sluggable;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
  * Class Post
@@ -16,7 +19,10 @@ class Post extends Entity
 {
     use ScopesTrait, Sluggable;
 
-    public function sluggable()
+    /**
+     * @return array
+     */
+    public function sluggable(): array
     {
         return [
             'slug' => [
@@ -43,7 +49,7 @@ class Post extends Entity
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function tags()
+    public function tags(): BelongsToMany
     {
         return $this->belongsToMany(Tag::class)->withTimestamps();
     }
@@ -59,7 +65,7 @@ class Post extends Entity
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function category()
+    public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class, 'category_id');
     }
@@ -67,16 +73,16 @@ class Post extends Entity
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function band()
+    public function band(): BelongsTo
     {
         return $this->belongsTo(Band::class, 'band_id');
     }
 
     /**
      * @param $category_id
-     * @return mixed
+     * @return Collection
      */
-    public function getPostsByCategoryId($category_id)
+    public function getPostsByCategoryId($category_id): Collection
     {
         $posts = $this->with(['category', 'user']);
         if (!empty($category_id)) {

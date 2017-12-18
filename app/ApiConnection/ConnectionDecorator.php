@@ -29,7 +29,6 @@ abstract class ConnectionDecorator
      * ConnectionDecorator constructor.
      *
      * @param Connector $connector
-     * @param array $config
      */
     public function __construct(Connector $connector)
     {

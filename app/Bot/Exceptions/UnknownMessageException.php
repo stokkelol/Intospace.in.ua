@@ -10,7 +10,4 @@ use Exception;
  *
  * @package App\Bot\Exceptions
  */
-class UnknownMessageException extends Exception
-{
-
-}
+class UnknownMessageException extends Exception {}

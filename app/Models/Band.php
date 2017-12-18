@@ -5,6 +5,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * Class Band
@@ -20,6 +21,9 @@ class Band extends Model
      */
     protected $table = 'bands';
 
+    /**
+     * @return array
+     */
     public function sluggable()
     {
         return [
@@ -32,7 +36,7 @@ class Band extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function posts()
+    public function posts(): HasMany
     {
         return $this->hasMany(Post::class, 'band_id');
     }
@@ -40,7 +44,7 @@ class Band extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function videos()
+    public function videos(): HasMany
     {
         return $this->hasMany(Video::class);
     }

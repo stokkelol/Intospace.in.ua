@@ -12,8 +12,11 @@ use App\Bot\ResponseMessages\Interfaces\Command;
  */
 class DeathMetal extends BaseCommand implements Command
 {
+    /**
+     * @return array
+     */
     public function prepare(): array
     {
-
+        $post = $this->post->getRandomPostByTag('death metal');
     }
 }

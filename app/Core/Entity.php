@@ -13,17 +13,26 @@ use App\Models\User;
  */
 abstract class Entity extends Model
 {
+    /**
+     * @var array
+     */
     protected $fillable = [
         'id',
         'title',
     ];
 
+    /**
+     * @var array
+     */
     protected $dates = [
         'created_at',
         'updated_at',
         'published_at'
     ];
-    
+
+    /**
+     * @var array
+     */
     protected $sluggable = [
         'build_from'    =>  'title',
         'save_to'       =>  'slug',

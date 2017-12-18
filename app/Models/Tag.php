@@ -5,6 +5,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
  * Class Tag
@@ -48,9 +49,14 @@ class Tag extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function posts()
+    public function posts(): BelongsToMany
     {
-        return $this->belongsToMany(Post::class, 'post_tag', 'post_id', 'tag_id');
+        return $this->belongsToMany(
+            Post::class,
+            'post_tag',
+            'post_id',
+            'tag_id'
+        );
     }
 
     /**
