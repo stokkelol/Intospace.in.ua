@@ -160,7 +160,8 @@ class PostRepository
     public function getPostsByBandSlug($slug)
     {
         $posts = $this->getActivePosts()->whereHas('band', function ($query) use ($slug) {
-            $query->whereSlug($slug);})->latest();
+            $query->whereSlug($slug);
+        })->latest();
 
         return $posts;
     }
@@ -170,7 +171,10 @@ class PostRepository
         return $this->getActivePosts()->where('is_pinned', '=', 1);
     }
 
-    public function getMonthlyPosts()
+    /**
+     * @return Collection
+     */
+    public function getMonthlyPosts(): Collection
     {
         $posts = $this->post->byStatus('active')
             ->getMonthlyItems()

@@ -8,7 +8,7 @@ use App\Bot\ResponseMessages\Interfaces\Command;
 /**
  * Class Factory
  *
- * @package app\Bot\ResponseMessages\CommandResponses
+ * @package App\Bot\ResponseMessages\CommandResponses
  */
 final class Factory
 {
@@ -20,23 +20,16 @@ final class Factory
     {
         switch ($type) {
             case '/latest':
-                return new Latest();
+                return new Latest($type);
             case '/blackmetal':
-                return new BlackMetal();
             case '/deathmetal':
-                return new DeathMetal();
             case '/sludge':
-                return new Sludge();
             case '/technicaldeathmetal':
-                return new TechnicalDeathMetal();
             case '/sludgedoom':
-                return new SludgeDoom();
             case '/experimental':
-                return new Experimental();
             case '/psychedelic':
-                return new Psychedelic();
             case '/doommetal':
-                return new DoomMetal();
+                return new Styles($type);
         }
     }
 }

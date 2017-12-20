@@ -32,6 +32,9 @@ class Lastfm extends ConnectionDecorator
         ];
     }
 
+    /**
+     * @return $this
+     */
     public function getUserInfo()
     {
         $this->request = \array_merge($this->request, [
@@ -42,6 +45,9 @@ class Lastfm extends ConnectionDecorator
         return $this;
     }
 
+    /**
+     * @return array
+     */
     public function get(): array
     {
         $handler = new Handler($this->connector->getClient());

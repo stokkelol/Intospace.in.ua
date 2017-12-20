@@ -2,25 +2,39 @@
 
 namespace App\Support\CustomCollections;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 
 class CollectionByIds
 {
+    /**
+     * @var Model
+     */
     protected $model;
 
-    public function __construct($model)
+    /**
+     * CollectionByIds constructor.
+     * @param $model
+     */
+    public function __construct(Model $model)
     {
         $this->model = $model;
     }
 
-    public function find($idsColl)
+    /**
+     * @param $idsColl
+     * @return Collection
+     */
+    public function find($idsColl): Collection
     {
         $models = new Collection;
+
         $ids = explode(',', $idsColl);
-        foreach($ids as $id)
-        {
+
+        foreach ($ids as $id) {
             $models->push($this->model->find($id));
         }
+
         return $models;
     }
 }

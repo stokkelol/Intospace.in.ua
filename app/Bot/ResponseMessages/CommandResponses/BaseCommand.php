@@ -28,11 +28,19 @@ abstract class BaseCommand
     protected $video;
 
     /**
-     * BaseCommand constructor.
+     * @var string
      */
-    public function __construct()
+    protected $type;
+
+    /**
+     * BaseCommand constructor.
+     *
+     * @param string $type
+     */
+    public function __construct(string $type)
     {
         $this->post = new PostRepository(new Post());
         $this->video = new VideoRepository(new Video());
+        $this->type = $type;
     }
 }
