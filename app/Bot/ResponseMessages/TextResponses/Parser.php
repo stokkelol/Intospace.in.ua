@@ -56,39 +56,8 @@ class Parser
 
         if (isset($this->parts[0], $this->parts[1])) {
             if ($this->parts[0] = 'lastfm') {
-                return $this->tryAssociateLastfm($this->parts[1]);
+                return new LastFmSetter($this->parts[1], $this->response);
             }
-        }
-    }
-
-    /**
-     * @return Lastfm
-     */
-    private function makeLastFmHandler(): Lastfm
-    {
-        return Container::getInstance()->make(Lastfm::class);
-    }
-
-    private function tryAssociateLastfm(string $lastfmTag)
-    {
-        $apiHandler = $this->makeLastFmHandler();
-
-        $apiHandler->getUserInfo($lastfmTag);
-        $response = $apiHandler->get();
-
-        $nickname = $response['user']['name'];
-        $user = $this->response->getUser();
-        if (!$user->whereHas('socials', function ($query) {
-            $query->where('id', Social::LASTFM);
-        })->exists()) {
-            $social = Social::query()->find(Social::LASTFM);
-            $userSocial = new SocialTelegramUser();
-            $userSocial->user_id = $user->id;
-            $userSocial->social_id = $social->id;
-            $userSocial->value = $nickname;
-            $userSocial->save();
-
-            return ['Hey ho ' . $nickname . '!'];
         }
     }
 }
