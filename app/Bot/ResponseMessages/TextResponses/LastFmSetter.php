@@ -64,7 +64,7 @@ class LastFmSetter implements Text
         $nickname = $response['user']['name'];
         $user = $this->response->getUser();
         if (!$user->whereHas('socials', function ($query) {
-            $query->where('social.id', Social::LASTFM);
+            $query->where('social_id', Social::LASTFM);
         })->exists()) {
             $social = Social::query()->find(Social::LASTFM);
             $userSocial = new SocialTelegramUser();
