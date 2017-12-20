@@ -22,6 +22,6 @@ class TextResponse extends Response
 
     private function parseText()
     {
-        return new Parser($this);
+        return (new Parser($this))->parse();
     }
 }
