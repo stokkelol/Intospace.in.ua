@@ -44,7 +44,7 @@ class LastFmSetter implements Text
      */
     public function prepare(): array
     {
-        $this->tryAssociateLastfm();
+        return $this->tryAssociateLastfm();
     }
 
     /**
@@ -55,7 +55,10 @@ class LastFmSetter implements Text
         return Container::getInstance()->make(Lastfm::class);
     }
 
-    private function tryAssociateLastfm()
+    /**
+     * @return array
+     */
+    private function tryAssociateLastfm(): array
     {
         $apiHandler = $this->makeLastFmHandler();
         $apiHandler->getUserInfo($this->nickname);
