@@ -58,7 +58,6 @@ class LastFmSetter implements Text
     private function tryAssociateLastfm()
     {
         $apiHandler = $this->makeLastFmHandler();
-
         $apiHandler->getUserInfo($this->nickname);
         $response = $apiHandler->get();
 

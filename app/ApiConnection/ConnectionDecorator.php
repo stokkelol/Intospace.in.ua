@@ -4,13 +4,14 @@ declare(strict_types=1);
 namespace app\ApiConnection;
 
 use App\ApiConnection\Interfaces\Connector;
+use GuzzleHttp\Client;
 
 /**
  * Class ConnectionDecorator
  *
  * @package app\ApiConnection
  */
-abstract class ConnectionDecorator
+abstract class ConnectionDecorator implements Connector
 {
     const GET_REQUEST = 'GET';
     const POST_REQUEST = 'POST';
@@ -34,6 +35,14 @@ abstract class ConnectionDecorator
     {
         $this->connector = $connector;
         $this->setProperties();
+    }
+
+    /**
+     * @return Client
+     */
+    public function getClient(): Client
+    {
+        return $this->connector->getClient();
     }
 
     /**
