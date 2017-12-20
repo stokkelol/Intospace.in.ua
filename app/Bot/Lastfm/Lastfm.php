@@ -52,7 +52,6 @@ class Lastfm extends ConnectionDecorator
      */
     public function get(): array
     {
-        \logger($this->request);
         $handler = new Handler($this->getClient());
 
         $response = $handler->get($this->endpoint, $this->request);
