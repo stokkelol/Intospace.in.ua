@@ -17,11 +17,6 @@ class TextResponse extends Response
      */
     public function createResponse(): void
     {
-        $this->parseText();
-    }
-
-    private function parseText()
-    {
-        return (new Parser($this))->parse();
+        $this->responseMessage = (new Parser($this))->parse();
     }
 }
