@@ -256,7 +256,6 @@ return [
         'Feed' => Roumen\Feed\Feed::class,
         'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
         'Telegram'  => Telegram\Bot\Laravel\Facades\Telegram::class
-
     ],
 
 ];
