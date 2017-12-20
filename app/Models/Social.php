@@ -15,6 +15,9 @@ class Social extends Model
 {
     const TABLE_NAME = 'socials';
 
+    const LASTFM = 1;
+    const FACEBOOK = 2;
+
     /**
      * @var string
      */

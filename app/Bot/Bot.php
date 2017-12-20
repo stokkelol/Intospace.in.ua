@@ -41,11 +41,8 @@ class Bot
      * @param TelegramUser $user
      * @param Chat $chat
      */
-    public function __construct(
-        Api $telegram,
-        TelegramUser $user,
-        Chat $chat
-    ) {
+    public function __construct(Api $telegram, TelegramUser $user, Chat $chat)
+    {
         $this->telegram = $telegram;
         $this->user = $user;
         $this->chat = $chat;

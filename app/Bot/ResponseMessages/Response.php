@@ -88,6 +88,21 @@ abstract class Response implements ResponseMessage
         $this->type = $type;
     }
 
+    public function getUser(): TelegramUser
+    {
+        return $this->user;
+    }
+
+    public function getText(): string
+    {
+        return $this->text;
+    }
+
+    public function getChat(): Chat
+    {
+        return $this->chat;
+    }
+
     /**
      * @param array $request
      * @param Chat $chat

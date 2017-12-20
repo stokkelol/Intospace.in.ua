@@ -33,13 +33,14 @@ class Lastfm extends ConnectionDecorator
     }
 
     /**
+     * @param string $username
      * @return $this
      */
-    public function getUserInfo()
+    public function getUserInfo(string $username)
     {
         $this->request = \array_merge($this->request, [
             'method' => 'user.getInfo',
-            'user' => 'redwhite1'
+            'user' => $username
         ]);
 
         return $this;
@@ -47,6 +48,7 @@ class Lastfm extends ConnectionDecorator
 
     /**
      * @return array
+     * @throws \RuntimeException
      */
     public function get(): array
     {
@@ -54,6 +56,8 @@ class Lastfm extends ConnectionDecorator
 
         $response = $handler->get($this->endpoint, $this->request);
 
-        return \json_decode($response->getBody()->getContents(), true);
+        if ($response->getStatusCode() === 200) {
+            return \json_decode($response->getBody()->getContents(), true);
+        }
     }
 }

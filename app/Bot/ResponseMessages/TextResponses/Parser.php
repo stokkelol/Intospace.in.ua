@@ -3,7 +3,12 @@ declare(strict_types=1);
 
 namespace app\Bot\ResponseMessages\TextResponses;
 
+use App\Bot\Lastfm\Lastfm;
 use App\Bot\ResponseMessages\Interfaces\Text;
+use App\Bot\ResponseMessages\TextResponse;
+use App\Models\Social;
+use App\Models\SocialTelegramUser;
+use Illuminate\Container\Container;
 
 /**
  * Class Parser
@@ -22,18 +27,18 @@ class Parser
     private $parts = [];
 
     /**
-     * @var string
+     * @var Text
      */
-    private $text;
+    private $response;
 
     /**
      * Parser constructor.
      * 
-     * @param string $text
+     * @param TextResponse $response
      */
-    public function __construct(string $text)
+    public function __construct(TextResponse $response)
     {
-        $this->text = $text;
+        $this->response = $response;
     }
 
     /**
@@ -41,12 +46,49 @@ class Parser
      */
     public function parse(): Text
     {
-        if (!\preg_match(self::SEPARATOR, $this->text)) {
+        if (\mb_strpos(self::SEPARATOR, $this->response->getText())) {
             return new Unknown();
         }
 
-        $parts = \explode(self::SEPARATOR, $this->text);
+        $parts = \explode(self::SEPARATOR, $this->response->getText());
 
         $this->parts = $parts;
+
+        if (isset($this->parts[0], $this->parts[1])) {
+            if ($this->parts[0] = 'lastfm') {
+                return $this->tryAssociateLastfm($this->parts[1]);
+            }
+        }
+    }
+
+    /**
+     * @return Lastfm
+     */
+    private function makeLastFmHandler(): Lastfm
+    {
+        return Container::getInstance()->make(Lastfm::class);
+    }
+
+    private function tryAssociateLastfm(string $lastfmTag)
+    {
+        $apiHandler = $this->makeLastFmHandler();
+
+        $apiHandler->getUserInfo($lastfmTag);
+        $response = $apiHandler->get();
+
+        $nickname = $response['user']['name'];
+        $user = $this->response->getUser();
+        if (!$user->whereHas('socials', function ($query) {
+            $query->where('id', Social::LASTFM);
+        })->exists()) {
+            $social = Social::query()->find(Social::LASTFM);
+            $userSocial = new SocialTelegramUser();
+            $userSocial->user_id = $user->id;
+            $userSocial->social_id = $social->id;
+            $userSocial->value = $nickname;
+            $userSocial->save();
+
+            return ['Hey ho ' . $nickname . '!'];
+        }
     }
 }

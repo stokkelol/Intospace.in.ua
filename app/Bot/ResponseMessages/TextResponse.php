@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Bot\ResponseMessages;
 
-use app\Bot\ResponseMessages\TextResponses\Parser;
+use App\Bot\ResponseMessages\TextResponses\Parser;
 
 /**
  * Class TextResponse
@@ -22,6 +22,6 @@ class TextResponse extends Response
 
     private function parseText()
     {
-        return new Parser($this->text);
+        return new Parser($this);
     }
 }
