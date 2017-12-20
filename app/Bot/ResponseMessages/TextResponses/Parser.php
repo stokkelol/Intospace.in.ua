@@ -42,12 +42,12 @@ class Parser
     }
 
     /**
-     * @return Text
+     * @return array
      */
-    public function parse(): Text
+    public function parse(): array
     {
-        if (\mb_strpos(self::SEPARATOR, $this->response->getText())) {
-            return new Unknown();
+        if (!\mb_strpos(self::SEPARATOR, $this->response->getText())) {
+            return (new Unknown())->prepare();
         }
 
         $parts = \explode(self::SEPARATOR, $this->response->getText());
@@ -56,7 +56,7 @@ class Parser
 
         if (isset($this->parts[0], $this->parts[1])) {
             if ($this->parts[0] = 'lastfm') {
-                return new LastFmSetter($this->parts[1], $this->response);
+                return (new LastFmSetter($this->parts[1], $this->response))->prepare();
             }
         }
     }
