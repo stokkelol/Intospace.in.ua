@@ -1,14 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace app\Bot\ResponseMessages\TextResponses;
+namespace App\Bot\ResponseMessages\TextResponses;
 
-use App\Bot\Lastfm\Lastfm;
 use App\Bot\ResponseMessages\Interfaces\Text;
 use App\Bot\ResponseMessages\TextResponse;
-use App\Models\Social;
-use App\Models\SocialTelegramUser;
-use Illuminate\Container\Container;
 
 /**
  * Class Parser

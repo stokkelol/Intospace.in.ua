@@ -1,7 +1,8 @@
 <?php
 declare(strict_types=1);
 
-namespace app\Bot\ResponseMessages\TextResponses;
+namespace App\Bot\ResponseMessages\TextResponses;
+
 use App\Bot\Interfaces\ResponseMessage;
 use App\Bot\Lastfm\Lastfm;
 use App\Bot\ResponseMessages\Interfaces\Text;

@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace app\Bot\ResponseMessages\TextResponses;
+namespace App\Bot\ResponseMessages\TextResponses;
 
-use app\Bot\ResponseMessages\Interfaces\Text;
+use App\Bot\ResponseMessages\Interfaces\Text;
 
 /**
  * Class Unknown
