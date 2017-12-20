@@ -42,7 +42,7 @@ class Parser
      */
     public function parse(): array
     {
-        if (!\mb_strpos(self::SEPARATOR, $this->response->getText())) {
+        if (!\mb_strpos($this->response->getText(), self::SEPARATOR)) {
             return (new Unknown())->prepare();
         }
 
