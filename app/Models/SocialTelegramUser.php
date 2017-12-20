@@ -18,4 +18,9 @@ class SocialTelegramUser extends Model
      * @var string
      */
     protected $table = self::TABLE_NAME;
+
+    /**
+     * @var bool
+     */
+    public $timestamps = false;
 }
