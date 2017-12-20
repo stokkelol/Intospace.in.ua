@@ -30,7 +30,6 @@ class Lastfm extends ConnectionDecorator
             'format' => config('lastfm.format'),
             'api_key' => config('lastfm.api_key')
         ];
-        \logger('123');
     }
 
     /**
@@ -53,6 +52,7 @@ class Lastfm extends ConnectionDecorator
      */
     public function get(): array
     {
+        \logger($this->request);
         $handler = new Handler($this->getClient());
 
         $response = $handler->get($this->endpoint, $this->request);
