@@ -113,6 +113,7 @@ abstract class Response implements ResponseMessage
         $this->request = $request;
         $this->chat = $chat;
         $this->user = $user;
+        $this->text = $request['message']['text'];
     }
 
     /**
