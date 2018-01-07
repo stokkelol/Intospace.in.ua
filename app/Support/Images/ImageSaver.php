@@ -1,18 +1,34 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Support\Images;
 
 use Intervention\Image\Facades\Image;
 
+/**
+ * Class ImageSaver
+ *
+ * @package App\Support\Images
+ */
 class ImageSaver
 {
-    public function saveCover($directorypath, $image)
+    /**
+     * @param $directorypath
+     * @param $image
+     * @return void
+     */
+    public function saveCover($directorypath, $image): void
     {
         $this->save($directorypath, $image);
         $this->saveResized($directorypath, $image);
     }
 
-    public function saveLogo($directorypath, $image)
+    /**
+     * @param $directorypath
+     * @param $image
+     * @return void
+     */
+    public function saveLogo($directorypath, $image): void
     {
         $this->save($directorypath, $image);
     }

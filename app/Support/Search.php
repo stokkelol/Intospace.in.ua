@@ -1,9 +1,15 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Support;
 
 use Illuminate\Support\Facades\DB;
 
+/**
+ * Class Search
+ *
+ * @package App\Support
+ */
 class Search
 {
     public function searchByQueryWithPublishedAt($table, $query)

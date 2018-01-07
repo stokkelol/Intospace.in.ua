@@ -14,5 +14,8 @@ class Conversation extends Model
 {
     const TABLE_NAME = 'conversations';
 
+    /**
+     * @var string
+     */
     protected $table = self::TABLE_NAME;
 }

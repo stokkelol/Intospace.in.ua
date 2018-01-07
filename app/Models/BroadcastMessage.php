@@ -14,7 +14,8 @@ class BroadcastMessage extends Model
 {
     const TABLE_NAME = 'broadcast_messages';
 
+    /**
+     * @var string
+     */
     protected $table = self::TABLE_NAME;
-
-
 }

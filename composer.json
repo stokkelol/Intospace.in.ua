@@ -30,7 +30,8 @@
         "facebook/graph-sdk": "^5.4",
         "arcanedev/log-viewer": "^4.4",
         "squizlabs/php_codesniffer": "*",
-        "laravel/tinker": "^1.0"
+        "laravel/tinker": "^1.0",
+        "laravel/horizon": "^1.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

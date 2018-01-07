@@ -16,6 +16,9 @@ class OutboundMessage extends Model
 {
     const TABLE_NAME = 'outbound_messages';
 
+    /**
+     * @var string
+     */
     protected $table = self::TABLE_NAME;
 
     /**

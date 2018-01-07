@@ -76,11 +76,16 @@ abstract class Response implements ResponseMessage
         }
     }
 
+    /**
+     * @return void
+     */
+    abstract protected function createResponse(): void;
 
     /**
      * Factory constructor.
      *
      * @param Api $telegram
+     * @param int $type
      */
     public function __construct(Api $telegram, int $type)
     {
@@ -88,16 +93,25 @@ abstract class Response implements ResponseMessage
         $this->type = $type;
     }
 
+    /**
+     * @return TelegramUser
+     */
     public function getUser(): TelegramUser
     {
         return $this->user;
     }
 
+    /**
+     * @return string
+     */
     public function getText(): string
     {
         return $this->text;
     }
 
+    /**
+     * @return Chat
+     */
     public function getChat(): Chat
     {
         return $this->chat;
@@ -115,11 +129,6 @@ abstract class Response implements ResponseMessage
         $this->user = $user;
         $this->text = $request['message']['text'];
     }
-
-    /**
-     * @return void
-     */
-    abstract protected function createResponse(): void;
 
     /**
      * @return Message

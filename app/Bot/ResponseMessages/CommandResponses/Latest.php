@@ -19,6 +19,7 @@ class Latest extends BaseCommand implements Command
     {
         $posts = $this->post->getLatestActivePosts(5);
 
+        $result = [];
         foreach ($posts as $post) {
             $result[] = static::POSTS_ENDPOINT . $post->slug;
         }

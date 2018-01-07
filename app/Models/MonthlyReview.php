@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * Class MonthlyReview
+ *
  * @package App\Models
  */
 class MonthlyReview extends Entity

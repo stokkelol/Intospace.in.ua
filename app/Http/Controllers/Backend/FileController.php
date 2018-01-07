@@ -1,33 +1,57 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Http\Controllers\Backend;
 
+use App\Models\Post;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests;
 use Illuminate\Filesystem\Filesystem;
-use App\Support\Images\ImageSaver;
 use Illuminate\Pagination\LengthAwarePaginator;
 use App\Repositories\Posts\PostRepository;
+use Illuminate\View\View;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
+/**
+ * Class FileController
+ *
+ * @package App\Http\Controllers\Backend
+ */
 class FileController extends Controller
 {
+    /**
+     * @var Filesystem
+     */
     protected $file;
+
+    /**
+     * @var PostRepository
+     */
     protected $post;
 
+    /**
+     * FileController constructor.
+     *
+     * @param Filesystem $file
+     * @param PostRepository $post
+     */
     public function __construct(Filesystem $file, PostRepository $post)
     {
         $this->file = $file;
         $this->post = $post;
     }
 
-    public function index(Request $request)
+    /**
+     * @param Request $request
+     * @return View
+     */
+    public function index(Request $request): View
     {
         $filesArray = [];
         $filesInFolder = $this->file->files('upload/covers');
-        foreach ($filesInFolder as $file)
-        {
+        foreach ($filesInFolder as $file) {
             $path = pathinfo($file);
+
             if (! starts_with($path['filename'], 'thumbnail')) {
                 $filesArray[] = $path;
             }
@@ -47,33 +71,45 @@ class FileController extends Controller
         $files_count = $this->countFiles('upload/covers');
 
         $data = [
-            'files'     =>  $items,
-            'links'     =>  $links,
-            'dir_size'  =>  $dirSize,
-            'count'     =>  $files_count
+            'files' => $items,
+            'links' => $links,
+            'dir_size' => $dirSize,
+            'count' => $files_count
         ];
 
         return view('backend.files.index', $data);
     }
 
-    public function getDirectorySize($path)
+    /**
+     * @param $path
+     * @return float
+     */
+    public function getDirectorySize($path): float
     {
-        $total = (int) 0;
+        $total = 0;
         $files = $this->file->files($path);
-        foreach ($files as $filepath)
-        {
+
+        foreach ($files as $filepath) {
             $total += $this->file->size($filepath);
         }
 
         return round($total/1048576, 2);
     }
 
-    public function countFiles($path)
+    /**
+     * @param $path
+     * @return int
+     */
+    public function countFiles($path): int
     {
         return count($this->file->files($path));
     }
 
-    public function openImage(Request $request)
+    /**
+     * @param Request $request
+     * @return View
+     */
+    public function openImage(Request $request): View
     {
         $path = $request->get('path');
         $file = pathinfo($path);
@@ -82,21 +118,27 @@ class FileController extends Controller
         $post = $this->getAssociatedPost($file['basename']);
 
         $data = [
-            'file'  =>  $file,
-            'post'  =>  $post
+            'file' => $file,
+            'post' => $post
         ];
-
-        //dd($data);
 
         return view('backend.files.show', $data);
     }
 
-    public function getAssociatedPost($img)
+    /**
+     * @param $img
+     * @return Post
+     */
+    public function getAssociatedPost($img): Post
     {
         return $this->post->getPostByImg($img);
     }
 
-    public function store(Request $request)
+    /**
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function store(Request $request): RedirectResponse
     {
         $newFile = 'upload/covers/'.$request->get('title').'.jpg';
         $newFileThumbnail = 'upload/covers/'.'thumbnail_'.$request->get('title').'.jpg';
@@ -108,7 +150,11 @@ class FileController extends Controller
         return redirect()->to('/backend/files');
     }
 
-    public function updatePost($img, $newImg)
+    /**
+     * @param $img
+     * @param $newImg
+     */
+    public function updatePost($img, $newImg): void
     {
         $post = $this->post->getPostByImg($img);
         $post->img = $newImg.'.jpg';

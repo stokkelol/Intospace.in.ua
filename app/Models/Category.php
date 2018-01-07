@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\DB;
@@ -45,9 +46,9 @@ class Category extends Model
     }
 
     /**
-     * @return mixed
+     * @return Collection
      */
-    public function categoriesWithPostsCount()
+    public function categoriesWithPostsCount(): Collection
     {
         return $this->leftJoin('posts', 'posts.category_id', '=', 'categories.id')
             ->groupBy('categories.id')

@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Support\Logger;
 
@@ -6,6 +7,11 @@ use Exception;
 use Illuminate\Support\Facades\Log;
 use Psr\Http\Message\ResponseInterface;
 
+/**
+ * Class Logger
+ *
+ * @package App\Support\Logger
+ */
 class Logger
 {
     /**

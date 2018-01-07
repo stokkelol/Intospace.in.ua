@@ -41,5 +41,8 @@ class BotCommand extends Model
 
     const TABLE_NAME = 'bot_commands';
 
+    /**
+     * @var string
+     */
     protected $table = self::TABLE_NAME;
 }

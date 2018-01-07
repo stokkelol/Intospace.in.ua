@@ -14,5 +14,8 @@ class ChatUser extends Model
 {
     const TABLE_NAME = 'chat_user';
 
+    /**
+     * @var string
+     */
     protected $table = self::TABLE_NAME;
 }

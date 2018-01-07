@@ -1,10 +1,16 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Http\Middleware;
 
-use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken as BaseVerifier;
 use Closure;
+use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken as BaseVerifier;
 
+/**
+ * Class VerifyCsrfToken
+ *
+ * @package App\Http\Middleware
+ */
 class VerifyCsrfToken extends BaseVerifier
 {
     /**
@@ -18,11 +24,10 @@ class VerifyCsrfToken extends BaseVerifier
 
     public function handle($request, Closure $next)
     {
-    if ('testing' !== app()->environment())
-    {
-        return parent::handle($request, $next);
-    }
+        if ('testing' !== app()->environment()) {
+            return parent::handle($request, $next);
+        }
 
-    return $next($request);
+        return $next($request);
     }
 }

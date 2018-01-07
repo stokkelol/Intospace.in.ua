@@ -14,5 +14,8 @@ class EditedMessage extends Model
 {
     const TABLE_NAME = 'edited_messages';
 
+    /**
+     * @var string
+     */
     protected $table = self::TABLE_NAME;
 }

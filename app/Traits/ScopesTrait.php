@@ -1,15 +1,33 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Traits;
 
+use Illuminate\Database\Eloquent\Builder;
+
+/**
+ * Trait ScopesTrait
+ *
+ * @package App\Traits
+ */
 trait ScopesTrait
 {
-    public function scopeByStatus($query, $statuses)
+    /**
+     * @param $query
+     * @param $statuses
+     * @return mixed
+     */
+    public function scopeByStatus(Builder $query, $statuses): Builder
     {
         return $query->with('category', 'tags', 'user', 'band')->where('status', $statuses);
     }
 
-    public function scopeBySearchQuery($query, $search)
+    /**
+     * @param Builder $query
+     * @param string $search
+     * @return Builder
+     */
+    public function scopeBySearchQuery(Builder $query, string $search): Builder
     {
         return $query->with('category', 'user')
                     ->where('title', 'like', '%' . $search . '%')
@@ -17,7 +35,11 @@ trait ScopesTrait
                     ->orderBy('id', 'desc');
     }
 
-    public function scopeRecent($query)
+    /**
+     * @param Builder $query
+     * @return Builder
+     */
+    public function scopeRecent(Builder $query): Builder
     {
         return $query->with('category', 'user')
             ->whereIn('status', ['active', 'draft'])
@@ -25,12 +47,16 @@ trait ScopesTrait
             ->orderBy('id', 'desc');
     }
 
-    public function scopeGetMonthlyItems($query)
+    /**
+     * @param Builder $query
+     * @return Builder
+     */
+    public function scopeGetMonthlyItems(Builder $query): Builder
     {
         $startDate = date('Y-m-1');
         $endDate = date('Y-m-t');
 
         return $query->where('published_at', '>=', $startDate)
-                    ->where('published_at', '<=', $endDate);
+                     ->where('published_at', '<=', $endDate);
     }
 }

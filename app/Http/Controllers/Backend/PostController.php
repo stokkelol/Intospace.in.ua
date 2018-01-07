@@ -2,31 +2,56 @@
 
 namespace App\Http\Controllers\Backend;
 
-use Illuminate\Http\Request;
-use App\Http\Requests\StorePostRequest;
 use App\Http\Controllers\Controller;
-use Intervention\Image\Facades\Image;
+use App\Http\Requests\StorePostRequest;
+use App\Models\Band;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
-use App\Models\User;
-use App\Models\Band;
-use Illuminate\Support\Facades\Flash;
-use Illuminate\Support\Facades\Auth;
-use Carbon\Carbon;
-use Illuminate\Support\Facades\DB;
 use App\Support\Images\ImageSaver;
 use App\Support\Statuses\StatusChanger;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Flash;
+use Illuminate\View\View;
 
 class PostController extends Controller
 {
+    /**
+     * @var Post
+     */
     protected $post;
+
+    /**
+     * @var Category
+     */
     protected $category;
+
+    /**
+     * @var Tag
+     */
     protected $tag;
+
+    /**
+     * @var Band
+     */
     protected $band;
 
-    public function __construct(Post $post, Category $category, Tag $tag, Band $band)
-    {
+    /**
+     * PostController constructor.
+     *
+     * @param Post $post
+     * @param Category $category
+     * @param Tag $tag
+     * @param Band $band
+     */
+    public function __construct(
+        Post $post,
+        Category $category,
+        Tag $tag,
+        Band $band
+    ) {
         $this->post = $post;
         $this->category = $category;
         $this->tag = $tag;
@@ -38,14 +63,14 @@ class PostController extends Controller
      *
      * @return View
      */
-    public function index(Request $request)
+    public function index(Request $request): View
     {
         $posts = (new Post)->recent()->newQuery();
 
         if ($request->has('status')) {
             $posts = $this->post->byStatus($request->get('status'));
         }
-        if ($request->exists('orderby')){
+        if ($request->exists('orderby')) {
             $posts = $this->post->with('category', 'user')->orderBy('published_at', 'asc');
         }
         if ($request->has('search')) {
@@ -56,8 +81,8 @@ class PostController extends Controller
         $posts = $posts->with('user', 'category')->paginate(15);
 
         $data = [
-            'posts'         =>  $posts,
-            'categories'    =>  $this->category->all(),
+            'posts' => $posts,
+            'categories' => $this->category->all(),
         ];
 
         return view('backend.posts.index', $data);
@@ -68,34 +93,32 @@ class PostController extends Controller
      *
      * @return View
      */
-    public function create()
+    public function create(): View
     {
         $data = [
-            'bands'         =>  $this->band->all(),
-            'categories'    =>  $this->category->all(),
-            'save_url'      =>  route('backend.posts.store'),
-            //'post'        =>  null,
-            'tags'          =>  $this->tag->pluck('tag', 'id')
+            'bands' => $this->band->all(),
+            'categories' => $this->category->all(),
+            'save_url' => route('backend.posts.store'),
+            'tags' => $this->tag->pluck('tag', 'id')
         ];
 
         return view('backend.posts.create', $data);
     }
 
     /**
-     * backend.posts.store
-     *
-     * @param Request $request
+     * @param StorePostRequest $request
      * @param null $post_id
      * @return mixed
+     * @return RedirectResponse
      */
-    public function store(StorePostRequest $request, ImageSaver $imageSaver, $post_id = null)
+    public function store(StorePostRequest $request, ImageSaver $imageSaver, $post_id = null): RedirectResponse
     {
         $post = $this->storeOrUpdatePost($request, $post_id = null);
 
         if ($request->hasFile('img')) {
             $imageSaver->saveCover('upload/covers/', $request->file('img'));
             $post->img = $request->file('img')->getClientOriginalName();
-            $post->img_thumbnail = 'thumbnail_'.$request->file('img')->getClientOriginalName();
+            $post->img_thumbnail = 'thumbnail_' . $request->file('img')->getClientOriginalName();
         }
 
         if ($request->hasFile('logo')) {
@@ -113,28 +136,40 @@ class PostController extends Controller
         return redirect()->route('backend.posts.edit', ['post_id' => $post->id]);
     }
 
-    public function show($post_id)
+    /**
+     * @param $post_id
+     * @return View
+     */
+    public function show($post_id): View
     {
         $post = $this->post->findOrFail($post_id);
         $data = [
-            'post'  =>  $post,
+            'post' => $post,
         ];
         return view('backend.posts.show', $data);
     }
 
-    public function edit($post_id)
+    /**
+     * @param $post_id
+     * @return View
+     */
+    public function edit($post_id): View
     {
         $data = [
-            'post'          =>  $this->post->find($post_id),
-            'bands'         =>  $this->band->all(),
-            'categories'    =>  $this->category->all(),
-            'tags'          =>  $this->tag->pluck('tag', 'id')
+            'post' => $this->post->find($post_id),
+            'bands' => $this->band->all(),
+            'categories' => $this->category->all(),
+            'tags' => $this->tag->pluck('tag', 'id')
         ];
 
         return view('backend.posts.edit', $data);
     }
 
-    public function destroy($post_id)
+    /**
+     * @param $post_id
+     * @return RedirectResponse
+     */
+    public function destroy($post_id): RedirectResponse
     {
         $post = $this->post->findOrFail($post_id);
         $post->destroy($post_id);
@@ -142,18 +177,24 @@ class PostController extends Controller
         return redirect('backend/posts');
     }
 
-    public function update(StorePostRequest $request, ImageSaver $imageSaver, $post_id)
+    /**
+     * @param StorePostRequest $request
+     * @param ImageSaver $imageSaver
+     * @param $post_id
+     * @return RedirectResponse
+     */
+    public function update(StorePostRequest $request, ImageSaver $imageSaver, $post_id): RedirectResponse
     {
         $post = $this->storeOrUpdatePost($request, $post_id);
         $post->resluggify();
 
-        if($request->hasFile('img')) {
+        if ($request->hasFile('img')) {
             $imageSaver->saveCover('upload/covers/', $request->file('img'));
             $post->img = $request->file('img')->getClientOriginalName();
-            $post->img_thumbnail = 'thumbnail_'.$request->file('img')->getClientOriginalName();
+            $post->img_thumbnail = 'thumbnail_' . $request->file('img')->getClientOriginalName();
         }
 
-        if($request->hasFile('logo')) {
+        if ($request->hasFile('logo')) {
             $imageSaver->saveLogo('upload/logos/', $request->file('logo'));
             $post->logo = $request->file('logo')->getClientOriginalName();
         }
@@ -168,7 +209,12 @@ class PostController extends Controller
         return redirect()->route('backend.posts.index');
     }
 
-    public function setCategory($post_id, $category_id)
+    /**
+     * @param $post_id
+     * @param $category_id
+     * @return RedirectResponse
+     */
+    public function setCategory($post_id, $category_id): RedirectResponse
     {
         $category = $this->category->find($category_id);
 
@@ -187,13 +233,18 @@ class PostController extends Controller
      * Sync the list of tags
      * @param Post $post
      * @param array $tags
+     * @return array
      */
-    public function syncTags (Post $post, array $tags)
+    public function syncTags(Post $post, array $tags): array
     {
         $post->tags()->sync($tags);
     }
 
-    protected function toDraft($post_id)
+    /**
+     * @param $post_id
+     * @return RedirectResponse
+     */
+    protected function toDraft($post_id): RedirectResponse
     {
         $changer = new StatusChanger($this->post->find($post_id));
         $changer->setStatus($post_id, 'draft');
@@ -201,7 +252,11 @@ class PostController extends Controller
         return redirect()->back();
     }
 
-    protected function toActive($post_id)
+    /**
+     * @param $post_id
+     * @return RedirectResponse
+     */
+    protected function toActive($post_id): RedirectResponse
     {
         $changer = new StatusChanger($this->post->find($post_id));
         $changer->setStatus($post_id, 'active');
@@ -209,7 +264,11 @@ class PostController extends Controller
         return redirect()->back();
     }
 
-    protected function toDeleted($post_id)
+    /**
+     * @param $post_id
+     * @return RedirectResponse
+     */
+    protected function toDeleted($post_id): RedirectResponse
     {
         $changer = new StatusChanger($this->post->find($post_id));
         $changer->setStatus($post_id, 'deleted');
@@ -226,7 +285,11 @@ class PostController extends Controller
         return $post;
     }
 
-    public function toPinned($post_id)
+    /**
+     * @param $post_id
+     * @return RedirectResponse
+     */
+    public function toPinned($post_id): RedirectResponse
     {
         $this->setPinnedStatus($post_id, '1');
         flash()->message('Post is pinned');
@@ -234,7 +297,11 @@ class PostController extends Controller
         return redirect()->back();
     }
 
-    public function toRegular($post_id)
+    /**
+     * @param $post_id
+     * @return RedirectResponse
+     */
+    public function toRegular($post_id): RedirectResponse
     {
         $this->setPinnedStatus($post_id, '0');
         flash()->message('Post is unpinned');
@@ -242,7 +309,12 @@ class PostController extends Controller
         return redirect()->back();
     }
 
-    private function storeOrUpdatePost(Request $request, $post_id)
+    /**
+     * @param Request $request
+     * @param $post_id
+     * @return Post
+     */
+    private function storeOrUpdatePost(Request $request, $post_id): Post
     {
         $post = $this->post->findOrNew($post_id);
         $post->user_id = Auth::user()->id;
@@ -260,7 +332,12 @@ class PostController extends Controller
         return $post;
     }
 
-    public function postPreviewOnAjaxRequest(Request $request, $post_id)
+    /**
+     * @param Request $request
+     * @param $post_id
+     * @return View|null
+     */
+    public function postPreviewOnAjaxRequest(Request $request, $post_id): ?View
     {
         $post = $this->post->findOrFail($post_id);
         $preview = $post->content;
@@ -268,14 +345,18 @@ class PostController extends Controller
         if ($request->ajax()) {
             return view('backend.posts.show', $preview)->renderSection('content');
         }
+
+        return null;
     }
 
-    public function getAllUpdated()
+    /**
+     * @return RedirectResponse
+     */
+    public function getAllUpdated(): RedirectResponse
     {
         $posts = $this->post->all();
 
-        foreach ($posts as $post)
-        {
+        foreach ($posts as $post) {
             $post->year = preg_replace('/[^0-9]/', '', $post->title);
             $post->update();
         }

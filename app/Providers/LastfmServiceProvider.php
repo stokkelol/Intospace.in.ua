@@ -26,7 +26,7 @@ class LastfmServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         //
     }
@@ -36,7 +36,7 @@ class LastfmServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function register()
+    public function register(): void
     {
         $this->app->bind(Lastfm::class, function () {
             return new Lastfm(new Connection());

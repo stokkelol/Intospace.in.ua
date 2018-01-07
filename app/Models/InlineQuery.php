@@ -14,5 +14,8 @@ class InlineQuery extends Model
 {
     const TABLE_NAME = 'inline_queries';
 
+    /**
+     * @var string
+     */
     protected $table = self::TABLE_NAME;
 }

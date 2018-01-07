@@ -29,6 +29,9 @@ class MessageType extends Model
     const VENUE = 12;
     const CAPTION = 13;
 
+    /**
+     * @var string
+     */
     protected $table = self::TABLE_NAME;
 
     /**
