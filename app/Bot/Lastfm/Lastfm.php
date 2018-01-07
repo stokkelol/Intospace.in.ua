@@ -36,10 +36,24 @@ class Lastfm extends ConnectionDecorator
      * @param string $username
      * @return $this
      */
-    public function getUserInfo(string $username)
+    public function getUserInfo(string $username): self
     {
         $this->request = \array_merge($this->request, [
             'method' => 'user.getInfo',
+            'user' => $username
+        ]);
+
+        return $this;
+    }
+
+    /**
+     * @param string $username
+     * @return Lastfm
+     */
+    public function getUserTopArtists(string $username): self
+    {
+        $this->request = \array_merge($this->request, [
+            'method' => 'user.getTopArtists',
             'user' => $username
         ]);
 

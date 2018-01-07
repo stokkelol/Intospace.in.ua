@@ -25,4 +25,19 @@ interface ResponseMessage
      * @return mixed
      */
     public function setParameters(array $request, Chat $chat, TelegramUser $user);
+
+    /**
+     * @return TelegramUser
+     */
+    public function getUser(): TelegramUser;
+
+    /**
+     * @return string
+     */
+    public function getText(): string;
+
+    /**
+     * @return Chat
+     */
+    public function getChat(): Chat;
 }

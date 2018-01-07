@@ -4,9 +4,7 @@ declare(strict_types=1);
 namespace App\Providers;
 
 use App\ApiConnection\Connection;
-use App\ApiConnection\Interfaces\Connector as ConnectionContract;
 use App\Bot\Lastfm\Lastfm;
-use Illuminate\Database\Connectors\Connector;
 use Illuminate\Support\ServiceProvider;
 
 /**

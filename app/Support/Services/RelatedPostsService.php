@@ -1,19 +1,39 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Support\Services;
 
 use App\Models\Post;
+use Illuminate\Database\Eloquent\Collection;
 
+/**
+ * Class RelatedPostsService
+ *
+ * @package App\Support\Services
+ */
 class RelatedPostsService
 {
+    /**
+     * @var Post
+     */
     protected $post;
 
+    /**
+     * RelatedPostsService constructor.
+     *
+     * @param Post $post
+     */
     public function __construct(Post $post)
     {
         $this->post = $post;
     }
 
-    public function getRelatedPosts($tags, $id)
+    /**
+     * @param $tags
+     * @param $id
+     * @return Collection
+     */
+    public function getRelatedPosts($tags, $id): Collection
     {
         $tagsids = $tags->pluck('tag');
         $relatedposts = $this->post->whereHas('tags', function ($query) use ($tagsids) {
