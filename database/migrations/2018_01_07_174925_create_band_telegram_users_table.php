@@ -6,9 +6,9 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
 /**
- * Class CreateInlineQuerieResultsTable
+ * Class CreateBandTelegramUsersTable
  */
-class CreateInlineQueryResultsTable extends Migration
+class CreateBandTelegramUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -17,20 +17,25 @@ class CreateInlineQueryResultsTable extends Migration
      */
     public function up()
     {
-        Schema::create('inline_query_results', function (Blueprint $table) {
+        Schema::create('band_telegram_users', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedBigInteger('result_id');
-            $table->unsignedBigInteger('user_id')->nullable();
-            $table->string('location', 191)->nullable();
-            $table->string('message_id', 191)->nullable();
-            $table->text('query');
-            $table->timestamps();
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedInteger('band_id');
+            $table->unsignedInteger('value');
+
+            $table->unique(['user_id', 'band_id']);
 
             $table->foreign('user_id')
                   ->references('id')
                   ->on('telegram_users')
                   ->onUpdate('cascade')
                   ->onDelete('cascade');
+
+            $table->foreign('band_id')
+                ->references('id')
+                ->on('bands')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
         });
     }
 
@@ -41,6 +46,6 @@ class CreateInlineQueryResultsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('inline_query_results');
+        Schema::dropIfExists('band_telegram_users');
     }
 }

@@ -1,21 +1,18 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Models;
+namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class ChatUser
+ * Class BandTelegramUser
  *
  * @package App
  */
-class ChatUser extends Model
+class BandTelegramUser extends Model
 {
-    const TABLE_NAME = 'chat_user';
+    const TABLE_NAME = 'band_telegram_user';
 
-    /**
-     * @var string
-     */
     protected $table = self::TABLE_NAME;
 }
