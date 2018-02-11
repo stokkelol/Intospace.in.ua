@@ -19,5 +19,18 @@ class TagTelegramUser extends Model
 {
     const TABLE_NAME = 'tag_telegram_user';
 
+    /**
+     * @var string
+     */
     protected $table = self::TABLE_NAME;
+
+    /**
+     * @var array
+     */
+    protected $guarded = ['id'];
+
+    /**
+     * @var bool
+     */
+    public $timestamps = false;
 }

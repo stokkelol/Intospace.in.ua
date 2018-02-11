@@ -28,4 +28,9 @@ class BandTelegramUser extends Model
      * @var array
      */
     protected $guarded = ['id'];
+
+    /**
+     * @var bool
+     */
+    public $timestamps = false;
 }
