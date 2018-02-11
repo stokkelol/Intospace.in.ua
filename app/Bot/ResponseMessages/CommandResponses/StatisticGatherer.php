@@ -38,7 +38,7 @@ class StatisticGatherer
         $tags = $post->tags;
 
         foreach ($tags as $tag) {
-            $pivot = Tag::query()->where('user_id', $user->id)
+            $pivot = TagTelegramUser::query()->where('user_id', $user->id)
                     ->where('tag_id', $tag->id)->first() ?? new TagTelegramUser();
             $pivot->user_id = $user->id;
             $pivot->tag_id = $tag->id;
