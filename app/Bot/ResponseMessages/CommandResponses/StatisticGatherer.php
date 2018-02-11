@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace app\Bot\ResponseMessages\CommandResponses;
 
-use App\BandTelegramUser;
+use App\Models\BandTelegramUser;
 use App\Models\Post;
 use App\Models\TagTelegramUser;
 use App\Models\TelegramUser;
