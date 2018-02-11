@@ -1,9 +1,15 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 
+/**
+ * Class SendMorningMessage
+ *
+ * @package App\Console\Commands
+ */
 class SendMorningMessage extends Command
 {
     /**
@@ -19,16 +25,6 @@ class SendMorningMessage extends Command
      * @var string
      */
     protected $description = 'Send morning message';
-
-    /**
-     * Create a new command instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
 
     /**
      * Execute the console command.

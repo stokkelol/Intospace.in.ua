@@ -17,6 +17,16 @@ class Lastfm extends ConnectionDecorator
     /**
      * @var array
      */
+    private static $bindings = [
+        'getUserInfo' => 'user.getInfo',
+        'getUserTopArtists' => 'user.getTopArtists',
+        'getUserTopAlbums' => 'user.getTopAlbums',
+        'getUserTopTags' => 'user.getTopTags'
+    ];
+
+    /**
+     * @var array
+     */
     private $request;
 
     /**
@@ -38,26 +48,49 @@ class Lastfm extends ConnectionDecorator
      */
     public function getUserInfo(string $username): self
     {
-        $this->request = \array_merge($this->request, [
+        return $this->set([
             'method' => 'user.getInfo',
             'user' => $username
         ]);
+    }
 
-        return $this;
+    /**
+     * @param string $username
+     * @return $this
+     */
+    public function getUserTopArtists(string $username): self
+    {
+        return $this->set([
+            'method' => 'user.getTopArtists',
+            'user' => $username
+        ]);
+    }
+
+    /**
+     * @param string $username
+     * @return $this
+     */
+    public function getUserTopAlbums(string $username): self
+    {
+        return $this->set($this->setQuery(__METHOD__, ['user' => $username]));
     }
 
     /**
      * @param string $username
      * @return Lastfm
      */
-    public function getUserTopArtists(string $username): self
+    public function getUserTopTags(string $username): self
     {
-        $this->request = \array_merge($this->request, [
-            'method' => 'user.getTopArtists',
-            'user' => $username
-        ]);
+        return $this->set($this->setQuery(__METHOD__, ['user' => $username]));
+    }
 
-        return $this;
+    /**
+     * @param string $username
+     * @return Lastfm
+     */
+    public function getUserTopTracks(string $username): self
+    {
+        return $this->set($this->setQuery(__METHOD__, ['user' => $username]));
     }
 
     /**
@@ -73,5 +106,37 @@ class Lastfm extends ConnectionDecorator
         if ($response->getStatusCode() === 200) {
             return \json_decode($response->getBody()->getContents(), true);
         }
+    }
+
+    /**
+     * @param array $args
+     * @return $this
+     */
+    private function set(array $args): self
+    {
+        $this->request = \array_merge($this->request, $args);
+
+        return $this;
+    }
+
+    /**
+     * @param string $method
+     * @param array $args
+     * @return array
+     */
+    private function setQuery(string $method, array $args): array
+    {
+        return \array_merge([
+            'method' => $this->getBindings($method)
+        ], $args);
+    }
+
+    /**
+     * @param string $method
+     * @return string
+     */
+    private function getBindings(string $method): string
+    {
+        return static::$bindings[$method];
     }
 }

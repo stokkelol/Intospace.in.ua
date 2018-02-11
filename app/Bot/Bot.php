@@ -154,9 +154,9 @@ class Bot
      * @param array $request
      * @param TelegramUser $user
      * @param Chat $chat
-     * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model|null|static|static[]
+     * @return MessageType
      */
-    private function saveBotCommand(array $request, TelegramUser $user, Chat $chat)
+    private function saveBotCommand(array $request, TelegramUser $user, Chat $chat): MessageType
     {
         $messageType = MessageType::query()->find(MessageType::ENTITIES);
 
@@ -178,9 +178,9 @@ class Bot
      * @param array $request
      * @param TelegramUser $user
      * @param Chat $chat
-     * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model|null|static|static[]
+     * @return MessageType
      */
-    private function saveTextMessage(array $request, TelegramUser $user, Chat $chat)
+    private function saveTextMessage(array $request, TelegramUser $user, Chat $chat): MessageType
     {
         $messageType = MessageType::query()->find(MessageType::TEXT);
 
@@ -197,7 +197,7 @@ class Bot
      * @param Chat $chat
      * @return InboundMessage
      */
-    private function prepareMessageToSave(array $request, TelegramUser $user, Chat $chat)
+    private function prepareMessageToSave(array $request, TelegramUser $user, Chat $chat): InboundMessage
     {
         $message = new InboundMessage();
         $message->id = $request['update_id'];

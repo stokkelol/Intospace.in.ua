@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Bot\ResponseMessages\CommandResponses;
 
 use App\Bot\ResponseMessages\Interfaces\Command;
+use App\Models\TelegramUser;
 
 /**
  * Class Factory
@@ -14,13 +15,14 @@ final class Factory
 {
     /**
      * @param string $type
+     * @param TelegramUser $user
      * @return Command
      */
-    public static function build(string $type): Command
+    public static function build(string $type, TelegramUser $user): Command
     {
         switch ($type) {
             case '/latest':
-                return new Latest($type);
+                return new Latest($type, $user);
             case '/blackmetal':
             case '/deathmetal':
             case '/sludge':
@@ -29,7 +31,7 @@ final class Factory
             case '/experimental':
             case '/psychedelic':
             case '/doommetal':
-                return new Styles($type);
+                return new Styles($type, $user);
         }
     }
 }

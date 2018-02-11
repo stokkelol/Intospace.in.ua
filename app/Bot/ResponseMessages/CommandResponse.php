@@ -23,6 +23,7 @@ class CommandResponse extends Response
 
     /**
      * @return void
+     * @throws \LogicException
      */
     public function createResponse(): void
     {
@@ -53,10 +54,11 @@ class CommandResponse extends Response
 
     /**
      * @return array
+     * @throws \LogicException
      */
     private function determineCommand()
     {
-        $this->setCommand(Factory::build($this->extractType()));
+        $this->setCommand(Factory::build($this->extractType(), $this->user));
 
         if (!$this->command) {
             throw new LogicException('Command is not set');
