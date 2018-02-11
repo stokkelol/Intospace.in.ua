@@ -22,7 +22,8 @@ class StatisticGatherer
      */
     public function associatePostAndUser(Post $post, TelegramUser $user): void
     {
-        $pivot = new BandTelegramUser();
+        $pivot = BandTelegramUser::query()->where('band_id', $post->band_id)
+            ->where('user_id', $user->id)->first() ?? new BandTelegramUser();
         $pivot->user_id = $user->id;
         $pivot->band_id = $post->band_id;
         $pivot->value++;
