@@ -17,7 +17,7 @@ class CreateBandTelegramUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('band_telegram_users', function (Blueprint $table) {
+        Schema::create('band_telegram_user', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedBigInteger('user_id');
             $table->unsignedInteger('band_id');
