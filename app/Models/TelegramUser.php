@@ -5,6 +5,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * Class TelegramUser
@@ -54,5 +55,13 @@ class TelegramUser extends Model
     {
         return $this->belongsToMany(Social::class,
             'social_telegram_user', 'user_id', 'social_id');
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function bands(): BelongsToMany
+    {
+        return $this->belongsToMany(Band::class);
     }
 }
