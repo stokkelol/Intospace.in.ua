@@ -5,6 +5,7 @@ namespace app\Bot\ResponseMessages\CommandResponses;
 
 use App\Models\BandTelegramUser;
 use App\Models\Post;
+use App\Models\Tag;
 use App\Models\TagTelegramUser;
 use App\Models\TelegramUser;
 
@@ -34,10 +35,15 @@ class StatisticGatherer
      */
     public function associateTagAndUser(Post $post, TelegramUser $user): void
     {
-        $pivot = new TagTelegramUser();
-        $pivot->user_id = $user->id;
-        $pivot->band_id = $post->band_id;
-        $pivot->value++;
-        $pivot->save();
+        $tags = $post->tags;
+
+        foreach ($tags as $tag) {
+            $pivot = Tag::query()->where('user_id', $user->id)
+                    ->where('tag_id', $tag->id)->first() ?? new TagTelegramUser();
+            $pivot->user_id = $user->id;
+            $pivot->tag_id = $tag->id;
+            $pivot->value++;
+            $pivot->save();
+        }
     }
 }

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * @property int $id
  * @property int $user_id
- * @property int $band_id
+ * @property int $tag_id
  * @property int $value
  *
  * Class TagTelegramUser
