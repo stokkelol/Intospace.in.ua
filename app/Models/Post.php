@@ -11,6 +11,30 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
+ * @property int $id
+ * @property int $category_id
+ * @property int $user_id
+ * @property string $title
+ * @property int $year
+ * @property int $band_id
+ * @property string $excerpt
+ * @property string $content
+ * @property string $links
+ * @property string $video
+ * @property string $similar
+ * @property string $img
+ * @property string $img_thumbnail
+ * @property string $logo
+ * @property string $slug
+ * @property int $is_pinned
+ * @property int $views
+ * @property string $status
+ * @property \DateTime $published_at
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
+ *
+ * @property \Illuminate\Database\Eloquent\Collection|Tag[] $tags
+ *
  * Class Post
  *
  * @package App\Models

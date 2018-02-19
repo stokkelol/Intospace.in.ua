@@ -4,7 +4,10 @@ declare(strict_types=1);
 namespace App\Bot\Jobs;
 
 use App\Bot\ResponseMessages\CommandResponses\BaseCommand;
+use App\Models\BroadcastMessage;
 use App\Models\Chat;
+use App\Models\MessageType;
+use App\Models\OutboundMessage;
 use App\Models\Post;
 use App\Models\TelegramUser;
 use Illuminate\Bus\Queueable;
@@ -48,10 +51,22 @@ class MorningMessage implements ShouldQueue
     public function handle(): void
     {
         $user = $this->chat->users;
-
+        \logger($user);
         $post = Post::query()->get()->random();
 
         $telegram = Container::getInstance()->make(Api::class);
+
+        $outboundMessage = new OutboundMessage();
+        $outboundMessage->chat()->associate($this->chat);
+        $outboundMessage->user()->associate($user);
+        $outboundMessage->message_type_id = MessageType::ENTITIES;
+        $outboundMessage->save();
+
+        $broadcastMessage = new BroadcastMessage();
+        $broadcastMessage->user()->associate($user);
+        $broadcastMessage->chat()->associate($this->chat);
+        $broadcastMessage->outboundMessage()->associate($outboundMessage);
+        $broadcastMessage->save();
 
         $telegram->sendMessage([
             'chat_id' => $this->chat->id,

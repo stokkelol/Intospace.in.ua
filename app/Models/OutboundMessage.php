@@ -8,6 +8,18 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
+ * @property int $id
+ * @property int $message_type_id
+ * @property int $user_id
+ * @property int $chat_id
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
+ *
+ * @property-read TelegramUser $user
+ * @property-read Chat $chat
+ * @property-read MessageType $messageType
+ * @property-read \Illuminate\Database\Eloquent\Collection|OutboundMessageText[] $texts
+ *
  * Class OutboundMessage
  *
  * @package App\Models
