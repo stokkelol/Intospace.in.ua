@@ -52,7 +52,7 @@ class MorningMessage implements ShouldQueue
      */
     public function __construct(Chat $chat, OutboundMessage $outboundMessage, BroadcastMessage $broadcastMessage)
     {
-        $user = $this->chat->users;
+        $user = $chat->users->first();
         $this->chat = $chat;
         \logger($outboundMessage);
         \logger($broadcastMessage);
