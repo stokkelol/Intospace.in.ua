@@ -52,17 +52,27 @@ class MorningMessage implements ShouldQueue
      */
     public function __construct(Chat $chat, OutboundMessage $outboundMessage, BroadcastMessage $broadcastMessage)
     {
+        $user = $this->chat->users;
         $this->chat = $chat;
         \logger($outboundMessage);
         \logger($broadcastMessage);
         $this->outboundMessage = $outboundMessage;
+        $this->outboundMessage->chat()->associate($this->chat);
+        $this->outboundMessage->user()->associate($user);
+        $this->outboundMessage->message_type_id = MessageType::ENTITIES;
+        $this->outboundMessage->save();
         $this->broadcastMessage = $broadcastMessage;
+        $this->broadcastMessage->user()->associate($user);
+        $this->broadcastMessage->chat()->associate($this->chat);
+        $this->broadcastMessage->outboundMessage()->associate($this->outboundMessage);
+        $this->broadcastMessage->save();
     }
 
     /**
      * Execute the job.
      *
      * @return void
+     * @throws \InvalidArgumentException
      */
     public function handle(): void
     {
@@ -71,18 +81,6 @@ class MorningMessage implements ShouldQueue
         $post = Post::query()->get()->random();
 
         $telegram = Container::getInstance()->make(Api::class);
-
-        $this->outboundMessage->chat()->associate($this->chat);
-        $this->outboundMessage->user()->associate($user);
-        $this->outboundMessage->message_type_id = MessageType::ENTITIES;
-        $this->outboundMessage->save();
-        \logger($this->outboundMessage);
-
-        $this->broadcastMessage->user()->associate($user);
-        $this->broadcastMessage->chat()->associate($this->chat);
-        $this->broadcastMessage->outboundMessage()->associate($this->outboundMessage);
-        $this->broadcastMessage->save();
-        \logger($this->broadcastMessage);
 
         $telegram->sendMessage([
             'chat_id' => $this->chat->id,
