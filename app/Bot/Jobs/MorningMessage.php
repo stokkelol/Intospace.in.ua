@@ -65,7 +65,7 @@ class MorningMessage implements ShouldQueue
     public function handle(): void
     {
         $user = $this->chat->users;
-        \logger($user);
+        \logger($user->id);
         $post = Post::query()->get()->random();
 
         $telegram = Container::getInstance()->make(Api::class);
