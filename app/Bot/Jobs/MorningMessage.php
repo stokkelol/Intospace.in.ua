@@ -61,16 +61,8 @@ class MorningMessage implements ShouldQueue
         $user = $chat->users->first();
         $this->chat = $chat;
         $this->post = Post::query()->get()->random();
-        $this->outboundMessage = $outboundMessage;
-        $this->outboundMessage->chat()->associate($this->chat);
-        $this->outboundMessage->user()->associate($user);
-        $this->outboundMessage->message_type_id = MessageType::ENTITIES;
-        $this->outboundMessage->save();
-        $this->broadcastMessage = $broadcastMessage;
-        $this->broadcastMessage->user()->associate($user);
-        $this->broadcastMessage->chat()->associate($this->chat);
-        $this->broadcastMessage->outboundMessage()->associate($this->outboundMessage);
-        $this->broadcastMessage->save();
+
+        $this->saveMessages($outboundMessage, $broadcastMessage, $user);
 
         $gatherer = new StatisticGatherer();
         $gatherer->associatePostAndUser($this->post, $user);
@@ -92,5 +84,24 @@ class MorningMessage implements ShouldQueue
             'chat_id' => $this->chat->id,
             'text' => BaseCommand::POSTS_ENDPOINT . $this->post->slug
         ]);
+    }
+
+    /**
+     * @param OutboundMessage $outboundMessage
+     * @param BroadcastMessage $broadcastMessage
+     * @param TelegramUser $user
+     */
+    private function saveMessages(OutboundMessage $outboundMessage, BroadcastMessage $broadcastMessage, TelegramUser $user): void
+    {
+        $this->outboundMessage = $outboundMessage;
+        $this->outboundMessage->chat()->associate($this->chat);
+        $this->outboundMessage->user()->associate($user);
+        $this->outboundMessage->message_type_id = MessageType::ENTITIES;
+        $this->outboundMessage->save();
+        $this->broadcastMessage = $broadcastMessage;
+        $this->broadcastMessage->user()->associate($user);
+        $this->broadcastMessage->chat()->associate($this->chat);
+        $this->broadcastMessage->outboundMessage()->associate($this->outboundMessage);
+        $this->broadcastMessage->save();
     }
 }
