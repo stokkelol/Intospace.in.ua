@@ -54,7 +54,7 @@ class MorningMessage implements ShouldQueue
     {
         $user = $this->chat->users;
 
-        $post = Post::query()->inRandomOrder()->first();
+        $post = Post::query()->get()->random();
 
         $this->telegram->sendMessage([
             'chat_id' => $this->chat->id,
