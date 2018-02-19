@@ -1,6 +1,6 @@
 <?php
+declare(strict_types=1);
 
-/* Simple configuration file for Laravel Sitemap package */
 return [
 	'use_cache'			=> 	false,
 	'cache_key'			=> 	'laravel-sitemap.' . config('app.url'),

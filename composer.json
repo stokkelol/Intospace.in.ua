@@ -31,7 +31,8 @@
         "arcanedev/log-viewer": "^4.4",
         "squizlabs/php_codesniffer": "*",
         "laravel/tinker": "^1.0",
-        "laravel/horizon": "^1.0"
+        "laravel/horizon": "^1.0",
+        "alaouy/youtube": "^2.1"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

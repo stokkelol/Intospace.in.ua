@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 return [
 
@@ -194,7 +195,7 @@ return [
         //https://telegram-bot-sdk.readme.io/
         Telegram\Bot\Laravel\TelegramServiceProvider::class,
         Arcanedev\LogViewer\LogViewerServiceProvider::class,
-
+        Alaouy\Youtube\YoutubeServiceProvider::class
 
     ],
 
@@ -255,7 +256,8 @@ return [
         'LaravelAnalytics' => Spatie\LaravelAnalytics\LaravelAnalyticsFacade::class,
         'Feed' => Roumen\Feed\Feed::class,
         'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
-        'Telegram'  => Telegram\Bot\Laravel\Facades\Telegram::class
+        'Telegram'  => Telegram\Bot\Laravel\Facades\Telegram::class,
+        'Youtube' => Alaouy\Youtube\Facades\Youtube::class
     ],
 
 ];

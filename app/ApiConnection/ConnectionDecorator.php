@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace app\ApiConnection;
+namespace App\ApiConnection;
 
 use App\ApiConnection\Interfaces\Connector;
 use GuzzleHttp\Client;

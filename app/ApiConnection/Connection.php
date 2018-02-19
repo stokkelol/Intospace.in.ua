@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\ApiConnection;
 
-use app\ApiConnection\Interfaces\Connector;
+use App\ApiConnection\Interfaces\Connector;
 use GuzzleHttp\Client;
 
 /**

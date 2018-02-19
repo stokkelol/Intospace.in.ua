@@ -48,10 +48,7 @@ class Lastfm extends ConnectionDecorator
      */
     public function getUserInfo(string $username): self
     {
-        return $this->set([
-            'method' => 'user.getInfo',
-            'user' => $username
-        ]);
+        return $this->set($this->setQuery(__METHOD__, ['user' => $username]));
     }
 
     /**
@@ -60,10 +57,7 @@ class Lastfm extends ConnectionDecorator
      */
     public function getUserTopArtists(string $username): self
     {
-        return $this->set([
-            'method' => 'user.getTopArtists',
-            'user' => $username
-        ]);
+        return $this->set($this->setQuery(__METHOD__, ['user' => $username]));
     }
 
     /**
@@ -137,6 +131,8 @@ class Lastfm extends ConnectionDecorator
      */
     private function getBindings(string $method): string
     {
-        return static::$bindings[$method];
+        $array = \explode('::', $method);
+
+        return static::$bindings[$array[1]];
     }
 }

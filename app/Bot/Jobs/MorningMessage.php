@@ -55,6 +55,7 @@ class MorningMessage implements ShouldQueue
      * @param Chat $chat
      * @param OutboundMessage $outboundMessage
      * @param BroadcastMessage $broadcastMessage
+     * @throws \InvalidArgumentException
      */
     public function __construct(Chat $chat, OutboundMessage $outboundMessage, BroadcastMessage $broadcastMessage)
     {
@@ -98,6 +99,7 @@ class MorningMessage implements ShouldQueue
         $this->outboundMessage->user()->associate($user);
         $this->outboundMessage->message_type_id = MessageType::ENTITIES;
         $this->outboundMessage->save();
+
         $this->broadcastMessage = $broadcastMessage;
         $this->broadcastMessage->user()->associate($user);
         $this->broadcastMessage->chat()->associate($this->chat);
