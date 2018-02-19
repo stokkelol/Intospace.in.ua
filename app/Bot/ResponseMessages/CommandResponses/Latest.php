@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace App\Bot\ResponseMessages\CommandResponses;
 
-use App\BandTelegramUser;
 use App\Bot\ResponseMessages\Interfaces\Command;
 use Illuminate\Database\Eloquent\Collection;
 

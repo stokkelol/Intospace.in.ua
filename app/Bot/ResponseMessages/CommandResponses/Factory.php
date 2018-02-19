@@ -32,6 +32,8 @@ final class Factory
             case '/psychedelic':
             case '/doommetal':
                 return new Styles($type, $user);
+            case '/youtube':
+                return new YoutubeSearch($type, $user);
         }
     }
 }

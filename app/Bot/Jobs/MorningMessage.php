@@ -24,7 +24,7 @@ use Telegram\Bot\Api;
  *
  * @package App\Bot\Jobs
  */
-class MorningMessage implements ShouldQueue
+class MorningMessage extends BotJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -32,16 +32,6 @@ class MorningMessage implements ShouldQueue
      * @var TelegramUser
      */
     private $chat;
-
-    /**
-     * @var OutboundMessage
-     */
-    private $outboundMessage;
-
-    /**
-     * @var BroadcastMessage
-     */
-    private $broadcastMessage;
 
     /**
      * @var mixed
@@ -85,25 +75,5 @@ class MorningMessage implements ShouldQueue
             'chat_id' => $this->chat->id,
             'text' => BaseCommand::POSTS_ENDPOINT . $this->post->slug
         ]);
-    }
-
-    /**
-     * @param OutboundMessage $outboundMessage
-     * @param BroadcastMessage $broadcastMessage
-     * @param TelegramUser $user
-     */
-    private function saveMessages(OutboundMessage $outboundMessage, BroadcastMessage $broadcastMessage, TelegramUser $user): void
-    {
-        $this->outboundMessage = $outboundMessage;
-        $this->outboundMessage->chat()->associate($this->chat);
-        $this->outboundMessage->user()->associate($user);
-        $this->outboundMessage->message_type_id = MessageType::ENTITIES;
-        $this->outboundMessage->save();
-
-        $this->broadcastMessage = $broadcastMessage;
-        $this->broadcastMessage->user()->associate($user);
-        $this->broadcastMessage->chat()->associate($this->chat);
-        $this->broadcastMessage->outboundMessage()->associate($this->outboundMessage);
-        $this->broadcastMessage->save();
     }
 }

@@ -21,7 +21,8 @@ class BotCommandsSeeder extends Seeder
         6 => '/sludgedoom',
         7 => '/experimental',
         8 => '/psychedelic',
-        9 => '/doommetal'
+        9 => '/doommetal',
+        10 => '/youtube'
     ];
 
     /**
