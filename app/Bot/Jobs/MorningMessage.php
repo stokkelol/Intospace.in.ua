@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace App\Bot\Jobs;
 
 use App\Bot\ResponseMessages\CommandResponses\BaseCommand;
-use app\Bot\ResponseMessages\CommandResponses\StatisticGatherer;
+use App\Bot\ResponseMessages\CommandResponses\StatisticGatherer;
 use App\Models\BroadcastMessage;
 use App\Models\Chat;
 use App\Models\MessageType;
@@ -90,7 +90,7 @@ class MorningMessage implements ShouldQueue
 
         $telegram->sendMessage([
             'chat_id' => $this->chat->id,
-            'text' => BaseCommand::POSTS_ENDPOINT . $post->slug
+            'text' => BaseCommand::POSTS_ENDPOINT . $this->post->slug
         ]);
     }
 }
