@@ -34,15 +34,14 @@ class SendMorningMessage extends Command
     /**
      * Execute the console command.
      *
-     * @param Api $telegram
      * @return mixed
      */
-    public function handle(Api $telegram)
+    public function handle()
     {
         $chats = Chat::query()->with('users')->get();
 
         foreach ($chats as $chat) {
-            \dispatch(new MorningMessage($chat, $telegram));
+            \dispatch(new MorningMessage($chat));
         }
     }
 }

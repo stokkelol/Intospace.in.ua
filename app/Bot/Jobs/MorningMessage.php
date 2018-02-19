@@ -8,6 +8,7 @@ use App\Models\Chat;
 use App\Models\Post;
 use App\Models\TelegramUser;
 use Illuminate\Bus\Queueable;
+use Illuminate\Container\Container;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -28,21 +29,15 @@ class MorningMessage implements ShouldQueue
      */
     private $chat;
 
-    /**
-     * @var Api
-     */
-    private $telegram;
 
     /**
      * Create a new job instance.
      *
      * @param Chat $chat
-     * @param Api $telegram
      */
-    public function __construct(Chat $chat, Api $telegram)
+    public function __construct(Chat $chat)
     {
         $this->chat = $chat;
-        $this->telegram = $telegram;
     }
 
     /**
@@ -54,11 +49,13 @@ class MorningMessage implements ShouldQueue
     {
         $user = $this->chat->users;
 
-//        $post = Post::query()->get()->random();
+        $post = Post::query()->get()->random();
 
-        $this->telegram->sendMessage([
+        $telegram = Container::getInstance()->make(Api::class);
+
+        $telegram->sendMessage([
             'chat_id' => $this->chat->id,
-            'text' => 'HI!'
+            'text' => BaseCommand::POSTS_ENDPOINT . $post->slug
         ]);
     }
 }
