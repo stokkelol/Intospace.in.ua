@@ -31,12 +31,12 @@ class SendMorningMessage extends Command
     /**
      * Execute the console command.
      *
-     * @return mixed
+     * @return void
      */
-    public function handle()
+    public function handle(): void
     {
         $chats = Chat::query()->with('users')->get();
 
-        return new Morning($chats);
+        (new Morning($chats))->handle();
     }
 }
