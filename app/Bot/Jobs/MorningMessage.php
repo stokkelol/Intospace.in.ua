@@ -47,12 +47,14 @@ class MorningMessage implements ShouldQueue
      * Create a new job instance.
      *
      * @param Chat $chat
+     * @param OutboundMessage $outboundMessage
+     * @param BroadcastMessage $broadcastMessage
      */
-    public function __construct(Chat $chat)
+    public function __construct(Chat $chat, OutboundMessage $outboundMessage, BroadcastMessage $broadcastMessage)
     {
         $this->chat = $chat;
-        $this->outboundMessage = new OutboundMessage();
-        $this->broadcastMessage = new BroadcastMessage();
+        $this->outboundMessage = $outboundMessage;
+        $this->broadcastMessage = $broadcastMessage;
     }
 
     /**

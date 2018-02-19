@@ -3,12 +3,9 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
-use App\Bot\Jobs\MorningMessage;
+use App\Bot\Broadcast\Morning;
 use App\Models\Chat;
-use App\Models\ChatUser;
-use App\Models\TelegramUser;
 use Illuminate\Console\Command;
-use Telegram\Bot\Api;
 
 /**
  * Class SendMorningMessage
@@ -40,8 +37,6 @@ class SendMorningMessage extends Command
     {
         $chats = Chat::query()->with('users')->get();
 
-        foreach ($chats as $chat) {
-            \dispatch(new MorningMessage($chat));
-        }
+        return new Morning($chats);
     }
 }
