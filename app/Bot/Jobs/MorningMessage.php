@@ -4,6 +4,8 @@ declare(strict_types=1);
 namespace App\Bot\Jobs;
 
 use App\Bot\ResponseMessages\CommandResponses\BaseCommand;
+use app\Bot\ResponseMessages\CommandResponses\StatisticGatherer;
+use App\Models\BandTelegramUser;
 use App\Models\BroadcastMessage;
 use App\Models\Chat;
 use App\Models\MessageType;
@@ -42,6 +44,11 @@ class MorningMessage implements ShouldQueue
      */
     private $broadcastMessage;
 
+    /**
+     * @var mixed
+     */
+    private $post;
+
 
     /**
      * Create a new job instance.
@@ -54,6 +61,7 @@ class MorningMessage implements ShouldQueue
     {
         $user = $chat->users->first();
         $this->chat = $chat;
+        $this->post = Post::query()->get()->random();
         $this->outboundMessage = $outboundMessage;
         $this->outboundMessage->chat()->associate($this->chat);
         $this->outboundMessage->user()->associate($user);
@@ -64,6 +72,11 @@ class MorningMessage implements ShouldQueue
         $this->broadcastMessage->chat()->associate($this->chat);
         $this->broadcastMessage->outboundMessage()->associate($this->outboundMessage);
         $this->broadcastMessage->save();
+
+        $gatherer = new StatisticGatherer();
+        $gatherer->associatePostAndUser($this->post, $user);
+        $gatherer->associateTagAndUser($this->post, $user);
+
     }
 
     /**
@@ -74,7 +87,6 @@ class MorningMessage implements ShouldQueue
      */
     public function handle(): void
     {
-        $post = Post::query()->get()->random();
         $telegram = Container::getInstance()->make(Api::class);
 
         $telegram->sendMessage([
