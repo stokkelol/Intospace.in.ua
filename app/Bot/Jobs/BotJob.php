@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace app\Bot\Jobs;
 
 use App\Models\BroadcastMessage;
+use App\Models\Chat;
 use App\Models\MessageType;
 use App\Models\OutboundMessage;
 use App\Models\TelegramUser;
@@ -15,16 +16,30 @@ use App\Models\TelegramUser;
  */
 abstract class BotJob
 {
+    /**
+     * @var TelegramUser
+     */
+    protected $chat;
 
     /**
      * @var OutboundMessage
      */
-    private $outboundMessage;
+    protected $outboundMessage;
 
     /**
      * @var BroadcastMessage
      */
-    private $broadcastMessage;
+    protected $broadcastMessage;
+
+    /**
+     * BotJob constructor.
+     *
+     * @param Chat $chat
+     */
+    public function __construct(Chat $chat)
+    {
+        $this->chat = $chat;
+    }
 
     /**
      * @param OutboundMessage $outboundMessage

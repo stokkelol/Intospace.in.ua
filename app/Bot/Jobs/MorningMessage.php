@@ -29,11 +29,6 @@ class MorningMessage extends BotJob implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     /**
-     * @var TelegramUser
-     */
-    private $chat;
-
-    /**
      * @var mixed
      */
     private $post;
@@ -49,6 +44,8 @@ class MorningMessage extends BotJob implements ShouldQueue
      */
     public function __construct(Chat $chat, OutboundMessage $outboundMessage, BroadcastMessage $broadcastMessage)
     {
+        parent::__construct($chat);
+
         $user = $chat->users->first();
         $this->chat = $chat;
         $this->post = Post::query()->get()->random();
