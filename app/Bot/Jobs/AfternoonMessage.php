@@ -9,6 +9,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Telegram\Bot\Api;
 
 /**
  * Class AfternoonMessage
@@ -25,13 +26,20 @@ class AfternoonMessage implements ShouldQueue
     private $user;
 
     /**
+     * @var Api
+     */
+    private $telegram;
+
+    /**
      * Create a new job instance.
      *
      * @param TelegramUser $user
+     * @param Api $telegram
      */
-    public function __construct(TelegramUser $user)
+    public function __construct(TelegramUser $user, Api $telegram)
     {
         $this->user = $user;
+        $this->telegram = $telegram;
     }
 
     /**

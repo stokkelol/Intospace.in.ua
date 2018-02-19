@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace App\Console;
 
+use App\Console\Commands\SendAfternoonMessage;
+use App\Console\Commands\SendEveningMessage;
 use App\Console\Commands\SendMorningMessage;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
@@ -42,5 +44,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule): void
     {
         $schedule->call(SendMorningMessage::class)->dailyAt('11:00');
+        $schedule->call(SendAfternoonMessage::class)->dailyAt('16:00');
+        $schedule->call(SendEveningMessage::class)->dailyAt('20:00');
     }
 }
