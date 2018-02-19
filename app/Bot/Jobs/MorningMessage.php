@@ -59,17 +59,17 @@ class MorningMessage implements ShouldQueue
      */
     public function __construct(Chat $chat, OutboundMessage $outboundMessage, BroadcastMessage $broadcastMessage)
     {
-        \logger($chat->id);
+
         $this->chat = $chat;
         $user = $chat->users->first();
-        \logger($user->id);
-        $this->post = Post::query()->get()->random();
 
+        $post = Post::query()->get()->random();
+        $this->post = $post;
         $this->saveMessages($outboundMessage, $broadcastMessage, $user);
 
         $gatherer = new StatisticGatherer();
-        $gatherer->associatePostAndUser($this->post, $user);
-        $gatherer->associateTagAndUser($this->post, $user);
+        $gatherer->associatePostAndUser($post, $user);
+        $gatherer->associateTagAndUser($post, $user);
     }
 
     /**
