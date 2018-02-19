@@ -36,17 +36,17 @@ class MorningMessage implements ShouldQueue
     /**
      * @var OutboundMessage
      */
-    protected $outboundMessage;
+    private $outboundMessage;
 
     /**
      * @var BroadcastMessage
      */
-    protected $broadcastMessage;
+    private $broadcastMessage;
 
     /**
      * @var Chat
      */
-    protected $chat;
+    private $chat;
 
 
     /**
@@ -62,7 +62,7 @@ class MorningMessage implements ShouldQueue
         \logger($chat->id);
         $this->chat = $chat;
         $user = $chat->users->first();
-
+        \logger($user->id);
         $this->post = Post::query()->get()->random();
 
         $this->saveMessages($outboundMessage, $broadcastMessage, $user);
@@ -70,7 +70,6 @@ class MorningMessage implements ShouldQueue
         $gatherer = new StatisticGatherer();
         $gatherer->associatePostAndUser($this->post, $user);
         $gatherer->associateTagAndUser($this->post, $user);
-
     }
 
     /**
