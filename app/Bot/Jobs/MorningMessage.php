@@ -11,7 +11,12 @@ use App\Models\MessageType;
 use App\Models\OutboundMessage;
 use App\Models\Post;
 use App\Models\TelegramUser;
+use Illuminate\Bus\Queueable;
 use Illuminate\Container\Container;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
 use Telegram\Bot\Api;
 
 /**
@@ -19,8 +24,10 @@ use Telegram\Bot\Api;
  *
  * @package App\Bot\Jobs
  */
-class MorningMessage extends BotJob
+class MorningMessage implements ShouldQueue
 {
+    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+
     /**
      * @var mixed
      */
@@ -36,6 +43,11 @@ class MorningMessage extends BotJob
      */
     protected $broadcastMessage;
 
+    /**
+     * @var Chat
+     */
+    protected $chat;
+
 
     /**
      * Create a new job instance.
@@ -47,8 +59,7 @@ class MorningMessage extends BotJob
      */
     public function __construct(Chat $chat, OutboundMessage $outboundMessage, BroadcastMessage $broadcastMessage)
     {
-        parent::__construct($chat);
-
+        $this->chat = $chat;
         $user = $chat->users->first();
 
         $this->post = Post::query()->get()->random();

@@ -16,7 +16,7 @@ use Telegram\Bot\Api;
  *
  * @package App\Bot\Jobs
  */
-class AfternoonMessage extends BotJob implements ShouldQueue
+class AfternoonMessage implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
