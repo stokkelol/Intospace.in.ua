@@ -54,11 +54,11 @@ class MorningMessage implements ShouldQueue
     {
         $user = $this->chat->users;
 
-        $post = Post::query()->get()->random();
+//        $post = Post::query()->get()->random();
 
         $this->telegram->sendMessage([
             'chat_id' => $this->chat->id,
-            'text' => BaseCommand::POSTS_ENDPOINT . $post->slug
+            'text' => 'HI!'
         ]);
     }
 }
