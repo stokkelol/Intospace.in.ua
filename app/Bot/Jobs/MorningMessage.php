@@ -61,12 +61,14 @@ class MorningMessage implements ShouldQueue
         $outboundMessage->user()->associate($user);
         $outboundMessage->message_type_id = MessageType::ENTITIES;
         $outboundMessage->save();
+        \logger($outboundMessage);
 
         $broadcastMessage = new BroadcastMessage();
         $broadcastMessage->user()->associate($user);
         $broadcastMessage->chat()->associate($this->chat);
         $broadcastMessage->outboundMessage()->associate($outboundMessage);
         $broadcastMessage->save();
+        \logger($broadcastMessage);
 
         $telegram->sendMessage([
             'chat_id' => $this->chat->id,
