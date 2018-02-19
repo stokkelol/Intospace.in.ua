@@ -7,8 +7,10 @@ use App\Bot\ResponseMessages\CommandResponses\BaseCommand;
 use App\Bot\ResponseMessages\CommandResponses\StatisticGatherer;
 use App\Models\BroadcastMessage;
 use App\Models\Chat;
+use App\Models\MessageType;
 use App\Models\OutboundMessage;
 use App\Models\Post;
+use App\Models\TelegramUser;
 use Illuminate\Container\Container;
 use Telegram\Bot\Api;
 
@@ -23,6 +25,16 @@ class MorningMessage extends BotJob
      * @var mixed
      */
     private $post;
+
+    /**
+     * @var OutboundMessage
+     */
+    protected $outboundMessage;
+
+    /**
+     * @var BroadcastMessage
+     */
+    protected $broadcastMessage;
 
 
     /**
@@ -63,5 +75,26 @@ class MorningMessage extends BotJob
             'chat_id' => $this->chat->id,
             'text' => BaseCommand::POSTS_ENDPOINT . $this->post->slug
         ]);
+    }
+
+
+    /**
+     * @param OutboundMessage $outboundMessage
+     * @param BroadcastMessage $broadcastMessage
+     * @param TelegramUser $user
+     */
+    protected function saveMessages(OutboundMessage $outboundMessage, BroadcastMessage $broadcastMessage, TelegramUser $user): void
+    {
+        $this->outboundMessage = $outboundMessage;
+        $this->outboundMessage->chat()->associate($this->chat);
+        $this->outboundMessage->user()->associate($user);
+        $this->outboundMessage->message_type_id = MessageType::ENTITIES;
+        $this->outboundMessage->save();
+
+        $this->broadcastMessage = $broadcastMessage;
+        $this->broadcastMessage->user()->associate($user);
+        $this->broadcastMessage->chat()->associate($this->chat);
+        $this->broadcastMessage->outboundMessage()->associate($this->outboundMessage);
+        $this->broadcastMessage->save();
     }
 }
