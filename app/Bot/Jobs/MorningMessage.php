@@ -5,7 +5,6 @@ namespace App\Bot\Jobs;
 
 use App\Bot\ResponseMessages\CommandResponses\BaseCommand;
 use app\Bot\ResponseMessages\CommandResponses\StatisticGatherer;
-use App\Models\BandTelegramUser;
 use App\Models\BroadcastMessage;
 use App\Models\Chat;
 use App\Models\MessageType;
