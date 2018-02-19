@@ -34,7 +34,7 @@ class Morning
     public function handle(): void
     {
         foreach ($this->chats as $chat) {
-            \dispatch(new MorningMessage($chat, new OutboundMessage(), new BroadcastMessage());
+            \dispatch(new MorningMessage($chat, new OutboundMessage(), new BroadcastMessage()));
         }
     }
 }
