@@ -47,7 +47,7 @@ class MorningMessage extends BotJob implements ShouldQueue
         parent::__construct($chat);
 
         $user = $chat->users->first();
-        $this->chat = $chat;
+
         $this->post = Post::query()->get()->random();
 
         $this->saveMessages($outboundMessage, $broadcastMessage, $user);
