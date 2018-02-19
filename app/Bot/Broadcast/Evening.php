@@ -8,7 +8,7 @@ namespace App\Bot\Broadcast;
  *
  * @package App\Bot\Broadcast
  */
-class Evening
+class Evening  extends BaseBroadcast
 {
 
 }

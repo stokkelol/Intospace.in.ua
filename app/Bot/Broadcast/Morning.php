@@ -13,33 +13,15 @@ use App\Models\OutboundMessage;
  *
  * @package App\Bot\Broadcast
  */
-class Morning
+class Morning extends BaseBroadcast
 {
-    /**
-     * @var
-     */
-    private $chats;
-
-    /**
-     * Morning constructor.
-     *
-     * @param $chats
-     */
-    public function __construct($chats)
-    {
-        $this->chats = $chats;
-    }
-
     /**
      * @return void
      */
     public function handle(): void
     {
-//        foreach ($this->chats as $chat) {
-//            \dispatch(new MorningMessage($chat, new OutboundMessage(), new BroadcastMessage()));
-//        }
-        $chat = Chat::query()->find(73429990);
-
-        \dispatch(new MorningMessage($chat, new OutboundMessage(), new BroadcastMessage()));
+        foreach ($this->chats as $chat) {
+            \dispatch(new MorningMessage($chat, new OutboundMessage(), new BroadcastMessage()));
+        }
     }
 }
