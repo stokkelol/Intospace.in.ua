@@ -54,8 +54,6 @@ class MorningMessage implements ShouldQueue
     {
         $user = $chat->users->first();
         $this->chat = $chat;
-        \logger($outboundMessage);
-        \logger($broadcastMessage);
         $this->outboundMessage = $outboundMessage;
         $this->outboundMessage->chat()->associate($this->chat);
         $this->outboundMessage->user()->associate($user);
@@ -76,10 +74,7 @@ class MorningMessage implements ShouldQueue
      */
     public function handle(): void
     {
-        $user = $this->chat->users;
-        \logger($user->id);
         $post = Post::query()->get()->random();
-
         $telegram = Container::getInstance()->make(Api::class);
 
         $telegram->sendMessage([
