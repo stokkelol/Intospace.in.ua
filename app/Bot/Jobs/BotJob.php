@@ -8,14 +8,21 @@ use App\Models\Chat;
 use App\Models\MessageType;
 use App\Models\OutboundMessage;
 use App\Models\TelegramUser;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Queue\SerializesModels;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Bus\Queueable;
 
 /**
  * Class BotJob
  *
  * @package app\Bot\Jobs
  */
-abstract class BotJob
+abstract class BotJob  implements ShouldQueue
 {
+    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+
     /**
      * @var TelegramUser
      */
