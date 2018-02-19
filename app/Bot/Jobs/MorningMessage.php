@@ -32,6 +32,16 @@ class MorningMessage implements ShouldQueue
      */
     private $chat;
 
+    /**
+     * @var OutboundMessage
+     */
+    private $outboundMessage;
+
+    /**
+     * @var BroadcastMessage
+     */
+    private $broadcastMessage;
+
 
     /**
      * Create a new job instance.
@@ -41,6 +51,8 @@ class MorningMessage implements ShouldQueue
     public function __construct(Chat $chat)
     {
         $this->chat = $chat;
+        $this->outboundMessage = new OutboundMessage();
+        $this->broadcastMessage = new BroadcastMessage();
     }
 
     /**
@@ -56,19 +68,17 @@ class MorningMessage implements ShouldQueue
 
         $telegram = Container::getInstance()->make(Api::class);
 
-        $outboundMessage = new OutboundMessage();
-        $outboundMessage->chat()->associate($this->chat);
-        $outboundMessage->user()->associate($user);
-        $outboundMessage->message_type_id = MessageType::ENTITIES;
-        $outboundMessage->save();
-        \logger($outboundMessage);
+        $this->outboundMessage->chat()->associate($this->chat);
+        $this->outboundMessage->user()->associate($user);
+        $this->outboundMessage->message_type_id = MessageType::ENTITIES;
+        $this->outboundMessage->save();
+        \logger($this->outboundMessage);
 
-        $broadcastMessage = new BroadcastMessage();
-        $broadcastMessage->user()->associate($user);
-        $broadcastMessage->chat()->associate($this->chat);
-        $broadcastMessage->outboundMessage()->associate($outboundMessage);
-        $broadcastMessage->save();
-        \logger($broadcastMessage);
+        $this->broadcastMessage->user()->associate($user);
+        $this->broadcastMessage->chat()->associate($this->chat);
+        $this->broadcastMessage->outboundMessage()->associate($this->outboundMessage);
+        $this->broadcastMessage->save();
+        \logger($this->broadcastMessage);
 
         $telegram->sendMessage([
             'chat_id' => $this->chat->id,
