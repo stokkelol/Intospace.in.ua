@@ -87,7 +87,6 @@ class MorningMessage implements ShouldQueue
         ]);
     }
 
-
     /**
      * @param OutboundMessage $outboundMessage
      * @param BroadcastMessage $broadcastMessage

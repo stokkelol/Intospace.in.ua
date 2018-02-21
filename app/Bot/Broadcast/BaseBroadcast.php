@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace app\Bot\Broadcast;
+namespace App\Bot\Broadcast;
 
 /**
  * Class BaseBroadcast

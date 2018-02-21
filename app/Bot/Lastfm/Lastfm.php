@@ -131,8 +131,6 @@ class Lastfm extends ConnectionDecorator
      */
     private function getBindings(string $method): string
     {
-        $array = \explode('::', $method);
-
-        return static::$bindings[$array[1]];
+        return static::$bindings[\explode('::', $method)[1]];
     }
 }

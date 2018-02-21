@@ -5,7 +5,6 @@ namespace App\Bot\Broadcast;
 
 use App\Bot\Jobs\MorningMessage;
 use App\Models\BroadcastMessage;
-use App\Models\Chat;
 use App\Models\OutboundMessage;
 
 /**
