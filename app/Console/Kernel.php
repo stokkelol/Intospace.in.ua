@@ -6,6 +6,7 @@ namespace App\Console;
 use App\Console\Commands\SendAfternoonMessage;
 use App\Console\Commands\SendEveningMessage;
 use App\Console\Commands\SendMorningMessage;
+use App\Console\Commands\SocialReminder;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -33,6 +34,8 @@ class Kernel extends ConsoleKernel
     protected function commands(): void
     {
         $this->load(__DIR__ . '/Commands');
+
+        require base_path('routes/console.php');
     }
 
     /**
@@ -43,8 +46,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        $schedule->call(SendMorningMessage::class)->dailyAt('11:00');
-        $schedule->call(SendAfternoonMessage::class)->dailyAt('16:00');
-        $schedule->call(SendEveningMessage::class)->dailyAt('20:00');
+        $schedule->command(SendMorningMessage::class)->dailyAt('11:00');
+        $schedule->command(SendAfternoonMessage::class)->dailyAt('16:00');
+        $schedule->command(SendEveningMessage::class)->dailyAt('20:00');
+        $schedule->command(SocialReminder::class)->weeklyOn(6);
     }
 }

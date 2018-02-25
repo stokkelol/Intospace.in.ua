@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
+ * @property-read \Illuminate\Database\Eloquent\Collection|Chat[] $chats
+ * @property-read \Illuminate\Database\Eloquent\Collection|Social[] $socials
+ * @property-read \Illuminate\Database\Eloquent\Collection|Band[] $bands
  * Class TelegramUser
  *
  * @package App
