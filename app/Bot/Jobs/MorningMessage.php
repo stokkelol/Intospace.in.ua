@@ -9,6 +9,7 @@ use App\Models\BroadcastMessage;
 use App\Models\Chat;
 use App\Models\MessageType;
 use App\Models\OutboundMessage;
+use App\Models\OutboundMessageText;
 use App\Models\Post;
 use App\Models\TelegramUser;
 use Illuminate\Bus\Queueable;
@@ -37,6 +38,11 @@ class MorningMessage implements ShouldQueue
      * @var OutboundMessage
      */
     private $outboundMessage;
+
+    /**
+     * @var OutboundMessageText
+     */
+    private $outboundMessageText;
 
     /**
      * @var BroadcastMessage
@@ -95,6 +101,11 @@ class MorningMessage implements ShouldQueue
         $this->outboundMessage->user()->associate($user);
         $this->outboundMessage->message_type_id = MessageType::ENTITIES;
         $this->outboundMessage->save();
+
+        $this->outboundMessageText = new OutboundMessageText();
+        $this->outboundMessageText->outboundMessage()->associate($this->outboundMessage);
+        $this->outboundMessageText->message = BaseCommand::POSTS_ENDPOINT . $this->post->slug;
+        $this->outboundMessageText->save();
 
         $this->broadcastMessage = new BroadcastMessage();
         $this->broadcastMessage->user()->associate($user);

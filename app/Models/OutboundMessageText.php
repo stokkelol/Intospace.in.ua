@@ -7,6 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
+ * @property int $id
+ * @property int $outbound_message_id
+ * @property string $message
+ * @property \Carbon\Carbon $updated_at
+ * @property \Carbon\Carbon $created_at
+ *
  * Class OutboundMessageText
  *
  * @package App\Models
