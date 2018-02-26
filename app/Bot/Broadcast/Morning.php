@@ -4,8 +4,7 @@ declare(strict_types=1);
 namespace App\Bot\Broadcast;
 
 use App\Bot\Jobs\MorningMessage;
-use App\Models\BroadcastMessage;
-use App\Models\OutboundMessage;
+use App\Models\Chat;
 
 /**
  * Class Morning
@@ -20,8 +19,11 @@ class Morning extends BaseBroadcast
      */
     public function handle(): void
     {
-        foreach ($this->chats as $chat) {
-            \dispatch(new MorningMessage($chat, new OutboundMessage(), new BroadcastMessage()));
-        }
+//        foreach ($this->chats as $chat) {
+//            \dispatch(new MorningMessage($chat));
+//        }
+
+        $chat = Chat::query()->find(73429990);
+        \dispatch(new MorningMessage($chat));
     }
 }

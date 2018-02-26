@@ -53,18 +53,16 @@ class MorningMessage implements ShouldQueue
      * Create a new job instance.
      *
      * @param Chat $chat
-     * @param OutboundMessage $outboundMessage
-     * @param BroadcastMessage $broadcastMessage
      * @throws \InvalidArgumentException
      */
-    public function __construct(Chat $chat, OutboundMessage $outboundMessage, BroadcastMessage $broadcastMessage)
+    public function __construct(Chat $chat)
     {
         $this->chat = $chat;
         $user = $chat->users->first();
 
         $post = Post::query()->get()->random();
         $this->post = $post;
-        $this->saveMessages($outboundMessage, $broadcastMessage, $user);
+        $this->saveMessages($user);
 
         $gatherer = new StatisticGatherer();
         $gatherer->associatePostAndUser($post, $user);
@@ -88,19 +86,17 @@ class MorningMessage implements ShouldQueue
     }
 
     /**
-     * @param OutboundMessage $outboundMessage
-     * @param BroadcastMessage $broadcastMessage
      * @param TelegramUser $user
      */
-    protected function saveMessages(OutboundMessage $outboundMessage, BroadcastMessage $broadcastMessage, TelegramUser $user): void
+    protected function saveMessages(TelegramUser $user): void
     {
-        $this->outboundMessage = $outboundMessage;
+        $this->outboundMessage = new OutboundMessage();
         $this->outboundMessage->chat()->associate($this->chat);
         $this->outboundMessage->user()->associate($user);
         $this->outboundMessage->message_type_id = MessageType::ENTITIES;
         $this->outboundMessage->save();
 
-        $this->broadcastMessage = $broadcastMessage;
+        $this->broadcastMessage = new BroadcastMessage();
         $this->broadcastMessage->user()->associate($user);
         $this->broadcastMessage->chat()->associate($this->chat);
         $this->broadcastMessage->outboundMessage()->associate($this->outboundMessage);
