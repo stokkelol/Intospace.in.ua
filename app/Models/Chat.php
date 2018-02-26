@@ -67,6 +67,6 @@ class Chat extends Model
      */
     public function isActive(): bool
     {
-        return $this->getActiveChats()->first() === self::ACTIVE;
+        return $this->getActiveChats()->first()->active === self::ACTIVE;
     }
 }
