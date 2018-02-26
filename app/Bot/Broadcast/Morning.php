@@ -21,7 +21,7 @@ class Morning extends BaseBroadcast
     {
         /** @var Chat $chat */
         foreach ($this->chats as $chat) {
-            if ($chat->getActiveChats()->first() === Chat::ACTIVE) {
+            if ($chat->isActive()) {
                 \dispatch(new MorningMessage($chat));
             }
         }

@@ -61,4 +61,12 @@ class Chat extends Model
     {
         return $this->users()->wherePivot('active', '=', true)->get();
     }
+
+    /**
+     * @return bool
+     */
+    public function isActive(): bool
+    {
+        return $this->getActiveChats()->first() === self::ACTIVE;
+    }
 }
