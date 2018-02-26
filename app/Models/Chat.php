@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
@@ -26,6 +27,9 @@ class Chat extends Model
 {
     const TABLE_NAME = 'chats';
 
+    const ACTIVE = 1;
+    const DISABLED = 0;
+
     /**
      * @var string
      */
@@ -42,5 +46,19 @@ class Chat extends Model
             'chat_id',
             'user_id'
         )->withPivot('active');
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    |  Other methods
+    |--------------------------------------------------------------------------
+    */
+
+    /**
+     * @return Collection
+     */
+    public function getActiveChats(): Collection
+    {
+        return $this->users()->wherePivot('active', '=', true)->get();
     }
 }

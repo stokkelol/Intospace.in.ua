@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Bot\Broadcast;
 
 use App\Bot\Jobs\MorningMessage;
+use App\Models\Chat;
 
 /**
  * Class Morning
@@ -18,8 +19,11 @@ class Morning extends BaseBroadcast
      */
     public function handle(): void
     {
+        /** @var Chat $chat */
         foreach ($this->chats as $chat) {
-            \dispatch(new MorningMessage($chat));
+            if ($chat->getActiveChats()->first() === Chat::ACTIVE) {
+                \dispatch(new MorningMessage($chat));
+            }
         }
     }
 }
