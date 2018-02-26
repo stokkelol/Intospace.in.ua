@@ -20,7 +20,7 @@ use Telegram\Bot\Api;
 class SocialReminder implements ShouldQueue
 {
     const MESSAGE = 'Hi! In case you forget - you can hit me with {social_network}#{nickname} message,
-        so i can serve you better! For example: lastfm#coolnickname';
+        so i can serve you better! For example: lastfm#nickname, facebook#nickname';
 
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -30,7 +30,7 @@ class SocialReminder implements ShouldQueue
     private $user;
 
     /**
-     * @var mixed
+     * @var Api
      */
     private $telegram;
 

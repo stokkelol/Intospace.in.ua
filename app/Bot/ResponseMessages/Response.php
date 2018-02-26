@@ -60,6 +60,11 @@ abstract class Response implements ResponseMessage
     protected $type;
 
     /**
+     * @var
+     */
+    protected $parseMode = 'Markdown';
+
+    /**
      * @param int $type
      * @param Api $telegram
      * @return ResponseMessage
@@ -168,7 +173,8 @@ abstract class Response implements ResponseMessage
         foreach ($this->responseMessage as $message) {
             $this->telegram->sendMessage([
                 'chat_id' => $this->chat->id,
-                'text' => $message
+                'text' => $message,
+                'parse_mode' => $this->parseMode
             ]);
         }
     }

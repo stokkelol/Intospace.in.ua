@@ -41,6 +41,6 @@ class Chat extends Model
             'chat_user',
             'chat_id',
             'user_id'
-        );
+        )->withPivot('active');
     }
 }

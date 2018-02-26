@@ -22,7 +22,10 @@ class BotCommandsSeeder extends Seeder
         7 => '/experimental',
         8 => '/psychedelic',
         9 => '/doommetal',
-        10 => '/youtube'
+        10 => '/youtube',
+        11 => '/stop',
+        12 => '/start',
+        13 => '/help'
     ];
 
     /**

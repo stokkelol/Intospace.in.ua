@@ -13,6 +13,8 @@ use App\Models\TelegramUser;
  */
 final class Factory
 {
+    private static $commandsMap = [];
+
     /**
      * @param string $type
      * @param TelegramUser $user
@@ -23,6 +25,7 @@ final class Factory
         switch ($type) {
             case '/latest':
                 return new Latest($type, $user);
+                break;
             case '/blackmetal':
             case '/deathmetal':
             case '/sludge':
@@ -32,8 +35,19 @@ final class Factory
             case '/psychedelic':
             case '/doommetal':
                 return new Styles($type, $user);
+                break;
             case '/youtube':
                 return new YoutubeSearch($type, $user);
+                break;
+            case '/stop':
+                return new Stop($type, $user);
+                break;
+            case '/start':
+                return new Start($type, $user);
+                break;
+            case '/help':
+                return new Help($type, $user);
+                break;
         }
     }
 }

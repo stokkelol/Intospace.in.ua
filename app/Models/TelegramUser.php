@@ -3,9 +3,10 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @property-read \Illuminate\Database\Eloquent\Collection|Chat[] $chats
@@ -48,7 +49,7 @@ class TelegramUser extends Model
     public function chats(): BelongsToMany
     {
         return $this->belongsToMany(Chat::class,
-            'chat_user', 'user_id', 'chat_id');
+            'chat_user', 'user_id', 'chat_id')->withPivot('active');
     }
 
     /**
@@ -66,5 +67,19 @@ class TelegramUser extends Model
     public function bands(): BelongsToMany
     {
         return $this->belongsToMany(Band::class);
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    |  Other methods
+    |--------------------------------------------------------------------------
+    */
+
+    /**
+     * @return Collection
+     */
+    public function getActiveChats(): Collection
+    {
+        return $this->chats()->wherePivot('active', '=', true)->get();
     }
 }

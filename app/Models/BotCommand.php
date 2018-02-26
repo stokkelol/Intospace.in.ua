@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * Class BotCommand
@@ -39,10 +40,27 @@ class BotCommand extends Model
     const DOOM_METAL_ID = 10;
     const DOOM_METAL = '/doommetal';
 
+    const STOP_BROADCASTING_ID = 11;
+    const STOP_BROADCASTING = '/stop';
+
+    const START_BROADCASTING_ID = 12;
+    const START_BROADCASTING = '/start';
+
+    const HELP_ID = 13;
+    const HELP = '/help';
+
     const TABLE_NAME = 'bot_commands';
 
     /**
      * @var string
      */
     protected $table = self::TABLE_NAME;
+
+    /**
+     * @return HasMany
+     */
+    public function inboundMessages(): HasMany
+    {
+        return $this->hasMany(InboundMessage::class);
+    }
 }
