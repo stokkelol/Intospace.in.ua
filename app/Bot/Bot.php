@@ -143,6 +143,8 @@ class Bot
             return $message->messageType;
         }
 
+        $user->notify(new IncomingTelegramBotMessage($request['message']['text']));
+
         if (isset($request['message']['entities'])) {
             if ($request['message']['entities'][0]['type'] === 'bot_command') {
                 return $this->saveBotCommand($request, $user, $chat);
@@ -189,8 +191,6 @@ class Bot
         $message = $this->prepareMessageToSave($request, $user, $chat);
         $message->messageType()->associate($messageType);
         $message->save();
-
-        $user->notify(new IncomingTelegramBotMessage($message->message_text));
 
         return $messageType;
     }
