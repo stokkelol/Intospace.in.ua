@@ -13,7 +13,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
  *
  * @package App\Notifications
  */
-class IncomingTelegramBotMessage extends Notification implements ShouldQueue
+class IncomingTelegramBotMessage extends Notification
 {
     use Queueable;
 
