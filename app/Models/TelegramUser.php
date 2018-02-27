@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Notifications\Notifiable;
 
 /**
  * @property-read \Illuminate\Database\Eloquent\Collection|Chat[] $chats
@@ -18,6 +19,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  */
 class TelegramUser extends Model
 {
+    use Notifiable;
+    
     const TABLE_NAME = 'telegram_users';
 
     /**
@@ -81,5 +84,13 @@ class TelegramUser extends Model
     public function getActiveChats(): Collection
     {
         return $this->chats()->wherePivot('active', '=', true)->get();
+    }
+
+    /**
+     * @return \Illuminate\Config\Repository|mixed
+     */
+    public function routeNotificationForSlack()
+    {
+        return config('slack.webhook');
     }
 }

@@ -68,6 +68,10 @@ Route::group(['prefix' => 'telegram/' . config('telegram.bot_token')], function 
     Route::get('/set-webhook', ['uses' => 'TelegramController@setWebhook']);
 });
 
+Route::group(['prefix' => 'slack'], function () {
+    Route::post('/webhook', ['uses' => 'SlackController@processWebhook']);
+});
+
 /**
  * Routes for backend
  */
