@@ -12,7 +12,7 @@ use App\Models\MessageType;
 use App\Models\TelegramUser;
 use App\Notifications\IncomingTelegramBotMessage;
 use Illuminate\Http\Request;
-use Illuminate\Notifications\Notification;
+use Illuminate\Support\Facades\Notification;
 use Telegram\Bot\Api;
 
 /**
