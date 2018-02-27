@@ -48,6 +48,7 @@ class IncomingTelegramBotMessage extends Notification implements ShouldQueue
      */
     public function toSlack($notifiable): SlackMessage
     {
+        \logger($this->message);
         return (new SlackMessage)
             ->content('User ' . $notifiable->first_name . ' ' . $notifiable->last_name . ' sent a message ' . $this->message);
     }
