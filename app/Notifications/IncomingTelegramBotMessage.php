@@ -50,6 +50,6 @@ class IncomingTelegramBotMessage extends Notification
     {
         \logger($this->message);
         return (new SlackMessage)
-            ->content('User ' . $notifiable->first_name . ' ' . $notifiable->last_name . ' sent a message ' . $this->message);
+            ->content('User ' . $notifiable->first_name . ' ' . $notifiable->last_name . ' sent a message "' . $this->message . '"');
     }
 }

@@ -72,6 +72,12 @@ Route::group(['prefix' => 'slack'], function () {
     Route::post('/webhook', ['uses' => 'SlackController@processWebhook']);
 });
 
+Route::get('test', function () {
+    /** @var \App\Models\TelegramUser $user */
+    $user = \App\Models\TelegramUser::query()->find(73429990);
+    $user->notify(new \App\Notifications\IncomingTelegramBotMessage('Hello'));
+});
+
 /**
  * Routes for backend
  */
