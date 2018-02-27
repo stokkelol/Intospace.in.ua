@@ -89,7 +89,7 @@ class TelegramUser extends Model
     /**
      * @return \Illuminate\Config\Repository|mixed
      */
-    public function routeNotificationForSlack()
+    public function routeNotificationForSlack($notification)
     {
         return config('slack.webhook');
     }
