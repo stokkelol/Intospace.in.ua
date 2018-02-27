@@ -10,7 +10,9 @@ use App\Models\Chat;
 use App\Models\InboundMessage;
 use App\Models\MessageType;
 use App\Models\TelegramUser;
+use App\Notifications\IncomingTelegramBotMessage;
 use Illuminate\Http\Request;
+use Illuminate\Notifications\Notification;
 use Telegram\Bot\Api;
 
 /**
@@ -187,6 +189,8 @@ class Bot
         $message = $this->prepareMessageToSave($request, $user, $chat);
         $message->messageType()->associate($messageType);
         $message->save();
+
+        Notification::send($user, new IncomingTelegramBotMessage($message->message_text));
 
         return $messageType;
     }
