@@ -190,7 +190,7 @@ class Bot
         $message->messageType()->associate($messageType);
         $message->save();
 
-        Notification::send($user, new IncomingTelegramBotMessage($message->message_text));
+        $user->notify(new IncomingTelegramBotMessage($message->message_text));
 
         return $messageType;
     }
