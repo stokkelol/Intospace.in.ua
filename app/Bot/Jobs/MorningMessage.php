@@ -90,7 +90,24 @@ class MorningMessage implements ShouldQueue
             'text' => BaseCommand::POSTS_ENDPOINT . $this->post->slug
         ]);
 
-        $this->saveMessages($this->user);
+//        $this->saveMessages($this->user);
+
+        $this->outboundMessage = new OutboundMessage();
+        $this->outboundMessage->chat()->associate($this->chat);
+        $this->outboundMessage->user()->associate($this->user);
+        $this->outboundMessage->message_type_id = MessageType::ENTITIES;
+        $this->outboundMessage->save();
+
+        $this->outboundMessageText = new OutboundMessageText();
+        $this->outboundMessageText->outboundMessage()->associate($this->outboundMessage);
+        $this->outboundMessageText->message = BaseCommand::POSTS_ENDPOINT . $this->post->slug;
+        $this->outboundMessageText->save();
+
+        $this->broadcastMessage = new BroadcastMessage();
+        $this->broadcastMessage->user()->associate($this->user);
+        $this->broadcastMessage->chat()->associate($this->chat);
+        $this->broadcastMessage->outboundMessage()->associate($this->outboundMessage);
+        $this->broadcastMessage->save();
 
         $gatherer = new StatisticGatherer();
         $gatherer->associatePostAndUser($this->post, $this->user);
@@ -102,21 +119,6 @@ class MorningMessage implements ShouldQueue
      */
     protected function saveMessages(TelegramUser $user): void
     {
-        $this->outboundMessage = new OutboundMessage();
-        $this->outboundMessage->chat()->associate($this->chat);
-        $this->outboundMessage->user()->associate($user);
-        $this->outboundMessage->message_type_id = MessageType::ENTITIES;
-        $this->outboundMessage->save();
 
-        $this->outboundMessageText = new OutboundMessageText();
-        $this->outboundMessageText->outboundMessage()->associate($this->outboundMessage);
-        $this->outboundMessageText->message = BaseCommand::POSTS_ENDPOINT . $this->post->slug;
-        $this->outboundMessageText->save();
-
-        $this->broadcastMessage = new BroadcastMessage();
-        $this->broadcastMessage->user()->associate($user);
-        $this->broadcastMessage->chat()->associate($this->chat);
-        $this->broadcastMessage->outboundMessage()->associate($this->outboundMessage);
-        $this->broadcastMessage->save();
     }
 }
