@@ -75,6 +75,14 @@ class MorningMessage implements ShouldQueue
             'text' => BaseCommand::POSTS_ENDPOINT . $this->post->slug
         ]);
 
+        $this->saveMessages();
+    }
+
+    /**
+     * @return void
+     */
+    protected function saveMessages(): void
+    {
         $outboundMessage = new OutboundMessage();
         $outboundMessage->chat()->associate($this->chat);
         $outboundMessage->user()->associate($this->user);
@@ -95,13 +103,5 @@ class MorningMessage implements ShouldQueue
         $gatherer = new StatisticGatherer();
         $gatherer->associatePostAndUser($this->post, $this->user);
         $gatherer->associateTagAndUser($this->post, $this->user);
-    }
-
-    /**
-     * @param TelegramUser $user
-     */
-    protected function saveMessages(TelegramUser $user): void
-    {
-
     }
 }
