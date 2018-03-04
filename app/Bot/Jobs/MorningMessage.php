@@ -98,16 +98,22 @@ class MorningMessage implements ShouldQueue
         $this->outboundMessage->message_type_id = MessageType::ENTITIES;
         $this->outboundMessage->save();
 
+        \logger($this->outboundMessage->id);
+
         $this->outboundMessageText = new OutboundMessageText();
         $this->outboundMessageText->outboundMessage()->associate($this->outboundMessage);
         $this->outboundMessageText->message = BaseCommand::POSTS_ENDPOINT . $this->post->slug;
         $this->outboundMessageText->save();
+
+        \logger($this->outboundMessageText->id);
 
         $this->broadcastMessage = new BroadcastMessage();
         $this->broadcastMessage->user()->associate($this->user);
         $this->broadcastMessage->chat()->associate($this->chat);
         $this->broadcastMessage->outboundMessage()->associate($this->outboundMessage);
         $this->broadcastMessage->save();
+
+        \logger($this->broadcastMessage->id);
 
         $gatherer = new StatisticGatherer();
         $gatherer->associatePostAndUser($this->post, $this->user);
