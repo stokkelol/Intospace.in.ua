@@ -51,9 +51,23 @@ class Parser
         $this->parts = $parts;
 
         if (isset($this->parts[0], $this->parts[1])) {
-            if ($this->parts[0] = 'lastfm') {
-                return (new LastFmSetter($this->parts[1], $this->response))->prepare();
-            }
+            return $this->parseParts();
+        }
+
+        return (new Unknown())->prepare();
+    }
+
+    /**
+     * @return array
+     */
+    private function parseParts(): array
+    {
+        if (\strtolower($this->parts[0]) === 'lastfm') {
+            return (new LastFmSetter($this->parts[1], $this->response))->prepare();
+        }
+
+        if (\strtolower($this->parts[0]) === 'facebook') {
+            return (new LastFmSetter($this->parts[1], $this->response))->prepare();
         }
     }
 }

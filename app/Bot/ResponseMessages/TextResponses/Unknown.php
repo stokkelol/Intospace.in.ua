@@ -13,10 +13,18 @@ use App\Bot\ResponseMessages\Interfaces\Text;
 class Unknown implements Text
 {
     /**
+     * @var array
+     */
+    public static $answers = [
+        ['Silence is golden'],
+        ['Think different!']
+    ];
+
+    /**
      * @return array
      */
     public function prepare(): array
     {
-        return ['Silence is golden'];
+        return static::$answers[\random_int(1, \count(static::$answers))];
     }
 }

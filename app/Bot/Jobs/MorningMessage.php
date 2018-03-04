@@ -66,7 +66,7 @@ class MorningMessage implements ShouldQueue
         $this->chat = $chat;
         $user = $chat->users->first();
 
-        $post = Post::query()->get()->random();
+        $post = Post::query()->whereNotIn('status', ['draft', 'deleted'])->get()->random();
         $this->post = $post;
         $this->saveMessages($user);
 

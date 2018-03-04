@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Console;
 
+use App\Console\Commands\Recommendations;
 use App\Console\Commands\SendAfternoonMessage;
 use App\Console\Commands\SendEveningMessage;
 use App\Console\Commands\SendMorningMessage;
@@ -50,5 +51,6 @@ class Kernel extends ConsoleKernel
         $schedule->command(SendAfternoonMessage::class)->dailyAt('16:00');
         $schedule->command(SendEveningMessage::class)->dailyAt('20:00');
         $schedule->command(SocialReminder::class)->weeklyOn(6);
+        $schedule->command(Recommendations::class)->dailyAt('00:00');
     }
 }

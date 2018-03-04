@@ -15,68 +15,37 @@ use Illuminate\Container\Container;
  *
  * @package app\Bot\ResponseMessages\TextResponses
  */
-class LastFmSetter implements Text
+class LastFmSetter extends Setter implements Text
 {
     /**
-     * @var string
+     * @return string
      */
-    private $nickname;
-
-    /**
-     * @var ResponseMessage
-     */
-    private $response;
-
-    /**
-     * LastFmSetter constructor.
-     *
-     * @param string $nickname
-     * @param ResponseMessage $response
-     */
-    public function __construct(string $nickname, ResponseMessage $response)
+    protected function getHandlerType(): string
     {
-        $this->nickname = $nickname;
-        $this->response = $response;
+        return Lastfm::class;
     }
 
     /**
      * @return array
+     * @throws \RuntimeException
      */
-    public function prepare(): array
+    protected function associate(): array
     {
-        return $this->tryAssociateLastfm();
-    }
-
-    /**
-     * @return Lastfm
-     */
-    private function makeLastFmHandler(): Lastfm
-    {
-        return Container::getInstance()->make(Lastfm::class);
-    }
-
-    /**
-     * @return array
-     */
-    private function tryAssociateLastfm(): array
-    {
-        $apiHandler = $this->makeLastFmHandler();
+        $apiHandler = $this->makeHandler();
         $apiHandler->getUserInfo($this->nickname);
         $response = $apiHandler->get();
-
-        $nickname = $response['user']['name'];
         $user = $this->response->getUser();
+
         if (!$user->whereHas('socials', function ($query) {
             $query->where('social_id', Social::LASTFM);
         })->exists()) {
-            $social = Social::query()->find(Social::LASTFM);
-            $userSocial = new SocialTelegramUser();
-            $userSocial->user_id = $user->id;
-            $userSocial->social_id = $social->id;
-            $userSocial->value = $nickname;
-            $userSocial->save();
+            if ($this->save($user, Social::LASTFM, $nickname = $response['user']['name'])) {
+                return ['Hey ho ' . $nickname . '!'];
+            }
 
-            return ['Hey ho ' . $nickname . '!'];
+            return ['Oops! Something went wrong on my side! Please try again later!'];
         }
+
+        return ['Hi again!'];
     }
 }

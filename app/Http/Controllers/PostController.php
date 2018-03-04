@@ -67,7 +67,7 @@ class PostController extends Controller
     {
         $post = $this->postRepository->getBySlug($slug);
 
-        if ($post == NULL) {
+        if ($post === null) {
             App::abort(404);
         }
 
@@ -75,9 +75,9 @@ class PostController extends Controller
         $relatedPosts = $related->getRelatedPosts($post->tags, $post->id);
 
         $data = [
-            'posts'     =>  $relatedPosts,
-            'post'      =>  $post,
-            'title'     =>  $post->title,
+            'posts' => $relatedPosts,
+            'post' => $post,
+            'title' => $post->title,
         ];
 
         return view('frontend.posts.post', $data);
