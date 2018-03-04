@@ -35,21 +35,6 @@ class MorningMessage implements ShouldQueue
     private $post;
 
     /**
-     * @var OutboundMessage
-     */
-    private $outboundMessage;
-
-    /**
-     * @var OutboundMessageText
-     */
-    private $outboundMessageText;
-
-    /**
-     * @var BroadcastMessage
-     */
-    private $broadcastMessage;
-
-    /**
      * @var Chat
      */
     private $chat;
@@ -90,30 +75,22 @@ class MorningMessage implements ShouldQueue
             'text' => BaseCommand::POSTS_ENDPOINT . $this->post->slug
         ]);
 
-//        $this->saveMessages($this->user);
-
         $outboundMessage = new OutboundMessage();
         $outboundMessage->chat()->associate($this->chat);
         $outboundMessage->user()->associate($this->user);
         $outboundMessage->message_type_id = MessageType::ENTITIES;
         $outboundMessage->save();
 
-        \logger($outboundMessage->id);
-
         $outboundMessageText = new OutboundMessageText();
-        $outboundMessageText->outboundMessage()->associate($this->outboundMessage);
+        $outboundMessageText->outboundMessage()->associate($outboundMessage);
         $outboundMessageText->message = BaseCommand::POSTS_ENDPOINT . $this->post->slug;
         $outboundMessageText->save();
-
-        \logger($outboundMessageText->id);
 
         $broadcastMessage = new BroadcastMessage();
         $broadcastMessage->user()->associate($this->user);
         $broadcastMessage->chat()->associate($this->chat);
-        $broadcastMessage->outboundMessage()->associate($this->outboundMessage);
+        $broadcastMessage->outboundMessage()->associate($outboundMessage);
         $broadcastMessage->save();
-
-        \logger($this->broadcastMessage->id);
 
         $gatherer = new StatisticGatherer();
         $gatherer->associatePostAndUser($this->post, $this->user);
