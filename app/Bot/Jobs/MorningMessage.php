@@ -54,6 +54,11 @@ class MorningMessage implements ShouldQueue
      */
     private $chat;
 
+    /**
+     * @var mixed
+     */
+    private $user;
+
 
     /**
      * Create a new job instance.
@@ -64,15 +69,10 @@ class MorningMessage implements ShouldQueue
     public function __construct(Chat $chat)
     {
         $this->chat = $chat;
-        $user = $chat->users->first();
+        $this->user = $chat->users->first();
 
         $post = Post::query()->whereNotIn('status', ['draft', 'deleted'])->get()->random();
         $this->post = $post;
-        $this->saveMessages($user);
-
-        $gatherer = new StatisticGatherer();
-        $gatherer->associatePostAndUser($post, $user);
-        $gatherer->associateTagAndUser($post, $user);
     }
 
     /**
@@ -89,6 +89,12 @@ class MorningMessage implements ShouldQueue
             'chat_id' => $this->chat->id,
             'text' => BaseCommand::POSTS_ENDPOINT . $this->post->slug
         ]);
+
+        $this->saveMessages($this->user);
+
+        $gatherer = new StatisticGatherer();
+        $gatherer->associatePostAndUser($this->post, $this->user);
+        $gatherer->associateTagAndUser($this->post, $this->user);
     }
 
     /**
