@@ -92,26 +92,26 @@ class MorningMessage implements ShouldQueue
 
 //        $this->saveMessages($this->user);
 
-        $this->outboundMessage = new OutboundMessage();
-        $this->outboundMessage->chat()->associate($this->chat);
-        $this->outboundMessage->user()->associate($this->user);
-        $this->outboundMessage->message_type_id = MessageType::ENTITIES;
-        $this->outboundMessage->save();
+        $outboundMessage = new OutboundMessage();
+        $outboundMessage->chat()->associate($this->chat);
+        $outboundMessage->user()->associate($this->user);
+        $outboundMessage->message_type_id = MessageType::ENTITIES;
+        $outboundMessage->save();
 
-        \logger($this->outboundMessage->id);
+        \logger($outboundMessage->id);
 
-        $this->outboundMessageText = new OutboundMessageText();
-        $this->outboundMessageText->outboundMessage()->associate($this->outboundMessage);
-        $this->outboundMessageText->message = BaseCommand::POSTS_ENDPOINT . $this->post->slug;
-        $this->outboundMessageText->save();
+        $outboundMessageText = new OutboundMessageText();
+        $outboundMessageText->outboundMessage()->associate($this->outboundMessage);
+        $outboundMessageText->message = BaseCommand::POSTS_ENDPOINT . $this->post->slug;
+        $outboundMessageText->save();
 
-        \logger($this->outboundMessageText->id);
+        \logger($outboundMessageText->id);
 
-        $this->broadcastMessage = new BroadcastMessage();
-        $this->broadcastMessage->user()->associate($this->user);
-        $this->broadcastMessage->chat()->associate($this->chat);
-        $this->broadcastMessage->outboundMessage()->associate($this->outboundMessage);
-        $this->broadcastMessage->save();
+        $broadcastMessage = new BroadcastMessage();
+        $broadcastMessage->user()->associate($this->user);
+        $broadcastMessage->chat()->associate($this->chat);
+        $broadcastMessage->outboundMessage()->associate($this->outboundMessage);
+        $broadcastMessage->save();
 
         \logger($this->broadcastMessage->id);
 
