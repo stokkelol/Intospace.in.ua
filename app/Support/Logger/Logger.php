@@ -15,6 +15,14 @@ use Psr\Http\Message\ResponseInterface;
 class Logger
 {
     /**
+     * @param string $string
+     */
+    public static function log(string $string): void
+    {
+        Log::debug($string);
+    }
+    
+    /**
      * @param Exception $e
      */
     public static function exception(Exception $e)

@@ -27,7 +27,7 @@ use Telegram\Bot\Api;
  */
 class MorningMessage implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels, Saver;
 
     /**
      * @var mixed
@@ -76,32 +76,5 @@ class MorningMessage implements ShouldQueue
         ]);
 
         $this->saveMessages();
-    }
-
-    /**
-     * @return void
-     */
-    protected function saveMessages(): void
-    {
-        $outboundMessage = new OutboundMessage();
-        $outboundMessage->chat()->associate($this->chat);
-        $outboundMessage->user()->associate($this->user);
-        $outboundMessage->message_type_id = MessageType::ENTITIES;
-        $outboundMessage->save();
-
-        $outboundMessageText = new OutboundMessageText();
-        $outboundMessageText->outboundMessage()->associate($outboundMessage);
-        $outboundMessageText->message = BaseCommand::POSTS_ENDPOINT . $this->post->slug;
-        $outboundMessageText->save();
-
-        $broadcastMessage = new BroadcastMessage();
-        $broadcastMessage->user()->associate($this->user);
-        $broadcastMessage->chat()->associate($this->chat);
-        $broadcastMessage->outboundMessage()->associate($outboundMessage);
-        $broadcastMessage->save();
-
-        $gatherer = new StatisticGatherer();
-        $gatherer->associatePostAndUser($this->post, $this->user);
-        $gatherer->associateTagAndUser($this->post, $this->user);
     }
 }

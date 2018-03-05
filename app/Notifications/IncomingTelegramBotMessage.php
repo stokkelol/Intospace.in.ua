@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Notifications;
 
+use App\Support\Logger\Logger;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\SlackMessage;
 use Illuminate\Notifications\Notification;
@@ -13,7 +14,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
  *
  * @package App\Notifications
  */
-class IncomingTelegramBotMessage extends Notification
+class IncomingTelegramBotMessage extends Notification implements ShouldQueue
 {
     use Queueable;
 
@@ -48,8 +49,14 @@ class IncomingTelegramBotMessage extends Notification
      */
     public function toSlack($notifiable): SlackMessage
     {
-        \logger($this->message);
+        Logger::log($this->message);
+
         return (new SlackMessage)
-            ->content('User ' . $notifiable->first_name . ' ' . $notifiable->last_name . ' sent a message "' . $this->message . '"');
+            ->content(
+                'User ' .
+                $notifiable->first_name . ' ' .
+                $notifiable->last_name . ' sent a message "' .
+                $this->message . '"'
+            );
     }
 }

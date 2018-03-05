@@ -47,11 +47,6 @@ class TelegramController extends Controller
         return $this->telegram->getMe();
     }
 
-    public function info()
-    {
-        return $this->telegram->getWebhookInfo();
-    }
-
     /**
      * @return bool
      * @throws \Telegram\Bot\Exceptions\TelegramSDKException

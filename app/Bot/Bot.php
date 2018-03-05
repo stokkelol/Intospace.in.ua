@@ -162,6 +162,7 @@ class Bot
      */
     private function saveBotCommand(array $request, TelegramUser $user, Chat $chat): MessageType
     {
+        /** @var MessageType $messageType */
         $messageType = MessageType::query()->find(MessageType::ENTITIES);
 
         $command = BotCommand::query()->where('title', '=', $request['message']['text'])->first();
@@ -186,6 +187,7 @@ class Bot
      */
     private function saveTextMessage(array $request, TelegramUser $user, Chat $chat): MessageType
     {
+        /** @var MessageType $messageType */
         $messageType = MessageType::query()->find(MessageType::TEXT);
 
         $message = $this->prepareMessageToSave($request, $user, $chat);

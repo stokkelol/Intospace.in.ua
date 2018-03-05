@@ -1,10 +1,16 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Support\CustomCollections;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 
+/**
+ * Class CollectionByIds
+ *
+ * @package App\Support\CustomCollections
+ */
 class CollectionByIds
 {
     /**
@@ -29,9 +35,7 @@ class CollectionByIds
     {
         $models = new Collection;
 
-        $ids = explode(',', $idsColl);
-
-        foreach ($ids as $id) {
+        foreach (explode(',', $idsColl) as $id) {
             $models->push($this->model->find($id));
         }
 

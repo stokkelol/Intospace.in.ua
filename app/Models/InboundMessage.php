@@ -8,6 +8,16 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Notifications\Notifiable;
 
 /**
+ * @property int $id
+ * @property int $chat_id
+ * @property int $user_id
+ * @property int $message_type_id
+ *
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
+ *
+ * @property-read MessageType $messageType
+ *
  * Class Message
  *
  * @package App
