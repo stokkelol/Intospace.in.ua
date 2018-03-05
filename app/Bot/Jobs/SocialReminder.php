@@ -30,11 +30,6 @@ class SocialReminder implements ShouldQueue
     private $user;
 
     /**
-     * @var Api
-     */
-    private $telegram;
-
-    /**
      * Create a new job instance.
      *
      * @param TelegramUser $user
@@ -42,7 +37,6 @@ class SocialReminder implements ShouldQueue
     public function __construct(TelegramUser $user)
     {
         $this->user = $user;
-        $this->telegram = Container::getInstance()->make(Api::class);
     }
 
     /**
@@ -52,7 +46,9 @@ class SocialReminder implements ShouldQueue
      */
     public function handle()
     {
-        $this->telegram->sendMessage([
+        $telegram = Container::getInstance()->make(Api::class);
+
+        $telegram->sendMessage([
             'chat_id' => $this->user->chats->first()->id,
             'text' => static::MESSAGE
         ]);
