@@ -50,7 +50,7 @@ class Kernel extends ConsoleKernel
         $schedule->command(SendMorningMessage::class)->dailyAt('11:00');
         $schedule->command(SendAfternoonMessage::class)->dailyAt('16:00');
         $schedule->command(SendEveningMessage::class)->dailyAt('20:00');
-        $schedule->command(SocialReminder::class)->weeklyOn(6);
+        $schedule->command(SocialReminder::class)->mondays()->at('13:00');
         $schedule->command(Recommendations::class)->dailyAt('00:00');
     }
 }

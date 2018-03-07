@@ -17,7 +17,7 @@ class Recommendations extends Command
      *
      * @var string
      */
-    protected $signature = 'command:name';
+    protected $signature = 'update:recommendation';
 
     /**
      * The console command description.
