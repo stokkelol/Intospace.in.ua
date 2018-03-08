@@ -10,5 +10,26 @@ namespace App\Bot\Lastfm;
  */
 class Parser
 {
+    /**
+     * @var Lastfm
+     */
+    private $api;
 
+    /**
+     * Parser constructor.
+     * 
+     * @param Lastfm $api
+     */
+    public function __construct(Lastfm $api)
+    {
+        $this->api = $api;
+    }
+
+    /**
+     * @return void
+     */
+    public function handle(): void
+    {
+        
+    }
 }

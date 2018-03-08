@@ -32,7 +32,8 @@ class BandRepository
      */
     public function getAllBands(): Builder
     {
-        return $this->band->with('posts', 'videos')->orderBy('title', 'asc');
+        return $this->band->with('posts', 'videos')
+            ->where('is_post_exist', '=', true)->orderBy('title', 'asc');
     }
 
     /**
