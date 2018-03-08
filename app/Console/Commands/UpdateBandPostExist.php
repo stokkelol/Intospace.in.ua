@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Models\Band;
 use App\Models\Post;
+use App\Models\Video;
 use Illuminate\Console\Command;
 
 class UpdateBandPostExist extends Command
@@ -33,7 +34,9 @@ class UpdateBandPostExist extends Command
         $bands = Band::query()->where('is_post_exist', '=', false)->get();
 
         foreach ($bands as $band) {
-            if (Post::query()->where('band_id', '=', $band->id)->exists()) {
+            $postExist = Post::query()->where('band_id', '=', $band->id)->exists();
+            $videoExist = Video::query()->where('band_id', '=', $band->id)->exists();
+            if ($postExist || $videoExist) {
                 $band->is_post_exist = true;
                 $band->save();
             }
