@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Http\Controllers\Backend;
 
@@ -6,17 +7,32 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Band;
 use App\Repositories\Bands\BandRepository;
-use App\Models\Post;
-use DB;
-use Flash;
+use Illuminate\Support\Facades\DB;
+use Laracasts\Flash\Flash;
 
-use App\Http\Requests;
-
+/**
+ * Class BandController
+ *
+ * @package App\Http\Controllers\Backend
+ */
 class BandController extends Controller
 {
+    /**
+     * @var Band
+     */
     protected $band;
+
+    /**
+     * @var BandRepository
+     */
     protected $bandRepository;
 
+    /**
+     * BandController constructor.
+     *
+     * @param Band $band
+     * @param BandRepository $bandRepository
+     */
     public function __construct(Band $band, BandRepository $bandRepository)
     {
         $this->band = $band;
@@ -37,8 +53,8 @@ class BandController extends Controller
     public function create()
     {
         $data =[
-            'title'     =>  'Create New Band',
-            'save_url'  =>  route('backend.bands.store'),
+            'title' => 'Create New Band',
+            'save_url' => route('backend.bands.store'),
         ];
 
         return view('backend.bands.create', $data);

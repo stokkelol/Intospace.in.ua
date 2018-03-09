@@ -34,6 +34,12 @@ class Band extends Model
         ];
     }
 
+    /*
+    |--------------------------------------------------------------------------
+    |  Relations
+    |--------------------------------------------------------------------------
+    */
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
@@ -56,5 +62,20 @@ class Band extends Model
     public function telegramUsers(): BelongsToMany
     {
         return $this->belongsToMany(TelegramUser::class);
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    |  Other methods
+    |--------------------------------------------------------------------------
+    */
+
+    /**
+     * @param string $title
+     * @return self
+     */
+    public function firstByTitle(string $title): self
+    {
+        return $this->where('title', '=', $title)->first();
     }
 }

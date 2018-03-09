@@ -61,7 +61,8 @@ class TelegramUser extends Model
     public function socials(): BelongsToMany
     {
         return $this->belongsToMany(Social::class,
-            'social_telegram_user', 'user_id', 'social_id');
+            'social_telegram_user', 'user_id', 'social_id')
+            ->withPivot('value');
     }
 
     /**
@@ -69,7 +70,9 @@ class TelegramUser extends Model
      */
     public function bands(): BelongsToMany
     {
-        return $this->belongsToMany(Band::class);
+        return $this->belongsToMany(Band::class,
+            'band_telegram_user', 'user_id', 'band_id')
+            ->withPivot('value', 'lastfm_count');
     }
 
     /*

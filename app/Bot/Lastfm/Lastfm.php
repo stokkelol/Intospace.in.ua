@@ -18,6 +18,7 @@ class Lastfm extends ConnectionDecorator
      * @var array
      */
     private static $bindings = [
+        'getArtistInfo' => 'artist.getInfo',
         'getUserInfo' => 'user.getInfo',
         'getUserTopArtists' => 'user.getTopArtists',
         'getUserTopAlbums' => 'user.getTopAlbums',
@@ -43,6 +44,15 @@ class Lastfm extends ConnectionDecorator
     }
 
     /**
+     * @param string $name
+     * @return Lastfm
+     */
+    public function getArtistInfo(string $name): self
+    {
+        return $this->set($this->setQuery(__METHOD__, ['artist' => $name]));
+    }
+
+    /**
      * @param string $username
      * @return $this
      */
@@ -57,7 +67,7 @@ class Lastfm extends ConnectionDecorator
      */
     public function getUserTopArtists(string $username): self
     {
-        return $this->set($this->setQuery(__METHOD__, ['user' => $username]));
+        return $this->set($this->setQuery(__METHOD__, ['user' => $username, 'limit' => 5]));
     }
 
     /**
