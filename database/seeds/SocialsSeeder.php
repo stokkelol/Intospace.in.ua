@@ -29,7 +29,8 @@ class SocialsSeeder extends Seeder
      */
     private $map = [
         1 => 'lastfm',
-        2 => 'facebook'
+        2 => 'facebook',
+        3 => 'soundclound'
     ];
 
     /**

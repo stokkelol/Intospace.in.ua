@@ -33,7 +33,7 @@ class Styles extends BaseCommand implements Command
     public function prepare(): array
     {
         $post = $this->post->getRandomPostByTag($this->getTag());
-        $this->gatherer->associatePostAndUser($post, $this->user);
+        $this->gatherer->associateBandAndUser($post, $this->user);
         $this->gatherer->associateTagAndUser($post, $this->user);
 
         return [static::POSTS_ENDPOINT . $post->slug];

@@ -17,7 +17,9 @@ class Unknown implements Text
      */
     public static $answers = [
         ['Silence is golden'],
-        ['Think different!']
+        ['Think different!'],
+        ['Whats up?'],
+        ['Go to hell!']
     ];
 
     /**
@@ -25,6 +27,8 @@ class Unknown implements Text
      */
     public function prepare(): array
     {
-        return static::$answers[\random_int(1, \count(static::$answers))];
+        return static::$answers[
+            \random_int(1, \count(static::$answers))
+        ];
     }
 }

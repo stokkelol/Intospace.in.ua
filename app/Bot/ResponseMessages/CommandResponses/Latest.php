@@ -37,7 +37,7 @@ class Latest extends BaseCommand implements Command
     public function associatePostAndUser(Collection $posts): void
     {
         foreach ($posts as $post) {
-            $this->gatherer->associatePostAndUser($post, $this->user);
+            $this->gatherer->associateBandAndUser($post, $this->user);
             $this->gatherer->associateTagAndUser($post, $this->user);
         }
     }

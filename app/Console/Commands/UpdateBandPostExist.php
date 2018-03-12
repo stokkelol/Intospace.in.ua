@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Console\Commands;
 
@@ -7,6 +8,11 @@ use App\Models\Post;
 use App\Models\Video;
 use Illuminate\Console\Command;
 
+/**
+ * Class UpdateBandPostExist
+ *
+ * @package App\Console\Commands
+ */
 class UpdateBandPostExist extends Command
 {
     /**

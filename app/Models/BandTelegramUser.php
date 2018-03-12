@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property int $user_id
  * @property int $band_id
  * @property int $value
+ * @property int $lastfm_count
  *
  * Class BandTelegramUser
  *
@@ -29,6 +30,17 @@ class BandTelegramUser extends Model
      * @var array
      */
     protected $guarded = ['id'];
+
+    /**
+     * @var array
+     */
+    protected $casts = [
+        'id' => 'int',
+        'user_id' => 'int',
+        'band_id' => 'int',
+        'value' => 'int',
+        'lastfm_count' => 'int'
+    ];
 
     /**
      * @var bool

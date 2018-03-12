@@ -17,6 +17,8 @@ class Social extends Model
 
     const LASTFM = 1;
     const FACEBOOK = 2;
+    const SOUNDCLOUD = 3;
+
 
     /**
      * @var string

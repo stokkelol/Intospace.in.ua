@@ -40,7 +40,7 @@ trait Saver
         $broadcastMessage->save();
 
         $gatherer = new StatisticGatherer();
-        $gatherer->associatePostAndUser($this->post, $this->user);
-        $gatherer->associateTagAndUser($this->post, $this->user);
+        $gatherer->associateBandAndUser($this->post, $this->user, $this->recommendation);
+        $gatherer->associateTagAndUser($this->post, $this->user, $this->recommendation);
     }
 }

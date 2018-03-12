@@ -19,6 +19,7 @@ class Lastfm extends ConnectionDecorator
      */
     private static $bindings = [
         'getArtistInfo' => 'artist.getInfo',
+        'getArtistTopTags' => 'artist.getTopTags',
         'getUserInfo' => 'user.getInfo',
         'getUserTopArtists' => 'user.getTopArtists',
         'getUserTopAlbums' => 'user.getTopAlbums',
@@ -53,8 +54,29 @@ class Lastfm extends ConnectionDecorator
     }
 
     /**
+     * @param string $name
+     * @return Lastfm
+     */
+    public function getArtistTopTags(string $name): self
+    {
+        return $this->set($this->setQuery(__METHOD__, ['artist' => $name]));
+    }
+
+    /**
+     * @param string $name
+     * @return Lastfm
+     */
+    public function getArtistSimilar(string $name): self
+    {
+        return $this->set($this->setQuery(__METHOD__, [
+            'artist' => $name,
+            'limit' => 200
+        ]));
+    }
+
+    /**
      * @param string $username
-     * @return $this
+     * @return Lastfm
      */
     public function getUserInfo(string $username): self
     {
@@ -63,16 +85,22 @@ class Lastfm extends ConnectionDecorator
 
     /**
      * @param string $username
-     * @return $this
+     * @param int $page
+     * @return Lastfm
      */
-    public function getUserTopArtists(string $username): self
+    public function getUserTopArtists(string $username, int $page): self
     {
-        return $this->set($this->setQuery(__METHOD__, ['user' => $username, 'limit' => 5]));
+        return $this->set($this->setQuery(__METHOD__,
+            [
+                'user' => $username,
+                'limit' => 500,
+                'page' => $page
+            ]));
     }
 
     /**
      * @param string $username
-     * @return $this
+     * @return Lastfm
      */
     public function getUserTopAlbums(string $username): self
     {
@@ -114,7 +142,7 @@ class Lastfm extends ConnectionDecorator
 
     /**
      * @param array $args
-     * @return $this
+     * @return Lastfm
      */
     private function set(array $args): self
     {

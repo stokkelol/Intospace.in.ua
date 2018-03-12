@@ -52,7 +52,8 @@ class TelegramUser extends Model
     public function chats(): BelongsToMany
     {
         return $this->belongsToMany(Chat::class,
-            'chat_user', 'user_id', 'chat_id')->withPivot('active');
+            'chat_user', 'user_id', 'chat_id')
+            ->withPivot('active');
     }
 
     /**
@@ -75,11 +76,37 @@ class TelegramUser extends Model
             ->withPivot('value', 'lastfm_count');
     }
 
+    /**
+     * @return BelongsToMany
+     */
+    public function tags(): BelongsToMany
+    {
+        return $this->belongsToMany(Tag::class,
+            'tag_telegram_user', 'user_id', 'tag_id')
+            ->withPivot('value');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function recommendations()
+    {
+        return $this->hasMany(TelegramUserRecommendation::class, 'user_id', 'id');
+    }
+
     /*
     |--------------------------------------------------------------------------
     |  Other methods
     |--------------------------------------------------------------------------
     */
+
+    /**
+     * @return bool
+     */
+    public function isLastfmExists(): bool
+    {
+        return $this->socials()->wherePivot('social_id', '=', Social::LASTFM)->exists();
+    }
 
     /**
      * @return Collection

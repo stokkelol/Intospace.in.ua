@@ -197,7 +197,6 @@ return [
         Telegram\Bot\Laravel\TelegramServiceProvider::class,
         Arcanedev\LogViewer\LogViewerServiceProvider::class,
         Alaouy\Youtube\YoutubeServiceProvider::class
-
     ],
 
     /*

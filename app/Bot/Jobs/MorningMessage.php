@@ -29,10 +29,13 @@ class MorningMessage implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels, Saver;
 
+    const LASTFM = 1;
+    const POST = 2;
+
     /**
-     * @var mixed
+     * @var Post|null
      */
-    private $post;
+    private $post = null;
 
     /**
      * @var Chat
@@ -40,9 +43,19 @@ class MorningMessage implements ShouldQueue
     private $chat;
 
     /**
-     * @var mixed
+     * @var TelegramUser
      */
     private $user;
+
+    /**
+     * @var
+     */
+    private $type;
+
+    /**
+     * @var string|null
+     */
+    private $recommendation = null;
 
 
     /**
@@ -56,8 +69,13 @@ class MorningMessage implements ShouldQueue
         $this->chat = $chat;
         $this->user = $chat->users->first();
 
-        $post = Post::query()->whereNotIn('status', ['draft', 'deleted'])->get()->random();
-        $this->post = $post;
+        $this->user->isLastfmExists() ? $this->type = static::LASTFM : $this->type = static::POST;
+
+        $this->type === static::LASTFM
+            ? $this->recommendation = $this->user->recommendations()->orderBy('id','desc')->first()
+            : $this->post = Post::query()->whereNotIn('status', ['draft', 'deleted'])->get()->random();
+
+        $this->post = Post::query()->whereNotIn('status', ['draft', 'deleted'])->get()->random();
     }
 
     /**
@@ -72,7 +90,7 @@ class MorningMessage implements ShouldQueue
 
         $telegram->sendMessage([
             'chat_id' => $this->chat->id,
-            'text' => BaseCommand::POSTS_ENDPOINT . $this->post->slug
+            'text' => $this->recommendation ?? BaseCommand::POSTS_ENDPOINT . $this->post->slug
         ]);
 
         $this->saveMessages();

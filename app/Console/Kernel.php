@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Console;
 
+use App\Console\Commands\CleanBands;
 use App\Console\Commands\Recommendations;
 use App\Console\Commands\SendAfternoonMessage;
 use App\Console\Commands\SendEveningMessage;
@@ -54,5 +55,6 @@ class Kernel extends ConsoleKernel
         $schedule->command(SocialReminder::class)->mondays()->at('13:00');
         $schedule->command(Recommendations::class)->dailyAt('00:00');
         $schedule->command(UpdateBandPostExist::class)->dailyAt('01:00');
+        $schedule->command(CleanBands::class)->tuesdays()->at('00:00');
     }
 }

@@ -3,11 +3,13 @@ declare(strict_types=1);
 
 namespace App\Bot\ResponseMessages\CommandResponses;
 
+use App\Bot\Jobs\MorningMessage;
 use App\Models\BandTelegramUser;
 use App\Models\Post;
 use App\Models\Tag;
 use App\Models\TagTelegramUser;
 use App\Models\TelegramUser;
+use App\Models\TelegramUserRecommendation;
 
 /**
  * Class StatisticGatherer
@@ -19,10 +21,15 @@ class StatisticGatherer
     /**
      * @param Post $post
      * @param TelegramUser $user
+     * @param TelegramUserRecommendation $recommendation
      */
-    public function associatePostAndUser(Post $post, TelegramUser $user): void
+    public function associateBandAndUser(Post $post, TelegramUser $user, TelegramUserRecommendation $recommendation): void
     {
-        $pivot = BandTelegramUser::query()->where('band_id', $post->band_id)
+        $id = $post === null
+            ? $recommendation->band_id
+            : $post->band_id;
+
+        $pivot = BandTelegramUser::query()->where('band_id', '=', $id)
             ->where('user_id', $user->id)->first() ?? new BandTelegramUser();
         $pivot->user_id = $user->id;
         $pivot->band_id = $post->band_id;
@@ -34,17 +41,19 @@ class StatisticGatherer
      * @param Post $post
      * @param TelegramUser $user
      */
-    public function associateTagAndUser(Post $post, TelegramUser $user): void
+    public function associateTagAndUser(Post $post, TelegramUser $user, TelegramUserRecommendation $recommendation): void
     {
-        $tags = $post->tags;
+        if ($post !== null) {
+            $tags = $post->tags;
 
-        foreach ($tags as $tag) {
-            $pivot = TagTelegramUser::query()->where('user_id', $user->id)
-                    ->where('tag_id', $tag->id)->first() ?? new TagTelegramUser();
-            $pivot->user_id = $user->id;
-            $pivot->tag_id = $tag->id;
-            $pivot->value++;
-            $pivot->save();
+            foreach ($tags as $tag) {
+                $pivot = TagTelegramUser::query()->where('user_id', $user->id)
+                        ->where('tag_id', $tag->id)->first() ?? new TagTelegramUser();
+                $pivot->user_id = $user->id;
+                $pivot->tag_id = $tag->id;
+                $pivot->value++;
+                $pivot->save();
+            }
         }
     }
 }
