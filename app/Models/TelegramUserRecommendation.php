@@ -7,6 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
+ * @property int $id
+ * @property int $band_id
+ * @property int $user_id
+ * @property \Carbon\Carbon $updated_at
+ * @property \Carbon\Carbon $created_at
+ * @property int $is_dispatched
+ *
+ * @property-read TelegramUser $user
+ * @property-read Band $band
+ *
  * Class TelegramUserRecommendation
  *
  * @package App\Models
@@ -26,6 +36,16 @@ class TelegramUserRecommendation extends Model
     protected $guarded =['id'];
 
     /**
+     * @var array
+     */
+    protected $casts = [
+        'id' => 'int',
+        'band_id' => 'int',
+        'user_id' => 'int',
+        'is_dispatched' => 'bool'
+    ];
+
+    /**
      * @return BelongsTo
      */
     public function user(): BelongsTo
@@ -39,5 +59,15 @@ class TelegramUserRecommendation extends Model
     public function band(): BelongsTo
     {
         return $this->belongsTo(Band::class, 'band_id', 'id');
+    }
+
+    /**
+     * @return string
+     */
+    public function getPayload(): string
+    {
+        $payload = \json_decode($this->payload, true);
+
+        return $payload['link'];
     }
 }

@@ -101,6 +101,14 @@ class TelegramUser extends Model
     */
 
     /**
+     * @return TelegramUserRecommendation
+     */
+    public function getLatestRecommendation(): TelegramUserRecommendation
+    {
+        $this->recommendations()->where('is_dispatched', false)->orderBy('id', 'desc')->first();
+    }
+
+    /**
      * @return bool
      */
     public function isLastfmExists(): bool

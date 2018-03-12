@@ -3,15 +3,11 @@ declare(strict_types=1);
 
 namespace App\Bot\Jobs;
 
-use App\Bot\ResponseMessages\CommandResponses\BaseCommand;
-use App\Bot\ResponseMessages\CommandResponses\StatisticGatherer;
-use App\Models\BroadcastMessage;
+use App\Models\Band;
 use App\Models\Chat;
-use App\Models\MessageType;
-use App\Models\OutboundMessage;
-use App\Models\OutboundMessageText;
 use App\Models\Post;
 use App\Models\TelegramUser;
+use App\Models\TelegramUserRecommendation;
 use Illuminate\Bus\Queueable;
 use Illuminate\Container\Container;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -33,11 +29,6 @@ class MorningMessage implements ShouldQueue
     const POST = 2;
 
     /**
-     * @var Post|null
-     */
-    private $post = null;
-
-    /**
      * @var Chat
      */
     private $chat;
@@ -48,14 +39,30 @@ class MorningMessage implements ShouldQueue
     private $user;
 
     /**
-     * @var
+     * @var int
      */
     private $type;
 
     /**
+     * @var TelegramUserRecommendation|null
+     */
+    private $recommendation;
+
+    /**
      * @var string|null
      */
-    private $recommendation = null;
+    private $message;
+
+    /**
+     * @var Band|null
+     */
+    private $band;
+
+
+    /**
+     * @var Post|null
+     */
+    private $post;
 
 
     /**
@@ -70,12 +77,9 @@ class MorningMessage implements ShouldQueue
         $this->user = $chat->users->first();
 
         $this->user->isLastfmExists() ? $this->type = static::LASTFM : $this->type = static::POST;
+        $this->recommendation = $this->user->recommendations()->orderBy('id','desc')->first();
 
-        $this->type === static::LASTFM
-            ? $this->recommendation = $this->user->recommendations()->orderBy('id','desc')->first()
-            : $this->post = Post::query()->whereNotIn('status', ['draft', 'deleted'])->get()->random();
-
-        $this->post = Post::query()->whereNotIn('status', ['draft', 'deleted'])->get()->random();
+        $this->prepareMessage();
     }
 
     /**
@@ -90,9 +94,41 @@ class MorningMessage implements ShouldQueue
 
         $telegram->sendMessage([
             'chat_id' => $this->chat->id,
-            'text' => $this->recommendation ?? BaseCommand::POSTS_ENDPOINT . $this->post->slug
+            'text' => $this->message
         ]);
 
         $this->saveMessages();
+    }
+
+    /**
+     * @return void
+     * @throws \InvalidArgumentException
+     */
+    private function prepareMessage(): void
+    {
+        $this->type === static::LASTFM
+            ? $this->prepareFromPayload()
+            : $this->prepareFromPost();
+    }
+
+    /**
+     * @return void
+     */
+    private function prepareFromPayload(): void
+    {
+        $this->message = $this->recommendation->getPayload();
+        $this->band = $this->recommendation->band;
+        $this->post = Post::query()->where('band_id', '=', $this->band->id) ?? null;
+    }
+
+    /**
+     * @return void
+     * @throws \InvalidArgumentException
+     */
+    private function prepareFromPost(): void
+    {
+        $this->post = Post::query()->whereNotIn('status', ['draft', 'deleted'])->get()->random();
+        $this->message = $this->post->slug;
+        $this->band = $this->post->band ?? null;
     }
 }

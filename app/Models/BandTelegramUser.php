@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
@@ -61,5 +62,16 @@ class BandTelegramUser extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(TelegramUser::class);
+    }
+
+    /**
+     * @param Builder $query
+     * @param int $userId
+     * @param int $bandId
+     * @return Builder
+     */
+    public function scopeFindByBandAndUser(Builder $query, int $userId, int $bandId): Builder
+    {
+        return $query->where('band_id', '=', $bandId)->where('user_id','=',$userId);
     }
 }

@@ -3,31 +3,28 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
-use App\Bot\Lastfm\Lastfm;
-use App\Bot\Lastfm\Parser;
 use Illuminate\Console\Command;
-use Illuminate\Container\Container;
 
 /**
- * Class ParseLastfm
- * 
+ * Class ParseLatfmSimilarity
+ *
  * @package App\Console\Commands
  */
-class ParseLastfm extends Command
+class ParseLatfmSimilarity extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'lastfm:parse';
+    protected $signature = 'command:name';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Parse LastFm bands base';
+    protected $description = 'Command description';
 
     /**
      * Execute the console command.
@@ -36,6 +33,6 @@ class ParseLastfm extends Command
      */
     public function handle()
     {
-        (new Parser(Container::getInstance()->make(Lastfm::class)))->handle();
+        //
     }
 }

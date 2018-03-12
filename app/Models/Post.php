@@ -33,7 +33,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  *
- * @property \Illuminate\Database\Eloquent\Collection|Tag[] $tags
+ * @property-read \Illuminate\Database\Eloquent\Collection|Tag[] $tags
+ * @property-read Band $band
  *
  * Class Post
  *

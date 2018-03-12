@@ -40,6 +40,7 @@ class StatisticGatherer
     /**
      * @param Post $post
      * @param TelegramUser $user
+     * @param TelegramUserRecommendation $recommendation
      */
     public function associateTagAndUser(Post $post, TelegramUser $user, TelegramUserRecommendation $recommendation): void
     {

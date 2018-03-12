@@ -30,7 +30,7 @@ trait Saver
 
         $outboundMessageText = new OutboundMessageText();
         $outboundMessageText->outboundMessage()->associate($outboundMessage);
-        $outboundMessageText->message = BaseCommand::POSTS_ENDPOINT . $this->post->slug;
+        $outboundMessageText->message = $this->message;
         $outboundMessageText->save();
 
         $broadcastMessage = new BroadcastMessage();
