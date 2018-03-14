@@ -8,6 +8,7 @@ use App\Models\Chat;
 use App\Models\Post;
 use App\Models\TelegramUser;
 use App\Models\TelegramUserRecommendation;
+use App\Support\Logger\Logger;
 use Illuminate\Bus\Queueable;
 use Illuminate\Container\Container;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -98,6 +99,14 @@ class MorningMessage implements ShouldQueue
         ]);
 
         $this->saveMessages();
+    }
+
+    /**
+     * @param \Throwable $e
+     */
+    public function failed(\Throwable $e): void
+    {
+        Logger::exception($e);
     }
 
     /**

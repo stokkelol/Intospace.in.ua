@@ -23,9 +23,9 @@ class Logger
     }
     
     /**
-     * @param Exception $e
+     * @param \Throwable $e
      */
-    public static function exception(Exception $e)
+    public static function exception(\Throwable $e)
     {
         Log::debug(get_class($e) . ' has been thrown with message: "' . $e->getMessage() . '" in file: ' . $e->getFile()
             . ' at line: ' . $e->getLine() . '. Trace:' . $e->getTraceAsString());

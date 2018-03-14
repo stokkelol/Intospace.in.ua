@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Bot\Jobs;
 
 use App\Models\TelegramUser;
+use App\Support\Logger\Logger;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
@@ -50,5 +51,13 @@ class AfternoonMessage implements ShouldQueue
     public function handle(): void
     {
         //
+    }
+
+    /**
+     * @param \Throwable $e
+     */
+    public function failed(\Throwable $e): void
+    {
+        Logger::exception($e);
     }
 }
