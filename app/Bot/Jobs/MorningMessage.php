@@ -78,7 +78,7 @@ class MorningMessage implements ShouldQueue
 
         $this->user->isLastfmExists() ? $this->type = static::LASTFM : $this->type = static::POST;
         $this->recommendation = $this->user->recommendations()->orderBy('id','desc')->first();
-
+        \logger($this->recommendation->id);
         $this->prepareMessage();
     }
 

@@ -19,18 +19,15 @@ use App\Models\TelegramUserRecommendation;
 class StatisticGatherer
 {
     /**
-     * @param Post $post
-     * @param TelegramUser $user
+     * @param Post|null $post
+     * @param TelegramUser|null $user
      * @param TelegramUserRecommendation $recommendation
      */
-    public function associateBandAndUser(Post $post, TelegramUser $user, TelegramUserRecommendation $recommendation): void
+    public function associateBandAndUser(?Post $post, TelegramUser $user, ?TelegramUserRecommendation $recommendation): void
     {
-        \logger($recommendation->id);
         $id = $post === null
             ? $recommendation->band_id
             : $post->band_id;
-
-        \logger($id);
 
         $pivot = BandTelegramUser::query()->where('band_id', '=', $id)
                 ->where('user_id', $user->id)->first();
