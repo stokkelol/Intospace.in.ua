@@ -48,12 +48,10 @@ class PostRepository
      */
     public function getRandomPosts(): Collection
     {
-        $randomposts = $this->post->where('status', 'active')
+        return $this->post->where('status', 'active')
             ->where('category_id', '=', '1')
             ->get()
             ->random(18);
-
-        return $randomposts;
     }
 
     public function getBySlug($slug)
@@ -63,11 +61,9 @@ class PostRepository
 
     public function getPostsByCategory($slug)
     {
-        $posts = $this->getActivePosts()->whereHas('category', function ($query) use ($slug) {
+        return $this->getActivePosts()->whereHas('category', function ($query) use ($slug) {
             $query->whereSlug($slug);
         })->latest();
-
-        return $posts;
     }
 
     /**
@@ -76,14 +72,12 @@ class PostRepository
      */
     public function getPopularPosts($count): Collection
     {
-        $posts = $this->post->with('tags')
+        return $this->post->with('tags')
             ->whereIn('status', ['active'])
             ->groupBy('views')
             ->orderBy('views', 'desc')
             ->take($count)
             ->get();
-
-        return $posts;
     }
 
     /**
@@ -92,12 +86,10 @@ class PostRepository
      */
     public function getLatestActivePosts($limit = 10): Collection
     {
-        $posts = $this->post->latest()
+        return $this->post->latest()
             ->whereIn('status', ['active'])
             ->take($limit)
             ->get();
-
-        return $posts;
     }
 
     public function getPostsBySearchQuery($query)
@@ -159,11 +151,9 @@ class PostRepository
 
     public function getPostsByBandSlug($slug)
     {
-        $posts = $this->getActivePosts()->whereHas('band', function ($query) use ($slug) {
+        return $this->getActivePosts()->whereHas('band', function ($query) use ($slug) {
             $query->whereSlug($slug);
         })->latest();
-
-        return $posts;
     }
 
     public function getPinnedPost()
@@ -176,13 +166,11 @@ class PostRepository
      */
     public function getMonthlyPosts(): Collection
     {
-        $posts = $this->post->byStatus('active')
+        return $this->post->byStatus('active')
             ->getMonthlyItems()
             ->groupBy('published_at')
             ->orderBy('published_at', 'desc')
             ->get();
-
-        return $posts;
     }
 
     /**
