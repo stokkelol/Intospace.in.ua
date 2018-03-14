@@ -73,15 +73,7 @@ class StatisticGatherer
     {
         $id = $this->post === null ? $this->recommendation->band_id : $this->post->band_id;
 
-        $pivot = BandTelegramUser::query()->where('band_id', '=', $id)
-                ->where('user_id', $this->user->id)->first();
-
-        if ($pivot === null) {
-            $pivot = new BandTelegramUser();
-            $pivot->user_id = $this->user->id;
-            $pivot->band_id = $this->post->band_id;
-        }
-
+        $pivot = $this->findBandUserPivot($id);
         $pivot->value++;
         $pivot->save();
 
@@ -94,18 +86,50 @@ class StatisticGatherer
     public function associateTagAndUser(): self
     {
         if ($this->post !== null) {
-            $tags = $this->post->tags;
-
-            foreach ($tags as $tag) {
-                $pivot = TagTelegramUser::query()->where('user_id', $this->user->id)
-                        ->where('tag_id', $tag->id)->first() ?? new TagTelegramUser();
-                $pivot->user_id = $this->user->id;
-                $pivot->tag_id = $tag->id;
+            foreach ($this->post->tags as $tag) {
+                $pivot = $this->findTagUserPivot($tag->id);
                 $pivot->value++;
                 $pivot->save();
             }
         }
 
         return $this;
+    }
+
+    /**
+     * @param int $id
+     * @return BandTelegramUser
+     */
+    private function findBandUserPivot(int $id): BandTelegramUser
+    {
+        /** @var BandTelegramUser $pivot */
+        $pivot = BandTelegramUser::query()->where('band_id', '=', $id)
+            ->where('user_id', $this->user->id)->first();
+
+        if ($pivot === null) {
+            $pivot = new BandTelegramUser();
+            $pivot->user_id = $this->user->id;
+            $pivot->band_id = $this->post->band_id;
+        }
+
+        return $pivot;
+    }
+
+    /**
+     * @param int $id
+     * @return TagTelegramUser
+     */
+    private function findTagUserPivot(int $id): TagTelegramUser
+    {
+        /** @var TagTelegramUser $pivot */
+        $pivot = TagTelegramUser::query()->where('user_id', $this->user->id)
+                ->where('tag_id', $id)->first() ?? new TagTelegramUser();
+
+        if ($pivot === null) {
+            $pivot->user_id = $this->user->id;
+            $pivot->tag_id = $id;
+        }
+
+        return $pivot;
     }
 }
