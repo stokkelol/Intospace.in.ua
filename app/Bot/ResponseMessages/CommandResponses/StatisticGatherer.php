@@ -38,6 +38,8 @@ class StatisticGatherer
             $pivot->band_id = $post->band_id;
         }
 
+        \logger($pivot->id ?? 'not fount');
+
         $pivot->value++;
         $pivot->save();
     }
