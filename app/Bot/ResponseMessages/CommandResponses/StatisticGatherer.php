@@ -38,18 +38,16 @@ class StatisticGatherer
             $pivot->band_id = $post->band_id;
         }
 
-        \logger($pivot->id ?? 'not fount');
-
         $pivot->value++;
         $pivot->save();
     }
 
     /**
-     * @param Post $post
+     * @param Post|null $post
      * @param TelegramUser $user
-     * @param TelegramUserRecommendation $recommendation
+     * @param TelegramUserRecommendation|null $recommendation
      */
-    public function associateTagAndUser(Post $post, TelegramUser $user, TelegramUserRecommendation $recommendation): void
+    public function associateTagAndUser(?Post $post, TelegramUser $user, ?TelegramUserRecommendation $recommendation): void
     {
         if ($post !== null) {
             $tags = $post->tags;
