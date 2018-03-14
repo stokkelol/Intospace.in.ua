@@ -25,7 +25,7 @@ class TelegramUserRecommendation extends Model
 {
     const TABLE_NAME = 'telegram_user_recommendations';
 
-    const YOUTUBE_URL = 'https://www.youtube.com/';
+    const YOUTUBE_URL = 'https://www.youtube.com/watch?v=';
 
     /**
      * @var string
