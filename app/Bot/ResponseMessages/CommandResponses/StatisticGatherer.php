@@ -25,6 +25,7 @@ class StatisticGatherer
      */
     public function associateBandAndUser(Post $post, TelegramUser $user, TelegramUserRecommendation $recommendation): void
     {
+        \logger($recommendation->id);
         $id = $post === null
             ? $recommendation->band_id
             : $post->band_id;
