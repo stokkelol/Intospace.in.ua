@@ -97,9 +97,7 @@ class MorningMessage implements ShouldQueue
             'text' => $this->message
         ]);
 
-        if ($this->saveMessages()) {
-            logger('true');
-        }
+        $this->saveMessages();
     }
 
     /**

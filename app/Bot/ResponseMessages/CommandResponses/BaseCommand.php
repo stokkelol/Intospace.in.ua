@@ -34,11 +34,6 @@ abstract class BaseCommand
     protected $type;
 
     /**
-     * @var StatisticGatherer
-     */
-    protected $gatherer;
-
-    /**
      * @var TelegramUser
      */
     protected $user;
@@ -63,6 +58,5 @@ abstract class BaseCommand
     {
         $this->post = new PostRepository(new Post());
         $this->video = new VideoRepository(new Video());
-        $this->gatherer = new StatisticGatherer();
     }
 }
