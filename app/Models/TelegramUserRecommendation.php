@@ -25,6 +25,8 @@ class TelegramUserRecommendation extends Model
 {
     const TABLE_NAME = 'telegram_user_recommendations';
 
+    const YOUTUBE_URL = 'https://www.youtube.com/';
+
     /**
      * @var string
      */
@@ -68,6 +70,15 @@ class TelegramUserRecommendation extends Model
     {
         $payload = \json_decode($this->payload, true);
 
-        return $payload['link'];
+        return $this->createYoutubeLink($payload['link']);
+    }
+
+    /**
+     * @param string $link
+     * @return string
+     */
+    private function createYoutubeLink(string $link): string
+    {
+        return static::YOUTUBE_URL . $link;
     }
 }
