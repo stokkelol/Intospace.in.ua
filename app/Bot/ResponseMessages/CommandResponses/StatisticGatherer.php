@@ -29,6 +29,8 @@ class StatisticGatherer
             ? $recommendation->band_id
             : $post->band_id;
 
+        \logger($id);
+
         $pivot = BandTelegramUser::query()->where('band_id', '=', $id)
                 ->where('user_id', $user->id)->first();
 
