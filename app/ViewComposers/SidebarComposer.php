@@ -53,7 +53,7 @@ class SidebarComposer
         $posts = $this->post->latest()->get();
         $videos = $this->video->latest()->get();
         $popularposts = $this->post->popular(10)->get();
-        $counttags = (new CountTags())->get(null);
+        $counttags = (new CountTags())->get($this->tag->count());
 
         $view->with('latestposts', $posts);
         $view->with('latestvideos', $videos);

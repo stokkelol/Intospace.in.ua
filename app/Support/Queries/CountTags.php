@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Support\Queries;
 
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use App\Models\Tag;
 
@@ -24,13 +25,21 @@ class CountTags
             $count = Tag::query()->count();
         }
 
-        $tags = Tag::query()->join('post_tag', 'tags.id', '=', 'post_tag.tag_id')
-            ->groupBy('tags.id')
-            ->select(['tags.*', DB::raw('COUNT(*) as cnt')])
-            ->orderBy('cnt', 'desc')
-            ->take($count)
-            ->get();
+        if (Cache::has('tags_' . $count)) {
+            return Cache::get('tags_' . $count);
+        } else {
+            $tags = Tag::query()->join('post_tag', 'tags.id', '=', 'post_tag.tag_id')
+                ->groupBy('tags.id')
+                ->select(['tags.*', DB::raw('COUNT(*) as cnt')])
+                ->orderBy('cnt', 'desc')
+                ->take($count)
+                ->get();
 
-        return $tags;
+            Cache::put('tags_' . $count, $tags, 3600);
+
+            return $tags;
+        }
+
+
     }
 }
