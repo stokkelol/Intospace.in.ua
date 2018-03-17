@@ -185,8 +185,7 @@ class Post extends Entity
 
     public function scopePopular(Builder $query, int $count): Builder
     {
-        return $query->with('tags')
-            ->whereIn('status', ['active'])
+        return $query->active()
             ->groupBy('views')
             ->orderBy('views', 'desc')
             ->take($count);
