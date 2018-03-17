@@ -17,34 +17,14 @@ use Laracasts\Flash\Flash;
  */
 class BandController extends Controller
 {
-    /**
-     * @var Band
-     */
-    protected $band;
-
-    /**
-     * @var BandRepository
-     */
-    protected $bandRepository;
-
-    /**
-     * BandController constructor.
-     *
-     * @param Band $band
-     * @param BandRepository $bandRepository
-     */
-    public function __construct(Band $band, BandRepository $bandRepository)
-    {
-        $this->band = $band;
-        $this->bandRepository = $bandRepository;
-    }
-
     public function index(Request $request)
     {
         if ($request->has('search')) {
-            $bands = $this->bandRepository->getAllBandsBySearch($request->get('search'))->paginate(15);
+            $bands = Band::query()->with('posts', 'videos')
+                ->where('title', 'like', '%' . $request->get('search') . '%')
+                ->orderBy('title')->paginate(15);
         } else {
-        $bands = $this->bandRepository->getAllBands()->paginate(15);
+            $bands = Band::query()->paginate(15);
         }
 
         return view('backend.bands.index', compact('bands'));
@@ -62,7 +42,7 @@ class BandController extends Controller
 
     public function store(Request $request, $band_id = null)
     {
-        $band = $this->band->findOrNew($band_id);
+        $band = Band::query()->findOrNew($band_id);
         $band->title = $request->input('title');
         $band->save();
         Flash::message('Band created!');
@@ -72,16 +52,12 @@ class BandController extends Controller
 
     public function edit($band_id)
     {
-        $data = [
-            'band' => $this->band->find($band_id),
-        ];
-
-        return view('backend.bands.edit', $data);
+        return view('backend.bands.edit', \compact(['band' => Band::query()->find($band_id)]));
     }
 
     public function update(Request $request, $band_id)
     {
-        $band = $this->band->findOrNew($band_id);
+        $band = Band::query()->findOrNew($band_id);
         $band->title = $request->input('title');
         $band->resluggify();
         $band->update();
@@ -92,8 +68,6 @@ class BandController extends Controller
 
     public function show($band_id)
     {
-        $band = $this->band->findOrFail($band_id);
-
-        return view('backend.bands.show', compact('band'));
+        return view('backend.bands.show', \compact(['band' => Band::query()->findOrFail($band_id)]));
     }
 }

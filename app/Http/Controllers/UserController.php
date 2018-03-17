@@ -3,10 +3,8 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-use App\Repositories\Users\UserRepository;
-use App\Repositories\Posts\PostRepository;
 
 /**
  * Class UserController
@@ -15,20 +13,6 @@ use App\Repositories\Posts\PostRepository;
  */
 class UserController extends Controller
 {
-    protected $user;
-    protected $post;
-
-    /**
-     * UserController constructor.
-     * @param UserRepository $user
-     * @param PostRepository $post
-     */
-    public function __construct(UserRepository $user, PostRepository $post)
-    {
-        $this->user = $user;
-        $this->post = $post;
-    }
-
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View
      */
@@ -38,11 +22,11 @@ class UserController extends Controller
             return redirect('/');
         }
 
-        $user_id = Auth::id();
+        $user = User::query()->find(Auth::id());
 
         $data = [
-            'user' => $this->user->getUser(),
-            'posts' => $this->post->getPostsByUserId($user_id)->get()
+            'user' => $user,
+            'posts' => $user->posts
         ];
         return view('frontend.users.show', $data);
     }

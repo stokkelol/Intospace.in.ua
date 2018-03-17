@@ -23,7 +23,8 @@ class Lastfm extends ConnectionDecorator
         'getUserInfo' => 'user.getInfo',
         'getUserTopArtists' => 'user.getTopArtists',
         'getUserTopAlbums' => 'user.getTopAlbums',
-        'getUserTopTags' => 'user.getTopTags'
+        'getUserTopTags' => 'user.getTopTags',
+        'getArtistSimilar' => 'artist.getSimilar'
     ];
 
     /**
@@ -70,7 +71,7 @@ class Lastfm extends ConnectionDecorator
     {
         return $this->set($this->setQuery(__METHOD__, [
             'artist' => $name,
-            'limit' => 200
+            'limit' => 25
         ]));
     }
 
@@ -169,6 +170,15 @@ class Lastfm extends ConnectionDecorator
      */
     private function getBindings(string $method): string
     {
-        return static::$bindings[\explode('::', $method)[1]];
+        return static::$bindings[$this->extractMethod($method)];
+    }
+
+    /**
+     * @param string $method
+     * @return string
+     */
+    private function extractMethod(string $method): string
+    {
+        return \explode('::', $method)[1];
     }
 }

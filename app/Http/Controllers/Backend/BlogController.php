@@ -3,33 +3,24 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Intervention\Image\Facades\Image;
-use App\Models\Blog;
-use Auth;
-use Flash;
-use Carbon\Carbon;
 use App\Http\Requests\StoreBlogRequest;
+use App\Models\Blog;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Laracasts\Flash\Flash;
 
 class BlogController extends Controller
 {
-    protected $blog;
-
-    public function __construct(Blog $blog)
-    {
-        $this->blog = $blog;
-    }
-
     public function index()
     {
-        $blogs = $this->blog->with('user')->paginate(15);
+        $blogs = Blog::query()->with('user')->paginate(15);
 
         return view('backend.blogs.index', compact('blogs'));
     }
 
     public function show(Request $request, $id)
     {
-        $blog = $this->blog->findOrFail($id);
+        $blog = Blog::query()->findOrFail($id);
 
         return view('backend.blogs.show', compact('blog'));
     }
@@ -37,20 +28,20 @@ class BlogController extends Controller
     public function create()
     {
         $data = [
-            'save_url'      =>  route('backend.blogs.store'),
+            'save_url' => route('backend.blogs.store'),
         ];
         return view('backend.blogs.create', $data);
     }
 
     public function destroy($id)
     {
-        $review = $this->blog->findOrFail($id);
+        Blog::query()->findOrFail($id);
 
     }
 
     public function update(StoreBlogRequest $request, $id)
     {
-        $review = $this->blog->findOrNew($id);
+        Blog::query()->findOrNew($id);
     }
 
     public function store(StoreBlogRequest $request)
@@ -68,7 +59,7 @@ class BlogController extends Controller
     public function edit($blog_id)
     {
         $data = [
-            'blog'          =>  $this->blog->find($blog_id),
+            'blog' => $this->blog->find($blog_id),
         ];
 
         return view('backend.blogs.edit', $data);
@@ -76,7 +67,7 @@ class BlogController extends Controller
 
     public function storeOrUpdateBlog(Request $request, $blog_id)
     {
-        $blog = $this->blog->findOrNew($blog_id);
+        $blog = Blog::query()->findOrNew($blog_id);
         $blog->user_id = Auth::user()->id;
         $blog->title = $request->input('title');
         $blog->content = $request->input('content');

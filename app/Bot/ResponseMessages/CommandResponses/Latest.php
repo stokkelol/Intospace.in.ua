@@ -18,7 +18,7 @@ class Latest extends BaseCommand implements Command
      */
     public function prepare(): array
     {
-        $posts = $this->post->getLatestActivePosts(5);
+        $posts = $this->post->active(5)->get();
 
         $this->associatePostAndUser($posts);
         

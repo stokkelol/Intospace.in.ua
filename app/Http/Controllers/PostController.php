@@ -3,14 +3,11 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\App;
-use App\Http\Requests;
 use App\Models\Post;
 use App\Models\Tag;
-use App\Repositories\Posts\PostRepository;
-use App\Repositories\Tags\TagRepository;
-use Illuminate\Http\Request;
 use App\Support\Services\RelatedPostsService;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 
 /**
  * Class PostController
@@ -19,18 +16,26 @@ use App\Support\Services\RelatedPostsService;
  */
 class PostController extends Controller
 {
-    protected $postRepository;
-    protected $tagRepository;
+    /**
+     * @var Post
+     */
+    private $post;
+
+    /**
+     * @var Tag
+     */
+    private $tag;
 
     /**
      * PostController constructor.
-     * @param PostRepository $postRepository
-     * @param TagRepository $tagRepository
+     *
+     * @param Post $post
+     * @param Tag $tag
      */
-    public function __construct(PostRepository $postRepository, TagRepository $tagRepository)
+    public function __construct(Post $post, Tag $tag)
     {
-        $this->postRepository = $postRepository;
-        $this->tagRepository = $tagRepository;
+        $this->post = $post;
+        $this->tag = $tag;
     }
 
     /**
@@ -42,16 +47,16 @@ class PostController extends Controller
 
         if ($request->has('search')) {
             $query = $request->get('search');
-            $posts = $this->postRepository->getPostsBySearchQuery($query)->get();
-            } else {
-            $posts = $this->postRepository->getLatestPublishedPosts()->paginate(15);
+            $posts = $this->post->getPostsBySearchQuery($query)->get();
+        } else {
+            $posts = $this->post->getLatestPublishedPosts()->paginate(15);
         }
 
         $data = [
-            'toppost'       =>  $this->postRepository->getPinnedPost()->first(),
-            'posts'         =>  $posts,
-            'tags'          =>  $this->tagRepository->getAllTags(),
-            'randposts'     =>  $this->postRepository->getRandomPosts()
+            'toppost' => $this->post->getPinnedPost()->first(),
+            'posts' => $posts,
+            'tags' => $this->tagRepository->getAllTags(),
+            'randposts' => $this->post->getRandomPosts()
         ];
 
         return view('frontend.main', $data);
@@ -65,7 +70,7 @@ class PostController extends Controller
      */
     public function show($slug, RelatedPostsService $related)
     {
-        $post = $this->postRepository->getBySlug($slug);
+        $post = $this->post->findBySlug($slug)->first();
 
         if ($post === null) {
             App::abort(404);
@@ -88,7 +93,7 @@ class PostController extends Controller
      */
     protected function incrementViews($post)
     {
-        if ($post->status == 'active') {
+        if ($post->status === 'active') {
             $post->increment('views');
         }
     }

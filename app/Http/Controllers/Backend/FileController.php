@@ -25,7 +25,7 @@ class FileController extends Controller
     protected $file;
 
     /**
-     * @var PostRepository
+     * @var Post
      */
     protected $post;
 
@@ -33,9 +33,9 @@ class FileController extends Controller
      * FileController constructor.
      *
      * @param Filesystem $file
-     * @param PostRepository $post
+     * @param Post $post
      */
-    public function __construct(Filesystem $file, PostRepository $post)
+    public function __construct(Filesystem $file, Post $post)
     {
         $this->file = $file;
         $this->post = $post;
@@ -131,7 +131,7 @@ class FileController extends Controller
      */
     public function getAssociatedPost($img): Post
     {
-        return $this->post->getPostByImg($img);
+        return $this->post->byImage($img);
     }
 
     /**
@@ -156,7 +156,7 @@ class FileController extends Controller
      */
     public function updatePost($img, $newImg): void
     {
-        $post = $this->post->getPostByImg($img);
+        $post = $this->post->byImage($img);
         $post->img = $newImg.'.jpg';
         $post->img_thumbnail = 'thumbnail_'.$newImg.'.jpg';
         $post->update();

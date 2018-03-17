@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace App\ViewComposers;
 
+use App\Models\Tag;
 use Illuminate\Contracts\View\View;
-use App\Repositories\Tags\TagRepository;
 use App\Support\Queries\CountTags;
 
 /**
@@ -15,16 +15,16 @@ use App\Support\Queries\CountTags;
 class TaglineComposer
 {
     /**
-     * @var TagRepository
+     * @var Tag
      */
     protected $tag;
 
     /**
      * TaglineComposer constructor.
      *
-     * @param TagRepository $tag
+     * @param Tag $tag
      */
-    public function __construct(TagRepository $tag)
+    public function __construct(Tag $tag)
     {
         $this->tag = $tag;
     }

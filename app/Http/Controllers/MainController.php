@@ -3,12 +3,12 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Collection;
+use App\Models\Post;
+use App\Models\Tag;
+use App\Models\Video;
 use Illuminate\Http\Request;
-use App\Repositories\Posts\PostRepository;
-use App\Repositories\Tags\TagRepository;
-use App\Repositories\Videos\VideoRepository;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Collection;
 use Illuminate\View\View;
 
 /**
@@ -21,36 +21,33 @@ class MainController extends Controller
     const POSTS_PER_PAGE = 15;
 
     /**
-     * @var PostRepository
+     * @var Post
      */
     protected $post;
 
     /**
-     * @var TagRepository
+     * @var Tag
+
      */
     protected $tag;
 
     /**
-     * @var VideoRepository
+     * @var Video
      */
     protected $video;
 
     /**
      * MainController constructor.
      *
-     * @param PostRepository $postRepository
-     * @param TagRepository $tagRepository
-     * @param VideoRepository $videoRepository
+     * @param Post $post
+     * @param Tag $tag
+     * @param Video $video
      */
-    public function __construct(
-        PostRepository $postRepository,
-        TagRepository $tagRepository,
-        VideoRepository $videoRepository
-    )
+    public function __construct(Post $post, Tag $tag, Video $video)
     {
-        $this->post = $postRepository;
-        $this->tag = $tagRepository;
-        $this->video = $videoRepository;
+        $this->post = $post;
+        $this->tag = $tag;
+        $this->video = $video;
     }
 
     /**
@@ -81,14 +78,15 @@ class MainController extends Controller
 
         $links = new LengthAwarePaginator($posts, count($posts), $perPage);
         $links->setPath('/');
-        $topPost = $this->post->getPinnedPost()->first();
+        $topPost = $this->post->pinned()->first();
 
         $data = [
-            'toppost'       =>  $topPost,
-            'links'         =>  $links,
-            'posts'         =>  $items,
-            'tags'          =>  $this->tag->getAllTags(),
-            'randposts'     =>  $this->post->getRandomPosts()
+            'toppost' => $topPost,
+            'links' => $links,
+            'posts' => $items,
+            'tags' => $this->tag->allWith()->get(),
+            'randposts' => $this->post->where('status', 'active')
+                ->where('category_id', '=', '1')->random(18)
         ];
 
         return view('frontend.main', $data);
@@ -103,7 +101,7 @@ class MainController extends Controller
         $posts = $this->getCollection($request);
         if ($posts->count() == 1) {
             $query = $request->get('search');
-            $topPost = $this->post->getPostsBySearchQuery($query)->first();
+            $topPost = $this->post->bySearchQuery($query)->first();
             $posts = [];
         } else {
             $topPost = [];
@@ -112,7 +110,7 @@ class MainController extends Controller
         $data = [
             'toppost' => $topPost,
             'posts' => $posts,
-            'tags' => $this->tag->getAllTags(),
+            'tags' => $this->tag->get(),
         ];
 
         return view('frontend.main', $data);
@@ -126,18 +124,16 @@ class MainController extends Controller
     {
         if ($request->has('search')) {
             $query = $request->get('search');
-            $postscollection = collect($this->post->getPostsBySearchQuery($query)->get());
-            $videoscollection = collect($this->video->getVideosBySearchQuery($query)->get());
-            $posts = $postscollection->merge($videoscollection)->sortByDesc('published_at');
+            $postsCollection = collect($this->post->bySearchQuery($query)->get());
+            $videosCollection = collect($this->video->bySearchQuery($query)->get());
 
-            return $posts;
+            return $postsCollection->merge($videosCollection)->sortByDesc('published_at');
         }
 
-        $postscollection = collect($this->post->getLatestPublishedPosts()->get());
-        $videoscollection = collect($this->video->getLatestVideos()->get());
-        $posts = $postscollection->merge($videoscollection)->sortByDesc('published_at');
+        $postsCollection = collect($this->post->active()->get());
+        $videosCollection = collect($this->video->latest()->get());
 
-        return $posts;
+        return $postsCollection->merge($videosCollection)->sortByDesc('published_at');
     }
 
 
@@ -148,6 +144,6 @@ class MainController extends Controller
      */
     public function maintenance(): View
     {
-      return view('errors.503-custom');
+        return view('errors.503-custom');
     }
 }

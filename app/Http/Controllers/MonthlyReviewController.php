@@ -3,11 +3,10 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-use App\Repositories\MonthlyReviews\MonthlyReviewRepository;
-use App\Http\Requests;
+use App\Models\MonthlyReview;
+use App\Models\Post;
+use App\Models\Video;
 use App\Support\Presenters\ReviewPresenter;
-use App\Repositories\Posts\PostRepository;
-use App\Repositories\Videos\VideoRepository;
 use Illuminate\View\View;
 
 /**
@@ -18,31 +17,27 @@ use Illuminate\View\View;
 class MonthlyReviewController extends Controller
 {
     /**
-     * @var MonthlyReviewRepository
+     * @var MonthlyReview
      */
     protected $review;
 
     /**
-     * @var PostRepository
+     * @var Post
      */
     protected $post;
 
     /**
-     * @var VideoRepository
+     * @var Video
      */
     protected $video;
 
     /**
      * MonthlyReviewController constructor.
-     * @param MonthlyReviewRepository $review
-     * @param PostRepository $post
-     * @param VideoRepository $video
+     * @param MonthlyReview $review
+     * @param Post $post
+     * @param Video $video
      */
-    public function __construct(
-        MonthlyReviewRepository $review,
-        PostRepository $post,
-        VideoRepository $video
-    ) {
+    public function __construct(MonthlyReview $review, Post $post, Video $video) {
         $this->review = $review;
         $this->post = $post;
         $this->video = $video;
@@ -64,16 +59,16 @@ class MonthlyReviewController extends Controller
      */
     public function show($slug): View
     {
-        $review = $this->review->getReviewBySlug($slug);
+        $review = $this->review->where('slug', $slug)->first();
         $titlesArray = explode(';', $review->titles);
         $contentsArray = explode(';', $review->content);
         $imgsArray = explode(';', $review->imgs);
         $presenter = new ReviewPresenter($titlesArray, $contentsArray, $imgsArray);
         $presenter->merge();
 
-        $latest_posts  = $this->post->getPostsById($review->latest_posts);
-        $popular_posts = $this->post->getPostsById($review->popular_posts);
-        $latest_videos = $this->video->getVideosById($review->latest_videos);
+        $latest_posts  = $this->post->whereIn('id', \explode(',', $review->latest_posts))->get();
+        $popular_posts = $this->post->whereIn('id', \explode(',', $review->popular_posts))->get();
+        $latest_videos = $this->video->whereIn('id', \explode(',', $review->latest_videos))->get();
 
         $data = [
             'review' => $review,

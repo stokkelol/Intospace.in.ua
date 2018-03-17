@@ -5,8 +5,9 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\MonthlyReview;
+use App\Models\Post;
+use App\Models\Video;
 use App\Repositories\Posts\PostRepository;
-use App\Repositories\Videos\VideoRepository;
 use App\Support\Images\ImageSaver;
 use App\Support\Statuses\StatusChanger;
 use Illuminate\Http\RedirectResponse;
@@ -27,12 +28,12 @@ class MonthlyReviewController extends Controller
     protected $review;
 
     /**
-     * @var PostRepository
+     * @var Post
      */
     protected $post;
 
     /**
-     * @var VideoRepository
+     * @var Video
      */
     protected $video;
 
@@ -40,14 +41,11 @@ class MonthlyReviewController extends Controller
      * MonthlyReviewController constructor.
      *
      * @param MonthlyReview $review
-     * @param PostRepository $post
-     * @param VideoRepository $video
+     * @param Post $post
+     * @param Video $video
      */
-    public function __construct(
-        MonthlyReview $review,
-        PostRepository $post,
-        VideoRepository $video
-    ) {
+    public function __construct(MonthlyReview $review, Post $post, Video $video)
+    {
         $this->review = $review;
         $this->post = $post;
         $this->video = $video;
@@ -72,7 +70,7 @@ class MonthlyReviewController extends Controller
             'title' => 'Create new review',
             'save_url' => route('backend.monthlyreviews.store'),
             'latest_posts' => $this->post->getMonthlyPosts(),
-            'popular_posts' => $this->post->getPopularPosts(5),
+            'popular_posts' => $this->post->popular(5)->get(),
             'latest_videos' => $this->video->getMonthlyVideos()
         ];
 
@@ -156,7 +154,7 @@ class MonthlyReviewController extends Controller
 
         if (empty($review->latest_posts)) {
             $review->latest_posts = $this->getItemsForReview($this->post->getMonthlyPosts());
-            $review->popular_posts = $this->getItemsForReview($this->post->getPopularPosts(5));
+            $review->popular_posts = $this->getItemsForReview($this->post->popular(5)->get());
             $review->latest_videos = $this->getItemsForReview($this->video->getMonthlyVideos());
         }
 

@@ -3,16 +3,10 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Models\Video;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Band;
-use Illuminate\Support\Facades\DB;
-use App\Repositories\Bands\BandRepository;
-use App\Repositories\Posts\PostRepository;
-use App\Repositories\Videos\VideoRepository;
-use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Pagination\Paginator;
-use App\Http\Requests;
 use Illuminate\View\View;
 
 /**
@@ -23,35 +17,32 @@ use Illuminate\View\View;
 class BandController extends Controller
 {
     /**
-     * @var BandRepository
+     * @var Band
      */
-    protected $bandRepository;
+    protected $band;
 
     /**
-     * @var PostRepository
+     * @var Post
      */
-    protected $postRepository;
+    protected $post;
 
     /**
-     * @var VideoRepository
+     * @var Video
      */
-    protected $videoRepository;
+    protected $video;
 
     /**
      * BandController constructor.
      *
-     * @param BandRepository $band
-     * @param PostRepository $post
-     * @param VideoRepository $video
+     * @param Band $band
+     * @param Post $post
+     * @param Video $video
      */
-    public function __construct(
-        BandRepository $band,
-        PostRepository $post,
-        VideoRepository $video
-    ) {
-        $this->bandRepository = $band;
-        $this->postRepository = $post;
-        $this->videoRepository = $video;
+    public function __construct(Band $band, Post $post, Video $video)
+    {
+        $this->band = $band;
+        $this->post = $post;
+        $this->video = $video;
     }
 
     /**
@@ -61,12 +52,14 @@ class BandController extends Controller
     public function index(Request $request): View
     {
         if ($request->has('search')) {
-            $bands = $this->bandRepository->getAllBandsBySearch($request->input('search'))->get();
+            $bands = Band::query()->with('posts', 'videos')
+                ->where('title', 'like', '%' . $request->get('search') . '%')
+                ->orderBy('title')->get();
 
             return view('frontend.bands.index', compact('bands'));
         }
 
-        $bands = $this->bandRepository->getAllBands()->get();
+        $bands = Band::query()->get();
 
         return view('frontend.bands.index', compact('bands'));
     }
@@ -82,7 +75,7 @@ class BandController extends Controller
         $posts = $this->getCollection($slug);
 
         if ($posts->count() == 1) {
-            $topPost = $this->postRepository->getPostsByBandSlug($slug)->first();
+            $topPost = $this->post->getPostsByBandSlug($slug)->first();
             $posts = [];
         } else {
             $topPost = null;
@@ -102,10 +95,9 @@ class BandController extends Controller
      */
     public function getCollection($slug)
     {
-        $postscollection = collect($this->postRepository->getPostsByBandSlug($slug)->get());
-        $videoscollection = collect($this->videoRepository->getVideosByBandSlug($slug)->get());
-        $posts = $postscollection->merge($videoscollection)->sortByDesc('published_at');
+        $postscollection = collect($this->post->getPostsByBandSlug($slug)->get());
+        $videoscollection = collect($this->video->getVideosByBandSlug($slug)->get());
 
-        return $posts;
+        return $postscollection->merge($videoscollection)->sortByDesc('published_at');
     }
 }

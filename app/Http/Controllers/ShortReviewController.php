@@ -3,9 +3,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-use App\Repositories\Posts\PostRepository;
 use App\Models\Post;
-use App\Http\Requests;
 
 /**
  * Class ShortReviewController
@@ -18,9 +16,9 @@ class ShortReviewController extends Controller
 
     /**
      * ShortReviewController constructor.
-     * @param PostRepository $post
+     * @param Post $post
      */
-    public function __construct(PostRepository $post)
+    public function __construct(Post $post)
     {
         $this->post = $post;
     }
@@ -31,7 +29,7 @@ class ShortReviewController extends Controller
     public function index()
     {
         $data = [
-            'posts' =>  $this->post->getShortReviewsPosts(),
+            'posts' =>  $this->post->getShortReviewsPosts()->paginate(15)
         ];
 
         return view('frontend.shortreviews.index', $data);

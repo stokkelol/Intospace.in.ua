@@ -3,9 +3,8 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-use App\Repositories\Posts\PostRepository;
-use App\Repositories\Videos\VideoRepository;
-use App\Http\Requests;
+use App\Models\Post;
+use App\Models\Video;
 
 /**
  * Class NewsfeedController
@@ -14,21 +13,19 @@ use App\Http\Requests;
  */
 class NewsfeedController extends Controller
 {
-    protected $postRepository;
-    protected $videoRepository;
+    protected $post;
+    protected $video;
 
     /**
      * NewsfeedController constructor.
-     * @param PostRepository $postRepository
-     * @param VideoRepository $videoRepository
+     *
+     * @param Post $post
+     * @param Video $video
      */
-    public function __construct(
-        PostRepository$postRepository,
-        VideoRepository $videoRepository
-    )
+    public function __construct(Post $post, Video $video)
     {
-        $this->postRepository = $postRepository;
-        $this->videoRepository = $videoRepository;
+        $this->post = $post;
+        $this->video = $video;
     }
 
     /**
@@ -37,8 +34,8 @@ class NewsfeedController extends Controller
     public function index()
     {
         $data = [
-            'posts'     =>  $this->postRepository->getLatestPublishedPosts(),
-            'videos'    =>  $this->videoRepository->getAllVideos()
+            'posts' => $this->post->active()->get(),
+            'videos' => $this->video->get()
         ];
 
         return view('frontend.newsfeed.index', $data);

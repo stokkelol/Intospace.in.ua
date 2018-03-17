@@ -3,10 +3,10 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-use App\Models\Band;
-use Cviebrock\EloquentSluggable\Sluggable;
-use App\Traits\ScopesTrait;
 use App\Core\Entity;
+use App\Traits\ScopesTrait;
+use Cviebrock\EloquentSluggable\Sluggable;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
@@ -45,5 +45,17 @@ class Video extends Entity
     public function getBySlug($slug): self
     {
         return $this->with(['user'])->where('slug', $slug)->first();
+    }
+
+    /**
+     * @param Builder $query
+     * @param string $slug
+     * @return Builder
+     */
+    public function scopeGetVideosByBandSlug(Builder $query, string $slug): Builder
+    {
+        return $query->whereHas('band', function ($query) use ($slug) {
+            $query->whereSlug($slug);
+        });
     }
 }

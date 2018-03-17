@@ -3,7 +3,10 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
+use App\Bot\Lastfm\Lastfm;
+use App\Bot\Lastfm\SimilarityParser;
 use Illuminate\Console\Command;
+use Illuminate\Container\Container;
 
 /**
  * Class ParseLatfmSimilarity
@@ -17,7 +20,7 @@ class ParseLatfmSimilarity extends Command
      *
      * @var string
      */
-    protected $signature = 'command:name';
+    protected $signature = 'lastfm:similarity';
 
     /**
      * The console command description.
@@ -33,6 +36,6 @@ class ParseLatfmSimilarity extends Command
      */
     public function handle()
     {
-        //
+        (new SimilarityParser(Container::getInstance()->make(Lastfm::class)))->handle();
     }
 }

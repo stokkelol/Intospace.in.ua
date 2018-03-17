@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -79,5 +80,16 @@ class Tag extends Model
         } else {
             $this->attributes['slug'] = $tag;
         }
+    }
+
+    /**
+     * @param Builder $query
+     * @return Builder
+     */
+    public function scopeAllWith(Builder $query): Builder
+    {
+        return $query->with('posts', 'user')
+            ->groupBy('tag')
+            ->orderBy('tag', 'asc');
     }
 }

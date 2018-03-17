@@ -8,6 +8,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Zizaco\Entrust\Traits\EntrustUserTrait;
 
 /**
+ * @property-read \Illuminate\Database\Eloquent\Collection|Post[] $posts
+ * @property-read \Illuminate\Database\Eloquent\Collection|Video[] $videos
  * Class User
  *
  * @package App\Models

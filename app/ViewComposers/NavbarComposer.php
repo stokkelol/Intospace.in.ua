@@ -3,10 +3,10 @@ declare(strict_types=1);
 
 namespace App\ViewComposers;
 
-use App\Repositories\MonthlyReviews\MonthlyReviewRepository;
-use App\Repositories\Posts\PostRepository;
-use App\Repositories\Tags\TagRepository;
-use App\Repositories\Videos\VideoRepository;
+use App\Models\MonthlyReview;
+use App\Models\Post;
+use App\Models\Tag;
+use App\Models\Video;
 use App\Support\Queries\CountTags;
 use Illuminate\Contracts\View\View;
 
@@ -18,39 +18,35 @@ use Illuminate\Contracts\View\View;
 class NavbarComposer
 {
     /**
-     * @var PostRepository
+     * @var Post
      */
     protected $post;
 
     /**
-     * @var VideoRepository
+     * @var Video
      */
     protected $video;
 
     /**
-     * @var TagRepository
+     * @var Tag
      */
     protected $tag;
 
     /**
-     * @var MonthlyReviewRepository
+     * @var MonthlyReview
      */
     protected $review;
 
     /**
      * NavbarComposer constructor.
      *
-     * @param PostRepository $post
-     * @param VideoRepository $video
-     * @param TagRepository $tag
-     * @param MonthlyReviewRepository $review
+     * @param Post $post
+     * @param Video $video
+     * @param Tag $tag
+     * @param MonthlyReview $review
      */
-    public function __construct(
-        PostRepository $post,
-        VideoRepository $video,
-        TagRepository $tag,
-        MonthlyReviewRepository $review
-    ) {
+    public function __construct(Post $post, Video $video, Tag $tag, MonthlyReview $review)
+    {
         $this->post = $post;
         $this->video = $video;
         $this->tag = $tag;
@@ -63,14 +59,9 @@ class NavbarComposer
      */
     public function compose(View $view): void
     {
-        $posts = $this->post->getLatestActivePosts();
-        $videos = $this->video->getLatestVideos()->get();
-        $tags = (new CountTags)->get(20);
-        $reviews = $this->review->getAllReviews();
-
-        $view->with('navbarposts', $posts);
-        $view->with('navbarvideos', $videos);
-        $view->with('counttags', $tags);
-        $view->with('reviews', $reviews);
+        $view->with('navbarposts', $this->post->latest()->active()->get())
+             ->with('navbarvideos', $this->video->latest()->get())
+             ->with('counttags', (new CountTags)->get(20))
+             ->with('reviews', $this->review->get());
     }
 }

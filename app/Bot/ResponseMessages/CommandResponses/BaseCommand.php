@@ -6,8 +6,6 @@ namespace App\Bot\ResponseMessages\CommandResponses;
 use App\Models\Post;
 use App\Models\TelegramUser;
 use App\Models\Video;
-use App\Repositories\Posts\PostRepository;
-use App\Repositories\Videos\VideoRepository;
 
 /**
  * Class BaseCommand
@@ -19,12 +17,12 @@ abstract class BaseCommand
     const POSTS_ENDPOINT = 'https://www.intospace.in.ua/posts/';
 
     /**
-     * @var PostRepository
+     * @var Post
      */
     protected $post;
 
     /**
-     * @var VideoRepository
+     * @var Video
      */
     protected $video;
 
@@ -56,7 +54,7 @@ abstract class BaseCommand
      */
     private function setPrimaryDependencies(): void
     {
-        $this->post = new PostRepository(new Post());
-        $this->video = new VideoRepository(new Video());
+        $this->post = new Post();
+        $this->video = new Video();
     }
 }

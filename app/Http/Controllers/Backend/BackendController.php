@@ -3,42 +3,52 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-use App\Repositories\Posts\PostRepository;
-use App\Repositories\Users\UserRepository;
-use App\Repositories\Categories\CategoryRepository;
-use Auth;
-use DB;
-use App\Repositories\Videos\VideoRepository;
-use App\Http\Requests;
-use LaravelAnalytics;
+use App\Models\Post;
+use App\Models\User;
+use App\Models\Video;
 
 class BackendController extends Controller
 {
-    protected $post;
-    protected $video;
-    protected $user;
+    /**
+     * @var Post
+     */
+    private $post;
 
-    public function __construct(PostRepository $postRepository,
-                                VideoRepository $videoRepository,
-                                UserRepository $userRepository)
+    /**
+     * @var Video
+     */
+    private $video;
+
+    /**
+     * @var User
+     */
+    private $user;
+
+    /**
+     * BackendController constructor.
+     * @param Post $post
+     * @param Video $video
+     * @param User $user
+     */
+    public function __construct(Post $post, Video $video, User $user)
     {
-        $this->post = $postRepository;
-        $this->video = $videoRepository;
-        $this->user = $userRepository;
+        $this->post = $post;
+        $this->video = $video;
+        $this->user = $user;
     }
 
     public function index()
     {
         $data = [
-            'title'                 =>  'Dashboard',
-            'posts_total'           =>  $this->post->getAllPosts()->count(),
-            'posts_active'          =>  $this->post->getActivePosts()->count(),
-            'posts_draft'           =>  $this->post->getPostsByStatus('draft')->count(),
-            'posts_moderation'      =>  $this->post->getPostsByStatus('moderation')->count(),
-            'recent_posts'          =>  $this->post->getRecentPosts(5)->get(),
-            'popular_posts'         =>  $this->post->getPopularPosts(5),
-            'videos_total'          =>  $this->video->getAllVideos()->count(),
-            'users_total'           =>  $this->user->getAllUsers()->count()
+            'title' => 'Dashboard',
+            'posts_total' => $this->post->count(),
+            'posts_active' => $this->post->active()->count(),
+            'posts_draft' => $this->post->getPostsByStatus('draft')->count(),
+            'posts_moderation' => $this->post->getPostsByStatus('moderation')->count(),
+            'recent_posts' => $this->post->getRecentPosts(5)->get(),
+            'popular_posts' => $this->post->getPopularPosts(5),
+            'videos_total' => $this->video->count(),
+            'users_total' => $this->user->count()
         ];
 
         return view('backend.main', $data);

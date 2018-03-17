@@ -6,6 +6,7 @@ namespace App\Models;
 use App\Traits\ScopesTrait;
 use App\Core\Entity;
 use Cviebrock\EloquentSluggable\Sluggable;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -117,14 +118,96 @@ class Post extends Entity
         return $posts->active()->sort()->paginate(10);
     }
 
+    public function scopeGetPostsByBandSlug(Builder $query, string $slug): Builder
+    {
+        return $query->whereHas('band', function ($query) use ($slug) {
+            $query->whereSlug($slug);
+        });
+    }
+
     /**
      * @param $query
      * @param $slug
      * @return mixed
      */
-    public function scopeFindBySlug($query, $slug)
+    public function scopeFindBySlug(Builder $query, string $slug): Builder
     {
-        return $query->whereSlug($slug)->firstOrFail();
+        return $query->whereSlug($slug);
+    }
+
+    /**
+     * @param Builder $query
+     * @param int $take
+     * @return Builder
+     */
+    public function scopeRecent(Builder $query, int $take): Builder
+    {
+        return $query->latest()->take($take);
+    }
+
+    /**
+     * @param Builder $query
+     * @return Builder
+     */
+    public function scopeActive(Builder $query): Builder
+    {
+        return $query->where('status', '=', 'active');
+    }
+
+    /**
+     * @param Builder $query
+     * @return Builder
+     */
+    public function scopeLatest(Builder $query): Builder
+    {
+        return $query->active()->take(10);
+    }
+
+    /**
+     * @param Builder $query
+     * @param string $img
+     * @return Builder
+     */
+    public function scopeByImage(Builder $query, string $img): Builder
+    {
+        return $query->where('img', '=', $img);
+    }
+
+    /**
+     * @param Builder $query
+     * @return Builder
+     */
+    public function scopeRandom(Builder $query): Builder
+    {
+        return $query->where('status', 'active')
+            ->where('category_id', '=', '1');
+    }
+
+    public function scopePopular(Builder $query, int $count): Builder
+    {
+        return $query->with('tags')
+            ->whereIn('status', ['active'])
+            ->groupBy('views')
+            ->orderBy('views', 'desc')
+            ->take($count);
+    }
+
+    /**
+     * @param Builder $query
+     * @return Builder
+     */
+    public function scopePinned(Builder $query): Builder
+    {
+        return $query->where('is_pinned', '=', 1);
+    }
+
+    /**
+     * @param Builder $query
+     * @return Builder
+     */
+    public function scopeGetShortReviews(Builder $query): Builder
+    {
+        return $query->active()->where('category_id','=','3');
     }
 
     /**

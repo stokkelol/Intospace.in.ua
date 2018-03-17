@@ -3,11 +3,10 @@ declare(strict_types=1);
 
 namespace App\ViewComposers;
 
+use App\Models\Post;
+use App\Models\Tag;
+use App\Models\Video;
 use Illuminate\Contracts\View\View;
-use App\Repositories\Posts\PostRepository;
-use App\Repositories\Tags\TagRepository;
-use App\Repositories\Videos\VideoRepository;
-use DB;
 use App\Support\Queries\CountTags;
 
 /**
@@ -18,43 +17,32 @@ use App\Support\Queries\CountTags;
 class SidebarComposer
 {
     /**
-     * @var PostRepository
+     * @var Post
      */
     protected $post;
 
     /**
-     * @var VideoRepository
+     * @var Video
      */
     protected $video;
 
     /**
-     * @var TagRepository
+     * @var Tag
      */
     protected $tag;
 
     /**
-     * @var CountTags
-     */
-    protected $tags;
-
-    /**
      * SidebarComposer constructor.
      *
-     * @param PostRepository $post
-     * @param VideoRepository $video
-     * @param TagRepository $tag
-     * @param CountTags $tags
+     * @param Post $post
+     * @param Video $video
+     * @param Tag $tag
      */
-    public function __construct(
-        PostRepository $post,
-        VideoRepository $video,
-        TagRepository $tag,
-        CountTags $tags
-    ) {
+    public function __construct(Post $post, Video $video, Tag $tag)
+    {
         $this->post = $post;
         $this->video = $video;
         $this->tag = $tag;
-        $this->tags = $tags;
     }
 
     /**
@@ -62,10 +50,10 @@ class SidebarComposer
      */
     public function compose(View $view): void
     {
-        $posts = $this->post->getLatestActivePosts();
-        $videos = $this->video->getLatestVideos()->get();
-        $popularposts = $this->post->getPopularPosts(10);
-        $counttags = $this->tags->get(null);
+        $posts = $this->post->latest()->get();
+        $videos = $this->video->latest()->get();
+        $popularposts = $this->post->popular(10)->get();
+        $counttags = (new CountTags())->get(null);
 
         $view->with('latestposts', $posts);
         $view->with('latestvideos', $videos);
