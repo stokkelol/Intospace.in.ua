@@ -50,7 +50,7 @@ class SidebarComposer
      */
     public function compose(View $view): void
     {
-        $posts = $this->post->with('tags', 'user', 'band')->latest()->get();
+        $posts = $this->post->latest()->get();
         $videos = $this->video->latest()->get();
         $popularposts = $this->post->popular(10)->get();
         $counttags = (new CountTags())->get(null);

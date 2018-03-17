@@ -131,7 +131,7 @@ class MainController extends Controller
         }
 
         $postsCollection = collect($this->post->active()->get());
-        $videosCollection = collect($this->video->latest()->get());
+        $videosCollection = collect($this->video->with('user', 'band')->latest()->get());
 
         return $postsCollection->merge($videosCollection)->sortByDesc('published_at');
     }
