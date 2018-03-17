@@ -48,8 +48,7 @@ class SimilarityParser
                 $response = $this->api->getArtistSimilar($band->title)->get();
                 if (isset($response['similarartists'])) {
                     foreach ($response['similarartists']['artist'] as $similarBand) {
-                        $similar = Band::query()->where('mbid', $similarBand['mbid'])
-                            ->orWhere('title', $similarBand['name'])->first();
+                        $similar = Band::query()->where('title', $similarBand['name'])->first();
 
                         if ($similar !== null) {
                             $this->saveSimilarity($band, $similar, $similarBand);
