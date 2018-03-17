@@ -123,12 +123,15 @@ class StatisticGatherer
     {
         /** @var TagTelegramUser $pivot */
         $pivot = TagTelegramUser::query()->where('user_id', $this->user->id)
-                ->where('tag_id', $id)->first() ?? new TagTelegramUser();
+                ->where('tag_id', $id)->first();
 
         if ($pivot === null) {
+            $pivot = new TagTelegramUser();
             $pivot->user_id = $this->user->id;
             $pivot->tag_id = $id;
         }
+
+        $pivot->value++;
 
         return $pivot;
     }
