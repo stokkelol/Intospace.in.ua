@@ -59,7 +59,7 @@ class NavbarComposer
      */
     public function compose(View $view): void
     {
-        $view->with('navbarposts', $this->post->latest()->active()->get())
+        $view->with('navbarposts', $this->post->active()->orderBy('id', 'desc')->take(18)->get())
              ->with('navbarvideos', $this->video->latest()->get())
              ->with('counttags', (new CountTags)->get(20))
              ->with('reviews', $this->review->get());

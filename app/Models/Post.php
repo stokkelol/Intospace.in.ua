@@ -160,7 +160,7 @@ class Post extends Entity
      */
     public function scopeLatest(Builder $query): Builder
     {
-        return $query->active()->take(10);
+        return $query->active()->orderBy('id')->take(10);
     }
 
     /**

@@ -86,7 +86,7 @@ class MainController extends Controller
             'posts' => $items,
             'tags' => $this->tag->allWith()->get(),
             'randposts' => $this->post->where('status', 'active')
-                ->where('category_id', '=', '1')->random(18)->get()
+                ->where('category_id', '=', '1')->inRandomORder()->take(18)->get()
         ];
 
         return view('frontend.main', $data);
