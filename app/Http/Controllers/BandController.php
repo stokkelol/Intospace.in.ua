@@ -75,7 +75,7 @@ class BandController extends Controller
         $posts = $this->getCollection($slug);
 
         if ($posts->count() == 1) {
-            $topPost = $this->post->getPostsByBandSlug($slug)->first();
+            $topPost = $posts->first();
             $posts = [];
         } else {
             $topPost = null;
@@ -95,8 +95,8 @@ class BandController extends Controller
      */
     public function getCollection($slug)
     {
-        $postsCollection = collect($this->post->where('slug', '=', $slug)->get());
-        $videosCollection = collect($this->video->where('slug', '=', $slug)->get());
+        $postsCollection = collect($this->post->byBandSlug($slug)->get());
+        $videosCollection = collect($this->video->byBandSlug($slug)->get());
 
         return $postsCollection->merge($videosCollection)->sortByDesc('published_at');
     }

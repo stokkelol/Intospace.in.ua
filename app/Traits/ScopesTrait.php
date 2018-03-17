@@ -59,4 +59,15 @@ trait ScopesTrait
         return $query->where('published_at', '>=', $startDate)
                      ->where('published_at', '<=', $endDate);
     }
+
+    /**
+     * @param Builder $query
+     * @return Builder
+     */
+    public function scopeByBandSlug(Builder $query, string $slug): Builder
+    {
+        return $query->whereHas('band', function ($query) use ($slug) {
+            $query->where('slug', '=', $slug);
+        });
+    }
 }

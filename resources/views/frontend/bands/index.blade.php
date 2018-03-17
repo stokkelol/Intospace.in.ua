@@ -18,7 +18,7 @@
                             <p class="band-title"><a href="/bands/{{ $band->slug }}">{{ $band->title }}</a></p>
                             <ul>
                                 @foreach ($band->posts as $post)
-                                    @if ($post->status == 'active')
+                                    @if ($post->status === 'active')
                                         <li><a href="/posts/{{ $post->slug }}">{{ $post->title }}</a></li>
                                         @endif
                                     @endforeach
