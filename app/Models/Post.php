@@ -151,7 +151,7 @@ class Post extends Entity
      */
     public function scopeActive(Builder $query): Builder
     {
-        return $query->where('status', '=', 'active');
+        return $query->with('tags', 'user', 'band', 'category')->where('status', '=', 'active');
     }
 
     /**

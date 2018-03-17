@@ -34,7 +34,7 @@ class FooterComposer
      */
     public function compose(View $view): void
     {
-        $randompost = $this->post->inRandomOrder()->first();
+        $randompost = $this->post->find(\random_int(1, 100));
 
         $view->with('randompost', $randompost);
     }

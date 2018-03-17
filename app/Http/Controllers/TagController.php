@@ -45,7 +45,7 @@ class TagController extends Controller
     {
         $data = [
             'posts' => $this->post->getPostsByTag($slug),
-            'tags' => $this->tag->with('post')->all(),
+            'tags' => $this->tag->with('posts')->all(),
             'title' => $this->tag->findBySlug($slug)->tag
         ];
 
