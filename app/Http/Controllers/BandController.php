@@ -95,9 +95,9 @@ class BandController extends Controller
      */
     public function getCollection($slug)
     {
-        $postscollection = collect($this->post->getPostsByBandSlug($slug)->get());
-        $videoscollection = collect($this->video->getVideosByBandSlug($slug)->get());
+        $postsCollection = collect($this->post->where('slug', '=', $slug)->get());
+        $videosCollection = collect($this->video->where('slug', '=', $slug)->get());
 
-        return $postscollection->merge($videoscollection)->sortByDesc('published_at');
+        return $postsCollection->merge($videosCollection)->sortByDesc('published_at');
     }
 }
