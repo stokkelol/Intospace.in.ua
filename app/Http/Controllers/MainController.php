@@ -9,6 +9,7 @@ use App\Models\Video;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\View\View;
 
 /**
@@ -130,8 +131,24 @@ class MainController extends Controller
             return $postsCollection->merge($videosCollection)->sortByDesc('published_at');
         }
 
-        $postsCollection = collect($this->post->active()->get());
-        $videosCollection = collect($this->video->with('user', 'band')->latest()->get());
+        if (Cache::has('main_posts')) {
+            $posts = Cache::get('main_posts');
+        } else {
+            $posts = $this->post->active()->get();
+
+            Cache::put('main_posts', $posts, 1440);
+        }
+
+        if (Cache::has('main_videos')) {
+            $videos = Cache::get('main_videos');
+        } else {
+            $videos = $this->video->with('user', 'band')->latest()->get();
+
+            Cache::put('main_videos', $posts, 1440);
+        }
+
+        $postsCollection = collect($posts);
+        $videosCollection = collect($videos);
 
         return $postsCollection->merge($videosCollection)->sortByDesc('published_at');
     }
