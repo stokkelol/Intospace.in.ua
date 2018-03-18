@@ -67,7 +67,7 @@ class ParseMusicbrainz extends Command
                     }
 
                     if ($band->description === null) {
-                        $band->description = $response['disambiguation'];
+                        $band->disambiguation = $response['disambiguation'];
                     }
 
                     if ($band->isDirty()) {
