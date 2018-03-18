@@ -53,7 +53,7 @@ class ParseMusicbrainz extends Command
      */
     public function handle()
     {
-        Band::query()->chunk(500, function ($bands) {
+        Band::query()->whereDoesntHave('albums')->chunk(500, function ($bands) {
             /** @var Band $band */
             foreach ($bands as $band) {
                 if ($band->mbid !== null && $band->mbid !== '') {
