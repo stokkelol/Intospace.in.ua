@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Bot\Musicbrainz;
 
 use App\ApiConnection\Connection;
+use App\Support\Logger\Logger;
 
 /**
  * Class Musicbrainz
@@ -34,7 +35,11 @@ class Musicbrainz
      */
     public function getAlbums(string $mbid): ?array
     {
-        $response = $this->connection->getClient()->get($this->makeUri($mbid), []);
+        try {
+            $response = $this->connection->getClient()->get($this->makeUri($mbid), []);
+        } catch (\Throwable $e) {
+            Logger::exception($e);
+        }
 
         if ($response->getStatusCode() === 200) {
             return \json_decode($response->getBody()->getContents(), true);
