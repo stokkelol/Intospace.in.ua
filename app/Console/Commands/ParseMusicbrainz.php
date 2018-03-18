@@ -60,33 +60,35 @@ class ParseMusicbrainz extends Command
                     if (!$band->albums()->exists()) {
                         $response = $this->api->getAlbums($band->mbid);
 
-                        if ($band->country_id === null) {
-                            $country = Country::query()->where('abbreviation', '=', $response['country'])->first();
-                            if ($country !== null) {
-                                $band->country_id = $country->id;
+                        if ($response !== null) {
+                            if ($band->country_id === null) {
+                                $country = Country::query()->where('abbreviation', '=', $response['country'])->first();
+                                if ($country !== null) {
+                                    $band->country_id = $country->id;
+                                }
                             }
-                        }
 
-                        if ($band->disambiguation === null) {
-                            $band->disambiguation = $response['disambiguation'];
-                        }
-
-                        if ($band->isDirty()) {
-                            $band->save();
-                        }
-
-                        foreach ($response['releases'] as $album) {
-                            if (!Album::query()->where('mbid', '=', $album['id'])->exists()) {
-                                $record = new Album();
-                                $record->band()->associate($band);
-                                $record->title = $album['title'];
-                                $record->mbid = $album['id'];
-                                $record->release_date = $album['date'] ?? null;
-                                $record->save();
+                            if ($band->disambiguation === null) {
+                                $band->disambiguation = $response['disambiguation'];
                             }
-                        }
 
-                        sleep(1);
+                            if ($band->isDirty()) {
+                                $band->save();
+                            }
+
+                            foreach ($response['releases'] as $album) {
+                                if (!Album::query()->where('mbid', '=', $album['id'])->exists()) {
+                                    $record = new Album();
+                                    $record->band()->associate($band);
+                                    $record->title = $album['title'];
+                                    $record->mbid = $album['id'];
+                                    $record->release_date = $album['date'] ?? null;
+                                    $record->save();
+                                }
+                            }
+
+                            sleep(1);
+                        }
                     }
                 }
             }

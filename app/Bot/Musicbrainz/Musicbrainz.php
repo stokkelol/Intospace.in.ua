@@ -30,13 +30,17 @@ class Musicbrainz
     }
 
     /**
-     * @return array
+     * @return null|array
      */
-    public function getAlbums(string $mbid): array
+    public function getAlbums(string $mbid): ?array
     {
         $response = $this->connection->getClient()->get($this->makeUri($mbid), []);
 
-        return \json_decode($response->getBody()->getContents(), true);
+        if ($response->getStatusCode() === 200) {
+            return \json_decode($response->getBody()->getContents(), true);
+        }
+
+        return null;
     }
 
     /**
