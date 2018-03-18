@@ -37,12 +37,12 @@ class Musicbrainz
     {
         try {
             $response = $this->connection->getClient()->get($this->makeUri($mbid), []);
+
+            if ($response->getStatusCode() === 200) {
+                return \json_decode($response->getBody()->getContents(), true);
+            }
         } catch (\Throwable $e) {
             Logger::exception($e);
-        }
-
-        if ($response->getStatusCode() === 200) {
-            return \json_decode($response->getBody()->getContents(), true);
         }
 
         return null;
