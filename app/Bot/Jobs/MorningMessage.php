@@ -78,9 +78,13 @@ class MorningMessage implements ShouldQueue
         $this->user = $chat->users->first();
 
         $this->user->isLastfmExists() ? $this->type = static::LASTFM : $this->type = static::POST;
-        $this->recommendation = $this->user->recommendations()->orderBy('id','desc')->first();
+        $this->recommendation = $this->user->recommendations()->where('is_dispatched', '=', false)
+            ->orderBy('id','desc')->first();
 
         $this->prepareMessage();
+
+        $this->recommendation->is_dispatched = true;
+        $this->recommendation->save();
     }
 
     /**
