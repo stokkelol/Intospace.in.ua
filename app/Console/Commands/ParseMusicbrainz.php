@@ -7,6 +7,8 @@ use App\Bot\Musicbrainz\Musicbrainz;
 use App\Models\Album;
 use App\Models\Band;
 use App\Models\Country;
+use App\Models\Label;
+use App\Models\Track;
 use Illuminate\Console\Command;
 use Illuminate\Container\Container;
 
@@ -119,7 +121,43 @@ class ParseMusicbrainz extends Command
             foreach ($albums as $album) {
                 $response = $this->api->getAlbumDetails($album->mbid);
 
-                dd($response);
+                if (isset($response['label-info'][0])) {
+                    $label = $response['label-info'][0];
+                    $labelModel = Label::query()->where('mbid', '=', $label['label']['id'])->first();
+
+                    if ($labelModel === null) {
+                        $labelModel = new Label();
+                        $labelModel->mbid = $label['label']['id'];
+                        $labelModel->title = $label['label']['name'];
+                        $labelModel->country_id = null;
+                        $labelModel->code = $label['label']['label-code'] ?? null;
+                        $labelModel->disambiguation = $label['label']['disambiguation'];
+                        $labelModel->save();
+                    }
+
+                    $album->label_id = $labelModel['id'];
+                    $album->catalog_number = $label['catalog-number'];
+                    $album->save();
+                }
+
+                $media = $response['media'][0];
+                $band = Band::query()->find($album->band_id);
+
+                if ($album->tracks()->get()->isEmpty()) {
+                    foreach ($media['tracks'] as $track) {
+                        $trackModel = new Track();
+                        $trackModel->mbid = $track['id'];
+                        $trackModel->title = $track['title'];
+                        $trackModel->album()->associate($album);
+                        $trackModel->band()->associate($band);
+                        $trackModel->disambiguation = null;
+                        $trackModel->position = $track['position'];
+                        $trackModel->length = $track['length'];
+                        $trackModel->save();
+                    }
+                }
+
+                sleep(1);
             }
 
         });
