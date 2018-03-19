@@ -53,6 +53,21 @@ class ParseMusicbrainz extends Command
      */
     public function handle()
     {
+//        $this->updateBands();
+        $this->updateAlbums();
+
+//        if (Carbon::now()->endOfMonth()) {
+//            $this->updateBands();
+//        } else {
+//            $this->updateAlbums();
+//        }
+    }
+
+    /**
+     * @return void
+     */
+    public function updateBands(): void
+    {
         Band::query()->whereDoesntHave('albums')->chunk(500, function ($bands) {
             /** @var Band $band */
             foreach ($bands as $band) {
@@ -92,6 +107,21 @@ class ParseMusicbrainz extends Command
                     }
                 }
             }
+        });
+    }
+
+    /**
+     * @return void
+     */
+    public function updateAlbums(): void
+    {
+        Album::query()->chunk(200, function ($albums) {
+            foreach ($albums as $album) {
+                $response = $this->api->getAlbumDetails($album->mbid);
+
+                dd($response);
+            }
+
         });
     }
 }

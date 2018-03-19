@@ -13,7 +13,8 @@ use App\Support\Logger\Logger;
  */
 class Musicbrainz
 {
-    const URL = 'http://musicbrainz.org/ws/2/artist/';
+    const ARTIST_URL = 'http://musicbrainz.org/ws/2/artist/';
+    const RELEASE_URL = 'http://musicbrainz.org/ws/2/release/';
 
     /**
      * @var Connection
@@ -36,7 +37,25 @@ class Musicbrainz
     public function getAlbums(string $mbid): ?array
     {
         try {
-            $response = $this->connection->getClient()->get($this->makeUri($mbid), []);
+            $response = $this->connection->getClient()->get($this->makeArtistUri($mbid), []);
+
+            if ($response->getStatusCode() === 200) {
+                return \json_decode($response->getBody()->getContents(), true);
+            }
+        } catch (\Throwable $e) {
+            Logger::exception($e);
+        }
+
+        return null;
+    }
+
+    /**
+     * @return null|array
+     */
+    public function getAlbumDetails(string $mbid): ?array
+    {
+        try {
+            $response = $this->connection->getClient()->get($this->makeReleaseUri($mbid), []);
 
             if ($response->getStatusCode() === 200) {
                 return \json_decode($response->getBody()->getContents(), true);
@@ -52,8 +71,13 @@ class Musicbrainz
      * @param string $mbid
      * @return string
      */
-    private function makeUri(string $mbid): string
+    private function makeArtistUri(string $mbid): string
     {
-        return static::URL  . $mbid . '?inc=aliases+releases&fmt=json';
+        return static::ARTIST_URL  . $mbid . '?inc=aliases+releases&fmt=json';
+    }
+
+    private function makeReleaseUri(string $mbid): string
+    {
+        return static::RELEASE_URL  . $mbid . '?inc=artist-credits+labels+discids+recordings&fmt=json';
     }
 }
