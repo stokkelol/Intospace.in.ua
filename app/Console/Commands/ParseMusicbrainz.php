@@ -117,7 +117,7 @@ class ParseMusicbrainz extends Command
      */
     public function updateAlbums(): void
     {
-        Album::query()->chunk(200, function ($albums) {
+        Album::query()->whereDoesntHave('tracks')->chunk(200, function ($albums) {
             foreach ($albums as $album) {
                 $response = $this->api->getAlbumDetails($album->mbid);
 
