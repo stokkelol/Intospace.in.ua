@@ -128,7 +128,7 @@ class ParseMusicbrainz extends Command
                     if ($labelModel === null) {
                         $labelModel = new Label();
                         $labelModel->mbid = $label['label']['id'];
-                        $labelModel->title = $label['label']['name'];
+                        $labelModel->title = $label['label']['name'] ?? '';
                         $labelModel->country_id = null;
                         $labelModel->code = $label['label']['label-code'] ?? null;
                         $labelModel->disambiguation = $label['label']['disambiguation'];
