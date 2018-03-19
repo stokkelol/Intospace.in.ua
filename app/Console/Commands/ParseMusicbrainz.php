@@ -140,23 +140,25 @@ class ParseMusicbrainz extends Command
                     $album->save();
                 }
 
-                $media = $response['media'][0];
-                $band = Band::query()->find($album->band_id);
+                if (isset($response['media'][0])) {
+                    $media = $response['media'][0];
+                    $band = Band::query()->find($album->band_id);
 
-                if ($album->tracks()->get()->isEmpty()) {
-                    foreach ($media['tracks'] as $track) {
-                        $trackModel = new Track();
-                        $trackModel->mbid = $track['id'];
-                        $trackModel->title = $track['title'];
-                        $trackModel->album()->associate($album);
-                        $trackModel->band()->associate($band);
-                        $trackModel->disambiguation = null;
-                        $trackModel->position = $track['position'];
-                        $trackModel->length = $track['length'];
-                        $trackModel->save();
+                    if ($album->tracks()->get()->isEmpty()) {
+                        foreach ($media['tracks'] as $track) {
+                            $trackModel = new Track();
+                            $trackModel->mbid = $track['id'];
+                            $trackModel->title = $track['title'];
+                            $trackModel->album()->associate($album);
+                            $trackModel->band()->associate($band);
+                            $trackModel->disambiguation = null;
+                            $trackModel->position = $track['position'];
+                            $trackModel->length = $track['length'];
+                            $trackModel->save();
+                        }
                     }
-                }
 
+                }
                 sleep(1);
             }
 
