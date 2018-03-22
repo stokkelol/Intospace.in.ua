@@ -83,8 +83,10 @@ class MorningMessage implements ShouldQueue
 
         $this->prepareMessage();
 
-        $this->recommendation->is_dispatched = true;
-        $this->recommendation->save();
+        if ($this->recommendation !== null) {
+            $this->recommendation->is_dispatched = true;
+            $this->recommendation->save();
+        }
     }
 
     /**
