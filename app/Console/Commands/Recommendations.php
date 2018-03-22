@@ -66,8 +66,8 @@ class Recommendations extends Command
             /** @var TelegramUser $user */
             foreach ($users as $user) {
                 if ($user->isLastfmExists()) {
-                    $maxBand = BandTelegramUser::query()->where('user_id', $user->id)
-                        ->orderBy('lastfm_count', 'desc')->first();
+                    $maxBand = BandTelegramUser::query()->where('user_id', $user->id)->inRandomOrder()->first();
+
                     $band = Band::query()->find($maxBand->band_id);
                     $video = $this->youtube->search($band->title);
 
