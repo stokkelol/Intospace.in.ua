@@ -71,7 +71,7 @@ class Lastfm extends ConnectionDecorator
     {
         return $this->set($this->setQuery(__METHOD__, [
             'artist' => $name,
-            'limit' => 25
+            'limit' => 100
         ]));
     }
 
