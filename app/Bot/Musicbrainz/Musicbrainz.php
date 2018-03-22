@@ -5,6 +5,7 @@ namespace App\Bot\Musicbrainz;
 
 use App\ApiConnection\Connection;
 use App\Support\Logger\Logger;
+use GuzzleHttp\Client;
 
 /**
  * Class Musicbrainz
@@ -37,7 +38,7 @@ class Musicbrainz
     public function getAlbums(string $mbid): ?array
     {
         try {
-            $response = $this->connection->getClient()->get($this->makeArtistUri($mbid), []);
+            $response = $this->getClient()->get($this->makeArtistUri($mbid), []);
 
             if ($response->getStatusCode() === 200) {
                 return \json_decode($response->getBody()->getContents(), true);
@@ -55,7 +56,7 @@ class Musicbrainz
     public function getAlbumDetails(string $mbid): ?array
     {
         try {
-            $response = $this->connection->getClient()->get($this->makeReleaseUri($mbid), []);
+            $response = $this->getClient()->get($this->makeReleaseUri($mbid), []);
 
             if ($response->getStatusCode() === 200) {
                 return \json_decode($response->getBody()->getContents(), true);
@@ -65,6 +66,14 @@ class Musicbrainz
         }
 
         return null;
+    }
+
+    /**
+     * @return Client
+     */
+    private function getClient(): Client
+    {
+        return $this->connection->getClient();
     }
 
     /**
