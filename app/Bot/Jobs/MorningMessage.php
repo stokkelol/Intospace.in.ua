@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Bot\Jobs;
 
+use App\Bot\ResponseMessages\CommandResponses\BaseCommand;
 use App\Models\Band;
 use App\Models\Chat;
 use App\Models\Post;
@@ -143,7 +144,7 @@ class MorningMessage implements ShouldQueue
     private function prepareFromPost(): void
     {
         $this->post = Post::query()->whereNotIn('status', ['draft', 'deleted'])->get()->random();
-        $this->message = $this->post->slug;
+        $this->message = BaseCommand::POSTS_ENDPOINT . $this->post->slug;
         $this->band = $this->post->band ?? null;
     }
 }
