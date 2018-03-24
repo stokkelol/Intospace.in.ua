@@ -39,6 +39,12 @@ class Tag extends Model
      */
     protected $fillable = ['tag', 'id'];
 
+    /*
+    |--------------------------------------------------------------------------
+    |  Relations
+    |--------------------------------------------------------------------------
+    */
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -59,6 +65,20 @@ class Tag extends Model
             'tag_id'
         );
     }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function bands(): BelongsToMany
+    {
+        return $this->belongsToMany(Band::class)->wherePivot('value');
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    |  Other methods
+    |--------------------------------------------------------------------------
+    */
 
     /**
      * @param $query

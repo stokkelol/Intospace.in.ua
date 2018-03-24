@@ -109,6 +109,14 @@ class Band extends Model
         return $this->hasMany(Album::class);
     }
 
+    /**
+     * @return BelongsToMany
+     */
+    public function tags(): BelongsToMany
+    {
+        return $this->belongsToMany(Tag::class)->wherePivot('value');
+    }
+
     /*
     |--------------------------------------------------------------------------
     |  Other methods

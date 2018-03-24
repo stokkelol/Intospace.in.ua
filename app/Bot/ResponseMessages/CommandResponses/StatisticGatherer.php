@@ -75,11 +75,25 @@ class StatisticGatherer
     }
 
     /**
+     * @param TelegramUser $user
+     * @param Band $band
+     * @return StatisticGatherer
+     */
+    public static function createFromStyles(TelegramUser $user, Band $band): self
+    {
+        return new static($user, $band, null, null);
+    }
+
+    /**
      * @return StatisticGatherer
      */
     public function associateBandAndUser(): self
     {
-        $id = $this->post === null ? $this->recommendation->band_id : $this->post->band_id;
+        if ($this->band !== null) {
+            $id = $this->band->id;
+        } else {
+            $id = $this->post === null ? $this->recommendation->band_id : $this->post->band_id;
+        }
 
         $pivot = $this->findBandUserPivot($id);
         $pivot->value++;

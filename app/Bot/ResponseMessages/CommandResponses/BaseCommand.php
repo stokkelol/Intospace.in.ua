@@ -37,6 +37,15 @@ abstract class BaseCommand
     protected $user;
 
     /**
+     * @var array
+     */
+    protected $context = [
+        'band' => null,
+        'album' => null,
+        'track' => null
+    ];
+
+    /**
      * BaseCommand constructor.
      *
      * @param string $type
@@ -56,5 +65,21 @@ abstract class BaseCommand
     {
         $this->post = new Post();
         $this->video = new Video();
+    }
+
+    /**
+     * @return bool
+     */
+    public function isContextAvailable(): bool
+    {
+        $res = false;
+
+        \array_walk($this->context, function ($value) use (&$res) {
+            if ($value !== null) {
+                $res = true;
+            }
+        });
+
+        return $res;
     }
 }
