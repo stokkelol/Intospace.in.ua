@@ -114,7 +114,7 @@ class Band extends Model
      */
     public function tags(): BelongsToMany
     {
-        return $this->belongsToMany(Tag::class)->wherePivot('value');
+        return $this->belongsToMany(Tag::class);
     }
 
     /*

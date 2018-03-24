@@ -31,6 +31,7 @@ class Styles extends BaseCommand implements Command
 
     /**
      * @return array
+     * @throws \Exception
      */
     public function prepare(): array
     {

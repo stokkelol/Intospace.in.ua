@@ -55,7 +55,9 @@ class TagsParser
                                 ];
                             }
                         }
+                    }
 
+                    if (!empty($models)) {
                         $band->tags()->sync($models);
                     }
                 }
