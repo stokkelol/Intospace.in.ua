@@ -85,7 +85,8 @@ class Bot
             $chat = $this->saveChat($fromChat, $user);
         }
 
-        $user->chats()->sync($chat, ['active' => true]);
+        $user->chats()->sync($chat);
+        $user->chats()->update(['active' => true]);
 
 
         $messageType = $this->saveMessage($request, $user, $chat);
