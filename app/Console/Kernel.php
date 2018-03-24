@@ -5,6 +5,7 @@ namespace App\Console;
 
 use App\Console\Commands\CleanBands;
 use App\Console\Commands\ParseLastfm;
+use App\Console\Commands\ParseLastfmBandTags;
 use App\Console\Commands\ParseLatfmSimilarity;
 use App\Console\Commands\ParseMusicbrainz;
 use App\Console\Commands\Recommendations;
@@ -62,5 +63,6 @@ class Kernel extends ConsoleKernel
         $schedule->command(ParseLastfm::class)->dailyAt('02:00');
         $schedule->command(ParseMusicbrainz::class)->dailyAt('03:00');
         $schedule->command(ParseLatfmSimilarity::class)->dailyAt('05:00');
+        $schedule->command(ParseLastfmBandTags::class)->dailyAt('07:00');
     }
 }
