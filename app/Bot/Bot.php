@@ -90,6 +90,7 @@ class Bot
         $chatUser = ChatUser::query()->where('user_id', $user->id)
             ->where('chat_id', $chat->id)->first();
 
+        \logger($chatUser->active === false);
         if ($chatUser->active === false) {
             $chatUser->active = true;
             $chatUser->save();
