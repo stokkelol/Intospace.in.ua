@@ -18,5 +18,9 @@ class Stop extends BaseCommand implements Command
     public function prepare(): array
     {
         $this->user->chats()->update(['active' => false]);
+
+        return [
+            'OK! Now I will no longer send you messages! Just type anything again and I will be right here!'
+        ];
     }
 }
