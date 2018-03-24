@@ -61,7 +61,7 @@ class StatisticGatherer
      */
     public static function createFromQueue(TelegramUser $user, ?Post $post, ?TelegramUserRecommendation $recommendation): self
     {
-        return new static($post, null, $user, $recommendation);
+        return new static($user, null, $post, $recommendation);
     }
 
     /**
@@ -71,7 +71,7 @@ class StatisticGatherer
      */
     public static function createFromCommand(TelegramUser $user, ?Post $post): self
     {
-        return new static($post, null, $user, null);
+        return new static($user, null, $post, null);
     }
 
     /**
