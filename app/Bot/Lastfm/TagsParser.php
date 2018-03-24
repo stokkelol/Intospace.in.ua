@@ -58,8 +58,6 @@ class TagsParser
 
                         $band->tags()->sync($models);
                     }
-
-                    \usleep(125000);
                 }
             }
         });
