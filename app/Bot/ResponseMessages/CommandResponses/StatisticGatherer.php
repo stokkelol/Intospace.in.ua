@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Bot\ResponseMessages\CommandResponses;
 
 use App\Bot\Jobs\MorningMessage;
+use App\Models\Band;
 use App\Models\BandTelegramUser;
 use App\Models\Post;
 use App\Models\Tag;
@@ -32,17 +33,24 @@ class StatisticGatherer
     private $recommendation;
 
     /**
+     * @var Band|null
+     */
+    private $band;
+
+    /**
      * StatisticGatherer constructor.
      *
-     * @param Post|null $post
      * @param TelegramUser $user
+     * @param Band|null $band
+     * @param Post|null $post
      * @param TelegramUserRecommendation|null $recommendation
      */
-    public function __construct(TelegramUser $user, ?Post $post,?TelegramUserRecommendation $recommendation)
+    public function __construct(TelegramUser $user, ?Band $band, ?Post $post, ?TelegramUserRecommendation $recommendation)
     {
         $this->post = $post;
         $this->user = $user;
         $this->recommendation = $recommendation;
+        $this->band = $band;
     }
 
     /**
@@ -53,7 +61,7 @@ class StatisticGatherer
      */
     public static function createFromQueue(TelegramUser $user, ?Post $post, ?TelegramUserRecommendation $recommendation): self
     {
-        return new static($post, $user, $recommendation);
+        return new static($post, null, $user, $recommendation);
     }
 
     /**
@@ -61,9 +69,9 @@ class StatisticGatherer
      * @param TelegramUser $user
      * @return StatisticGatherer
      */
-    public static function createFromCommand( TelegramUser $user, ?Post $post): self
+    public static function createFromCommand(TelegramUser $user, ?Post $post): self
     {
-        return new static($post, $user, null);
+        return new static($post, null, $user, null);
     }
 
     /**
