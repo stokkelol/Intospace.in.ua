@@ -12,8 +12,11 @@ use App\Bot\ResponseMessages\Interfaces\Command;
  */
 class Start extends BaseCommand implements Command
 {
+    /**
+     * @return array
+     */
     public function prepare(): array
     {
-        
+        return ['Hi there!'];
     }
 }

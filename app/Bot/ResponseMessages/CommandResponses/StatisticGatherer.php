@@ -38,7 +38,7 @@ class StatisticGatherer
      * @param TelegramUser $user
      * @param TelegramUserRecommendation|null $recommendation
      */
-    public function __construct(?Post $post, TelegramUser $user, ?TelegramUserRecommendation $recommendation)
+    public function __construct(TelegramUser $user, ?Post $post,?TelegramUserRecommendation $recommendation)
     {
         $this->post = $post;
         $this->user = $user;
@@ -51,7 +51,7 @@ class StatisticGatherer
      * @param TelegramUserRecommendation|null $recommendation
      * @return StatisticGatherer
      */
-    public static function createFromQueue(?Post $post, TelegramUser $user, ?TelegramUserRecommendation $recommendation): self
+    public static function createFromQueue(TelegramUser $user, ?Post $post, ?TelegramUserRecommendation $recommendation): self
     {
         return new static($post, $user, $recommendation);
     }
@@ -61,7 +61,7 @@ class StatisticGatherer
      * @param TelegramUser $user
      * @return StatisticGatherer
      */
-    public static function createFromCommand(?Post $post, TelegramUser $user): self
+    public static function createFromCommand( TelegramUser $user, ?Post $post): self
     {
         return new static($post, $user, null);
     }

@@ -39,7 +39,7 @@ trait Saver
         $broadcastMessage->outboundMessage()->associate($outboundMessage);
         $broadcastMessage->save();
 
-        $gatherer = StatisticGatherer::createFromQueue($this->post, $this->user, $this->recommendation);
+        $gatherer = StatisticGatherer::createFromQueue($this->user, $this->post, $this->recommendation);
         $gatherer->associateBandAndUser()->associateTagAndUser();
 
         return true;

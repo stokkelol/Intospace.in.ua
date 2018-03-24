@@ -35,7 +35,7 @@ class Styles extends BaseCommand implements Command
         $post = $this->post->random()->whereHas('tags', function ($query) {
             $query->where('tag', '=', $this->getTag());
         })->first();
-        $gatherer = StatisticGatherer::createFromCommand($post, $this->user);
+        $gatherer = StatisticGatherer::createFromCommand($this->user, $post);
         $gatherer->associateBandAndUser()->associateTagAndUser();
 
         return [static::POSTS_ENDPOINT . $post->slug];
