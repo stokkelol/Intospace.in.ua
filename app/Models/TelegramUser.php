@@ -101,6 +101,15 @@ class TelegramUser extends Model
     */
 
     /**
+     * @param int $count
+     * @return Collection
+     */
+    public function getTopBands(int $count): Collection
+    {
+        return $this->bands()->orderBy('lastfm_count')->take($count)->get();
+    }
+
+    /**
      * @return TelegramUserRecommendation
      */
     public function getLatestRecommendation(): TelegramUserRecommendation

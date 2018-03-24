@@ -7,6 +7,7 @@ use App\Bot\ResponseMessages\Response;
 use App\Models\BotCommand;
 use App\Models\BotCommandMessage;
 use App\Models\Chat;
+use App\Models\ChatUser;
 use App\Models\InboundMessage;
 use App\Models\MessageType;
 use App\Models\TelegramUser;
@@ -85,6 +86,14 @@ class Bot
         }
 
         $user->chats()->sync($chat);
+
+        $chatUser = ChatUser::query()->where('user_id', $user->id)
+            ->where('chat_id', $chat->id)->first();
+
+        if ($chatUser->active === false) {
+            $chatUser->active = true;
+            $chatUser->save();
+        }
 
         $messageType = $this->saveMessage($request, $user, $chat);
 

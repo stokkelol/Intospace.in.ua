@@ -36,6 +36,7 @@ class ParseMusicbrainz extends Command
 
     /**
      * ParseMusicbrainz constructor.
+     *
      * @param Musicbrainz $api
      */
     public function __construct(Musicbrainz $api)

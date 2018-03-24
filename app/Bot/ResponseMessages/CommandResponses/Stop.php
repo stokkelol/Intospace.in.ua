@@ -12,8 +12,11 @@ use App\Bot\ResponseMessages\Interfaces\Command;
  */
 class Stop extends BaseCommand implements Command
 {
+    /**
+     * @return array
+     */
     public function prepare(): array
     {
-
+        $this->user->chats()->update(['active' => false]);
     }
 }

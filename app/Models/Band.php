@@ -28,6 +28,7 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
  * @property \Carbon\Carbon $updated_at
  *
  * @property-read Country $country
+ * @property-read \Illuminate\Database\Eloquent\Collection|Album[] $albums
  *
  * Class Band
  *

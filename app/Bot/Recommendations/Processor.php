@@ -3,27 +3,26 @@ declare(strict_types=1);
 
 namespace App\Bot\Recommendations;
 
-use App\Bot\Youtube\Youtube;
+use App\Models\Band;
+use App\Models\TelegramUser;
 
 /**
  * Class Processor
  *
+ * @property TelegramUser user
  * @package App\Bot\Recommendations
  */
 class Processor
 {
     /**
-     * @var Youtube
+     * @param TelegramUser $user
+     * @return Band
+     * @throws \InvalidArgumentException
      */
-    private $client;
-
-    /**
-     * Processor constructor.
-     *
-     * @param Youtube $client
-     */
-    public function __construct(Youtube $client)
+    public function handle(TelegramUser $user): Band
     {
-        $this->client = $client;
+        $top = $user->getTopBands(10);
+
+        return $top->random();
     }
 }
