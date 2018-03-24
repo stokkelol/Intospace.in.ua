@@ -4,6 +4,8 @@ declare(strict_types=1);
 namespace App\Bot\ResponseMessages\CommandResponses;
 
 use App\Bot\ResponseMessages\Interfaces\Command;
+use App\Bot\Youtube\Youtube;
+use App\Models\Band;
 use App\Models\BotCommand;
 
 /**
@@ -32,13 +34,18 @@ class Styles extends BaseCommand implements Command
      */
     public function prepare(): array
     {
-        $post = $this->post->random()->whereHas('tags', function ($query) {
+        $band = Band::query()->whereHas('tags', function ($query) {
             $query->where('tag', '=', $this->getTag());
         })->first();
-        $gatherer = StatisticGatherer::createFromCommand($this->user, $post);
+
+        $gatherer = StatisticGatherer::createFromStyles($this->user, $band);
         $gatherer->associateBandAndUser()->associateTagAndUser();
 
-        return [static::POSTS_ENDPOINT . $post->slug];
+        $searcher = new Youtube();
+        $result = $searcher->search($band->title);
+
+
+        return [$result];
     }
 
     /**
