@@ -85,16 +85,8 @@ class Bot
             $chat = $this->saveChat($fromChat, $user);
         }
 
-        $user->chats()->sync($chat);
+        $user->chats()->sync($chat, ['active' => true]);
 
-        $chatUser = ChatUser::query()->where('user_id', $user->id)
-            ->where('chat_id', $chat->id)->first();
-
-        \logger($chatUser->active === false);
-        if ($chatUser->active === false) {
-            $chatUser->active = true;
-            $chatUser->save();
-        }
 
         $messageType = $this->saveMessage($request, $user, $chat);
 
