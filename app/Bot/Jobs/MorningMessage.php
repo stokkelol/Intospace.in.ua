@@ -103,7 +103,6 @@ class MorningMessage implements ShouldQueue
     {
         $telegram = Container::getInstance()->make(Api::class);
 
-        \var_dump($this->message);
         $telegram->sendMessage([
             'chat_id' => $this->chat->id,
             'text' => $this->message
