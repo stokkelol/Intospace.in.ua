@@ -152,6 +152,7 @@ class MorningMessage implements ShouldQueue
         $this->band = Band::query()->inRandomOrder()->first();
         \logger($this->band->title);
         $this->message = (new Youtube())->searchBand($this->band);
+        \logger($this->message);
         $this->band = $this->post->band ?? null;
     }
 }
