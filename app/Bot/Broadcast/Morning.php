@@ -19,6 +19,7 @@ class Morning extends BaseBroadcast
      */
     public function handle(): void
     {
+        var_dump(__METHOD__);
         /** @var Chat $chat */
         foreach ($this->chats as $chat) {
             if ($chat->isActive()) {
