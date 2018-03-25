@@ -154,7 +154,9 @@ class MorningMessage implements ShouldQueue
 
         $response = (new Youtube())->searchBand($this->band);
 
-        $this->message = static::YOUTUBE_ENDPOINT . $response[0]->id->videoId;
+        if (!empty($response)) {
+            $this->message = static::YOUTUBE_ENDPOINT . $response[0]->id->videoId;
+        }
 
         $this->band = $this->post->band ?? null;
     }
