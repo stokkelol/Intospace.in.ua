@@ -125,6 +125,7 @@ class MorningMessage implements ShouldQueue
      */
     private function prepareMessage(): void
     {
+        \var_dump(__METHOD__);
         $this->type === static::LASTFM
             ? $this->prepareFromPayload()
             : $this->prepareFromBand();
@@ -135,6 +136,7 @@ class MorningMessage implements ShouldQueue
      */
     private function prepareFromPayload(): void
     {
+        \var_dump(__METHOD__);
         if ($this->recommendation !== null) {
             $this->message = $this->recommendation->getPayload();
             $this->band = $this->recommendation->band;
@@ -150,9 +152,12 @@ class MorningMessage implements ShouldQueue
      */
     private function prepareFromBand(): void
     {
+        \var_dump(__METHOD__);
         $this->band = Band::query()->inRandomOrder()->first();
 
         $response = (new Youtube())->searchBand($this->band);
+
+
 
         $this->message = static::YOUTUBE_ENDPOINT . $response[0]->id->videoId;
 
