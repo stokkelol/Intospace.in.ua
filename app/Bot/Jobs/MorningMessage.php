@@ -134,9 +134,13 @@ class MorningMessage implements ShouldQueue
      */
     private function prepareFromPayload(): void
     {
-        $this->message = $this->recommendation->getPayload();
-        $this->band = $this->recommendation->band;
-        $this->post = Post::query()->where('band_id', '=', $this->band->id)->first() ?? null;
+        if ($this->recommendation !== null) {
+            $this->message = $this->recommendation->getPayload();
+            $this->band = $this->recommendation->band;
+            $this->post = Post::query()->where('band_id', '=', $this->band->id)->first() ?? null;
+        } else {
+            $this->prepareFromBand();
+        }
     }
 
     /**
