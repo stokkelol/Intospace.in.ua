@@ -30,7 +30,8 @@ class MorningMessage implements ShouldQueue
 
     const LASTFM = 1;
     const POST = 2;
-    const YOUTUBE_ENDPOINT  = 'https://www.yputube.com/watch?v=';
+
+    const YOUTUBE_ENDPOINT  = 'https://www.youtube.com/watch?v=';
 
     /**
      * @var Chat

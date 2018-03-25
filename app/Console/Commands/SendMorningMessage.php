@@ -35,7 +35,9 @@ class SendMorningMessage extends Command
      */
     public function handle(): void
     {
-        $chats = Chat::query()->with('users')->get();
+//        $chats = Chat::query()->with('users')->get();
+
+        $chats = Chat::query()->with('users')->where('id', 73429990)->get();
 
         (new Morning($chats))->handle();
     }
