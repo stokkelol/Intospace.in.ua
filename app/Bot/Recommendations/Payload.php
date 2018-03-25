@@ -17,7 +17,7 @@ class Payload
     public function processRecommendation(array $data): string
     {
         return \json_encode([
-            'link' => $data['0']->id->videoId
+            'link' => $data[0]->id->videoId
         ]);
     }
 }
