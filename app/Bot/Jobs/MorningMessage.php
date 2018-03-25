@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Bot\Jobs;
 
 use App\Bot\ResponseMessages\CommandResponses\BaseCommand;
+use App\Bot\Youtube\Youtube;
 use App\Models\Band;
 use App\Models\Chat;
 use App\Models\Post;
@@ -29,6 +30,7 @@ class MorningMessage implements ShouldQueue
 
     const LASTFM = 1;
     const POST = 2;
+    const YOUTUBE_ENDPOINT  = 'https://www.yputube.com/watch?v=';
 
     /**
      * @var Chat
@@ -124,7 +126,7 @@ class MorningMessage implements ShouldQueue
     {
         $this->type === static::LASTFM
             ? $this->prepareFromPayload()
-            : $this->prepareFromPost();
+            : $this->prepareFromBand();
     }
 
     /**
@@ -141,10 +143,11 @@ class MorningMessage implements ShouldQueue
      * @return void
      * @throws \InvalidArgumentException
      */
-    private function prepareFromPost(): void
+    private function prepareFromBand(): void
     {
-        $this->post = Post::query()->whereNotIn('status', ['draft', 'deleted'])->get()->random();
-        $this->message = BaseCommand::POSTS_ENDPOINT . $this->post->slug;
+        $this->band = Band::query()->inRandomOrder()->first();
+
+        $this->message = (new Youtube())->searchBand($this->band);
         $this->band = $this->post->band ?? null;
     }
 }

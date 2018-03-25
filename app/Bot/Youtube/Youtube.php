@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 namespace App\Bot\Youtube;
+use App\Models\Band;
 
 /**
  * Class Youtube
@@ -32,5 +33,30 @@ class Youtube
     public function search(string $query)
     {
         return $this->handler->searchVideos($query);
+    }
+
+    /**
+     * @param Band $band
+     * @return string
+     */
+    public function searchBand(Band $band)
+    {
+        if ($band->albums->isNotEmpty()) {
+            $album = $band->albums->random();
+
+            if ($album !== null) {
+                if ($album->tracks->isNotEmpty()) {
+                    $track = $album->tracks->random();
+
+                    $searchString = $band->title . ' ' . $track->title;
+                } else {
+                    $searchString = $band->title . ' ' . $album->title;
+                }
+            } else {
+                $searchString = $band->title;
+            }
+        }
+
+        return $this->search($searchString);
     }
 }
