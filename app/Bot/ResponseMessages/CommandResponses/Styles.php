@@ -40,6 +40,7 @@ class Styles extends BaseCommand implements Command
         })->first();
 
         \logger($band->id);
+        \logger($band->title);
 
         $gatherer = StatisticGatherer::createFromStyles($this->user, $band);
         $gatherer->associateBandAndUser()->associateTagAndUser();
