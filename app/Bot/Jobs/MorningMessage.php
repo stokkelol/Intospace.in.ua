@@ -150,7 +150,7 @@ class MorningMessage implements ShouldQueue
     private function prepareFromBand(): void
     {
         $this->band = Band::query()->inRandomOrder()->first();
-
+        \logger($this->band->title);
         $this->message = (new Youtube())->searchBand($this->band);
         $this->band = $this->post->band ?? null;
     }
