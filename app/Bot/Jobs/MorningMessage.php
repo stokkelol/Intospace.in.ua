@@ -86,7 +86,7 @@ class MorningMessage implements ShouldQueue
             ->orderBy('id','desc')->first();
 
         $this->prepareMessage();
-
+        \logger($this->message);
         if ($this->recommendation !== null) {
             $this->recommendation->is_dispatched = true;
             $this->recommendation->save();
