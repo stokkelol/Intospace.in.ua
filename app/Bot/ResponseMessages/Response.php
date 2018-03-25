@@ -171,7 +171,7 @@ abstract class Response implements ResponseMessage
     protected function send(): void
     {
         foreach ($this->responseMessage as $message) {
-            \var_dump($this->message);
+            \var_dump($message);
             $this->telegram->sendMessage([
                 'chat_id' => $this->chat->id,
                 'text' => $message,
