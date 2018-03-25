@@ -53,6 +53,7 @@ class Bot
 
     public function processWebhook(array $request)
     {
+        \logger($request['update_id']);
         if (InboundMessage::query()->where('id', '=', $request['update_id'])->exists()) {
             return \response('', 204);
         }
