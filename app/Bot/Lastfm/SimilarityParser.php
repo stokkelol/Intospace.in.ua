@@ -50,6 +50,10 @@ class SimilarityParser
                     foreach ($response['similarartists']['artist'] as $similarBand) {
                         $similar = Band::query()->where('title', $similarBand['name'])->first();
 
+                        if ($similar === null) {
+                            $similar = $this->saveSimilar($response);
+                        }
+
                         if ($similar !== null) {
                             $this->saveSimilarity($band, $similar, $similarBand);
                         }
@@ -76,5 +80,24 @@ class SimilarityParser
             $similarity->ratio = $data['match'];
             $similarity->save();
         }
+    }
+
+    /**
+     * @param array $data
+     * @return Band|null
+     */
+    public function saveSimilar(array $data): ?Band
+    {
+        if (isset($data['name'])) {
+            $band = new Band();
+            $band->title = $data['name'];
+            $band->lastfm_url = $data['url'];
+            $band->mbid = $data['mbid'];
+            $band->save();
+
+            return $band;
+        }
+
+        return null;
     }
 }

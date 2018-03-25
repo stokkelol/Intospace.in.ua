@@ -39,6 +39,8 @@ class Styles extends BaseCommand implements Command
             $query->where('tag', '=', $this->getTag());
         })->first();
 
+        \logger($band->id);
+
         $gatherer = StatisticGatherer::createFromStyles($this->user, $band);
         $gatherer->associateBandAndUser()->associateTagAndUser();
 
