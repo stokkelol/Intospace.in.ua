@@ -23,6 +23,7 @@ class Morning extends BaseBroadcast
         foreach ($this->chats as $chat) {
             if ($chat->isActive()) {
                 \dispatch(new MorningMessage($chat));
+                \logger($chat->id);
             }
         }
     }
