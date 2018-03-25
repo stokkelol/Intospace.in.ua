@@ -102,7 +102,7 @@ class MorningMessage implements ShouldQueue
     public function handle(): void
     {
         $telegram = Container::getInstance()->make(Api::class);
-        \logger(__METHOD__ . ' ' . $this->message);
+
         $telegram->sendMessage([
             'chat_id' => $this->chat->id,
             'text' => $this->message
@@ -153,8 +153,6 @@ class MorningMessage implements ShouldQueue
         $this->band = Band::query()->inRandomOrder()->first();
 
         $response = (new Youtube())->searchBand($this->band);
-
-        \logger($response);
 
         $this->message = static::YOUTUBE_ENDPOINT . $response[0]->id->videoId;
 
