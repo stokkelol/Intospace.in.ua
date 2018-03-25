@@ -129,7 +129,9 @@ Route::group(['prefix' => 'backend', 'middleware' => ['role:admin|owner|demo']],
 
     Route::resource('categories', 'Backend\CategoryController');
 
-    Route::resource('tags', 'Backend\TagController');
+//    Route::resource('tags', 'Backend\TagController');
+    Route::get('/tags', ['uses' => 'TagController@index', 'as' => 'tags.index']);
+    Route::post('/tags/create', ['as' => 'backend.tags.create', 'uses' => 'TagController@create']);
 
     Route::resource('users', 'Backend\UserController');
 

@@ -43,10 +43,10 @@ class BackendController extends Controller
             'title' => 'Dashboard',
             'posts_total' => $this->post->count(),
             'posts_active' => $this->post->active()->count(),
-            'posts_draft' => $this->post->getPostsByStatus('draft')->count(),
-            'posts_moderation' => $this->post->getPostsByStatus('moderation')->count(),
-            'recent_posts' => $this->post->getRecentPosts(5)->get(),
-            'popular_posts' => $this->post->getPopularPosts(5),
+            'posts_draft' => $this->post->byStatus('draft')->count(),
+            'posts_moderation' => $this->post->byStatus('moderation')->count(),
+            'recent_posts' => $this->post->latest()->take(5)->get(),
+            'popular_posts' => $this->post->popular(5),
             'videos_total' => $this->video->count(),
             'users_total' => $this->user->count()
         ];
