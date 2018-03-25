@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Bot\ResponseMessages\CommandResponses;
 
+use App\Models\Band;
 use App\Models\Post;
 use App\Models\TelegramUser;
 use App\Models\Video;
@@ -36,6 +37,11 @@ abstract class BaseCommand
      * @var TelegramUser
      */
     protected $user;
+
+    /**
+     * @var Band
+     */
+    protected $band;
 
     /**
      * @var array

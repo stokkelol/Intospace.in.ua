@@ -35,18 +35,15 @@ class Styles extends BaseCommand implements Command
      */
     public function prepare(): array
     {
-        $band = Band::query()->whereHas('tags', function ($query) {
+        $this->band = Band::query()->whereHas('tags', function ($query) {
             $query->where('tag', '=', $this->getTag());
         })->first();
 
-        \logger($band->id);
-        \logger($band->title);
-
-        $gatherer = StatisticGatherer::createFromStyles($this->user, $band);
+        $gatherer = StatisticGatherer::createFromStyles($this->user, $this->band);
         $gatherer->associateBandAndUser()->associateTagAndUser();
 
         $searcher = new Youtube();
-        $result = $searcher->search($band->title);
+        $result = $searcher->search($this->band->title);
 
 
         return [$result];
