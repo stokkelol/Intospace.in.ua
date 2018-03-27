@@ -41,8 +41,10 @@ class Test extends Command
             'parse_mode' => 'markdown',
             'reply_markup' => \json_encode([
                 'inline_keyboard' => [
-                    'text' => 'text',
-                    'callback_data' => 'band_id:1'
+                    [
+                        'text' => 'text',
+                        'callback_data' => 'band_id:1'
+                    ]
                 ]
             ])
         ]);
