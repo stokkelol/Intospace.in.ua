@@ -44,11 +44,11 @@ trait Saver
         $context->outboundMessage()->associate($outboundMessage);
 
         if ($this->youtubeHandler->getAlbum() !== null) {
-            $context->outboundMessage()->associate($outboundMessage);
+            $context->album()->associate($outboundMessage);
         }
 
         if ($this->youtubeHandler->getTrack() !== null) {
-            $context->outboundMessage()->associate($outboundMessage);
+            $context->track()->associate($outboundMessage);
         }
 
         $context->save();
