@@ -52,6 +52,9 @@ class BotCommand extends Model
     const HELP_ID = 13;
     const HELP = '/help';
 
+    const POST_ID = 14;
+    const POST = '/post';
+
     const TABLE_NAME = 'bot_commands';
 
     /**

@@ -21,7 +21,7 @@ class Processor
      */
     public function handle(TelegramUser $user): Band
     {
-        $top = $user->getTopBands(10);
+        $top = $user->getTopBands(100);
 
         return $top->random();
     }

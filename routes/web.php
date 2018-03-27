@@ -69,105 +69,103 @@ Route::group(['prefix' => 'telegram/' . config('telegram.bot_token')], function 
     Route::get('/info', ['uses' => 'TelegramController@ingo']);
 });
 
-Route::group(['prefix' => 'slack'], function () {
-    Route::post('/webhook', ['uses' => 'SlackController@processWebhook']);
-});
-
 /**
  * Routes for backend
  */
 
-Route::group(['prefix' => 'backend', 'middleware' => ['role:admin|owner|demo']], function () {
+Route::group(['prefix' => 'backend', 'middleware' => ['role:admin|owner|demo'], 'namespace' => 'Backend'], function () {
 
     Route::get('/', [
         'as'    =>  'backend.index',
-        'uses'  =>  'Backend\BackendController@index',
+        'uses'  =>  'BackendController@index',
     ]);
 
     Route::get('/posts/updateall', [
         'as'    =>  'backend.posts.updateall',
-        'uses'  =>  'Backend\PostController@getAllUpdated'
+        'uses'  =>  'PostController@getAllUpdated'
     ]);
 
-    Route::resource('posts', 'Backend\PostController');
+    Route::resource('posts', 'PostController');
 
     Route::get('/posts/preview{post_id}', [
         'as'    =>  'backend.posts.post-preview',
-        'uses'  =>  'Backend\PostController@postPreviewOnAjaxRequest'
+        'uses'  =>  'PostController@postPreviewOnAjaxRequest'
     ]);
 
     Route::get('/posts/to-draft/{post_id}', [
         'as'    => 'backend.posts.to-draft',
-        'uses'  =>  'Backend\PostController@toDraft'
+        'uses'  =>  'PostController@toDraft'
     ]);
 
     Route::get('/posts/to-active/{post_id}', [
         'as'     =>  'backend.posts.to-active',
-        'uses'  =>  'Backend\PostController@toActive'
+        'uses'  =>  'PostController@toActive'
     ]);
 
     Route::get('/posts/to-deleted/{post_id}', [
         'as'     =>  'backend.posts.to-deleted',
-        'uses'   =>  'Backend\PostController@toDeleted'
+        'uses'   =>  'PostController@toDeleted'
     ]);
 
     Route::get('/posts/to-pinned/{post_id}',[
         'as'    =>  'backend.posts.to-pinned',
-        'uses'  =>  'Backend\PostController@toPinned'
+        'uses'  =>  'PostController@toPinned'
     ]);
 
     Route::get('/posts/to-regular/{post_id}',[
         'as'    =>  'backend.posts.to-regular',
-        'uses'  =>  'Backend\PostController@toRegular'
+        'uses'  =>  'PostController@toRegular'
     ]);
 
 
     Route::get('/posts/search/', [
         'as'    =>  'backend.posts.search',
-        'uses'  =>  'Backend\PostController@index'
+        'uses'  =>  'PostController@index'
     ]);
 
-    Route::resource('categories', 'Backend\CategoryController');
+    Route::resource('categories', 'CategoryController');
 
 //    Route::resource('tags', 'Backend\TagController');
-    Route::get('/tags', ['uses' => 'TagController@index', 'as' => 'tags.index']);
+    Route::get('/tags', [ 'as' => 'backend.tags.index', 'uses' => 'TagController@index']);
     Route::post('/tags/create', ['as' => 'backend.tags.create', 'uses' => 'TagController@create']);
+    Route::get('/tags/{model}', ['as' => 'backend.tags.show', 'uses' => 'TagController@show']);
+    Route::get('/tags/{model}/edit', ['as' => 'backend.tags.edit', 'uses' => 'TagController@edit']);
 
-    Route::resource('users', 'Backend\UserController');
+    Route::resource('users', 'UserController');
 
-    Route::resource('videos', 'Backend\VideoController');
+    Route::resource('videos', 'VideoController');
 
-    Route::resource('bands', 'Backend\BandController');
+    Route::resource('bands', 'BandController');
 
-    Route::resource('blogs', 'Backend\BlogController');
+    Route::resource('blogs', 'BlogController');
 
-    Route::resource('monthlyreviews', 'Backend\MonthlyReviewController');
+    Route::resource('monthlyreviews', 'MonthlyReviewController');
 
-    Route::get('files', 'Backend\FileController@index');
+    Route::get('files', 'FileController@index');
 
     Route::get('files/image/', [
         'as'    =>  'backend.files.open-image',
-        'uses'  =>  'Backend\FileController@openImage'
+        'uses'  =>  'FileController@openImage'
     ]);
 
     Route::post('files/image/store', [
         'as'    =>  'backend.files.store',
-        'uses'  =>  'Backend\FileController@store'
+        'uses'  =>  'FileController@store'
     ]);
 
     Route::get('/monthlyreviews/to-draft/{post_id}', [
         'as'    => 'backend.monthlyreviews.to-draft',
-        'uses'  =>  'Backend\MonthlyReviewController@toDraft'
+        'uses'  =>  'MonthlyReviewController@toDraft'
     ]);
 
     Route::get('/monthlyreviews/to-active/{post_id}', [
         'as'     =>  'backend.monthlyreviews.to-active',
-        'uses'  =>  'Backend\MonthlyReviewController@toActive'
+        'uses'  =>  'MonthlyReviewController@toActive'
     ]);
 
     Route::get('posts.set-category/{post_id}/{category_id}', [
         'as'    =>  'backend.post.to.category',
-        'uses'  =>  'Backend\PostController@setCategory'
+        'uses'  =>  'PostController@setCategory'
     ]);
 });
 

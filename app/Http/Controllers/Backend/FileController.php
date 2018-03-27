@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Pagination\LengthAwarePaginator;
-use App\Repositories\Posts\PostRepository;
 use Illuminate\View\View;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 

@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Http\Controllers\Backend;
 
@@ -12,11 +13,29 @@ use Flash;
 use Auth;
 use App\Models\Band;
 
+/**
+ * Class VideoController
+ *
+ * @package App\Http\Controllers\Backend
+ */
 class VideoController extends Controller
 {
+    /**
+     * @var Video
+     */
     protected $video;
+
+    /**
+     * @var Band
+     */
     protected $band;
 
+    /**
+     * VideoController constructor.
+     *
+     * @param Video $video
+     * @param Band $band
+     */
     public function __construct(Video $video, Band $band)
     {
         $this->video = $video;

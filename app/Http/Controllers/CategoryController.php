@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use Illuminate\Http\Request;
 use App\Repositories\Posts\PostRepository;
 use App\Http\Requests;
@@ -16,21 +17,28 @@ use App\Models\Tag;
  */
 class CategoryController extends Controller
 {
+    /**
+     * @var Category
+     */
     protected $category;
+
+    /**
+     * @var Post
+     */
     protected $post;
+
+    /**
+     * @var Tag
+     */
     protected $tag;
 
     /**
      * CategoryController constructor.
      * @param Category $category
-     * @param PostRepository $post
+     * @param Post $post
      * @param Tag $tag
      */
-    public function __construct(
-        Category $category,
-        PostRepository $post,
-        Tag $tag
-    )
+    public function __construct(Category $category, Post $post, Tag $tag)
     {
         $this->category = $category;
         $this->post = $post;

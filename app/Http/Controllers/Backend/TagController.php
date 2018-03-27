@@ -89,20 +89,16 @@ class TagController extends Controller
     }
 
     /**
-     * @param $tag_id
-     * @return \Illuminate\Contracts\View\Factory|View
+     * @param Tag $model
+     * @return View
      */
-    public function edit($tag_id): View
+    public function edit(Tag $model): View
     {
-        $tag = $this->tag->find($tag_id);
-
         $data = [
-            'title' => $tag->id.': Edit Tag',
-            'tags' => $this->tag->all(),
-            'tag' => $tag,
+            'title' => $model->id .': Edit Tag',
+            'tags' => Tag::all(),
+            'tag' => $model,
         ];
-
-        $tag->update();
 
         return view('backend.tags.edit', $data);
     }
@@ -124,17 +120,20 @@ class TagController extends Controller
 
     /**
      * @param Post $post
-     * @param $slug
+     * @param Tag $model
      * @return View
      */
-    public function show(Post $post, $slug): View
+    public function show(Post $post, Tag $model): View
     {
-        $tag = $this->tag->findBySlug($slug);
-
+        $slug = $model->slug;
+        dd($model);
         $posts = $post->with('tags', 'category')->whereHas('tags', function ($query) use ($slug) {
             $query->whereSlug($slug);
         })->latest()->paginate(10);
 
-        return view('backend.tags.show', compact('tag', 'posts'));
+        return view('backend.tags.show', [
+            'tag' => $model,
+            'posts' => $posts
+        ]);
     }
 }

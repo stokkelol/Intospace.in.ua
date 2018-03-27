@@ -84,11 +84,6 @@ class MorningMessage implements ShouldQueue
             ->orderBy('id','desc')->first();
 
         $this->prepareMessage();
-
-        if ($this->recommendation !== null) {
-            $this->recommendation->is_dispatched = true;
-            $this->recommendation->save();
-        }
     }
 
     /**
@@ -107,6 +102,11 @@ class MorningMessage implements ShouldQueue
         ]);
 
         $this->saveMessages();
+
+        if ($this->recommendation !== null) {
+            $this->recommendation->is_dispatched = true;
+            $this->recommendation->save();
+        }
     }
 
     /**
@@ -123,9 +123,7 @@ class MorningMessage implements ShouldQueue
      */
     private function prepareMessage(): void
     {
-        $this->type === static::LASTFM
-            ? $this->prepareFromPayload()
-            : $this->prepareFromBand();
+        $this->prepareFromPayload();
     }
 
     /**
