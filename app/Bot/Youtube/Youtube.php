@@ -55,16 +55,12 @@ class Youtube
         if ($band->albums->isNotEmpty()) {
             $this->album = $band->albums->random();
 
-            if ($this->album !== null) {
-                if ($this->album->tracks->isNotEmpty()) {
-                    $this->track = $this->album->tracks->random();
+            if ($this->album->tracks->isNotEmpty()) {
+                $this->track = $this->album->tracks->random();
 
-                    $searchString = $band->title . ' ' . $this->track->title;
-                } else {
-                    $searchString = $band->title . ' ' . $this->album->title;
-                }
+                $searchString = $band->title . ' ' . $this->track->title;
             } else {
-                $searchString = $band->title;
+                $searchString = $band->title . ' ' . $this->album->title;
             }
         } else {
             $searchString = $band->title;
