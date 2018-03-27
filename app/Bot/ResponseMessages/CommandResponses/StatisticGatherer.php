@@ -54,7 +54,7 @@ class StatisticGatherer
     public function associateTagAndUser(Band $band): self
     {
         foreach ($band->tags as $tag) {
-            $pivot = $this->findTagUserPivot($tag->id);
+            $pivot = $this->findTagUserPivot($tag);
             $pivot->value++;
             $pivot->save();
         }
