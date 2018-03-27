@@ -7,6 +7,7 @@ use App\Bot\ResponseMessages\CommandResponses\StatisticGatherer;
 use App\Models\BroadcastMessage;
 use App\Models\MessageType;
 use App\Models\OutboundMessage;
+use App\Models\OutboundMessageContext;
 use App\Models\OutboundMessageText;
 
 /**
@@ -37,6 +38,20 @@ trait Saver
         $broadcastMessage->chat()->associate($this->chat);
         $broadcastMessage->outboundMessage()->associate($outboundMessage);
         $broadcastMessage->save();
+
+        $context = new OutboundMessageContext();
+        $context->band()->associate($this->band);
+        $context->outboundMessage()->associate($outboundMessage);
+
+        if ($this->youtubeHandler->getAlbum() !== null) {
+            $context->outboundMessage()->associate($outboundMessage);
+        }
+
+        if ($this->youtubeHandler->getTrack() !== null) {
+            $context->outboundMessage()->associate($outboundMessage);
+        }
+
+        $context->save();
 
         $gatherer = new StatisticGatherer($this->user);
         $gatherer->associateBandAndUser($this->band);

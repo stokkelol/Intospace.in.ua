@@ -63,12 +63,10 @@ class MorningMessage implements ShouldQueue
      */
     private $band;
 
-
     /**
-     * @var Post|null
+     * @var Youtube
      */
-    private $post;
-
+    private $youtubeHandler;
 
     /**
      * Create a new job instance.
@@ -80,13 +78,13 @@ class MorningMessage implements ShouldQueue
     {
         $this->chat = $chat;
         $this->user = $chat->users->first();
-
+        $this->youtubeHandler = new Youtube();
         $this->user->isLastfmExists() ? $this->type = static::LASTFM : $this->type = static::POST;
         $this->recommendation = $this->user->recommendations()->where('is_dispatched', '=', false)
             ->orderBy('id','desc')->first();
 
         $this->prepareMessage();
-        \logger($this->message);
+
         if ($this->recommendation !== null) {
             $this->recommendation->is_dispatched = true;
             $this->recommendation->save();
@@ -138,7 +136,6 @@ class MorningMessage implements ShouldQueue
         if ($this->recommendation !== null) {
             $this->message = $this->recommendation->getPayload();
             $this->band = $this->recommendation->band;
-            $this->post = Post::query()->where('band_id', '=', $this->band->id)->first() ?? null;
         } else {
             $this->prepareFromBand();
         }
@@ -151,8 +148,7 @@ class MorningMessage implements ShouldQueue
     private function prepareFromBand(): void
     {
         $this->band = Band::query()->inRandomOrder()->first();
-
-        $response = (new Youtube())->searchBand($this->band);
+        $response = $this->youtubeHandler->searchBand($this->band);
         $this->message = static::YOUTUBE_ENDPOINT . $response[0]->id->videoId;
 
     }

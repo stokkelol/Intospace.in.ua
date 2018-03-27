@@ -17,6 +17,16 @@ class Youtube
     private $handler;
 
     /**
+     * @var \App\Models\Album|null
+     */
+    private $album;
+
+    /**
+     * @var \App\Models\Track|null
+     */
+    private $track;
+
+    /**
      * Youtube constructor.
      *
      * @throws \Exception
@@ -28,7 +38,7 @@ class Youtube
 
     /**
      * @param string $query
-     * @return \stdClass
+     *
      */
     public function search(string $query)
     {
@@ -38,19 +48,20 @@ class Youtube
     /**
      * @param Band $band
      * @return string
+     * @throws \InvalidArgumentException
      */
     public function searchBand(Band $band)
     {
         if ($band->albums->isNotEmpty()) {
-            $album = $band->albums->random();
+            $this->album = $band->albums->random();
 
-            if ($album !== null) {
-                if ($album->tracks->isNotEmpty()) {
-                    $track = $album->tracks->random();
+            if ($this->album !== null) {
+                if ($this->album->tracks->isNotEmpty()) {
+                    $this->track = $this->album->tracks->random();
 
-                    $searchString = $band->title . ' ' . $track->title;
+                    $searchString = $band->title . ' ' . $this->track->title;
                 } else {
-                    $searchString = $band->title . ' ' . $album->title;
+                    $searchString = $band->title . ' ' . $this->album->title;
                 }
             } else {
                 $searchString = $band->title;
@@ -60,5 +71,21 @@ class Youtube
         }
 
         return $this->search($searchString);
+    }
+
+    /**
+     * @return \App\Models\Track|null
+     */
+    public function getTrack()
+    {
+        return $this->track;
+    }
+
+    /**
+     * @return \App\Models\Album|null
+     */
+    public function getAlbum()
+    {
+        return $this->album;
     }
 }
