@@ -20,9 +20,9 @@ class CreateOutboundMessageContextTable extends Migration
         Schema::create('outbound_message_contexts', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('outbound_message_id')->nullable();
-            $table->unsignedSmallInteger('band_id')->nullable();
-            $table->unsignedSmallInteger('album_id')->nullable();
-            $table->unsignedSmallInteger('track_id')->nullable();
+            $table->unsignedInteger('band_id')->nullable();
+            $table->unsignedInteger('album_id')->nullable();
+            $table->unsignedInteger('track_id')->nullable();
             $table->timestamps();
 
             $table->foreign('outbound_message_id')
