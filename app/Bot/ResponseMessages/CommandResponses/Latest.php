@@ -37,8 +37,9 @@ class Latest extends BaseCommand implements Command
     public function associatePostAndUser(Collection $posts): void
     {
         foreach ($posts as $post) {
-            $gatherer = StatisticGatherer::createFromCommand($this->user, $post);
-            $gatherer->associateBandAndUser()->associateTagAndUser();
+            $gatherer = new StatisticGatherer($this->user);
+            $gatherer->associateBandAndUser($post);
+            $gatherer->associateTagAndUser($post);
         }
     }
 }

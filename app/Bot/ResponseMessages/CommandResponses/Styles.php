@@ -39,8 +39,9 @@ class Styles extends BaseCommand implements Command
             $query->where('tag', '=', $this->getTag());
         })->first();
 
-        $gatherer = StatisticGatherer::createFromStyles($this->user, $this->band);
-        $gatherer->associateBandAndUser()->associateTagAndUser();
+        $gatherer = new StatisticGatherer($this->user);
+        $gatherer->associateBandAndUser($this->band);
+        $gatherer->associateTagAndUser($this->band);
 
         $searcher = new Youtube();
         $result = $searcher->search($this->band->title);

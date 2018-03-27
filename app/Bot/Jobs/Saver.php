@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace App\Bot\Jobs;
 
-use App\Bot\ResponseMessages\CommandResponses\BaseCommand;
 use App\Bot\ResponseMessages\CommandResponses\StatisticGatherer;
 use App\Models\BroadcastMessage;
 use App\Models\MessageType;
@@ -39,8 +38,9 @@ trait Saver
         $broadcastMessage->outboundMessage()->associate($outboundMessage);
         $broadcastMessage->save();
 
-        $gatherer = StatisticGatherer::createFromQueue($this->user, $this->post, $this->recommendation);
-        $gatherer->associateBandAndUser()->associateTagAndUser();
+        $gatherer = new StatisticGatherer($this->user);
+        $gatherer->associateBandAndUser($this->band);
+        $gatherer->associateTagAndUser($this->band);
 
         return true;
     }

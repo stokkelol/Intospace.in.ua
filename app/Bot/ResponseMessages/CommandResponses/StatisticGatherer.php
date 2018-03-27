@@ -20,82 +20,27 @@ use App\Models\TelegramUserRecommendation;
 class StatisticGatherer
 {
     /**
-     * @var Post|null
-     */
-    private $post;
-    /**
      * @var TelegramUser
      */
     private $user;
-    /**
-     * @var TelegramUserRecommendation|null
-     */
-    private $recommendation;
-
-    /**
-     * @var Band|null
-     */
-    private $band;
 
     /**
      * StatisticGatherer constructor.
      *
      * @param TelegramUser $user
-     * @param Band|null $band
-     * @param Post|null $post
-     * @param TelegramUserRecommendation|null $recommendation
      */
-    public function __construct(TelegramUser $user, ?Band $band, ?Post $post, ?TelegramUserRecommendation $recommendation)
+    public function __construct(TelegramUser $user)
     {
-        $this->post = $post;
         $this->user = $user;
-        $this->recommendation = $recommendation;
-        $this->band = $band;
     }
 
     /**
-     * @param Post|null $post
-     * @param TelegramUser $user
-     * @param TelegramUserRecommendation|null $recommendation
-     * @return StatisticGatherer
-     */
-    public static function createFromQueue(TelegramUser $user, ?Post $post, ?TelegramUserRecommendation $recommendation): self
-    {
-        return new static($user, null, $post, $recommendation);
-    }
-
-    /**
-     * @param Post|null $post
-     * @param TelegramUser $user
-     * @return StatisticGatherer
-     */
-    public static function createFromCommand(TelegramUser $user, ?Post $post): self
-    {
-        return new static($user, null, $post, null);
-    }
-
-    /**
-     * @param TelegramUser $user
      * @param Band $band
      * @return StatisticGatherer
      */
-    public static function createFromStyles(TelegramUser $user, Band $band): self
+    public function associateBandAndUser(Band $band): self
     {
-        return new static($user, $band, null, null);
-    }
-
-    /**
-     * @return StatisticGatherer
-     */
-    public function associateBandAndUser(): self
-    {
-        if ($this->band !== null) {
-            $id = $this->band->id;
-        } else {
-            $id = $this->post === null ? $this->recommendation->band_id : $this->post->band_id;
-        }
-
-        $pivot = $this->findBandUserPivot($id);
+        $pivot = $this->findBandUserPivot($band);
         $pivot->value++;
         $pivot->save();
 
@@ -103,54 +48,55 @@ class StatisticGatherer
     }
 
     /**
+     * @param Band $band
      * @return StatisticGatherer
      */
-    public function associateTagAndUser(): self
+    public function associateTagAndUser(Band $band): self
     {
-        if ($this->post !== null) {
-            foreach ($this->post->tags as $tag) {
-                $pivot = $this->findTagUserPivot($tag->id);
-                $pivot->value++;
-                $pivot->save();
-            }
+        foreach ($band->tags as $tag) {
+            $pivot = $this->findTagUserPivot($tag->id);
+            $pivot->value++;
+            $pivot->save();
         }
 
         return $this;
     }
 
     /**
-     * @param int $id
+     * @param Band $band
      * @return BandTelegramUser
+     * @internal param int $id
      */
-    private function findBandUserPivot(int $id): BandTelegramUser
+    private function findBandUserPivot(Band $band): BandTelegramUser
     {
         /** @var BandTelegramUser $pivot */
-        $pivot = BandTelegramUser::query()->where('band_id', '=', $id)
+        $pivot = BandTelegramUser::query()->where('band_id', '=', $band->id)
             ->where('user_id', $this->user->id)->first();
 
         if ($pivot === null) {
             $pivot = new BandTelegramUser();
             $pivot->user_id = $this->user->id;
-            $pivot->band_id = $this->post->band_id;
+            $pivot->band_id = $band->id;
         }
 
         return $pivot;
     }
 
     /**
-     * @param int $id
+     * @param Tag $tag
      * @return TagTelegramUser
+     * @internal param int $id
      */
-    private function findTagUserPivot(int $id): TagTelegramUser
+    private function findTagUserPivot(Tag $tag): TagTelegramUser
     {
         /** @var TagTelegramUser $pivot */
         $pivot = TagTelegramUser::query()->where('user_id', $this->user->id)
-                ->where('tag_id', $id)->first();
+                ->where('tag_id', $tag->id)->first();
 
         if ($pivot === null) {
             $pivot = new TagTelegramUser();
             $pivot->user_id = $this->user->id;
-            $pivot->tag_id = $id;
+            $pivot->tag_id = $tag->id;
         }
 
         $pivot->value++;
