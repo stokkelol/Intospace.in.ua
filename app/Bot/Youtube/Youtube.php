@@ -56,7 +56,7 @@ class Youtube
 
         if ($band->albums->isNotEmpty()) {
             $this->album = $band->albums->random();
-
+            logger($this->album->id);
             if ($this->album->tracks->isNotEmpty()) {
                 $this->track = $this->album->tracks->random();
 
