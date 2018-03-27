@@ -52,6 +52,8 @@ class Youtube
      */
     public function searchBand(Band $band)
     {
+        $band->load('albums', 'albums.tracks');
+
         if ($band->albums->isNotEmpty()) {
             $this->album = $band->albums->random();
 
