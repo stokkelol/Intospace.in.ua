@@ -39,14 +39,14 @@ class Test extends Command
             'chat_id' => 73429990,
             'text' => 'Hello!',
             'parse_mode' => 'markdown',
-            'reply_markup' => \json_encode([
+            'reply_markup' =>[
                 'inline_keyboard' => [
                     [
                         'text' => 'text',
                         'callback_data' => 'band_id:1'
                     ]
                 ]
-            ])
+            ]
         ]);
     }
 }
