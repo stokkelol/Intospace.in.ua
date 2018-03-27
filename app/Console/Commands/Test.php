@@ -38,8 +38,7 @@ class Test extends Command
         $api->sendMessage([
             'chat_id' => 73429990,
             'text' => 'Hello!',
-            'parse_mode' => 'markdown',
-            'reply_markup' =>[
+            'reply_markup' => [
                 'inline_keyboard' => [
                     [
                         'text' => 'text',
