@@ -38,8 +38,8 @@ class Latest extends BaseCommand implements Command
     {
         foreach ($posts as $post) {
             $gatherer = new StatisticGatherer($this->user);
-            $gatherer->associateBandAndUser($post);
-            $gatherer->associateTagAndUser($post);
+            $gatherer->associateBandAndUser($post->band);
+            $gatherer->associateTagAndUser($post->band);
         }
     }
 }
