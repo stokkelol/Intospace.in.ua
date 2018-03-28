@@ -78,7 +78,8 @@ class TagsParser
                         $models = [];
 
                         foreach ($tags as $tag) {
-                            $r = $tagsModels->where('tag', 'like', $tag['name'])->first();
+                            $name = \strtolower(\str_replace('-', '', $tag['name']));
+                            $r = $tagsModels->where('tag', 'like', $name)->first();
 
                             if ($r !== null) {
                                 $models[$r['id']] = [
