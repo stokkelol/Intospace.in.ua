@@ -37,7 +37,7 @@ class Styles extends BaseCommand implements Command
      */
     public function prepare(): array
     {
-        $tag = Tag::query()->where('tag', '=', 'sludge doom')
+        $tag = Tag::query()->where('tag', '=', $this->getTag())
             ->with('bands')->first();
 
         $this->band = $tag->bands->random();
