@@ -3,12 +3,14 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Models\Band;
 use App\Models\Post;
 use App\Models\Tag;
 use App\Models\Video;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 
 /**

@@ -6,7 +6,9 @@ namespace App\Bot\ResponseMessages\CommandResponses;
 use App\Bot\ResponseMessages\Interfaces\Command;
 use App\Bot\Youtube\Youtube;
 use App\Models\Band;
+use App\Models\BandTag;
 use App\Models\BotCommand;
+use App\Models\Tag;
 
 /**
  * Class Styles
@@ -35,9 +37,10 @@ class Styles extends BaseCommand implements Command
      */
     public function prepare(): array
     {
-        $this->band = Band::query()->whereHas('tags', function ($query) {
-            $query->where('tag', '=', $this->getTag());
-        })->first();
+        $tag = Tag::query()->where('tag', '=', 'sludge doom')
+            ->with('bands')->first();
+
+        $this->band = $tag->bands->random();
 
         $gatherer = new StatisticGatherer($this->user);
         $gatherer->associateBandAndUser($this->band);
