@@ -90,7 +90,7 @@ class TagsParser
                     }
 
                     if (!empty($models)) {
-                        $band->tags()->sync($models);
+                        $band->tags()->syncWithoutDetaching($models);
                     }
                 }
             }
