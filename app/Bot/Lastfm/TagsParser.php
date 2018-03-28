@@ -33,14 +33,45 @@ class TagsParser
         /** @var Tag[] $tags */
         $tagsModels = Tag::query()->get();
 
-        Band::query()->whereDoesntHave('tags')->chunk(1000, function ($bands) use ($tagsModels) {
+//        Band::query()->whereDoesntHave('tags')->chunk(1000, function ($bands) use ($tagsModels) {
+//            /** @var Band $band */
+//            foreach ($bands as $band) {
+//                $result = $this->api->getArtistTopTags($band->title)->get();
+//
+//                if (isset($result['toptags'])) {
+//                    $tags = \array_filter($result['toptags']['tag'], function ($tag) {
+//                        return $tag['count'] > 10;
+//                    });
+//
+//                    if (!empty($tags)) {
+//                        $models = [];
+//
+//                        foreach ($tags as $tag) {
+//                            $r = $tagsModels->where('tag', 'like', $tag['name'])->first();
+//
+//                            if ($r !== null) {
+//                                $models[$r['id']] = [
+//                                    'value' => $tag['count']
+//                                ];
+//                            }
+//                        }
+//                    }
+//
+//                    if (!empty($models)) {
+//                        $band->tags()->sync($models);
+//                    }
+//                }
+//            }
+//        });
+
+        Band::query()->chunk(1000, function ($bands) use ($tagsModels) {
             /** @var Band $band */
             foreach ($bands as $band) {
                 $result = $this->api->getArtistTopTags($band->title)->get();
 
                 if (isset($result['toptags'])) {
                     $tags = \array_filter($result['toptags']['tag'], function ($tag) {
-                        return $tag['count'] > 20;
+                        return $tag['count'] > 10;
                     });
 
                     if (!empty($tags)) {
