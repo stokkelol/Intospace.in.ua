@@ -49,7 +49,7 @@ class Styles extends BaseCommand implements Command
         $searcher = new Youtube();
         $result = $searcher->search($this->band->title);
 
-
+        \logger($result);
         return [$result];
     }
 

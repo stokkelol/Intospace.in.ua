@@ -158,10 +158,10 @@ abstract class Response implements ResponseMessage
         $outboundMessage->save();
 
         foreach ($this->responseMessage as $message) {
-//            $text = new OutboundMessageText();
-//            $text->message = $message;
-//            $text->outboundMessage()->associate($outboundMessage);
-//            $text->save();
+            $text = new OutboundMessageText();
+            $text->message = $message;
+            $text->outboundMessage()->associate($outboundMessage);
+            $text->save();
         }
     }
 
