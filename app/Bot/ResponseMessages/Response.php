@@ -4,9 +4,11 @@ declare(strict_types=1);
 namespace App\Bot\ResponseMessages;
 
 use App\Bot\Interfaces\ResponseMessage;
+use App\Bot\ResponseMessages\Interfaces\Command;
 use App\Models\Chat;
 use App\Models\MessageType;
 use App\Models\OutboundMessage;
+use App\Models\OutboundMessageContext;
 use App\Models\OutboundMessageText;
 use App\Models\TelegramUser;
 use Telegram\Bot\Api;
@@ -63,6 +65,11 @@ abstract class Response implements ResponseMessage
      * @var
      */
     protected $parseMode = 'Markdown';
+
+    /**
+     * @var Command
+     */
+    private $command;
 
     /**
      * @param int $type
@@ -162,6 +169,22 @@ abstract class Response implements ResponseMessage
             $text->message = $message;
             $text->outboundMessage()->associate($outboundMessage);
             $text->save();
+        }
+
+        if ($this->command !== null) {
+            $context = new OutboundMessageContext();
+            $context->outboundMessage()->associate($outboundMessage);
+            $context->band()->associate($this->command->getBand());
+
+            if ($this->command->getAlbum() !== null) {
+                $context->album()->associate($this->command->getAlbum());
+            }
+
+            if ($this->command->getTrack() !== null) {
+                $context->track()->associate($this->command->getTrack());
+            }
+
+            $context->save();
         }
     }
 

@@ -17,11 +17,6 @@ class CommandResponse extends Response
     const ENDPOINT = 'https://www.intospace.in.ua/posts/';
 
     /**
-     * @var Command
-     */
-    private $command;
-
-    /**
      * @return void
      * @throws \LogicException
      */
@@ -65,5 +60,13 @@ class CommandResponse extends Response
         }
 
         return $this->command->prepare();
+    }
+
+    /**
+     * @return Command
+     */
+    public function getCommand(): Command
+    {
+        return $this->command;
     }
 }

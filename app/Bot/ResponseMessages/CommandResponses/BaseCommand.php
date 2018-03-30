@@ -3,9 +3,11 @@ declare(strict_types=1);
 
 namespace App\Bot\ResponseMessages\CommandResponses;
 
+use App\Models\Album;
 use App\Models\Band;
 use App\Models\Post;
 use App\Models\TelegramUser;
+use App\Models\Track;
 use App\Models\Video;
 
 /**
@@ -42,6 +44,16 @@ abstract class BaseCommand
      * @var Band
      */
     protected $band;
+
+    /**
+     * @var Album|null
+     */
+    protected $album;
+
+    /**
+     * @var Track|null
+     */
+    protected $track;
 
     /**
      * @var array
@@ -88,5 +100,29 @@ abstract class BaseCommand
         });
 
         return $res;
+    }
+
+    /**
+     * @return Band
+     */
+    public function getBand(): Band
+    {
+        return $this->band;
+    }
+
+    /**
+     * @return Track
+     */
+    public function getTrack(): Track
+    {
+        return $this->track;
+    }
+
+    /**
+     * @return Album
+     */
+    public function getAlbum(): Album
+    {
+        return $this->album;
     }
 }
