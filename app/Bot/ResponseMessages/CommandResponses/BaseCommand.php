@@ -111,17 +111,17 @@ abstract class BaseCommand
     }
 
     /**
-     * @return Track
+     * @return Track|null
      */
-    public function getTrack(): Track
+    public function getTrack(): ?Track
     {
         return $this->track;
     }
 
     /**
-     * @return Album
+     * @return Album|null
      */
-    public function getAlbum(): Album
+    public function getAlbum(): ?Album
     {
         return $this->album;
     }
