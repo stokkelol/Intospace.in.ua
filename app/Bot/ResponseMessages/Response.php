@@ -69,7 +69,7 @@ abstract class Response implements ResponseMessage
     /**
      * @var Command
      */
-    private $command;
+    protected $command;
 
     /**
      * @param int $type
