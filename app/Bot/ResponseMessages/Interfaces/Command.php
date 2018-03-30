@@ -25,12 +25,12 @@ interface Command
     public function getBand(): Band;
 
     /**
-     * @return Album
+     * @return Album|null
      */
-    public function getAlbum(): Album;
+    public function getAlbum(): ?Album;
 
     /**
-     * @return Track
+     * @return Track|null
      */
-    public function getTrack(): Track;
+    public function getTrack(): ?Track;
 }
