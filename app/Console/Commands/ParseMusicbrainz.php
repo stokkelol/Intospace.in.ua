@@ -20,7 +20,7 @@ class ParseMusicbrainz extends Command
      *
      * @var string
      */
-    protected $signature = 'musicbrainz:parse';
+    protected $signature = 'musicbrainz:parse {--bands} {--albums}';
 
     /**
      * The console command description.
@@ -55,7 +55,12 @@ class ParseMusicbrainz extends Command
     {
         $parser = new Parser($this->api);
 
-        $parser->updateBands();
-        $parser->updateAlbums();
+        if ($this->argument('bands') !== null) {
+            $parser->updateBands();
+        }
+
+        if ($this->argument('albums') !== null) {
+            $parser->updateAlbums();
+        }
     }
 }
