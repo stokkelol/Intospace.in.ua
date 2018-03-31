@@ -55,11 +55,11 @@ class ParseMusicbrainz extends Command
     {
         $parser = new Parser($this->api);
 
-        if ($this->argument('bands') !== null) {
+        if ($this->hasArgument('bands')) {
             $parser->updateBands();
         }
 
-        if ($this->argument('albums') !== null) {
+        if ($this->hasArgument('albums')) {
             $parser->updateAlbums();
         }
     }
