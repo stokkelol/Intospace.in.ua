@@ -108,7 +108,7 @@ class Parser
                     $media = $response['media'][0];
                     /** @var Band $band */
                     $band = Band::query()->find($album->band_id);
-                    if ($album->tracks()->get()->isEmpty()) {
+                    if ($album->tracks()->get()->isEmpty() && isset($media['tracks'])) {
                         foreach ($media['tracks'] as $track) {
                             $track = $this->saveTrack($track, $album, $band);
                         }

@@ -2,7 +2,10 @@
 declare(strict_types=1);
 
 namespace App\Bot\Youtube;
+
+use App\Models\Album;
 use App\Models\Band;
+use App\Models\Track;
 
 /**
  * Class Youtube
@@ -73,7 +76,7 @@ class Youtube
     /**
      * @return \App\Models\Track|null
      */
-    public function getTrack()
+    public function getTrack(): ?Track
     {
         return $this->track;
     }
@@ -81,7 +84,7 @@ class Youtube
     /**
      * @return \App\Models\Album|null
      */
-    public function getAlbum()
+    public function getAlbum(): ?Album
     {
         return $this->album;
     }
