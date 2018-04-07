@@ -67,7 +67,7 @@ class Youtube
                 $searchString = $band->title . ' ' . $this->album->title;
             }
         } else {
-            $searchString = $band->title;
+            $searchString = $band->title . ' band';
         }
 
         return $this->search($searchString);
