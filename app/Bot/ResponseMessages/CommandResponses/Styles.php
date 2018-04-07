@@ -47,7 +47,7 @@ class Styles extends BaseCommand implements Command
         $gatherer->associateTagAndUser($this->band);
 
         $searcher = new Youtube();
-        $result = $searcher->search($this->band->title);
+        $result = $searcher->searchBand($this->band);
 
         $this->album = $searcher->getAlbum();
         $this->track = $searcher->getTrack();
