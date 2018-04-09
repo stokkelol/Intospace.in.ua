@@ -112,30 +112,32 @@ class Parser
     private function handleUserAndBands(TelegramUser $user, array $artists): void
     {
         foreach ($artists as $band) {
-            $bandModel = Band::query()->where('title', '=', $band['name'])->first();
-            $bandModel = $bandModel === null ? $this->saveBand($band) : $this->updateBand($band, $bandModel);
+            if (\strlen($band['name']) < 128) {
+                $bandModel = Band::query()->where('title', '=', $band['name'])->first();
+                $bandModel = $bandModel === null ? $this->saveBand($band) : $this->updateBand($band, $bandModel);
 
-            $bandTelegramUser = BandTelegramUser::query()->where('user_id', '=',$user->id)
-                ->where('band_id', '=', $bandModel->id)->first();
+                $bandTelegramUser = BandTelegramUser::query()->where('user_id', '=',$user->id)
+                    ->where('band_id', '=', $bandModel->id)->first();
 
 //            $existedTags = $user->tags;
 //            $tags = $this->api->getArtistTopTags($band['name'])->get();
 
-            try {
-                if ($bandTelegramUser === null) {
-                    $bandTelegramUser = new BandTelegramUser();
-                    $bandTelegramUser->user_id = $user->id;
-                    $bandTelegramUser->band_id = $bandModel->id;
-                    $bandTelegramUser->lastfm_count = $band['playcount'];
-                    $bandTelegramUser->save();
-                }
+                try {
+                    if ($bandTelegramUser === null) {
+                        $bandTelegramUser = new BandTelegramUser();
+                        $bandTelegramUser->user_id = $user->id;
+                        $bandTelegramUser->band_id = $bandModel->id;
+                        $bandTelegramUser->lastfm_count = $band['playcount'];
+                        $bandTelegramUser->save();
+                    }
 
-                if ($this->isUpdate() || $bandTelegramUser->lastfm_count === null) {
-                    $bandTelegramUser->lastfm_count = $band['playcount'];
-                    $bandTelegramUser->save();
+                    if ($this->isUpdate() || $bandTelegramUser->lastfm_count === null) {
+                        $bandTelegramUser->lastfm_count = $band['playcount'];
+                        $bandTelegramUser->save();
+                    }
+                } catch (\Throwable $e) {
+                    Logger::exception($e);
                 }
-            } catch (\Throwable $e) {
-                Logger::exception($e);
             }
         }
     }
