@@ -41,12 +41,14 @@ class Test extends Command
             'reply_markup' => \json_encode([
                 'inline_keyboard' => [
                     [
-                        'text' => 'test',
-                        'callback_data' => 'band_id:1'
-                    ],
-                    [
-                        'text' => 'test2',
-                        'callback_data' => 'band_id:1'
+                        [
+                            'text' => 'test',
+                            'callback_data' => 'band_id:1'
+                        ],
+                        [
+                            'text' => 'test2',
+                            'callback_data' => 'band_id:1'
+                        ]
                     ]
                 ]
             ])
