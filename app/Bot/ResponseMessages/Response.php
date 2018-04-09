@@ -72,6 +72,11 @@ abstract class Response implements ResponseMessage
     protected $command;
 
     /**
+     * @var array
+     */
+    protected $callback = [];
+
+    /**
      * @param int $type
      * @param Api $telegram
      * @return ResponseMessage
@@ -162,6 +167,7 @@ abstract class Response implements ResponseMessage
         $outboundMessage->message_type_id = $this->type;
         $outboundMessage->user_id = $this->user->id;
         $outboundMessage->chat_id = $this->chat->id;
+        $outboundMessage->inbound_message_id = $this->request['update_id'];
         $outboundMessage->save();
 
         foreach ($this->responseMessage as $message) {
