@@ -74,6 +74,10 @@ class Recommendations extends Command
      */
     public function handle(): void
     {
+        TelegramUserRecommendation::query()->where('is_dispatched', false)->update([
+            'is_dispatched' => TelegramUserRecommendation::TYPE_ARCHIVED
+        ]);
+
         TelegramUser::query()->chunk(1000, function ($users) {
             /** @var TelegramUser $user */
             foreach ($users as $user) {

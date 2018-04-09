@@ -27,6 +27,10 @@ class TelegramUserRecommendation extends Model
 
     const YOUTUBE_URL = 'https://www.youtube.com/watch?v=';
 
+    const TYPE_PENDING = 0;
+    const TYPE_DISPATCHED = 1;
+    const TYPE_ARCHIVED = 2;
+
     /**
      * @var string
      */
