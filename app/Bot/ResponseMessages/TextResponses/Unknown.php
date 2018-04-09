@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace App\Bot\ResponseMessages\TextResponses;
 
 use App\Bot\ResponseMessages\Interfaces\Text;
-use App\Models\Band;
 
 /**
  * Class Unknown
@@ -31,13 +30,5 @@ class Unknown implements Text
         return static::$answers[
             \random_int(1, \count(static::$answers))
         ];
-    }
-
-    /**
-     * @return Band|null
-     */
-    public function getBand(): Band
-    {
-        //
     }
 }

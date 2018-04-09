@@ -3,13 +3,8 @@ declare(strict_types=1);
 
 namespace App\Bot\ResponseMessages\TextResponses;
 
-use App\Bot\Interfaces\ResponseMessage;
 use App\Bot\Lastfm\Lastfm;
-use App\Bot\ResponseMessages\Interfaces\Text;
-use App\Models\Band;
 use App\Models\Social;
-use App\Models\SocialTelegramUser;
-use Illuminate\Container\Container;
 
 /**
  * Class LastFmSetter
