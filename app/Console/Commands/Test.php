@@ -41,10 +41,10 @@ class Test extends Command
             'reply_markup' => [
                 'keyboard' => [
                     [
-                        'text' => 'text',
-                        'callback_data' => 'band_id:1'
+                        'text' => 'text'
                     ]
-                ]
+                ],
+                'one_time_keyboard' => true
             ]
         ]);
     }
