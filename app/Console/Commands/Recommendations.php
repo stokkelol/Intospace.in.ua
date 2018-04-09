@@ -86,7 +86,9 @@ class Recommendations extends Command
                     : $this->getRandomBand();
 
                 $video = $this->youtube->search($this->getSearchString($band));
-                $payload = $this->payload->processRecommendation($video);
+                if (\is_array($video)) {
+                    $payload = $this->payload->processRecommendation($video);
+                }
 
                 $this->saveRecommendation($band, $user, $payload);
             }
