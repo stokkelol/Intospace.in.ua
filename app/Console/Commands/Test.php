@@ -39,12 +39,12 @@ class Test extends Command
             'chat_id' => 73429990,
             'text' => 'Hello!',
             'reply_markup' => [
-                'keyboard' => [
+                'inline_keyboard' => [
                     [
-                        'text' => 'text'
+                        'text' => 'text',
+                        'callback_data' => 'band_id:1'
                     ]
-                ],
-                'one_time_keyboard' => true
+                ]
             ]
         ]);
     }
