@@ -88,9 +88,8 @@ class Recommendations extends Command
                 $video = $this->youtube->search($this->getSearchString($band));
                 if (\is_array($video)) {
                     $payload = $this->payload->processRecommendation($video);
+                    $this->saveRecommendation($band, $user, $payload);
                 }
-
-                $this->saveRecommendation($band, $user, $payload);
             }
         });
     }
