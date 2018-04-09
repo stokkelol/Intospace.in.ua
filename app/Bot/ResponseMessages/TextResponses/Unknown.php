@@ -20,7 +20,7 @@ class Unknown implements Text
         ['Silence is golden'],
         ['Think different!'],
         ['Whats up?'],
-        ['Go to hell!']
+        ['Yo!']
     ];
 
     /**
