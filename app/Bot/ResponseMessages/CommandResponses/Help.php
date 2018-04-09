@@ -32,8 +32,6 @@ class Help extends BaseCommand implements Command
      */
     public function prepare(): array
     {
-        $result[] = static::MESSAGE;
-
-        return $result;
+        return [static::MESSAGE];
     }
 }

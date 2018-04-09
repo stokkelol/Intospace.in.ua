@@ -72,6 +72,30 @@ class Bot
      */
     private function processInitialRequest($request): array
     {
+        if (isset($request['message'])) {
+            return $this->processMessage($request);
+        }
+
+        if (isset($request['callback_query'])) {
+            return $this->processCallback($request);
+        }
+    }
+
+    /**
+     * @param $request
+     * @return array
+     */
+    private function processCallback($request): array
+    {
+
+    }
+
+    /**
+     * @param $request
+     * @return array
+     */
+    private function processMessage($request): array
+    {
         $from = $request['message']['from'];
         $fromChat = $request['message']['chat'];
 
