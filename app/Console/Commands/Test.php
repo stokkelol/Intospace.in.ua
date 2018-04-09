@@ -38,16 +38,11 @@ class Test extends Command
         $api->sendMessage([
             'chat_id' => 73429990,
             'text' => 'Hello!',
-            'reply_markup' => [
-                'inline_keyboard' => [
-                    [
-                        [
-                            'text' => 'test',
-                            'callback_data' => 'band_id:1'
-                        ]
-                    ]
-                ]
-            ]
+            'reply_markup' => \json_encode([
+                'inline_keyboard' => [[[
+                    'text' => 'test',
+                    'callback_data' => 'band_id:1']]]
+            ])
         ]);
     }
 }
