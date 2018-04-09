@@ -9,7 +9,6 @@ use App\Models\TelegramUser;
 /**
  * Class Processor
  *
- * @property TelegramUser user
  * @package App\Bot\Recommendations
  */
 class Processor
@@ -24,5 +23,14 @@ class Processor
         $top = $user->getTopBands(100);
 
         return $top->random();
+    }
+
+    /**
+     * @param TelegramUser $user
+     * @return Band
+     */
+    public function prepare(TelegramUser $user): Band
+    {
+
     }
 }

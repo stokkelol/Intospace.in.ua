@@ -6,6 +6,7 @@ namespace App\Bot\ResponseMessages\TextResponses;
 use App\Bot\Interfaces\ResponseMessage;
 use App\Bot\Lastfm\Lastfm;
 use App\Bot\ResponseMessages\Interfaces\Text;
+use App\Models\Band;
 use App\Models\Social;
 use App\Models\SocialTelegramUser;
 use Illuminate\Container\Container;
@@ -15,7 +16,7 @@ use Illuminate\Container\Container;
  *
  * @package app\Bot\ResponseMessages\TextResponses
  */
-class LastFmSetter extends Setter implements Text
+class LastFmSetter extends Setter
 {
     /**
      * @return string

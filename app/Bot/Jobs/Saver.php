@@ -18,9 +18,9 @@ use App\Models\OutboundMessageText;
 trait Saver
 {
     /**
-     * @return bool
+     * @return OutboundMessage
      */
-    protected function saveMessages(): bool
+    protected function saveMessages(): OutboundMessage
     {
         $outboundMessage = new OutboundMessage();
         $outboundMessage->chat()->associate($this->chat);
@@ -57,6 +57,6 @@ trait Saver
         $gatherer->associateBandAndUser($this->band);
         $gatherer->associateTagAndUser($this->band);
 
-        return true;
+        return $outboundMessage;
     }
 }

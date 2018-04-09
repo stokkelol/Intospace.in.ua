@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
  * @property int $id
@@ -63,5 +64,21 @@ class OutboundMessage extends Model
     public function texts(): HasMany
     {
         return $this->hasMany(OutboundMessageText::class);
+    }
+
+    /**
+     * @return HasOne
+     */
+    public function context(): HasOne
+    {
+        return $this->hasOne(OutboundMessageContext::class);
+    }
+
+    /**
+     * @return HasOne
+     */
+    public function recommendation(): HasOne
+    {
+        return $this->hasOne(TelegramUserRecommendation::class);
     }
 }

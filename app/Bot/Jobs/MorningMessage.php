@@ -101,10 +101,11 @@ class MorningMessage implements ShouldQueue
             'text' => $this->message
         ]);
 
-        $this->saveMessages();
+        $outboundMessage = $this->saveMessages();
 
         if ($this->recommendation !== null) {
             $this->recommendation->is_dispatched = true;
+            $this->recommendation->outboundMessage()->associate($outboundMessage);
             $this->recommendation->save();
         }
     }

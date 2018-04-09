@@ -64,6 +64,14 @@ class TelegramUserRecommendation extends Model
     }
 
     /**
+     * @return BelongsTo
+     */
+    public function outboundMessage(): BelongsTo
+    {
+        return $this->belongsTo(OutboundMessage::class);
+    }
+
+    /**
      * @return string
      */
     public function getPayload(): string
