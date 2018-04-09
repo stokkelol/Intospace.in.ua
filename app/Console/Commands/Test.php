@@ -39,9 +39,12 @@ class Test extends Command
             'chat_id' => 73429990,
             'text' => 'Hello!',
             'reply_markup' => [
-                'keyboard' => [
+                'inline_keyboard' => [
                     [
-                        ['1', '2']
+                        [
+                            'text' => 'test',
+                            'callback_data' => 'band_id:1'
+                        ]
                     ]
                 ]
             ]
