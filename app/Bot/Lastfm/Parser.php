@@ -132,7 +132,7 @@ class Parser
                         $bandTelegramUser->save();
                     }
                 } catch (\Throwable $e) {
-                    Logger::exception($e);
+                    //
                 }
             }
         }
