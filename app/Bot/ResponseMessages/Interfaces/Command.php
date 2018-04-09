@@ -20,9 +20,9 @@ interface Command
     public function prepare(): array;
 
     /**
-     * @return Band
+     * @return Band|null
      */
-    public function getBand(): Band;
+    public function getBand(): ?Band;
 
     /**
      * @return Album|null

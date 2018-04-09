@@ -41,7 +41,7 @@ abstract class BaseCommand
     protected $user;
 
     /**
-     * @var Band
+     * @var Band|null
      */
     protected $band;
 
@@ -105,7 +105,7 @@ abstract class BaseCommand
     /**
      * @return Band
      */
-    public function getBand(): Band
+    public function getBand(): ?Band
     {
         return $this->band;
     }
