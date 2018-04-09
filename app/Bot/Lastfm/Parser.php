@@ -77,8 +77,6 @@ class Parser
      */
     private function updateUsersBands(): void
     {
-        Logger::log(__METHOD__ . ' started at ' . Carbon::now());
-
         TelegramUser::query()->with('socials', 'bands')->chunk(500, function ($users) {
             /** TelegramUser $user */
             foreach ($users as $user) {
@@ -95,12 +93,10 @@ class Parser
                         } while (count($artists['topartists']['artist']) !== 0);
                     }
                 } catch (\Throwable $e) {
-                    Logger::exception($e);
+                    //
                 }
             }
         });
-
-        Logger::log(__METHOD__ . ' ended at ' . Carbon::now());
     }
 
     /**

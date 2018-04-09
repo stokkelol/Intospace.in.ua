@@ -53,13 +53,13 @@ class Bot
 
     public function processWebhook(array $request)
     {
-        \logger($request['update_id']);
+
         if (InboundMessage::query()->where('id', '=', $request['update_id'])->exists()) {
             return \response('', 204);
         }
 
         [$user, $chat, $messageType] = $this->processInitialRequest($request);
-        \logger($messageType->id);
+
         $message = Response::factory($messageType->id, $this->telegram);
         $message->setParameters($request, $chat, $user);
 
