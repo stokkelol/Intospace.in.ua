@@ -43,7 +43,7 @@ class CleanBands extends Command
         /** Band[] $bands */
         Band::query()->chunk(2000, function ($bands) {
             foreach ($bands as $band) {
-                if (\mb_strpos($band->title, static::$corruptionMap)) {
+                if (\mb_strpos($band->title, static::$corruptionMap[0])) {
                     $band->delete();
                 }
             }
