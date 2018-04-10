@@ -167,8 +167,6 @@ return [
         Anhskohbo\NoCaptcha\NoCaptchaServiceProvider::class,
         //https://github.com/jenssegers/date
         Jenssegers\Date\DateServiceProvider::class,
-        //https://github.com/barryvdh/laravel-ide-helper
-        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         //http://image.intervention.io/
         Intervention\Image\ImageServiceProvider::class,
         //https://github.com/jenssegers/agent
