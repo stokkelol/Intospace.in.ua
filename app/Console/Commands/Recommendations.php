@@ -85,7 +85,7 @@ class Recommendations extends Command
                     ? $this->getRecommendedBand($user)
                     : $this->getRandomBand();
 
-                $video = $this->youtube->search($this->getSearchString($band));
+                $video = $this->youtube->searchBand($band);
                 if (\is_array($video)) {
                     $payload = $this->payload->processRecommendation($video);
                     $this->saveRecommendation($band, $user, $payload);
@@ -128,26 +128,5 @@ class Recommendations extends Command
         $recommendation->band()->associate($band);
         $recommendation->payload = $payload;
         $recommendation->save();
-    }
-
-    /**
-     * @param Band $band
-     * @return string
-     */
-    private function getSearchString(Band $band): string
-    {
-        if ($band->albums->isNotEmpty()) {
-            $album = $band->albums->random();
-
-            if ($album->tracks->isNotEmpty()) {
-                $track = $album->tracks->random();
-
-                return $band->title . ' ' . $track->title;
-            }
-
-            return $band->title . ' ' . $album->title;
-        }
-
-        return $band->title;
     }
 }
