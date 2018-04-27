@@ -203,8 +203,7 @@ abstract class Response implements ResponseMessage
             $this->telegram->sendMessage([
                 'chat_id' => $this->chat->id,
                 'text' => $message,
-                'parse_mode' => $this->parseMode,
-                'reply_markup' => \json_encode([])
+                'parse_mode' => $this->parseMode
             ]);
         }
     }
