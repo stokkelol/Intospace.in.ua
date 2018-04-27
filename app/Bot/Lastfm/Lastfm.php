@@ -25,7 +25,9 @@ class Lastfm extends ConnectionDecorator
         'getUserTopAlbums' => 'user.getTopAlbums',
         'getUserTopTags' => 'user.getTopTags',
         'getArtistSimilar' => 'artist.getSimilar',
-        'getUserLovedTracks' => 'user.getLovedTracks'
+        'getUserLovedTracks' => 'user.getLovedTracks',
+        'getTrackTopTags' => 'track.getTopTags',
+        'getAlbumTopTags' => 'album.getTopTags'
     ];
 
     /**
@@ -134,6 +136,24 @@ class Lastfm extends ConnectionDecorator
     public function getUserLovedTracks(string $username): self
     {
         return $this->set($this->setQuery(__METHOD__, ['user' => $username]));
+    }
+
+    /**
+     * @param string $mbid
+     * @return Lastfm
+     */
+    public function getTrackTopTags(string $mbid): self
+    {
+        return $this->set($this->setQuery(__METHOD__, ['mdib' => $mbid]));
+    }
+
+    /**
+     * @param string $mbid
+     * @return Lastfm
+     */
+    public function getAlbumTopTags(string $mbid): self
+    {
+        return $this->set($this->setQuery(__METHOD__, ['mdib' => $mbid]));
     }
 
     /**
