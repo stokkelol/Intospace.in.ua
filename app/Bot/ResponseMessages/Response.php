@@ -210,7 +210,7 @@ abstract class Response implements ResponseMessage
                 'chat_id' => $this->chat->id,
                 'text' => $message,
                 'parse_mode' => $this->parseMode,
-                'reply_markup' => [$reply]
+                'reply_markup' => \json_encode([$reply])
             ]);
 
             $counter++;
