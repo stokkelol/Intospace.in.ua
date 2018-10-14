@@ -169,10 +169,8 @@ abstract class Response implements ResponseMessage
         $outboundMessage->inbound_message_id = $this->request['update_id'];
         $outboundMessage->save();
 
-
         $counter = 1;
         foreach ($this->responseMessage as $key => $value) {
-            logger($value . "   new ");
             $text = new OutboundMessageText();
             $text->message = $value;
             $text->outboundMessage()->associate($outboundMessage);
@@ -206,6 +204,7 @@ abstract class Response implements ResponseMessage
     {
         $counter = 1;
         foreach ($this->responseMessage as $message) {
+            \logger($this->keyboard[$counter]);
             $this->telegram->sendMessage([
                 'chat_id' => $this->chat->id,
                 'text' => $message,
