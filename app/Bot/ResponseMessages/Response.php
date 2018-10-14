@@ -207,7 +207,7 @@ abstract class Response implements ResponseMessage
     {
         $counter = 1;
         foreach ($this->responseMessage as $message) {
-            \logger($message);
+            \logger("Message" . $message);
             $this->telegram->sendMessage([
                 'chat_id' => $this->chat->id,
                 'text' => $message,
