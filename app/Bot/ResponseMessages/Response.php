@@ -214,8 +214,8 @@ abstract class Response implements ResponseMessage
     protected function send(): void
     {
         $id = 1;
-
         foreach ($this->responseMessage as $message) {
+            \log($message);
             $this->telegram->sendMessage([
                 'chat_id' => $this->chat->id,
                 'text' => $message,
