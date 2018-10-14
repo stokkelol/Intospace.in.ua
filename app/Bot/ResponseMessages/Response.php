@@ -184,12 +184,12 @@ abstract class Response implements ResponseMessage
         $outboundMessage->inbound_message_id = $this->request['update_id'];
         $outboundMessage->save();
 
-        foreach ($this->responseMessage as $message) {
+        foreach ($this->responseMessage as &$message) {
             $text = new OutboundMessageText();
             $text->message = $message;
             $text->outboundMessage()->associate($outboundMessage);
             $text->save();
-            $message['id'] = $text->id;
+            $message->id = $text->id;
         }
 
         if ($this->command !== null) {
