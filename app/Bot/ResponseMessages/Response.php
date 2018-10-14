@@ -169,6 +169,7 @@ abstract class Response implements ResponseMessage
         $outboundMessage->inbound_message_id = $this->request['update_id'];
         $outboundMessage->save();
 
+        $preparer = new Base;
         $counter = 1;
         foreach ($this->responseMessage as $key => $value) {
             $text = new OutboundMessageText();
@@ -176,7 +177,7 @@ abstract class Response implements ResponseMessage
             $text->outboundMessage()->associate($outboundMessage);
             $text->save();
 
-            $this->keyboard[$counter][] = (new Base)->prepare($text);
+            $this->keyboard[$counter][] = $preparer->prepare($text);
             $counter++;
         }
 
@@ -205,7 +206,7 @@ abstract class Response implements ResponseMessage
         $counter = 1;
         foreach ($this->responseMessage as $message) {
             $keyboard = \json_encode([
-                    'inline_keyboard' => [$this->keyboard[$counter]],
+                    'inline_keyboard' => $this->keyboard[$counter],
                     'resize_keyboard' => true,
                     'one_time_keyboard' => true
                 ]
