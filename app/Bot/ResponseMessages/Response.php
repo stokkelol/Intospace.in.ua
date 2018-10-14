@@ -155,21 +155,7 @@ abstract class Response implements ResponseMessage
     {
         $this->createResponse();
         $this->beforeResponse();
-        $this->prepareKeyboard();
         $this->send();
-    }
-
-    /**
-     * @return void
-     */
-    protected function prepareKeyboard(): void
-    {
-        $preparer = new Base();
-        $id = 1;
-        foreach ($this->responseMessage as $message) {
-            $this->keyboard[$id] = $preparer->prepare($message);
-            $id++;
-        }
     }
 
     /**
@@ -184,11 +170,17 @@ abstract class Response implements ResponseMessage
         $outboundMessage->inbound_message_id = $this->request['update_id'];
         $outboundMessage->save();
 
+        $preparer = new Base();
+
+        $counter = 1;
         foreach ($this->responseMessage as $key => $value) {
             $text = new OutboundMessageText();
             $text->message = $value;
             $text->outboundMessage()->associate($outboundMessage);
             $text->save();
+
+            $this->keyboard[$counter] = $preparer->prepare($text);
+            $counter++;
         }
 
         if ($this->command !== null) {
@@ -213,14 +205,14 @@ abstract class Response implements ResponseMessage
      */
     protected function send(): void
     {
-        $id = 1;
+        $counter = 1;
         foreach ($this->responseMessage as $message) {
             \logger($message);
             $this->telegram->sendMessage([
                 'chat_id' => $this->chat->id,
                 'text' => $message,
                 'parse_mode' => $this->parseMode,
-                'reply_markup' => $this->keyboard[$id]
+                'reply_markup' => $this->keyboard[$counter]
             ]);
 
             $id++;

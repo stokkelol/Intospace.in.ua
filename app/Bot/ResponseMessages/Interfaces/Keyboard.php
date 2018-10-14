@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace App\Bot\ResponseMessages\Interfaces;
 
+use App\Models\OutboundMessageText;
+
 /**
  * Interface Keyboard
  *
@@ -10,5 +12,5 @@ namespace App\Bot\ResponseMessages\Interfaces;
  */
 interface Keyboard
 {
-    public function prepare(array $response): array;
+    public function prepare(OutboundMessageText $response): array;
 }

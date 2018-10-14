@@ -6,6 +6,7 @@ namespace App\Bot\Keyboard;
 use App\Bot\Buttons\BaseButton;
 use App\Bot\Buttons\Factory;
 use App\Bot\ResponseMessages\Interfaces\Keyboard;
+use App\Models\OutboundMessageText;
 
 /**
  * Class Base
@@ -15,9 +16,10 @@ use App\Bot\ResponseMessages\Interfaces\Keyboard;
 class Base implements Keyboard
 {
     /**
+     * @param OutboundMessageText $response
      * @return array
      */
-    public function prepare(array $reponse): array
+    public function prepare(OutboundMessageText $response): array
     {
         $response = [];
 
