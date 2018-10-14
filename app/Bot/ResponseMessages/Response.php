@@ -209,7 +209,8 @@ abstract class Response implements ResponseMessage
                 'text' => $message,
                 'parse_mode' => $this->parseMode,
                 'reply_markup' => [
-                    'keyboard' => [$this->keyboard[$counter]],
+//                    'keyboard' => [$this->keyboard[$counter]],
+                    'keyboard' => [['12']],
                     'resize_keyboard' => true,
                     'one_time_keyboard' => true
                 ]
