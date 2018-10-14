@@ -15,6 +15,9 @@ class Dislike extends BaseButton
      */
     public function prepare(): array
     {
-        return [];
+        return [
+            'text' => "Dislike",
+            'callback_data' => "id:" . $this->response['id']
+        ];
     }
 }
