@@ -172,6 +172,7 @@ abstract class Response implements ResponseMessage
         $preparer = new Base();
 
         foreach ($this->responseMessage as $key => $value) {
+            logger($value . "   new ");
             $text = new OutboundMessageText();
             $text->message = $value;
             $text->outboundMessage()->associate($outboundMessage);
