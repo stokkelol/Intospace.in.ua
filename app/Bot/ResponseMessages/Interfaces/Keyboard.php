@@ -10,5 +10,5 @@ namespace App\Bot\ResponseMessages\Interfaces;
  */
 interface Keyboard
 {
-    public function prepare(): array;
+    public function prepare(array $response): array;
 }

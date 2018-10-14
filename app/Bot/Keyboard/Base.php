@@ -17,13 +17,13 @@ class Base implements Keyboard
     /**
      * @return array
      */
-    public function prepare(): array
+    public function prepare(array $reponse): array
     {
         $response = [];
 
         /** @var BaseButton $button */
         foreach ($this->map() as $button) {
-            $response[] = (new $button)->prepare();
+            $response[] = (new $button)->prepare($response);
         }
 
         return $response;

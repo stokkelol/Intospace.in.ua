@@ -149,7 +149,7 @@ abstract class Response implements ResponseMessage
     }
 
     /**
-     * @return Message
+     * @return void
      */
     public function sendResponse()
     {
@@ -165,9 +165,10 @@ abstract class Response implements ResponseMessage
     protected function prepareKeyboard(): void
     {
         $preparer = new Base();
-
+        $id = 1;
         foreach ($this->responseMessage as $message) {
-            $this->keyboard[] = $preparer->prepare($message);
+            $this->keyboard[$id] = $preparer->prepare($message);
+            $id++;
         }
     }
 
@@ -212,13 +213,17 @@ abstract class Response implements ResponseMessage
      */
     protected function send(): void
     {
+        $id = 1;
+
         foreach ($this->responseMessage as $message) {
             $this->telegram->sendMessage([
                 'chat_id' => $this->chat->id,
                 'text' => $message,
                 'parse_mode' => $this->parseMode,
-                'reply_markup' => $this->keyboard ?? []
+                'reply_markup' => $this->keyboard[$id]
             ]);
+
+            $id++;
         }
     }
 }
