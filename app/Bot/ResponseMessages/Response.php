@@ -204,12 +204,13 @@ abstract class Response implements ResponseMessage
     {
         $counter = 1;
         foreach ($this->responseMessage as $message) {
-            \logger($this->keyboard[$counter]);
+            $reply = [];
+            $reply[] = $this->keyboard[$counter];
             $this->telegram->sendMessage([
                 'chat_id' => $this->chat->id,
                 'text' => $message,
                 'parse_mode' => $this->parseMode,
-                'reply_markup' => $this->keyboard[$counter]
+                'reply_markup' => [$reply]
             ]);
 
             $counter++;
