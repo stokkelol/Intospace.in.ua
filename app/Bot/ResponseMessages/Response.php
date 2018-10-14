@@ -13,7 +13,6 @@ use App\Models\OutboundMessageContext;
 use App\Models\OutboundMessageText;
 use App\Models\TelegramUser;
 use Telegram\Bot\Api;
-use Telegram\Bot\Objects\Message;
 
 /**
  * Class Factory
