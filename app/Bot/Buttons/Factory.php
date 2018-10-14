@@ -20,9 +20,9 @@ class Factory
      */
     private static $buttons = [
         self::LikeButton => \App\Bot\Buttons\Like::class,
-//        self::DislikeButton => \App\Bot\Buttons\Dislike::class,
-//        self::InfoButton => \App\Bot\Buttons\More::class,
-//        self::MoreButton => \App\Bot\Buttons\Info::class,
+        self::DislikeButton => \App\Bot\Buttons\Dislike::class,
+        self::InfoButton => \App\Bot\Buttons\More::class,
+        self::MoreButton => \App\Bot\Buttons\Info::class,
     ];
 
     /**
