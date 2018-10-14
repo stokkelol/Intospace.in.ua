@@ -58,14 +58,6 @@ class Bot
             return \response('', 204);
         }
 
-//        try {
-//
-//        } catch (\Exception $e) {
-//            \logger($e->getMessage());
-//
-//            // telegram is very annoying
-//            return response("", 204);
-//        }
         [$user, $chat, $messageType] = $this->processInitialRequest($request);
 
         $message = Response::factory($messageType->id, $this->telegram);
@@ -95,7 +87,6 @@ class Bot
      */
     private function processCallback($request): array
     {
-        logger($request);
         return ['test'];
     }
 
