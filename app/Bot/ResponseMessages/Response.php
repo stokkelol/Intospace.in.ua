@@ -204,16 +204,17 @@ abstract class Response implements ResponseMessage
     {
         $counter = 1;
         foreach ($this->responseMessage as $message) {
+            $keyboard = \json_encode([
+                    'keyboard' => [$this->keyboard[$counter]],
+                    'resize_keyboard' => true,
+                    'one_time_keyboard' => true
+                ]
+            );
             $this->telegram->sendMessage([
                 'chat_id' => $this->chat->id,
                 'text' => $message,
                 'parse_mode' => $this->parseMode,
-                'reply_markup' => [
-//                    'keyboard' => [$this->keyboard[$counter]],
-                    'keyboard' => [['12']],
-                    'resize_keyboard' => true,
-                    'one_time_keyboard' => true
-                ]
+                'reply_markup' => $keyboard
             ]);
 
             $counter++;
