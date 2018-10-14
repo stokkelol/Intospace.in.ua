@@ -205,7 +205,7 @@ abstract class Response implements ResponseMessage
         $counter = 1;
         foreach ($this->responseMessage as $message) {
             $keyboard = \json_encode([
-                    'keyboard' => [$this->keyboard[$counter]],
+                    'inline_keyboard' => [$this->keyboard[$counter]],
                     'resize_keyboard' => true,
                     'one_time_keyboard' => true
                 ]
