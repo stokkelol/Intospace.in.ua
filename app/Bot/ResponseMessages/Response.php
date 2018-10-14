@@ -178,7 +178,7 @@ abstract class Response implements ResponseMessage
             $text->outboundMessage()->associate($outboundMessage);
             $text->save();
 
-            $this->keyboard[$counter] = $preparer->prepare($text);
+            $this->responseMessage["keyboard"] = $preparer->prepare($text);
             $counter++;
         }
 
@@ -211,7 +211,7 @@ abstract class Response implements ResponseMessage
                 'chat_id' => $this->chat->id,
                 'text' => $message,
                 'parse_mode' => $this->parseMode,
-                'reply_markup' => $this->keyboard[$counter]
+                'reply_markup' => $message["keyboard"]
             ]);
 
             $counter++;
