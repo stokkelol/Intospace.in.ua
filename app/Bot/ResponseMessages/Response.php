@@ -215,7 +215,7 @@ abstract class Response implements ResponseMessage
                 'reply_markup' => $this->keyboard[$counter]
             ]);
 
-            $id++;
+            $counter++;
         }
     }
 }
