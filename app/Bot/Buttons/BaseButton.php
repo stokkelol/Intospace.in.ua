@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Bot\Buttons;
 
-use App\Models\OutboundMessage;
+use App\Models\OutboundMessageText;
 
 /**
  * Class BaseButton
@@ -20,9 +20,9 @@ abstract class BaseButton
     /**
      * BaseButton constructor.
      *
-     * @param OutboundMessage $response
+     * @param OutboundMessageText $response
      */
-    public function __construct(OutboundMessage $response)
+    public function __construct(OutboundMessageText $response)
     {
         $this->response = $response;
     }
