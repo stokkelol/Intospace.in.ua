@@ -58,7 +58,13 @@ class Bot
             return \response('', 204);
         }
 
-        [$user, $chat, $messageType] = $this->processInitialRequest($request);
+        try {
+            [$user, $chat, $messageType] = $this->processInitialRequest($request);
+        } catch (\Exception $e) {
+            \logger($e->getMessage());
+
+            return response("", 204);
+        }
 
         $message = Response::factory($messageType->id, $this->telegram);
         $message->setParameters($request, $chat, $user);
