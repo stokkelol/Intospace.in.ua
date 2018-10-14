@@ -208,7 +208,9 @@ abstract class Response implements ResponseMessage
                 'chat_id' => $this->chat->id,
                 'text' => $message,
                 'parse_mode' => $this->parseMode,
-                'reply_markup' => $this->keyboard[$counter]
+                'reply_markup' => [
+                    'keyboard' => $this->keyboard[$counter]
+                ]
             ]);
 
             $counter++;
