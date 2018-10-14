@@ -155,7 +155,7 @@ abstract class Response implements ResponseMessage
     {
         $this->createResponse();
         $this->beforeResponse();
-//        $this->prepareKeyboard();
+        $this->prepareKeyboard();
         $this->send();
     }
 
@@ -215,12 +215,12 @@ abstract class Response implements ResponseMessage
     {
         $id = 1;
         foreach ($this->responseMessage as $message) {
-            \log($message);
+            \logger($message);
             $this->telegram->sendMessage([
                 'chat_id' => $this->chat->id,
                 'text' => $message,
                 'parse_mode' => $this->parseMode,
-//                'reply_markup' => $this->keyboard[$id]
+                'reply_markup' => $this->keyboard[$id]
             ]);
 
             $id++;
