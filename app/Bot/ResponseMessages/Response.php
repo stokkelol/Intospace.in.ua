@@ -155,7 +155,7 @@ abstract class Response implements ResponseMessage
     {
         $this->createResponse();
         $this->beforeResponse();
-        $this->prepareKeyboard();
+//        $this->prepareKeyboard();
         $this->send();
     }
 
