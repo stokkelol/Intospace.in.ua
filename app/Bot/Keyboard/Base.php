@@ -25,7 +25,7 @@ class Base implements Keyboard
 
         /** @var BaseButton $button */
         foreach ($this->map() as $button) {
-            $res[] = (new $button)->prepare($response);
+            $res[] = (new $button($response))->prepare();
         }
 
         return $res;
