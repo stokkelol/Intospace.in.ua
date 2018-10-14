@@ -13,7 +13,7 @@ return [
     | one of the channels defined in the "channels" configuration array.
     |
     */
-    'default' => env('LOG_CHANNEL', 'slack'),
+    'default' => env('LOG_CHANNEL', 'daily'),
 
     /*
     |--------------------------------------------------------------------------
