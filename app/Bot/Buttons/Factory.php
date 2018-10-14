@@ -11,9 +11,9 @@ namespace App\Bot\Buttons;
 class Factory
 {
     const LikeButton = 1;
-    const DislikeButton = 1;
-    const InfoButton = 1;
-    const MoreButton = 1;
+    const DislikeButton = 2;
+    const InfoButton = 3;
+    const MoreButton = 4;
 
     /**
      * @var array
