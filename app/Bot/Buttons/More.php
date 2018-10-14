@@ -16,7 +16,7 @@ class More extends BaseButton
     public function prepare(): array
     {
         return [
-            'text' => "More",
+            'text' => "🤗 More",
             'callback_data' => "id:" . $this->response['id']
         ];
     }

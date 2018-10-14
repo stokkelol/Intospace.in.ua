@@ -16,7 +16,7 @@ class Info extends BaseButton
     public function prepare(): array
     {
         return [
-            'text' => "Info",
+            'text' => "🤔 Info",
             'callback_data' => "id:" . $this->response['id']
         ];
     }
