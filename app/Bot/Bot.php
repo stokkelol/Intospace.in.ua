@@ -63,6 +63,7 @@ class Bot
         } catch (\Exception $e) {
             \logger($e->getMessage());
 
+            // telegram is very annoying
             return response("", 204);
         }
 
@@ -93,6 +94,7 @@ class Bot
      */
     private function processCallback($request): array
     {
+        logger($request);
         return ['test'];
     }
 
