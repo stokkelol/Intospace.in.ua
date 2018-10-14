@@ -189,7 +189,7 @@ abstract class Response implements ResponseMessage
             $text->message = $message;
             $text->outboundMessage()->associate($outboundMessage);
             $text->save();
-            $message['id'] = $outboundMessage->id;
+            $message['id'] = $text->id;
         }
 
         if ($this->command !== null) {
