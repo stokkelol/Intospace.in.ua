@@ -21,14 +21,14 @@ class Base implements Keyboard
      */
     public function prepare(OutboundMessageText $response): array
     {
-        $responses = [];
+        $response = [];
 
         /** @var BaseButton $button */
         foreach ($this->map() as $button) {
             $response[] = (new $button)->prepare($response);
         }
 
-        return $responses;
+        return $response;
     }
 
     /**

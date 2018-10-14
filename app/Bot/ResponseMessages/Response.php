@@ -169,7 +169,7 @@ abstract class Response implements ResponseMessage
         $outboundMessage->inbound_message_id = $this->request['update_id'];
         $outboundMessage->save();
 
-        $preparer = new Base();
+
 
         foreach ($this->responseMessage as $key => $value) {
             logger($value . "   new ");
@@ -178,7 +178,7 @@ abstract class Response implements ResponseMessage
             $text->outboundMessage()->associate($outboundMessage);
             $text->save();
 
-            $this->responseMessage["keyboard"] = $preparer->prepare($text);
+            $this->responseMessage["keyboard"] = (new Base)->prepare($text);
         }
 
         if ($this->command !== null) {
