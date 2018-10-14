@@ -170,7 +170,7 @@ abstract class Response implements ResponseMessage
         $outboundMessage->save();
 
 
-
+        $counter = 1;
         foreach ($this->responseMessage as $key => $value) {
             logger($value . "   new ");
             $text = new OutboundMessageText();
@@ -178,7 +178,8 @@ abstract class Response implements ResponseMessage
             $text->outboundMessage()->associate($outboundMessage);
             $text->save();
 
-            $this->responseMessage["keyboard"] = (new Base)->prepare($text);
+            $this->keyboard[$counter] = (new Base)->prepare($text);
+            $counter++;
         }
 
         if ($this->command !== null) {
@@ -205,12 +206,11 @@ abstract class Response implements ResponseMessage
     {
         $counter = 1;
         foreach ($this->responseMessage as $message) {
-            \logger("Message is " . $message);
             $this->telegram->sendMessage([
                 'chat_id' => $this->chat->id,
                 'text' => $message,
                 'parse_mode' => $this->parseMode,
-                'reply_markup' => $message["keyboard"]
+                'reply_markup' => $this->keyboard[$counter]
             ]);
 
             $counter++;
