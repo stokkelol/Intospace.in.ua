@@ -176,7 +176,7 @@ abstract class Response implements ResponseMessage
             $text->outboundMessage()->associate($outboundMessage);
             $text->save();
 
-            $this->keyboard[$counter] = (new Base)->prepare($text);
+            $this->keyboard[$counter][] = (new Base)->prepare($text);
             $counter++;
         }
 
