@@ -73,6 +73,7 @@ class MorningMessage implements ShouldQueue
      *
      * @param Chat $chat
      * @throws \InvalidArgumentException
+     * @throws \Exception
      */
     public function __construct(Chat $chat)
     {

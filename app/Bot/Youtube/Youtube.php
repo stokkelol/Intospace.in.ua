@@ -70,6 +70,7 @@ class Youtube
             $searchString = $band->title . ' band';
         }
         \logger($searchString);
+
         return $this->search($searchString);
     }
 

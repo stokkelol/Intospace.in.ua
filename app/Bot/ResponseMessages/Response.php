@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Bot\ResponseMessages;
 
 use App\Bot\Interfaces\ResponseMessage;
+use App\Bot\Keyboard\Base;
 use App\Bot\ResponseMessages\Interfaces\Command;
 use App\Models\Chat;
 use App\Models\MessageType;
@@ -74,7 +75,7 @@ abstract class Response implements ResponseMessage
     /**
      * @var array
      */
-    protected $callback = [];
+    protected $keyboard = [];
 
     /**
      * @param int $type
@@ -154,8 +155,20 @@ abstract class Response implements ResponseMessage
     {
         $this->createResponse();
         $this->beforeResponse();
-
+        $this->prepareKeyboard();
         $this->send();
+    }
+
+    /**
+     * @return void
+     */
+    protected function prepareKeyboard(): void
+    {
+        $preparer = new Base();
+
+        foreach ($this->responseMessage as $message) {
+            $this->keyboard[] = $preparer->prepare($message);
+        }
     }
 
     /**
@@ -203,7 +216,8 @@ abstract class Response implements ResponseMessage
             $this->telegram->sendMessage([
                 'chat_id' => $this->chat->id,
                 'text' => $message,
-                'parse_mode' => $this->parseMode
+                'parse_mode' => $this->parseMode,
+                'reply_markup' => $this->keyboard ?? []
             ]);
         }
     }

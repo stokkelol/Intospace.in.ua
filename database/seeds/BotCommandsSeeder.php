@@ -26,7 +26,8 @@ class BotCommandsSeeder extends Seeder
         11 => '/stop',
         12 => '/start',
         13 => '/help',
-        14 => '/post'
+        14 => '/post',
+        15 => '/random'
     ];
 
     /**

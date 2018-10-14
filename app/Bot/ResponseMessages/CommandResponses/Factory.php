@@ -48,6 +48,9 @@ final class Factory
             case '/help':
                 return new Help($type, $user);
                 break;
+            case "/random":
+                return new Relevant($type, $user);
+                break;
         }
     }
 }

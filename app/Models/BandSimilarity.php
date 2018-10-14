@@ -6,6 +6,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
+ * @property $id
+ * @property $band_id
+ * @property $related_id
+ * @property $ratio
+ *
  * Class BandSimilarity
  *
  * @package App\Models

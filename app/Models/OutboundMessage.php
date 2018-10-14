@@ -16,6 +16,8 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property int $inbound_message_id
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
+ * @property bool $is_liked
+ * @property bool $is_disliked
  *
  * @property-read TelegramUser $user
  * @property-read Chat $chat

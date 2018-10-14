@@ -1,18 +1,19 @@
 <?php
-declare(strict_types=1);
+/**
+ * Created by PhpStorm.
+ * User: alexandergulyiy
+ * Date: 10/7/18
+ * Time: 7:19 PM
+ */
 
 namespace App\Bot\ResponseMessages\CallbackQueries;
+
 
 use App\Bot\ResponseMessages\Interfaces\Callback;
 use App\Bot\ResponseMessages\Interfaces\Command;
 use App\Models\OutboundMessage;
 
-/**
- * Class Like
- *
- * @package App\Bot\ResponseMessages\CallbackQueries
- */
-class Like implements Callback
+class Dislike implements Callback
 {
     /**
      * @var array

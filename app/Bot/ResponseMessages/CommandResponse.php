@@ -22,7 +22,7 @@ class CommandResponse extends Response
      */
     public function createResponse(): void
     {
-        $messages = $this->determineCommand();
+        $messages = $this->handle();
 
         if (\is_array($messages)) {
             $this->responseMessage = $messages;
@@ -51,7 +51,7 @@ class CommandResponse extends Response
      * @return array
      * @throws \LogicException
      */
-    private function determineCommand()
+    private function handle()
     {
         $this->setCommand(Factory::build($this->extractType(), $this->user));
 

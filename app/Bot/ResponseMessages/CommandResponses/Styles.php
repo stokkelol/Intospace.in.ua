@@ -37,8 +37,7 @@ class Styles extends BaseCommand implements Command
      */
     public function prepare(): array
     {
-        $tag = Tag::query()->where('tag', '=', $this->getTag())
-            ->with('bands')->first();
+        $tag = Tag::query()->where('tag', '=', $this->getTag())->with('bands')->first();
 
         $this->band = $tag->bands->random();
 
@@ -52,7 +51,7 @@ class Styles extends BaseCommand implements Command
         $this->album = $searcher->getAlbum();
         $this->track = $searcher->getTrack();
 
-        return [static::YOUTUBE_ENDPOINT . $result[0]->id->videoId];
+        return [static::YOUTUBE_ENDPOINT . $this->getVideoId($result)];
     }
 
     /**
@@ -61,5 +60,14 @@ class Styles extends BaseCommand implements Command
     private function getTag(): string
     {
         return static::$map[$this->type];
+    }
+
+    /**
+     * @param array $results
+     * @return string
+     */
+    private function getVideoId(array $results): string
+    {
+        return $results[0]->id->videoId;
     }
 }

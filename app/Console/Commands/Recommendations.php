@@ -81,9 +81,7 @@ class Recommendations extends Command
         TelegramUser::query()->chunk(1000, function ($users) {
             /** @var TelegramUser $user */
             foreach ($users as $user) {
-                $band = $user->isLastfmExists()
-                    ? $this->getRecommendedBand($user)
-                    : $this->getRandomBand();
+                $band = $user->isLastfmExists() ? $this->getRecommendedBand($user) : $this->getRandomBand();
 
                 $video = $this->youtube->searchBand($band);
                 if (\is_array($video)) {

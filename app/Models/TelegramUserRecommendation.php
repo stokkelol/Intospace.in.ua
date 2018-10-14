@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property \Carbon\Carbon $updated_at
  * @property \Carbon\Carbon $created_at
  * @property int $is_dispatched
+ * @property string $payload
  *
  * @property-read TelegramUser $user
  * @property-read Band $band
