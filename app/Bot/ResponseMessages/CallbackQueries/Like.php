@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Bot\ResponseMessages\CallbackQueries;
 
-use App\Models\OutboundMessage;
+use App\Models\OutboundMessageText;
 
 /**
  * Class Like
@@ -17,10 +17,10 @@ class Like extends Query
      */
     public function handle(): void
     {
-        /** @var OutboundMessage $message */
-        \logger("message id : " . $this->data['id']);
-        $message = OutboundMessage::query()->where('id', $this->data['id'])->first();
-        $message->is_liked = true;
-        $message->save();
+        /** @var OutboundMessageText $message */
+        $message = OutboundMessageText::query()->where('id', $this->data['id'])->first();
+        $outMessage = $message->outboundMessage;
+        $outMessage->is_liked = true;
+        $outMessage->save();
     }
 }
