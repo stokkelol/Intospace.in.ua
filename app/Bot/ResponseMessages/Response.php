@@ -169,7 +169,6 @@ abstract class Response implements ResponseMessage
         $outboundMessage->inbound_message_id = $this->request['update_id'];
         $outboundMessage->save();
 
-        logger(123);
         $preparer = new Base;
         $counter = 1;
         foreach ($this->responseMessage as $key => $value) {

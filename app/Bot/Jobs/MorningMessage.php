@@ -3,11 +3,9 @@ declare(strict_types=1);
 
 namespace App\Bot\Jobs;
 
-use App\Bot\ResponseMessages\CommandResponses\BaseCommand;
 use App\Bot\Youtube\Youtube;
 use App\Models\Band;
 use App\Models\Chat;
-use App\Models\Post;
 use App\Models\TelegramUser;
 use App\Models\TelegramUserRecommendation;
 use App\Support\Logger\Logger;

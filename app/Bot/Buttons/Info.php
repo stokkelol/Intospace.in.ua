@@ -17,7 +17,7 @@ class Info extends BaseButton
     {
         return [
             'text' => "🤔 Info",
-            'callback_data' => "id:" . $this->response['id']
+            'callback_data' => "callback_type:3,". "id:" . $this->response['id']
         ];
     }
 }

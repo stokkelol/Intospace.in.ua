@@ -17,7 +17,7 @@ class Dislike extends BaseButton
     {
         return [
             'text' => "😒 Dislike",
-            'callback_data' => "id:" . $this->response['id']
+            'callback_data' => "callback_type:2,". "id:" . $this->response['id']
         ];
     }
 }

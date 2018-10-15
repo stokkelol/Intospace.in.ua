@@ -104,6 +104,7 @@ class Recommendations extends Command
 
     /**
      * @return Band
+     * @throws \Exception
      */
     private function getRandomBand(): Band
     {
