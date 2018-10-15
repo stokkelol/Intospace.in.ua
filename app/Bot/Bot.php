@@ -106,7 +106,7 @@ class Bot
     private function processCallbackData($request): void
     {
         $data = \json_decode($request['callback_query']['data'], true);
-        logger("data : " . $data);
+        logger("data : " . $data['callback_query']['data']);
         $handler = Factory::build($data['callback_type'], $data);
         $handler->handle();
     }
