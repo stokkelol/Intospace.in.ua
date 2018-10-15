@@ -87,6 +87,7 @@ class Bot
      */
     private function processCallback($request): array
     {
+        logger("process callback");
         logger($request);
         return ['test'];
     }
