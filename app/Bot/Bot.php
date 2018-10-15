@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Bot;
 
+use App\Bot\ResponseMessages\CallbackQueries\Factory;
 use App\Bot\ResponseMessages\Response;
 use App\Models\BotCommand;
 use App\Models\BotCommandMessage;
@@ -102,11 +103,13 @@ class Bot
         return [$user, $chat, $messageType];
     }
 
-    private function processCallbackData($request): array
+    private function processCallbackData($request): void
     {
-        $data = $request['callback_query']['data'];
+        $data = \json_decode($request['callback_query']['data']);
+        $type = $data['callback_type'];
 
-
+        $handler = Factory::build($type, $data);
+        $handler->handle();
     }
 
     /**

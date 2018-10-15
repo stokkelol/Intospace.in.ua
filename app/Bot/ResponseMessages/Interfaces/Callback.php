@@ -11,7 +11,7 @@ namespace App\Bot\ResponseMessages\Interfaces;
 interface Callback
 {
     /**
-     * @return string
+     * @return void
      */
-    public function prepare(): string;
+    public function handle(): void;
 }
