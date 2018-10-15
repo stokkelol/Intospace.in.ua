@@ -10,7 +10,7 @@ class More extends Query
     /**
      * @return string
      */
-    public function handle(): string
+    public function handle(): void
     {
         // TODO: Implement handle() method.
     }

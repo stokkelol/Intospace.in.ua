@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Bot\ResponseMessages\CallbackQueries;
 
-use App\Bot\ResponseMessages\Interfaces\Callback;
+use App\Bot\ResponseMessages\Interfaces\Callback as CallbackContract;
 
 /**
  * Class Factory
@@ -27,7 +27,7 @@ class Factory
      * @param array $data
      * @return \App\Bot\ResponseMessages\Interfaces\Callback
      */
-    public static function build(int $type, array $data): Callback
+    public static function build(int $type, array $data): CallbackContract
     {
         $class = self::$map[$type];
 
