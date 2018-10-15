@@ -29,6 +29,8 @@ class Factory
      */
     public static function build(int $type, array $data): Callback
     {
-        return new self::$map[$type]($data);
+        $class = self::$map[$type];
+
+        return new $class($data);
     }
 }
