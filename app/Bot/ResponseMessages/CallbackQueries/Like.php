@@ -17,9 +17,7 @@ class Like extends Query
      */
     public function handle(): void
     {
-        $messageId = $this->data['id'];
-
-        $message = OutboundMessage::query()->find($messageId);
+        $message = OutboundMessage::query()->find($this->data['id']);
         $message->is_liked = true;
         $message->save();
     }

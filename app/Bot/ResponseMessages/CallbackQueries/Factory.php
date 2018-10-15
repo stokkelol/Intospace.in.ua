@@ -25,7 +25,7 @@ class Factory
     /**
      * @param int $type
      * @param array $data
-     * @return Callback
+     * @return \App\Bot\ResponseMessages\Interfaces\Callback
      */
     public static function build(int $type, array $data): Callback
     {
