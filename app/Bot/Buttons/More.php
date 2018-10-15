@@ -17,7 +17,10 @@ class More extends BaseButton
     {
         return [
             'text' => "🤗 More",
-            'callback_data' => "callback_type:4,". "id:" . $this->response['id']
+            'callback_data' => \json_encode([
+                'callback_type' => 4,
+                'id' => $this->response['id']
+            ])
         ];
     }
 }

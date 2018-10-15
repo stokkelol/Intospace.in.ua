@@ -17,7 +17,10 @@ class Like extends BaseButton
     {
         return [
             'text' => "🤪 Like!",
-            'callback_data' => "callback_type:1,". "id:" . $this->response['id']
+            'callback_data' => \json_encode([
+                'callback_type' => 1,
+                'id' => $this->response['id']
+            ])
         ];
     }
 }

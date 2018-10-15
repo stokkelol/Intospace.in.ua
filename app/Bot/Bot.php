@@ -87,23 +87,14 @@ class Bot
      */
     private function processCallback($request): array
     {
-        $from = $request['message']['from'];
-        $fromChat = $request['message']['chat'];
+        $from = $request['callback_query']['from'];
+        $fromChat = $request['callback_query']['message']['chat'];
 
         $user = $this->user->where('id', $from['id'])->first();
         $chat = $this->chat->where('id', $fromChat['id'])->first();
 
         $this->processCallbackData($request);
-//        if ($user === null) {
-//            $user = $this->saveUser($from);
-//        }
-//
-//        if ($chat === null) {
-//            $chat = $this->saveChat($fromChat, $user);
-//        }
-//
-//        $user->chats()->sync($chat);
-//        $user->chats()->update(['active' => true]);
+
 
         /** @var MessageType $messageType */
         $messageType = MessageType::query()->find(MessageType::TEXT);
@@ -113,6 +104,8 @@ class Bot
 
     private function processCallbackData($request): array
     {
+        $data = $request['callback_query']['data'];
+
 
     }
 
