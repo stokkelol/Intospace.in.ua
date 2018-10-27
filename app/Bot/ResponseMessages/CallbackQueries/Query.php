@@ -13,8 +13,6 @@ use App\Models\OutboundMessageText;
  */
 abstract class Query implements Callback
 {
-    const FIELD = 'is_liked';
-
     /**
      * @var array
      */
