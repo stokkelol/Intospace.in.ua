@@ -19,13 +19,13 @@ class CreateCallbackResultsTable extends Migration
     {
         Schema::create('callback_results', function (Blueprint $table) {
             $table->unsignedBigInteger('id');
-            $table->unsignedInteger('outbound_message_id')->nullable()->default(null);
+            $table->unsignedInteger('outbound_message_text_id')->nullable()->default(null);
             $table->json('data')->nullable()->default(null);
             $table->timestamps();
 
-            $table->foreign('outbound_message_id')
+            $table->foreign('outbound_message_text_id')
                 ->references('id')
-                ->on('outbound_messages')
+                ->on('outbound_message_texts')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
         });
