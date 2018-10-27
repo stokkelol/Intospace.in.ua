@@ -25,6 +25,7 @@ class CallbackResponse extends Response
         $this->data = \json_decode($this->callback['data'], true);
 
         $callbackResults = new CallbackResults();
+        $callbackResults->id = $this->callback['id'];
         $callbackResults->outbound_message_text_id = $this->data['id'];
         $callbackResults->data = $this->callback['data'];
         $callbackResults->save();
