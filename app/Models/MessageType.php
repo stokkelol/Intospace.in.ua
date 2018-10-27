@@ -28,6 +28,7 @@ class MessageType extends Model
     const LOCATION = 11;
     const VENUE = 12;
     const CAPTION = 13;
+    const CALLBACK = 14;
 
     /**
      * @var string

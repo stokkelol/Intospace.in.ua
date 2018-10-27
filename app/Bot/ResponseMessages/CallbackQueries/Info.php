@@ -1,22 +1,22 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: alexandergulyiy
- * Date: 10/15/18
- * Time: 3:58 PM
- */
+declare(strict_types=1);
 
 namespace App\Bot\ResponseMessages\CallbackQueries;
 
-
+/**
+ * Class Info
+ *
+ * @package App\Bot\ResponseMessages\CallbackQueries
+ */
 class Info extends Query
 {
+    const FIELD = 'info';
 
     /**
-     * @return string
+     * @return void
      */
     public function handle(): void
     {
-        // TODO: Implement handle() method.
+        $this->save(self::FIELD);
     }
 }

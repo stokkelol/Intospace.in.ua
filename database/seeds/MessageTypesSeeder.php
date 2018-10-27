@@ -25,7 +25,8 @@ class MessageTypesSeeder extends Seeder
         'contact',
         'location',
         'venue',
-        'caption'
+        'caption',
+        'callback'
     ];
 
     /**

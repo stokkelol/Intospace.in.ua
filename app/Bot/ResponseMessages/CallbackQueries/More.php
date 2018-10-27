@@ -1,17 +1,22 @@
 <?php
-
+declare(strict_types=1);
 
 namespace App\Bot\ResponseMessages\CallbackQueries;
 
-
+/**
+ * Class More
+ *
+ * @package App\Bot\ResponseMessages\CallbackQueries
+ */
 class More extends Query
 {
+    const FIELD = 'more';
 
     /**
-     * @return string
+     * @return void
      */
     public function handle(): void
     {
-        // TODO: Implement handle() method.
+        $this->save(self::FIELD);
     }
 }

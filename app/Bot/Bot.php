@@ -98,7 +98,7 @@ class Bot
         $this->processCallbackData($request);
 
         /** @var MessageType $messageType */
-        $messageType = MessageType::query()->find(MessageType::TEXT);
+        $messageType = MessageType::query()->find(MessageType::CALLBACK);
 
         return [$user, $chat, $messageType];
     }
@@ -106,7 +106,6 @@ class Bot
     private function processCallbackData($request): void
     {
         $data = \json_decode($request['callback_query']['data'], true);
-        logger("data : " . $data['id']);
         $handler = Factory::build($data['callback_type'], $data);
         $handler->handle();
     }

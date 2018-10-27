@@ -27,7 +27,7 @@ abstract class Response implements ResponseMessage
     protected $telegram;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $text;
 
@@ -77,6 +77,11 @@ abstract class Response implements ResponseMessage
     protected $keyboard = [];
 
     /**
+     * @var array|null
+     */
+    protected $callback;
+
+    /**
      * @param int $type
      * @param Api $telegram
      * @return ResponseMessage
@@ -89,6 +94,9 @@ abstract class Response implements ResponseMessage
                 break;
             case MessageType::ENTITIES:
                 return new CommandResponse($telegram, $type);
+                break;
+            case MessageType::CALLBACK:
+                return new CallbackResponse($telegram, $type);
                 break;
         }
     }
@@ -144,7 +152,8 @@ abstract class Response implements ResponseMessage
         $this->request = $request;
         $this->chat = $chat;
         $this->user = $user;
-        $this->text = $request['message']['text'];
+        $this->text = $request['message']['text'] ?? null;
+        $this->callback = $request['callback_query'] ?? null;
     }
 
     /**

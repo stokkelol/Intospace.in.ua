@@ -33,6 +33,7 @@ class Musicbrainz
     }
 
     /**
+     * @param string $mbid
      * @return null|array
      */
     public function getAlbums(string $mbid): ?array
@@ -51,6 +52,7 @@ class Musicbrainz
     }
 
     /**
+     * @param string $mbid
      * @return null|array
      */
     public function getAlbumDetails(string $mbid): ?array
