@@ -8,13 +8,11 @@ use App\Bot\ResponseMessages\Response;
 use App\Models\BotCommand;
 use App\Models\BotCommandMessage;
 use App\Models\Chat;
-use App\Models\ChatUser;
 use App\Models\InboundMessage;
 use App\Models\MessageType;
 use App\Models\TelegramUser;
 use App\Notifications\IncomingTelegramBotMessage;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Notification;
 use Telegram\Bot\Api;
 
 /**
@@ -52,9 +50,12 @@ class Bot
         $this->chat = $chat;
     }
 
+    /**
+     * @param array $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response|mixed
+     */
     public function processWebhook(array $request)
     {
-
         if (InboundMessage::query()->where('id', '=', $request['update_id'])->exists()) {
             return \response('', 204);
         }
@@ -95,7 +96,6 @@ class Bot
         $chat = $this->chat->where('id', $fromChat['id'])->first();
 
         $this->processCallbackData($request);
-
 
         /** @var MessageType $messageType */
         $messageType = MessageType::query()->find(MessageType::TEXT);
