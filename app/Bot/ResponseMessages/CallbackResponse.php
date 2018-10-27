@@ -29,7 +29,5 @@ class CallbackResponse extends Response
         $callbackResults->outbound_message_text_id = $this->data['id'];
         $callbackResults->data = $this->callback['data'];
         $callbackResults->save();
-
-
     }
 }

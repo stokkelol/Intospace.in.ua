@@ -28,6 +28,8 @@ class CreateCallbackResultsTable extends Migration
                 ->on('outbound_message_texts')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
+
+            $table->index('id');
         });
     }
 
