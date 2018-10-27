@@ -41,7 +41,7 @@ class Youtube
 
     /**
      * @param string $query
-     *
+     * @return \stdClass
      */
     public function search(string $query)
     {
