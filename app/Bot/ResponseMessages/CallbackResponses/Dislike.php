@@ -1,18 +1,17 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: alexandergulyiy
- * Date: 10/27/18
- * Time: 3:06 PM
- */
+declare(strict_types=1);
 
 namespace App\Bot\ResponseMessages\CallbackResponses;
 
-
+/**
+ * Class Dislike
+ *
+ * @package App\Bot\ResponseMessages\CallbackResponses
+ */
 class Dislike extends Callback
 {
 
-    public function handle()
+    public function handle(): array
     {
         // TODO: Implement handle() method.
     }

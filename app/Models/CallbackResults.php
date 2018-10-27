@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * Class CallbackResults
  *
  * @property int $id
- * @property int $outbound_message_id
+ * @property int $outbound_message_text_id
  * @property string $data
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon updated_at
