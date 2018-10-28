@@ -62,7 +62,7 @@ abstract class Response implements ResponseMessage
     protected $type;
 
     /**
-     * @var
+     * @var string
      */
     protected $parseMode = 'Markdown';
 

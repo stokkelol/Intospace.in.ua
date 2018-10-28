@@ -16,6 +16,7 @@ class Morning extends BaseBroadcast
     /**
      * @return void
      * @throws \InvalidArgumentException
+     * @throws \Exception
      */
     public function handle(): void
     {

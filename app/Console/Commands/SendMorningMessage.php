@@ -33,13 +33,11 @@ class SendMorningMessage extends Command
      *
      * @return void
      * @throws \InvalidArgumentException
+     * @throws \Exception
      */
     public function handle(): void
     {
-        $chats = Chat::query()->with('users')->get();
-
-//        $chats = Chat::query()->with('users')->where('id', 73429990)->get();
-
-        (new Morning($chats))->handle();
+//        $chats = Chat::query()->with('users')->get();
+        (new Morning(Chat::query()->with('users')->where('id', 73429990)->get()))->handle();
     }
 }
