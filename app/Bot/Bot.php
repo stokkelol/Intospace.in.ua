@@ -246,6 +246,12 @@ class Bot
         return $messageType;
     }
 
+    /**
+     * @param array $request
+     * @param TelegramUser $user
+     * @param Chat $chat
+     * @return MessageType
+     */
     private function saveCallbackMessage(array $request, TelegramUser $user, Chat $chat): MessageType
     {
         $message = InboundMessage::query()->where('id', $request['update_id'])->first();
