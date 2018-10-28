@@ -108,7 +108,7 @@ class MorningMessage implements ShouldQueue
             'text' => $this->message,
             'parse_mode' => $this->parseMode,
             'reply_markup' => \json_encode([
-                    'inline_keyboard' => $keyboard,
+                    'inline_keyboard' => [$keyboard],
                     'resize_keyboard' => true,
                     'one_time_keyboard' => true
                 ]

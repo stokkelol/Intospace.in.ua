@@ -10,6 +10,14 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Notifications\Notifiable;
 
 /**
+ * @property int $id
+ * @property string $first_name
+ * @property string $last_name
+ * @property string $user_name
+ * @property string $language_code
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
+ *
  * @property-read \Illuminate\Database\Eloquent\Collection|Chat[] $chats
  * @property-read \Illuminate\Database\Eloquent\Collection|Social[] $socials
  * @property-read \Illuminate\Database\Eloquent\Collection|Band[] $bands
