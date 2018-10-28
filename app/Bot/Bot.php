@@ -98,13 +98,14 @@ class Bot
         $this->processCallbackData($request);
 
         /** @var MessageType $messageType */
-        $messageType = MessageType::query()->find(MessageType::CALLBACK);
+        $messageType = $this->saveCallbackMessage($request, $user, $chat);
 
         return [$user, $chat, $messageType];
     }
 
     private function processCallbackData($request): void
     {
+
         $data = \json_decode($request['callback_query']['data'], true);
         $handler = Factory::build($data['callback_type'], $data);
         $handler->handle();
@@ -245,6 +246,26 @@ class Bot
         return $messageType;
     }
 
+    private function saveCallbackMessage(array $request, TelegramUser $user, Chat $chat): MessageType
+    {
+        $message = InboundMessage::query()->where('id', $request['update_id'])->first();
+
+        if ($message !== null) {
+            return $message->messageType;
+        }
+
+        $user->notify(new IncomingTelegramBotMessage($request['message']['text']));
+
+        /** @var MessageType $messageType */
+        $messageType = MessageType::query()->find(MessageType::CALLBACK);
+
+        $message = $this->prepareMessageToSave($request, $user, $chat);
+        $message->messageType()->associate($messageType);
+        $message->save();
+
+        return $messageType;
+    }
+
     /**
      * @param array $request
      * @param TelegramUser $user
@@ -257,7 +278,7 @@ class Bot
         $message->id = $request['update_id'];
         $message->chat_id = $chat->id;
         $message->user_id = $user->id;
-        $message->message_text = $request['message']['text'];
+        $message->message_text = $request['message']['text'] ?? '';
 
         return $message;
     }
