@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Bot\Jobs;
 
 use App\Bot\Keyboard\Base;
+use App\Bot\Message\Assembler;
 use App\Bot\Youtube\Youtube;
 use App\Models\Band;
 use App\Models\Chat;
@@ -102,18 +103,8 @@ class MorningMessage implements ShouldQueue
         $telegram = Container::getInstance()->make(Api::class);
         $outboundMessage = $this->saveMessages();
         $keyboard = (new Base())->prepare($outboundMessage->texts->first());
-
-        $telegram->sendMessage([
-            'chat_id' => $this->chat->id,
-            'text' => $this->message,
-            'parse_mode' => $this->parseMode,
-            'reply_markup' => \json_encode([
-                    'inline_keyboard' => [$keyboard],
-                    'resize_keyboard' => true,
-                    'one_time_keyboard' => true
-                ]
-            )
-        ]);
+        $payload = new Assembler($this->chat, $this->message, $keyboard);
+        $telegram->sendMessage([$payload->assemble()]);
 
         if ($this->recommendation !== null) {
             $this->recommendation->is_dispatched = true;

@@ -260,7 +260,8 @@ class Bot
             return $message->messageType;
         }
 
-        $user->notify(new IncomingTelegramBotMessage("New callback response!"));
+        $user->notify(new IncomingTelegramBotMessage("New callback response! From" .
+            $user->user_name . ". Data: " . $request['callback_query']['data']));
 
         /** @var MessageType $messageType */
         $messageType = MessageType::query()->find(MessageType::CALLBACK);
