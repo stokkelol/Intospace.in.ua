@@ -57,7 +57,7 @@ class CallbackResponse extends Response
             $this->telegram->getAccessToken(),
             'POST',
             'answerCallbackQuery',
-            [$payload],
+            $payload,
             $this->telegram->isAsyncRequest(),
             $this->telegram->getTimeOut(),
             $this->telegram->getConnectTimeOut()
