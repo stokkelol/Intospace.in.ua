@@ -47,7 +47,7 @@ class CallbackResponse extends Response
     protected function send(): void
     {
         $client = $this->telegram->getClient();
-        \logger($this->callback);
+        \logger($this->callback['id']);
         $payload = [
             'callback_query_id' => (string)$this->callback['id'],
             'text' => $this->handler->handle()[0],
@@ -58,7 +58,7 @@ class CallbackResponse extends Response
             $this->telegram->getAccessToken(),
             'POST',
             'answerCallbackQuery',
-            $payload,
+            [$payload],
             $this->telegram->isAsyncRequest(),
             $this->telegram->getTimeOut(),
             $this->telegram->getConnectTimeOut()
