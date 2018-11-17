@@ -49,7 +49,7 @@ class CallbackResponse extends Response
         $client = $this->telegram->getClient();
         \logger($this->callback['id']);
         $payload = [
-            'callback_query_id' => $this->callback['id'],
+            'callback_query_id' => (string)$this->callback['id'],
             'text' => $this->handler->handle()
         ];
 
