@@ -42,7 +42,7 @@ class CallbackWrapper
 
     public function send()
     {
-        $endpoint = $this->telegram->getClient()->getBaseBotUrl() . '/bot' . $this->telegram->getAccessToken() . '/' . $this->request->getEndpoint();
+        $endpoint = $this->telegram->getClient()->getBaseBotUrl() . $this->telegram->getAccessToken() . '/' . $this->request->getEndpoint();
         $params = $this->request->getParams();
         $this->client->post($endpoint, $params);
     }
