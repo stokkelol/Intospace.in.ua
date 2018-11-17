@@ -5,6 +5,7 @@ namespace App\Bot\ResponseMessages\CallbackResponses;
 
 use App\Bot\ResponseMessages\Interfaces\CallbackResponse;
 use App\Bot\ResponseMessages\Response;
+use Telegram\Bot\Objects\Message;
 
 /**
  * Class Callback
@@ -39,4 +40,16 @@ abstract class Callback implements CallbackResponse
      * @return string
      */
     abstract protected function getText(): string;
+
+    /**
+     * @return Message
+     */
+    protected function sendTextResponse(): Message
+    {
+        return $this->response->getApi()->sendMessage([
+            'chat_id' => $this->response->getChat()->id,
+            'text' => $this->getText(),
+            'parse_mode' => $this->response->getParseMode(),
+        ]);
+    }
 }

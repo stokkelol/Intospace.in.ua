@@ -12,15 +12,12 @@ use Telegram\Bot\Objects\Message;
  */
 class Like extends Callback
 {
-
+    /**
+     * @return Message
+     */
     public function handle(): Message
     {
-        return $this->response->getApi()->sendMessage([
-            'chat_id' => $this->response->getChat()->id,
-            'text' => $this->getText(),
-            'parse_mode' => $this->response->getParseMode(),
-
-        ]);
+        return $this->sendTextResponse();
     }
 
     /**

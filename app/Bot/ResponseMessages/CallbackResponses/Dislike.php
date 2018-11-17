@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace App\Bot\ResponseMessages\CallbackResponses;
 
+use Telegram\Bot\Objects\Message;
+
 /**
  * Class Dislike
  *
@@ -10,10 +12,12 @@ namespace App\Bot\ResponseMessages\CallbackResponses;
  */
 class Dislike extends Callback
 {
-
-    public function handle(): array
+    /**
+     * @return Message
+     */
+    public function handle(): Message
     {
-        return [$this->getText()];
+        return $this->sendTextResponse();
     }
 
     /**
