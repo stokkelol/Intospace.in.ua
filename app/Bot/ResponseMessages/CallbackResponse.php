@@ -66,14 +66,15 @@ class CallbackResponse extends Response
         );
 
         $guzzle = $client->getHttpClientHandler();
-
+        \logger($client->getBaseBotUrl() . '/bot' . $this->telegram->getAccessToken());
         $guzzle->send(
             $client->getBaseBotUrl() . '/bot' . $this->telegram->getAccessToken(),
             $response->getMethod(),
             $response->getHeaders(),
             $response->getParams(),
-            $response->isAsyncRequest()
+            $response->getTimeOut(),
+            $response->isAsyncRequest(),
+            $response->getConnectTimeOut()
         );
-
     }
 }
