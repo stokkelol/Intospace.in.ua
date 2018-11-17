@@ -67,7 +67,7 @@ class CallbackResponse extends Response
 
         $guzzle = new Client();
 
-        \logger($client->getBaseBotUrl() . '/bot' . $this->telegram->getAccessToken());
+        \logger($client->getBaseBotUrl() . $this->telegram->getAccessToken());
         $endpoint = $client->getBaseBotUrl() . '/bot' . $this->telegram->getAccessToken() . '/' . $response->getEndpoint();
         $params = $response->getParams();
 
