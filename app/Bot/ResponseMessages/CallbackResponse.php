@@ -53,7 +53,7 @@ class CallbackResponse extends Response
             'text' => $this->handler->handle()[0],
             'cache_time' => 10
         ];
-
+        logger("ID:" . $payload['callback_query_id']);
         $response = new TelegramRequest(
             $this->telegram->getAccessToken(),
             'POST',
