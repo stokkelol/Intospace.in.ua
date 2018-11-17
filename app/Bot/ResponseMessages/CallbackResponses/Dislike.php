@@ -21,6 +21,6 @@ class Dislike extends Callback
      */
     protected function getText(): string
     {
-        // TODO: Implement getText() method.
+        return "Ohhh";
     }
 }

@@ -21,6 +21,6 @@ class Like extends Callback
      */
     protected function getText(): string
     {
-        // TODO: Implement getText() method.
+        return "Yay!";
     }
 }
