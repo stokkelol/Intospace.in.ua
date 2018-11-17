@@ -47,7 +47,7 @@ class CallbackResponse extends Response
     protected function send(): void
     {
         $client = $this->telegram->getClient();
-
+        \logger($this->callback['id']);
         $payload = [
             'callback_query_id' => $this->callback['id'],
             'text' => $this->handler->handle()
