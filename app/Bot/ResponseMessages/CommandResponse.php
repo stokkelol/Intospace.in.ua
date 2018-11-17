@@ -72,6 +72,7 @@ class CommandResponse extends Response
 
     /**
      * @return void
+     * @throws \Telegram\Bot\Exceptions\TelegramSDKException
      */
     protected function send(): void
     {
