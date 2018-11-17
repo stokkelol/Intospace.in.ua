@@ -49,6 +49,10 @@ class CallbackWrapper
     public function send()
     {
         $endpoint = $this->telegram->getClient()->getBaseBotUrl() . $this->telegram->getAccessToken() . '/' . $this->request->getEndpoint();
-        $this->client->post($endpoint, $this->params);
+        try {
+            $this->client->post($endpoint, $this->params);
+        } catch (\Throwable $e) {
+            \logger($e->getCode() . $e->getMessage());
+        }
     }
 }

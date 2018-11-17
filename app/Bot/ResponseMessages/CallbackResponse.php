@@ -6,7 +6,6 @@ namespace App\Bot\ResponseMessages;
 use App\Bot\ResponseMessages\CallbackResponses\CallbackWrapper;
 use App\Bot\ResponseMessages\CallbackResponses\Factory;
 use App\Models\CallbackResults;
-use GuzzleHttp\Client;
 use Telegram\Bot\TelegramRequest;
 
 /**
