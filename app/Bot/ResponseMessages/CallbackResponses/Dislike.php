@@ -13,7 +13,7 @@ class Dislike extends Callback
 
     public function handle(): array
     {
-        // TODO: Implement handle() method.
+        return [$this->getText()];
     }
 
     /**

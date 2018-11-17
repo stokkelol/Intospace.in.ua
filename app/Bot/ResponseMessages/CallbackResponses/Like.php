@@ -13,7 +13,7 @@ class Like extends Callback
 
     public function handle(): array
     {
-        // TODO: Implement handle() method.
+        return [$this->getText()];
     }
 
     /**
