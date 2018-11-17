@@ -65,7 +65,12 @@ class Bot
         $message = Response::factory($messageType->id, $this->telegram);
         $message->setParameters($request, $chat, $user);
 
-        return $message->sendResponse();
+
+        try {
+            $message->sendResponse();
+        } catch (\Throwable $e) {
+            \logger($e);
+        }
     }
 
     /**
