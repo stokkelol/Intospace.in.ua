@@ -50,7 +50,8 @@ class CallbackResponse extends Response
         \logger($this->callback);
         $payload = [
             'callback_query_id' => (string)$this->callback['id'],
-            'text' => $this->handler->handle()[0]
+            'text' => $this->handler->handle()[0],
+            'cache_time' => 10
         ];
 
         $response = new TelegramRequest(
