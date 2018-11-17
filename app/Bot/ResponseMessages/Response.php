@@ -47,6 +47,11 @@ abstract class Response implements ResponseMessage
     protected $responseMessage = [];
 
     /**
+     * @var array
+     */
+    protected $callbackResponses = [];
+
+    /**
      * @var TelegramUser
      */
     protected $user;
@@ -82,6 +87,11 @@ abstract class Response implements ResponseMessage
     protected $callback;
 
     /**
+     * @var int
+     */
+    protected $updateId;
+
+    /**
      * @param int $type
      * @param Api $telegram
      * @return ResponseMessage
@@ -105,6 +115,11 @@ abstract class Response implements ResponseMessage
      * @return void
      */
     abstract protected function createResponse(): void;
+
+    /**
+     * @return void
+     */
+    abstract protected function send(): void;
 
     /**
      * Factory constructor.
@@ -154,6 +169,7 @@ abstract class Response implements ResponseMessage
         $this->user = $user;
         $this->text = $request['message']['text'] ?? null;
         $this->callback = $request['callback_query'] ?? null;
+        $this->updateId = $request['update_id'];
     }
 
     /**
@@ -204,29 +220,6 @@ abstract class Response implements ResponseMessage
             }
 
             $context->save();
-        }
-    }
-
-    /**
-     * @return void
-     */
-    protected function send(): void
-    {
-        $counter = 1;
-        foreach ($this->responseMessage as $message) {
-            $this->telegram->sendMessage([
-                'chat_id' => $this->chat->id,
-                'text' => $message,
-                'parse_mode' => $this->parseMode,
-                'reply_markup' => \json_encode([
-                        'inline_keyboard' => $this->keyboard[$counter],
-                        'resize_keyboard' => true,
-                        'one_time_keyboard' => true
-                    ]
-                )
-            ]);
-
-            $counter++;
         }
     }
 }

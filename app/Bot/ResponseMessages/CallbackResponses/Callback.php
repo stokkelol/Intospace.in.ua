@@ -27,4 +27,9 @@ abstract class Callback implements CallbackResponse
     {
         $this->data = $data;
     }
+
+    /**
+     * @return string
+     */
+    abstract protected function getText(): string;
 }

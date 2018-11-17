@@ -15,4 +15,12 @@ class Info extends Callback
     {
         // TODO: Implement handle() method.
     }
+
+    /**
+     * @return string
+     */
+    protected function getText(): string
+    {
+        // TODO: Implement getText() method.
+    }
 }

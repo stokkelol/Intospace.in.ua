@@ -69,4 +69,27 @@ class CommandResponse extends Response
     {
         return $this->command;
     }
+
+    /**
+     * @return void
+     */
+    protected function send(): void
+    {
+        $counter = 1;
+        foreach ($this->responseMessage as $message) {
+            $this->telegram->sendMessage([
+                'chat_id' => $this->chat->id,
+                'text' => $message,
+                'parse_mode' => $this->parseMode,
+                'reply_markup' => \json_encode([
+                        'inline_keyboard' => $this->keyboard[$counter],
+                        'resize_keyboard' => true,
+                        'one_time_keyboard' => true
+                    ]
+                )
+            ]);
+
+            $counter++;
+        }
+    }
 }
