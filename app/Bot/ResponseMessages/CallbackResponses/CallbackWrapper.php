@@ -52,7 +52,7 @@ class CallbackWrapper
         try {
             $this->client->post($endpoint, $this->params);
         } catch (\Throwable $e) {
-            \logger($e->getCode() . $e->getMessage());
+            \logger("Exception: " . $e->getCode() . $e->getMessage());
         }
     }
 }
