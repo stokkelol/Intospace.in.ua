@@ -5,7 +5,7 @@ namespace App\Bot\ResponseMessages;
 
 use App\Bot\ResponseMessages\CallbackResponses\Factory;
 use App\Models\CallbackResults;
-use Telegram\Bot\HttpClients\GuzzleHttpClient;
+use GuzzleHttp\Client;
 use Telegram\Bot\TelegramRequest;
 
 /**
@@ -65,16 +65,12 @@ class CallbackResponse extends Response
             $this->telegram->isAsyncRequest()
         );
 
-        $guzzle = $client->getHttpClientHandler();
+        $guzzle = new Client();
+
         \logger($client->getBaseBotUrl() . '/bot' . $this->telegram->getAccessToken());
-        $guzzle->send(
-            $client->getBaseBotUrl() . '/bot' . $this->telegram->getAccessToken(),
-            $response->getMethod(),
-            $response->getHeaders(),
-            $response->getParams(),
-            $response->getTimeOut(),
-            $response->isAsyncRequest(),
-            $response->getConnectTimeOut()
-        );
+        $endpoint = $client->getBaseBotUrl() . '/bot' . $this->telegram->getAccessToken() . '/' . $response->getMethod();
+        $params = $response->getParams();
+
+        $guzzle->post($endpoint, $params);
     }
 }
