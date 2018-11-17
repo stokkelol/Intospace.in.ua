@@ -54,7 +54,7 @@ class CallbackWrapper
         try {
             $this->client->post($endpoint, $this->params);
         } catch (RequestException $e) {
-            \logger("Exception: " . $e->getResponse());
+            \logger("Exception: " . $e->getMessage());
         } catch (\Throwable $e) {
             \logger("Exception: " . $e->getCode() . $e->getMessage());
         }
