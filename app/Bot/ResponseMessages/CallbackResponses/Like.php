@@ -19,7 +19,7 @@ class Like extends Callback
     public function handle(): void
     {
         /** @var OutboundMessage $previousMessage */
-        $previousMessage = OutboundMessage::query()->with("context.band")->where('id', '=', $this->data['id']);
+        $previousMessage = OutboundMessage::query()->with("context.band")->where('id', '=', $this->data['id'])->first();
         /** @var BandTelegramUser $pivot */
         $pivot = BandTelegramUser::query()->where("user_id", '=', $this->response->getUser()->id)
             ->where('band_id', '=', $previousMessage->context->band->id)->first();

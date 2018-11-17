@@ -18,7 +18,7 @@ class More extends Callback
     public function handle(): void
     {
         /** @var OutboundMessage $previousMessage */
-        $previousMessage = OutboundMessage::query()->with("context.band")->where('id', '=', $this->data['id']);
+        $previousMessage = OutboundMessage::query()->with("context.band")->where('id', '=', $this->data['id'])->first();
         $service = new \App\Bot\Bands\More($previousMessage->context, $previousMessage->user);
     }
 
