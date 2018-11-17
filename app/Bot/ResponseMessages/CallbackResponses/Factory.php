@@ -25,10 +25,11 @@ final class Factory
     /**
      * @param int $type
      * @param array $data
+     * @param \App\Bot\ResponseMessages\Response $response
      * @return CallbackResponse
      */
-    public static function build(int $type, array $data): CallbackResponse
+    public static function build(int $type, array $data, \App\Bot\ResponseMessages\Response $response): CallbackResponse
     {
-        return new self::$responses[$type]($data);
+        return new self::$responses[$type]($data, $response);
     }
 }

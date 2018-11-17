@@ -1,16 +1,16 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: alexandergulyiy
- * Date: 10/27/18
- * Time: 3:37 PM
- */
+declare(strict_types=1);
 
 namespace App\Bot\ResponseMessages\CallbackResponses;
 
-
 use App\Bot\ResponseMessages\Interfaces\CallbackResponse;
+use App\Bot\ResponseMessages\Response;
 
+/**
+ * Class Callback
+ *
+ * @package App\Bot\ResponseMessages\CallbackResponses
+ */
 abstract class Callback implements CallbackResponse
 {
     /**
@@ -19,13 +19,20 @@ abstract class Callback implements CallbackResponse
     protected $data;
 
     /**
+     * @var Response
+     */
+    protected $response;
+
+    /**
      * Callback constructor.
      *
      * @param array $data
+     * @param Response $response
      */
-    public function __construct(array $data)
+    public function __construct(array $data, Response $response)
     {
         $this->data = $data;
+        $this->response = $response;
     }
 
     /**

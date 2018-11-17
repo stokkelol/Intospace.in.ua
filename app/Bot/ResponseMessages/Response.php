@@ -122,6 +122,14 @@ abstract class Response implements ResponseMessage
     abstract protected function send(): void;
 
     /**
+     * @return Api
+     */
+    public function getApi(): Api
+    {
+        return $this->telegram;
+    }
+
+    /**
      * Factory constructor.
      *
      * @param Api $telegram
@@ -155,6 +163,14 @@ abstract class Response implements ResponseMessage
     public function getChat(): Chat
     {
         return $this->chat;
+    }
+
+    /**
+     * @return string
+     */
+    public function getParseMode(): string
+    {
+        return $this->parseMode;
     }
 
     /**

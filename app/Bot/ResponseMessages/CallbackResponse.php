@@ -6,7 +6,6 @@ namespace App\Bot\ResponseMessages;
 use App\Bot\ResponseMessages\CallbackResponses\CallbackWrapper;
 use App\Bot\ResponseMessages\CallbackResponses\Factory;
 use App\Models\CallbackResults;
-use Telegram\Bot\TelegramRequest;
 
 /**
  * Class CallbackResponse
@@ -38,7 +37,7 @@ class CallbackResponse extends Response
         $callbackResults->data = $this->callback['data'];
         $callbackResults->save();
 
-        $this->handler = Factory::build($this->data['callback_type'], $this->data);
+        $this->handler = Factory::build($this->data['callback_type'], $this->data, $this);
     }
 
     /**
@@ -47,20 +46,6 @@ class CallbackResponse extends Response
      */
     protected function send(): void
     {
-        $params = [
-            'callback_query_id' => (string)$this->callback['id'],
-                'text' => $this->handler->handle()[0],
-                'cache_time' => 10,
-                'show_alert' => true
-            ];
-        $response = new TelegramRequest(
-            $this->telegram->getAccessToken(),
-            'POST',
-            'answerCallbackQuery',
-            [],
-            $this->telegram->isAsyncRequest()
-        );
-
-        (new CallbackWrapper($this->telegram, $response, $params))->send();
+        $this->handler->handle();
     }
 }
