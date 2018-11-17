@@ -29,21 +29,26 @@ class CallbackWrapper
     private $telegram;
 
     /**
+     * @var array
+     */
+    private $params;
+
+    /**
      * CallbackWrapper constructor.
      * @param Api $telegram
      * @param TelegramRequest $request
      */
-    public function __construct(Api $telegram, TelegramRequest $request)
+    public function __construct(Api $telegram, TelegramRequest $request, array $params)
     {
         $this->client = new Client();
         $this->request = $request;
         $this->telegram = $telegram;
+        $this->params = $params;
     }
 
     public function send()
     {
         $endpoint = $this->telegram->getClient()->getBaseBotUrl() . $this->telegram->getAccessToken() . '/' . $this->request->getEndpoint();
-        $params = $this->request->getParams();
-        $this->client->post($endpoint, $params);
+        $this->client->post($endpoint, $this->params);
     }
 }

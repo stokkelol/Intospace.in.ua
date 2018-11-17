@@ -48,19 +48,20 @@ class CallbackResponse extends Response
      */
     protected function send(): void
     {
+        $params = [
+            'callback_query_id' => (string)$this->callback['id'],
+                'text' => $this->handler->handle()[0],
+                'cache_time' => 10,
+                'show_alert' => true
+            ];
         $response = new TelegramRequest(
             $this->telegram->getAccessToken(),
             'POST',
             'answerCallbackQuery',
-            [
-                'callback_query_id' => (string)$this->callback['id'],
-                'text' => $this->handler->handle()[0],
-                'cache_time' => 10,
-                'show_alert' => true
-            ],
+            [],
             $this->telegram->isAsyncRequest()
         );
 
-        (new CallbackWrapper($this->telegram, $response))->send();
+        (new CallbackWrapper($this->telegram, $response, $params))->send();
     }
 }
