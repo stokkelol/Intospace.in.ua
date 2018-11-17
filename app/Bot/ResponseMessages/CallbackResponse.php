@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Bot\ResponseMessages;
 
+use App\Bot\ResponseMessages\CallbackResponses\CallbackWrapper;
 use App\Bot\ResponseMessages\CallbackResponses\Factory;
 use App\Models\CallbackResults;
 use GuzzleHttp\Client;
@@ -47,30 +48,19 @@ class CallbackResponse extends Response
      */
     protected function send(): void
     {
-        $client = $this->telegram->getClient();
-        \logger($this->callback['id']);
-
-        $payload = [
-            'callback_query_id' => (string)$this->callback['id'],
-            'text' => $this->handler->handle()[0],
-            'cache_time' => 10,
-            'show_alert' => true
-        ];
-
         $response = new TelegramRequest(
             $this->telegram->getAccessToken(),
             'POST',
             'answerCallbackQuery',
-            $payload,
+            [
+                'callback_query_id' => (string)$this->callback['id'],
+                'text' => $this->handler->handle()[0],
+                'cache_time' => 10,
+                'show_alert' => true
+            ],
             $this->telegram->isAsyncRequest()
         );
 
-        $guzzle = new Client();
-
-        \logger($client->getBaseBotUrl() . $this->telegram->getAccessToken());
-        $endpoint = $client->getBaseBotUrl() . '/bot' . $this->telegram->getAccessToken() . '/' . $response->getEndpoint();
-        $params = $response->getParams();
-
-        $guzzle->post($endpoint, $params);
+        (new CallbackWrapper($this->telegram, $response))->send();
     }
 }
