@@ -4,6 +4,8 @@ declare(strict_types=1);
 namespace App\Bot\ResponseMessages\CallbackResponses;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\BadResponseException;
+use GuzzleHttp\Exception\RequestException;
 use Telegram\Bot\Api;
 use Telegram\Bot\TelegramRequest;
 
@@ -51,6 +53,8 @@ class CallbackWrapper
         $endpoint = $this->telegram->getClient()->getBaseBotUrl() . $this->telegram->getAccessToken() . '/' . $this->request->getEndpoint();
         try {
             $this->client->post($endpoint, $this->params);
+        } catch (RequestException $e) {
+            \logger("Exception: " . $e->getResponse());
         } catch (\Throwable $e) {
             \logger("Exception: " . $e->getCode() . $e->getMessage());
         }
