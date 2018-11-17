@@ -23,7 +23,7 @@ class Like extends Callback
         /** @var BandTelegramUser $pivot */
         $pivot = BandTelegramUser::query()->where("user_id", '=', $this->response->getUser()->id)
             ->where('band_id', '=', $previousMessage->context->band->id)->first();
-
+        \logger($pivot->id);
         if ($pivot !== null) {
             $pivot->likes_count++;
         } else {
