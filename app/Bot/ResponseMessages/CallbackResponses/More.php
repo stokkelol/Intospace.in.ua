@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace App\Bot\ResponseMessages\CallbackResponses;
 
+use App\Models\OutboundMessage;
+
 /**
  * Class More
  *
@@ -10,10 +12,14 @@ namespace App\Bot\ResponseMessages\CallbackResponses;
  */
 class More extends Callback
 {
-
-    public function handle(): array
+    /**
+     * @return void
+     */
+    public function handle(): void
     {
-        // TODO: Implement handle() method.
+        /** @var OutboundMessage $previousMessage */
+        $previousMessage = OutboundMessage::query()->with("context.band")->where('id', '=', $this->data['id']);
+        $service = new \App\Bot\Bands\More($previousMessage->context, $previousMessage->user);
     }
 
     /**
@@ -21,6 +27,6 @@ class More extends Callback
      */
     protected function getText(): string
     {
-        // TODO: Implement getText() method.
+        return 'Here you go!';
     }
 }

@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property int $band_id
  * @property int $value
  * @property int $lastfm_count
+ * @property int $likes_count
  *
  * Class BandTelegramUser
  *

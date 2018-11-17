@@ -3,7 +3,8 @@ declare(strict_types=1);
 
 namespace App\Bot\ResponseMessages\CallbackResponses;
 
-use Telegram\Bot\Objects\Message;
+use App\Models\BandTelegramUser;
+use App\Models\OutboundMessage;
 
 /**
  * Class Like
@@ -13,11 +14,29 @@ use Telegram\Bot\Objects\Message;
 class Like extends Callback
 {
     /**
-     * @return Message
+     * @return void
      */
-    public function handle(): Message
+    public function handle(): void
     {
-        return $this->sendTextResponse();
+        /** @var OutboundMessage $previousMessage */
+        $previousMessage = OutboundMessage::query()->with("context.band")->where('id', '=', $this->data['id']);
+        /** @var BandTelegramUser $pivot */
+        $pivot = BandTelegramUser::query()->where("user_id", '=', $this->response->getUser()->id)
+            ->where('band_id', '=', $previousMessage->context->band->id)->first();
+
+        if ($pivot !== null) {
+            $pivot->likes_count++;
+        } else {
+            $pivot = new BandTelegramUser();
+            $pivot->user()->associate($this->response->getUser());
+            $pivot->band()->associate($previousMessage->context->band);
+            $pivot->likes_count++;
+            $pivot->lastfm_count = null;
+        }
+
+        $pivot->save();
+
+        $this->sendTextResponse();
     }
 
     /**
@@ -25,6 +44,6 @@ class Like extends Callback
      */
     protected function getText(): string
     {
-        return "Yay!";
+        return "Yay! Nice!";
     }
 }

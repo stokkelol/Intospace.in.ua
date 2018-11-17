@@ -7,6 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
+ * @property-read Band $band
+ * @property-read Album $album
+ * @property-read Track $track
+ * @property-read OutboundMessage $outboundMessage
+ *
  * Class OutboundMessageContext
  *
  * @package App\Models

@@ -10,8 +10,10 @@ namespace App\Bot\ResponseMessages\CallbackResponses;
  */
 class Info extends Callback
 {
-
-    public function handle(): array
+    /**
+     * @return void
+     */
+    public function handle(): void
     {
         // TODO: Implement handle() method.
     }
