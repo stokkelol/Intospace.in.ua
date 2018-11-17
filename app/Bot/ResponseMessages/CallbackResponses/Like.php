@@ -19,10 +19,10 @@ class Like extends Callback
     public function handle(): void
     {
         /** @var OutboundMessage $previousMessage */
-        $previousMessage = OutboundMessage::query()->with("context.band")->where('id', '=', $this->data['id'])->first();
+        $previousMessage = OutboundMessage::query()->with("context")->where('id', '=', $this->data['id'])->first();
         /** @var BandTelegramUser $pivot */
         $pivot = BandTelegramUser::query()->where("user_id", '=', $this->response->getUser()->id)
-            ->where('band_id', '=', $previousMessage->context->band->id)->first();
+            ->where('band_id', '=', $previousMessage->context->band_id)->first();
         \logger($pivot->id);
         if ($pivot !== null) {
             $pivot->likes_count++;
