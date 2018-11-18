@@ -42,14 +42,11 @@ class CallbackWrapper
         $this->params = $params;
     }
 
-    public function send()
+    /**
+     * @return void
+     */
+    public function send(): void
     {
-        $request = new TelegramRequest([
-            $this->telegram->getAccessToken(),
-            'GET',
-            'answerCallbackQuery',
-            ['callback_query_id' => $this->params['callback_query']['id']]
-        ]);
         $endpoint = $this->telegram->getClient()->getBaseBotUrl() . $this->telegram->getAccessToken()
             . '/answerCallbackQuery?callback_query_id=' . $this->params['callback_query']['id'];
         try {
