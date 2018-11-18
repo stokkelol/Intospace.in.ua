@@ -5,6 +5,10 @@ namespace App\Bot\ResponseMessages\CallbackResponses;
 
 use App\Bot\ResponseMessages\Interfaces\CallbackResponse;
 use App\Bot\ResponseMessages\Response;
+use App\Models\BandTelegramUser;
+use App\Models\OutboundMessage;
+use App\Models\OutboundMessageContext;
+use App\Models\OutboundMessageText;
 use Telegram\Bot\Objects\Message;
 
 /**
@@ -25,6 +29,16 @@ abstract class Callback implements CallbackResponse
     protected $response;
 
     /**
+     * @var OutboundMessageText|null
+     */
+    protected $message = null;
+
+    /**
+     * @var BandTelegramUser|null
+     */
+    protected $pivot = null;
+
+    /**
      * Callback constructor.
      *
      * @param array $data
@@ -34,6 +48,8 @@ abstract class Callback implements CallbackResponse
     {
         $this->data = $data;
         $this->response = $response;
+
+        $this->parse();
     }
 
     /**
@@ -51,5 +67,22 @@ abstract class Callback implements CallbackResponse
             'text' => $this->getText(),
             'parse_mode' => $this->response->getParseMode(),
         ]);
+    }
+
+    /**
+     * @return void
+     */
+    protected function parse(): void
+    {
+        $this->message = OutboundMessageText::query()->with("outboundMessage.context")->find($this->data['id']);
+        $this->pivot = BandTelegramUser::query()->where("user_id", '=', $this->response->getUser()->id)
+            ->where('band_id', '=', $this->message->outboundMessage->context->band_id)->first();
+
+        if ($this->pivot === null) {
+            $this->pivot = new BandTelegramUser();
+            $this->pivot->user()->associate($this->response->getUser());
+            $this->pivot->band()->associate($this->message->outboundMessage->context->band);
+            $this->pivot->lastfm_count = null;
+        }
     }
 }

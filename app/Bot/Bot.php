@@ -265,6 +265,7 @@ class Bot
         }
 
         $this->notifyCallback($user, $request);
+        // we need to answer to callback as soon as possible
         $this->sendOk($request);
 
         /** @var MessageType $messageType */

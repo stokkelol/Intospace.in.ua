@@ -15,6 +15,10 @@ class Dislike extends Callback
      */
     public function handle(): void
     {
+        $this->pivot->dislikes_count++;
+        $this->pivot->save();
+        $this->sendTextResponse();
+
         $this->sendTextResponse();
     }
 
