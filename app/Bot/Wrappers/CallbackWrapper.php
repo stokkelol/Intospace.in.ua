@@ -50,7 +50,7 @@ class CallbackWrapper
             'answerCallbackQuery',
             ['callback_query_id' => $this->params['callback_query']['id']]
         ]);
-        $endpoint = $this->telegram->getClient()->getBaseBotUrl() . $this->telegram->getAccessToken() . '/' . $request->getEndpoint();
+        $endpoint = $this->telegram->getClient()->getBaseBotUrl() . $this->telegram->getAccessToken() . '/answerCallbackQuery';
         try {
             $this->client->post($endpoint, $this->params);
         } catch (RequestException $e) {
