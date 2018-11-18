@@ -46,13 +46,14 @@ class CallbackWrapper
     {
         $request = new TelegramRequest([
             $this->telegram->getAccessToken(),
-            'POST',
+            'GET',
             'answerCallbackQuery',
             ['callback_query_id' => $this->params['callback_query']['id']]
         ]);
-        $endpoint = $this->telegram->getClient()->getBaseBotUrl() . $this->telegram->getAccessToken() . '/answerCallbackQuery';
+        $endpoint = $this->telegram->getClient()->getBaseBotUrl() . $this->telegram->getAccessToken()
+            . '/answerCallbackQuery?callback_query_id=' . $this->params['callback_query']['id'];
         try {
-            $this->client->post($endpoint, $this->params);
+            $this->client->get($endpoint);
         } catch (RequestException $e) {
             \logger("Exception: " . $e->getMessage());
         } catch (\Throwable $e) {
