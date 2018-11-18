@@ -5,6 +5,7 @@ namespace App\Bot;
 
 use App\Bot\ResponseMessages\CallbackQueries\Factory;
 use App\Bot\ResponseMessages\Response;
+use App\Bot\Wrappers\CallbackWrapper;
 use App\Models\BotCommand;
 use App\Models\BotCommandMessage;
 use App\Models\Chat;
@@ -65,7 +66,12 @@ class Bot
         $message = Response::factory($messageType->id, $this->telegram);
         $message->setParameters($request, $chat, $user);
 
-        return $message->sendResponse();
+
+        try {
+            $message->sendResponse();
+        } catch (\Throwable $e) {
+            \logger($e);
+        }
     }
 
     /**
@@ -105,7 +111,6 @@ class Bot
 
     private function processCallbackData($request): void
     {
-
         $data = \json_decode($request['callback_query']['data'], true);
         $handler = Factory::build($data['callback_type'], $data);
         $handler->handle();
@@ -186,14 +191,13 @@ class Bot
      */
     private function saveMessage(array $request, TelegramUser $user, Chat $chat)
     {
-        $message = InboundMessage::query()->where('id', $request['update_id'])->first();
+        $message = $this->isHandled($request);
 
         if ($message !== null) {
             return $message->messageType;
         }
 
         $user->notify(new IncomingTelegramBotMessage($request['message']['text']));
-
         if (isset($request['message']['entities'])) {
             if ($request['message']['entities'][0]['type'] === 'bot_command') {
                 return $this->saveBotCommand($request, $user, $chat);
@@ -260,8 +264,9 @@ class Bot
             return $message->messageType;
         }
 
-        $user->notify(new IncomingTelegramBotMessage("New callback response! From" .
-            $user->user_name . ". Data: " . $request['callback_query']['data']));
+        $this->notifyCallback($user, $request);
+        // we need to answer to callback as soon as possible
+        $this->sendOk($request);
 
         /** @var MessageType $messageType */
         $messageType = MessageType::query()->find(MessageType::CALLBACK);
@@ -288,5 +293,33 @@ class Bot
         $message->message_text = $request['message']['text'] ?? '';
 
         return $message;
+    }
+
+    /**
+     * @param TelegramUser $user
+     * @param array $request
+     */
+    private function notifyCallback(TelegramUser $user, array $request): void
+    {
+        $user->notify(new IncomingTelegramBotMessage("New callback response! From " .
+            $user->user_name . ". Data: " . $request['callback_query']['data']));
+    }
+
+    /**
+     * @param array $request
+     */
+    private function sendOk(array $request): void
+    {
+        $client = new CallbackWrapper($this->telegram, $request);
+        $client->send();
+    }
+
+    /**
+     * @param array $request
+     * @return InboundMessage|null
+     */
+    private function isHandled(array $request): ?InboundMessage
+    {
+        return InboundMessage::query()->where('id', $request['update_id'])->first();
     }
 }

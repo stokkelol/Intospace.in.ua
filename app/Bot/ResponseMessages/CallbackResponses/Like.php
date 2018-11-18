@@ -10,9 +10,21 @@ namespace App\Bot\ResponseMessages\CallbackResponses;
  */
 class Like extends Callback
 {
-
-    public function handle(): array
+    /**
+     * @return void
+     */
+    public function handle(): void
     {
-        // TODO: Implement handle() method.
+        $this->pivot->likes_count++;
+        $this->pivot->save();
+        $this->sendTextResponse();
+    }
+
+    /**
+     * @return string
+     */
+    protected function getText(): string
+    {
+        return "Yay! Nice!";
     }
 }

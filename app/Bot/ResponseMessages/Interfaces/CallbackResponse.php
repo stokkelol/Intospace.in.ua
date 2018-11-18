@@ -10,5 +10,8 @@ namespace App\Bot\ResponseMessages\Interfaces;
  */
 interface CallbackResponse
 {
-    public function handle(): array;
+    /**
+     * @return void
+     */
+    public function handle(): void;
 }

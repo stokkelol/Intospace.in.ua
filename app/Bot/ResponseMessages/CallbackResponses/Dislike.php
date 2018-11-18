@@ -10,9 +10,23 @@ namespace App\Bot\ResponseMessages\CallbackResponses;
  */
 class Dislike extends Callback
 {
-
-    public function handle(): array
+    /**
+     * @return void
+     */
+    public function handle(): void
     {
-        // TODO: Implement handle() method.
+        $this->pivot->dislikes_count++;
+        $this->pivot->save();
+        $this->sendTextResponse();
+
+        $this->sendTextResponse();
+    }
+
+    /**
+     * @return string
+     */
+    protected function getText(): string
+    {
+        return "Ohhh. I'll remember that.";
     }
 }

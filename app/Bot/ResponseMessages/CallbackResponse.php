@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace App\Bot\ResponseMessages;
 
+use App\Bot\ResponseMessages\CallbackResponses\CallbackWrapper;
+use App\Bot\ResponseMessages\CallbackResponses\Factory;
 use App\Models\CallbackResults;
 
 /**
@@ -18,6 +20,11 @@ class CallbackResponse extends Response
     private $data = [];
 
     /**
+     * @var \App\Bot\ResponseMessages\Interfaces\CallbackResponse
+     */
+    private $handler;
+
+    /**
      * @return void
      */
     protected function createResponse(): void
@@ -29,5 +36,16 @@ class CallbackResponse extends Response
         $callbackResults->outbound_message_text_id = $this->data['id'];
         $callbackResults->data = $this->callback['data'];
         $callbackResults->save();
+
+        $this->handler = Factory::build($this->data['callback_type'], $this->data, $this);
+    }
+
+    /**
+     * @return void
+     * @throws \Telegram\Bot\Exceptions\TelegramSDKException
+     */
+    protected function send(): void
+    {
+        $this->handler->handle();
     }
 }
