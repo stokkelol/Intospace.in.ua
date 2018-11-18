@@ -5,6 +5,7 @@ namespace App\Bot;
 
 use App\Bot\ResponseMessages\CallbackQueries\Factory;
 use App\Bot\ResponseMessages\Response;
+use App\Bot\Wrappers\CallbackWrapper;
 use App\Models\BotCommand;
 use App\Models\BotCommandMessage;
 use App\Models\Chat;
@@ -110,7 +111,6 @@ class Bot
 
     private function processCallbackData($request): void
     {
-
         $data = \json_decode($request['callback_query']['data'], true);
         $handler = Factory::build($data['callback_type'], $data);
         $handler->handle();
@@ -265,6 +265,7 @@ class Bot
         }
 
         $this->notifyCallback($user, $request);
+        $this->sendOk($request);
 
         /** @var MessageType $messageType */
         $messageType = MessageType::query()->find(MessageType::CALLBACK);
@@ -301,6 +302,15 @@ class Bot
     {
         $user->notify(new IncomingTelegramBotMessage("New callback response! From " .
             $user->user_name . ". Data: " . $request['callback_query']['data']));
+    }
+
+    /**
+     * @param array $request
+     */
+    private function sendOk(array $request): void
+    {
+        $client = new CallbackWrapper($this->telegram, $request);
+        $client->send();
     }
 
     /**
