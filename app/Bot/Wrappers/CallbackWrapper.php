@@ -33,7 +33,6 @@ class CallbackWrapper
     /**
      * CallbackWrapper constructor.
      * @param Api $telegram
-     * @param TelegramRequest $request
      * @param array $params
      */
     public function __construct(Api $telegram, array $params)
