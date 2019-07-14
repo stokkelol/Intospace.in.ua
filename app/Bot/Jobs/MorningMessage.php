@@ -135,12 +135,13 @@ class MorningMessage implements ShouldQueue
      */
     private function prepareFromPayload(): void
     {
-        if ($this->recommendation !== null) {
-            $this->message = $this->recommendation->getPayload();
-            $this->band = $this->recommendation->band;
-        } else {
-            $this->prepareFromBand();
-        }
+        $this->recommendation !== null ? $this->prepareFromRecommendation() : $this->prepareFromBand();
+    }
+
+    private function prepareFromRecommendation(): void
+    {
+        $this->message = $this->recommendation->getPayload();
+        $this->band = $this->recommendation->band;
     }
 
     /**
@@ -152,6 +153,5 @@ class MorningMessage implements ShouldQueue
         $this->band = Band::query()->inRandomOrder()->first();
         $response = $this->youtubeHandler->searchBand($this->band);
         $this->message = static::YOUTUBE_ENDPOINT . $response[0]->id->videoId;
-
     }
 }
