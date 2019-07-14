@@ -1,6 +1,6 @@
 <p class="sidebar-tagline">...и всё более странная музыка...</p>
     <div class="sidebar-image">
-        <img src="http://intospace.in.ua/upload/images/logo.jpg" class="main-img img-responsive">
+        <img src="/upload/images/logo.jpg" class="main-img img-responsive">
     </div>
     <br>
     <div class="text-left">
