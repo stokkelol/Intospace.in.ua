@@ -24,10 +24,9 @@ class UserController extends Controller
 
         $user = User::query()->find(Auth::id());
 
-        $data = [
+        return view('frontend.users.show',  [
             'user' => $user,
             'posts' => $user->posts
-        ];
-        return view('frontend.users.show', $data);
+        ]);
     }
 }

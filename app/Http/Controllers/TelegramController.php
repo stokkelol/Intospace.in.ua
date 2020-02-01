@@ -6,7 +6,6 @@ namespace App\Http\Controllers;
 use App\Bot\Bot;
 use Illuminate\Http\Request;
 use Telegram\Bot\Api;
-use Telegram\Bot\Objects\Message;
 use Telegram\Bot\Objects\User;
 
 /**
