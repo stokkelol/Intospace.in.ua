@@ -40,7 +40,8 @@ class SendMorningMessage extends Command
     {
         (new Morning(Chat::query()->with("users")->whereIn("id", ChatUser::query()
             ->where("active", true)
-            ->pluck("chat_id")->toArray())->get())
+            ->pluck("chat_id")->toArray())
+            ->get())
         )->handle();
     }
 }
