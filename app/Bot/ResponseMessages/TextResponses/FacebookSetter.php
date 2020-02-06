@@ -12,7 +12,6 @@ use App\Bot\ResponseMessages\Interfaces\Text;
  */
 class FacebookSetter implements Text
 {
-
     /**
      * @return array
      */

@@ -18,7 +18,7 @@ class More extends BaseButton
         return [
             'text' => "🤗 More",
             'callback_data' => \json_encode([
-                'callback_type' => 4,
+                'callback_type' => Factory::MoreButton,
                 'id' => $this->response['id']
             ])
         ];

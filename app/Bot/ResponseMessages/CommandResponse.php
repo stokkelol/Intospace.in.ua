@@ -24,11 +24,7 @@ class CommandResponse extends Response
     {
         $messages = $this->handle();
 
-        if (\is_array($messages)) {
-            $this->responseMessage = $messages;
-        } else {
-            $this->responseMessage[] = $messages;
-        }
+        \is_array($messages) ?  $this->responseMessage = $messages : $this->responseMessage[] = $messages;
     }
 
     /**

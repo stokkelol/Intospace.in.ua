@@ -18,7 +18,7 @@ class Info extends BaseButton
         return [
             'text' => "🤔 Info",
             'callback_data' => \json_encode([
-                'callback_type' => 3,
+                'callback_type' => Factory::InfoButton,
                 'id' => $this->response['id']
             ])
         ];

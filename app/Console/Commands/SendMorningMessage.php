@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 
 use App\Bot\Broadcast\Morning;
 use App\Models\Chat;
+use App\Models\ChatUser;
 use Illuminate\Console\Command;
 
 /**
@@ -37,12 +38,10 @@ class SendMorningMessage extends Command
      */
     public function handle(): void
     {
-        (new Morning(
-            Chat::query()
-                ->with('users', function ($q) {
-                    $q->where("char_user.active", true);
-                })
-                ->get())
+        (new Morning(Chat::query()->with("users")->whereIn("id", ChatUser::query()
+            ->where("active", true)
+            ->pluck("chat_id")->toArray())
+            ->get())
         )->handle();
     }
 }

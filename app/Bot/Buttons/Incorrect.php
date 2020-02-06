@@ -4,21 +4,21 @@ declare(strict_types=1);
 namespace App\Bot\Buttons;
 
 /**
- * Class Like
+ * Class Incorrect
  *
- * @package App\Bot\Keyboard
+ * @package App\Bot\Buttons
  */
-class Like extends BaseButton
+class Incorrect extends BaseButton
 {
     /**
-     * @return array
+     * @inheritDoc
      */
     public function prepare(): array
     {
         return [
-            'text' => "🤪 Like!",
+            'text' => "Incorrect!",
             'callback_data' => \json_encode([
-                'callback_type' => Factory::LikeButton,
+                'callback_type' => Factory::IncorrectButton,
                 'id' => $this->response['id']
             ])
         ];
