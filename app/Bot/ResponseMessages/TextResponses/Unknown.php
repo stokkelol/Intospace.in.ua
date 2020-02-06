@@ -24,6 +24,7 @@ class Unknown implements Text
 
     /**
      * @return array
+     * @throws \Exception
      */
     public function prepare(): array
     {

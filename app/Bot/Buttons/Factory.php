@@ -14,15 +14,17 @@ class Factory
     const DislikeButton = 2;
     const InfoButton = 3;
     const MoreButton = 4;
+    const IncorrectButton = 5;
 
     /**
      * @var array
      */
     private static $buttons = [
-        self::LikeButton => \App\Bot\Buttons\Like::class,
-        self::DislikeButton => \App\Bot\Buttons\Dislike::class,
-        self::InfoButton => \App\Bot\Buttons\More::class,
-        self::MoreButton => \App\Bot\Buttons\Info::class,
+        self::LikeButton => Like::class,
+        self::DislikeButton => Dislike::class,
+        self::InfoButton => More::class,
+        self::MoreButton => Info::class,
+        self::IncorrectButton => Incorrect::class,
     ];
 
     /**

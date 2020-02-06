@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Bot\ResponseMessages;
 
-use App\Bot\ResponseMessages\CallbackResponses\CallbackWrapper;
+use App\Bot\Wrappers\CallbackWrapper;
 use App\Bot\ResponseMessages\CallbackResponses\Factory;
 use App\Models\CallbackResults;
 

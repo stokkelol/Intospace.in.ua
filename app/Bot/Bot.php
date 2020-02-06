@@ -87,6 +87,8 @@ class Bot
         if (isset($request['callback_query'])) {
             return $this->processCallback($request);
         }
+
+        return [];
     }
 
     /**

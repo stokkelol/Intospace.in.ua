@@ -87,6 +87,10 @@ class Musicbrainz
         return static::ARTIST_URL  . $mbid . '?inc=aliases+releases&fmt=json';
     }
 
+    /**
+     * @param string $mbid
+     * @return string
+     */
     private function makeReleaseUri(string $mbid): string
     {
         return static::RELEASE_URL  . $mbid . '?inc=artist-credits+labels+discids+recordings&fmt=json';

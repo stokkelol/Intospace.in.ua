@@ -18,8 +18,6 @@ class Dislike extends Callback
         $this->pivot->dislikes_count++;
         $this->pivot->save();
         $this->sendTextResponse();
-
-        $this->sendTextResponse();
     }
 
     /**
