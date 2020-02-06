@@ -43,11 +43,9 @@ class TagController extends Controller
      */
     public function show($slug): View
     {
-        $data = [
+        return view('frontend.main', [
             'posts' => $this->post->getPostsByTag($slug),
             'title' => $this->tag->findBySlug($slug)->tag
-        ];
-
-        return view('frontend.main', $data);
+        ]);
     }
 }
