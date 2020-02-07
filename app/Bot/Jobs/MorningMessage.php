@@ -100,15 +100,17 @@ class MorningMessage implements ShouldQueue
      */
     public function handle(): void
     {
+        /** @var Api $telegram */
         $telegram = Container::getInstance()->make(Api::class);
         $outboundMessage = $this->saveMessages();
         $keyboard = (new Base())->prepare($outboundMessage->texts->first());
         $payload = new Assembler($this->chat, $this->message, $keyboard);
-        \logger($payload->assemble());
-        $telegram->sendMessage($payload->assemble());
+
+        $response = $telegram->sendMessage($payload->assemble());
+        $isDispatched = $response->getStatus() === true;
 
         if ($this->recommendation !== null) {
-            $this->recommendation->is_dispatched = true;
+            $this->recommendation->is_dispatched = $isDispatched;
             $this->recommendation->outboundMessage()->associate($outboundMessage);
             $this->recommendation->save();
         }
