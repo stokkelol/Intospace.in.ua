@@ -14,7 +14,7 @@ use LogicException;
  */
 class CommandResponse extends Response
 {
-    const ENDPOINT = 'https://www.intospace.in.ua/posts/';
+    const ENDPOINT = 'https://intospace.rocks/posts/';
 
     /**
      * @return void

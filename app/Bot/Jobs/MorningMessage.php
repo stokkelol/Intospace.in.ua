@@ -104,6 +104,7 @@ class MorningMessage implements ShouldQueue
         $outboundMessage = $this->saveMessages();
         $keyboard = (new Base())->prepare($outboundMessage->texts->first());
         $payload = new Assembler($this->chat, $this->message, $keyboard);
+        \logger($payload->assemble());
         $telegram->sendMessage($payload->assemble());
 
         if ($this->recommendation !== null) {
