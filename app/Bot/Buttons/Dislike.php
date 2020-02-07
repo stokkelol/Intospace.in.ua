@@ -16,7 +16,7 @@ class Dislike extends BaseButton
     public function prepare(): array
     {
         return [
-            'text' => "😒 Dislike",
+            'text' => "Dislike",
             'callback_data' => \json_encode([
                 'callback_type' => Factory::DislikeButton,
                 'id' => $this->response['id']

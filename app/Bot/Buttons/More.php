@@ -16,7 +16,7 @@ class More extends BaseButton
     public function prepare(): array
     {
         return [
-            'text' => "🤗 More",
+            'text' => "More",
             'callback_data' => \json_encode([
                 'callback_type' => Factory::MoreButton,
                 'id' => $this->response['id']

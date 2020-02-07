@@ -16,7 +16,7 @@ class Like extends BaseButton
     public function prepare(): array
     {
         return [
-            'text' => "🤪 Like!",
+            'text' => "Like!",
             'callback_data' => \json_encode([
                 'callback_type' => Factory::LikeButton,
                 'id' => $this->response['id']
