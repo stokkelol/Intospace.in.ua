@@ -74,16 +74,6 @@ class MainController extends Controller
      */
     public function indexMain(Request $request): View
     {
-        $client = new Predis\Client([
-            'scheme' => 'tcp',
-            'host'   => '127.0.0.1',
-            'port'   => 6379,
-        ]);
-
-        if ($client->exists(static::MAIN_PAGE)) {
-            return $client->get(static::MAIN_PAGE);
-        }
-
         $posts = $this->getCollection($request);
 
         $page = $request->get('page', LengthAwarePaginator::resolveCurrentPage());
@@ -104,9 +94,7 @@ class MainController extends Controller
                 ->where('category_id', '=', '1')->inRandomORder()->take(18)->get()
         ];
 
-        $v = view('frontend.main', $data);
-        $client->set(static::MAIN_PAGE, $v);
-        return $v;
+        return view('frontend.main', $data);
     }
 
     /**
