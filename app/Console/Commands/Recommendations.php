@@ -86,6 +86,10 @@ class Recommendations extends Command
             foreach ($users as $user) {
                 $band = $user->isLastfmExists() ? $this->getRecommendedBand($user) : $this->getRandomBand($user);
 
+                if ($band === null) {
+                    continue;
+                }
+
                 $video = $this->youtube->searchBand($band);
                 if (\is_array($video)) {
                     $payload = $this->payload->processRecommendation($video);
@@ -107,10 +111,10 @@ class Recommendations extends Command
 
     /**
      * @param TelegramUser $user
-     * @return Band
+     * @return Band|null
      * @throws \Exception
      */
-    private function getRandomBand(TelegramUser $user): Band
+    private function getRandomBand(TelegramUser $user): ?Band
     {
         $likesExists = OutboundMessage::query()
             ->where("is_liked", "=", 1)
@@ -145,11 +149,15 @@ class Recommendations extends Command
         $recommendation->save();
     }
 
+    /**
+     * @param int $max
+     * @return int
+     */
     private function getRandom(int $max): int {
-        if ($max < 1) {
+        try {
+            return \random_int(1, $max);
+        } catch (\Exception $e) {
             return 1;
         }
-
-        return \random_int(1, $max);
     }
 }
