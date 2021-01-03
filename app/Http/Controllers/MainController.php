@@ -11,7 +11,9 @@ use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redis;
 use Illuminate\View\View;
+use Predis;
 
 /**
  * Class MainController
@@ -21,6 +23,7 @@ use Illuminate\View\View;
 class MainController extends Controller
 {
     const POSTS_PER_PAGE = 15;
+    const MAIN_PAGE = "main_page";
 
     /**
      * @var Post
@@ -71,6 +74,16 @@ class MainController extends Controller
      */
     public function indexMain(Request $request): View
     {
+        $client = new Predis\Client([
+            'scheme' => 'tcp',
+            'host'   => '127.0.0.1',
+            'port'   => 6379,
+        ]);
+
+        if ($client->exists(static::MAIN_PAGE)) {
+            return $client->get(static::MAIN_PAGE);
+        }
+
         $posts = $this->getCollection($request);
 
         $page = $request->get('page', LengthAwarePaginator::resolveCurrentPage());
@@ -91,7 +104,9 @@ class MainController extends Controller
                 ->where('category_id', '=', '1')->inRandomORder()->take(18)->get()
         ];
 
-        return view('frontend.main', $data);
+        $v = view('frontend.main', $data);
+        $client->set(static::MAIN_PAGE, $v);
+        return $v;
     }
 
     /**
