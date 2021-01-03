@@ -112,8 +112,11 @@ class Recommendations extends Command
      */
     private function getRandomBand(TelegramUser $user): Band
     {
-        if (OutboundMessage::query()->where("is_liked", "=", 1)->exists()) {
-
+        $likesExists = OutboundMessage::query()
+            ->where("is_liked", "=", 1)
+            ->where("user_id", "=", $user->id)
+            ->exists();
+        if ($likesExists) {
             /** @var Band[]|\Illuminate\Database\Eloquent\Collection $messages */
             $messages = OutboundMessage::query()->where("is_liked", "=", 1)
                 ->where("user_id", "=", $user->id)->get();
@@ -143,6 +146,10 @@ class Recommendations extends Command
     }
 
     private function getRandom(int $max): int {
+        if ($max < 1) {
+            return 1;
+        }
+
         return \random_int(1, $max);
     }
 }
