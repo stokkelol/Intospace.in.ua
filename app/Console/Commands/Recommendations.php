@@ -8,10 +8,12 @@ use App\Bot\Recommendations\Processor;
 use App\Bot\Youtube\Youtube;
 use App\Models\Band;
 use App\Models\BandTelegramUser;
+use App\Models\OutboundMessage;
 use App\Models\TelegramUser;
 use App\Models\TelegramUserRecommendation;
 use App\Traits\RandomOrder;
 use Illuminate\Console\Command;
+use Illuminate\Support\Collection;
 
 /**
  * Class Recommendations
@@ -71,6 +73,7 @@ class Recommendations extends Command
      *
      * @return void
      * @throws \InvalidArgumentException
+     * @throws \Exception
      */
     public function handle(): void
     {
@@ -81,7 +84,7 @@ class Recommendations extends Command
         TelegramUser::query()->chunk(1000, function ($users) {
             /** @var TelegramUser $user */
             foreach ($users as $user) {
-                $band = $user->isLastfmExists() ? $this->getRecommendedBand($user) : $this->getRandomBand();
+                $band = $user->isLastfmExists() ? $this->getRecommendedBand($user) : $this->getRandomBand($user);
 
                 $video = $this->youtube->searchBand($band);
                 if (\is_array($video)) {
@@ -103,13 +106,23 @@ class Recommendations extends Command
     }
 
     /**
+     * @param TelegramUser $user
      * @return Band
      * @throws \Exception
      */
-    private function getRandomBand(): Band
+    private function getRandomBand(TelegramUser $user): Band
     {
+        if (OutboundMessage::query()->where("is_liked", "=", 1)->exists()) {
+
+            /** @var Band[]|\Illuminate\Database\Eloquent\Collection $messages */
+            $messages = OutboundMessage::query()->where("is_liked", "=", 1)
+                ->where("user_id", "=", $user->id)->get();
+
+            return $messages->get($this->getRandom($messages->count()));
+        }
+
         /** @var Band $band */
-        $band = Band::query()->with('albums', 'albums.tracks')->find(\random_int(1, Band::query()->count()));
+        $band = Band::query()->with('albums', 'albums.tracks')->find($this->getRandom(Band::query()->count()));
 
         return $band;
     }
@@ -127,5 +140,9 @@ class Recommendations extends Command
         $recommendation->band()->associate($band);
         $recommendation->payload = $payload;
         $recommendation->save();
+    }
+
+    private function getRandom(int $max): int {
+        return \random_int(1, $max);
     }
 }

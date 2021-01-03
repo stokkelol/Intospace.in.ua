@@ -122,7 +122,7 @@ class TelegramUser extends Model
      */
     public function getLatestRecommendation(): TelegramUserRecommendation
     {
-        $this->recommendations()->where('is_dispatched', false)->orderBy('id', 'desc')->first();
+        return $this->recommendations()->where('is_dispatched', false)->orderBy('id', 'desc')->first();
     }
 
     /**
