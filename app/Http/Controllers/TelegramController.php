@@ -69,4 +69,12 @@ class TelegramController extends Controller
 
         return $this->bot->processWebhook($result);
     }
+
+    /**
+     * @return User
+     */
+    public function info(): User
+    {
+        return $this->telegram->getMe();
+    }
 }
