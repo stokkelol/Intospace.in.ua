@@ -24,7 +24,7 @@ class Latest extends BaseCommand implements Command
         
         $result = [];
         foreach ($posts as $post) {
-            $result[] = env("APP_URL") . '/posts/' . $post->slug;
+            $result[] = \config("url") . '/posts/' . $post->slug;
         }
 
         return $result;
