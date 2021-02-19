@@ -37,9 +37,9 @@ class Styles extends BaseCommand implements Command
      */
     public function prepare(): array
     {
+        $searcher = new Youtube();
         do {
             $this->searchBand();
-            $searcher = new Youtube();
             $result = $searcher->searchBand($this->band);
         } while (!\is_array($result));
 
