@@ -24,7 +24,7 @@ class Latest extends BaseCommand implements Command
         
         $result = [];
         foreach ($posts as $post) {
-            $result[] = \config("url") . '/posts/' . $post->slug;
+            $result[] = 'https://intospace.rocks/posts/' . $post->slug;
         }
 
         return $result;
