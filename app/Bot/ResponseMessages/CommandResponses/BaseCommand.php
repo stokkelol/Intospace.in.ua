@@ -17,7 +17,6 @@ use App\Models\Video;
  */
 abstract class BaseCommand
 {
-    const POSTS_ENDPOINT = 'https://www.intospace.in.ua/posts/';
     const YOUTUBE_ENDPOINT  = 'https://www.youtube.com/watch?v=';
 
     /**
