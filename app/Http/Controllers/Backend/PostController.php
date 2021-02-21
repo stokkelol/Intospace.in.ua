@@ -65,7 +65,7 @@ class PostController extends Controller
      */
     public function index(Request $request): View
     {
-        $posts = (new Post)->recent()->newQuery();
+        $posts = (new Post)->recent(20)->newQuery();
 
         if ($request->has('status')) {
             $posts = $this->post->byStatus($request->get('status'));
