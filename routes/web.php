@@ -85,7 +85,22 @@ Route::group(['prefix' => 'backend', 'middleware' => ['role:admin|owner|demo'], 
         'uses'  =>  'PostController@getAllUpdated'
     ]);
 
-    Route::resource('posts', 'PostController');
+    //Route::resource('posts', 'PostController');
+
+    Route::get('/posts', [
+        'as' => 'backend.posts.index',
+        'uses' => 'PostController@index'
+    ]);
+
+    Route::get('/posts', [
+        'as' => 'backend.posts.create',
+        'uses' => 'PostController@create'
+    ]);
+
+    Route::post('/posts', [
+        'as' => "backend.posts.store",
+        'uses' => "PostController@store"
+    ]);
 
     Route::get('/posts/preview{post_id}', [
         'as'    =>  'backend.posts.post-preview',
