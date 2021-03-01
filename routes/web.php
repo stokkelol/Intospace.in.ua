@@ -100,6 +100,11 @@ Route::group(['prefix' => 'backend', 'middleware' => ['role:admin|owner|demo'], 
         'uses' => "PostController@store"
     ]);
 
+    Route::get('/posts/{post_id}', [
+       'as' => 'backend.posts.edit',
+       'uses' => 'PostController@edit'
+    ]);
+
     Route::patch('/posts/{post_id}', [
        'as' => 'backend.posts.update',
        'uses' => 'PostController@update'
