@@ -38,15 +38,15 @@
                             ---
                         @endif
                     </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 element">
-                        @if (count($band->reviews) !== 0)
-                            @foreach ($band->reviews as $review)
-                                {{ $review->title }}
-                            @endforeach
-                        @else
-                            ---
-                        @endif
-                    </div>
+{{--                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 element">--}}
+{{--                        @if (count($band->reviews) !== 0)--}}
+{{--                            @foreach ($band->reviews as $review)--}}
+{{--                                {{ $review->title }}--}}
+{{--                            @endforeach--}}
+{{--                        @else--}}
+{{--                            -----}}
+{{--                        @endif--}}
+{{--                    </div>--}}
                 </div>
             </div>
         @endforeach

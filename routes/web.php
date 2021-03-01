@@ -85,14 +85,12 @@ Route::group(['prefix' => 'backend', 'middleware' => ['role:admin|owner|demo'], 
         'uses' => 'PostController@getAllUpdated'
     ]);
 
-    //Route::resource('posts', 'PostController');
-
     Route::get('/posts', [
         'as' => 'backend.posts.index',
         'uses' => 'PostController@index'
     ]);
 
-    Route::get('/posts', [
+    Route::get('/posts/create', [
         'as' => 'backend.posts.create',
         'uses' => 'PostController@create'
     ]);
@@ -100,6 +98,16 @@ Route::group(['prefix' => 'backend', 'middleware' => ['role:admin|owner|demo'], 
     Route::post('/posts', [
         'as' => "backend.posts.store",
         'uses' => "PostController@store"
+    ]);
+
+    Route::patch('/posts/{post_id}', [
+       'as' => 'backend.posts.update',
+       'uses' => 'PostController@update'
+    ]);
+
+    Route::delete('/posts/{post_id}', [
+       'as' => 'backend.posts.delete',
+       'uses' => 'PostController@destroy'
     ]);
 
     Route::get('/posts/preview{post_id}', [
