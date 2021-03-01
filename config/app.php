@@ -180,7 +180,7 @@ return [
         //https://github.com/laracasts/flash
         Laracasts\Flash\FlashServiceProvider::class,
         //https://github.com/spatie/laravel-analytics
-        Spatie\LaravelAnalytics\LaravelAnalyticsServiceProvider::class,
+        Spatie\Analytics\AnalyticsServiceProvider::class,
         //https://packagist.org/packages/unisharp/laravel-ckeditor
         Unisharp\Ckeditor\ServiceProvider::class,
         //https://github.com/RoumenDamianoff/laravel-feed
