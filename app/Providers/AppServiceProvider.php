@@ -25,7 +25,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        view()->share('app_name', 'http://www.intospace.in.ua');
+        view()->share('app_name', 'https://intospace.rocks');
     }
 
     /**

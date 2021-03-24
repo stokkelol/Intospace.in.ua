@@ -9,7 +9,7 @@
           </div>
           <div class="pages-content">
               <ul class="list-unstyled">
-                  <li><a href="http://www.intospace.in.ua/a-forest-of-stars-2015-beware-the-sword-you-cannot-see" target="_blank">A Forest Of Stars — Beware The Sword You Cannot See</a>
+                  <li><a href="https://intospace.rocks/a-forest-of-stars-2015-beware-the-sword-you-cannot-see" target="_blank">A Forest Of Stars — Beware The Sword You Cannot See</a>
                   <p>Возможно один из лучших альбомов прошлого года.</p>
                   </li>
                   <li><a href="https://drudkh.bandcamp.com/" target="_blank">Drudkh — Борозна Обірвалася</a>
@@ -21,55 +21,55 @@
                   <li><a href="http://www.highonfire.net/" target="_blank">High On Fire — Luminiferous</a>
                   <p>High On Fire не самая однозначная группа, посему и отношение к ней варьируется от «шикарно-волшебно», до «та могло быть куда лучше» (справедливости ради более сомнительные мнения не учитываем). Но тут HoF выдали отличную хитовую пластинку. Под риффы Luminiferous нереально усидеть на месте.</p>
                   </li>
-                  <li><a href="http://www.intospace.in.ua/iskra-2015-ruins" target="_blank">Iskra — Ruins</a>
+                  <li><a href="https://intospace.rocks/iskra-2015-ruins" target="_blank">Iskra — Ruins</a>
                   <p>Последние года четыре, примерно, золотое время для краст/блэка. Ну и Iskra использует эту волну хайпа на все 100, благо песни писать они вроде умеют, а значит слушатели найдутся.</p>
                   </li>
                   <li><a href="https://acidking.bandcamp.com/" target="_blank">Acid King — Middle of Nowhere, Center of Everywhere</a>
                   <p>Ну тут комментарии излишни, всем и так всё ясно.</p>
                   </li>
-                  <li><a href="http://www.intospace.in.ua/leviathan-2015-scar-sighted" target="_blank">Leviathan — Scar Sighted</a>
+                  <li><a href="https://intospace.rocks/leviathan-2015-scar-sighted" target="_blank">Leviathan — Scar Sighted</a>
                   <p>Альбом стал приятной неожиданностью. Резкий крен в авангард, эклектику, диссонансы, как итог заслуженное место в топе и блэк мэтл пьедестал.</p>
                   </li>
                   <li><a href="https://www.facebook.com/corpomenteofficial/" target="_blank">Corpo-Mente — Corpo-Mente</a>
                   <p>Авангардно-оперное нечто от Igorrr. Огромная мешанина стилей, не каждому придется по душе. Но если уж зацепит, то на долго.</p>
                   </li>
-                  <li><a href="http://www.intospace.in.ua/prurient-2015-frozen-niagara-falls" target="_blank">Prurient — Frozen Niagara Falls</a>
+                  <li><a href="https://intospace.rocks/prurient-2015-frozen-niagara-falls" target="_blank">Prurient — Frozen Niagara Falls</a>
                   <p>«Frozen Niagara Falls — шикарный, атмосферный, наполненный эмоциями и настроением. А самое главное — он очень мрачный».</p>
                   </li>
-                  <li><a href="http://www.intospace.in.ua/contrarian-2015-polemic/" target="_blank">Contrarian — Polemic</a>
+                  <li><a href="https://intospace.rocks/contrarian-2015-polemic/" target="_blank">Contrarian — Polemic</a>
                   <p>Хороший прогрессив дэт, продуманный, с прекрасным мелодизмом. Очень зрелая работа, такие альбомы имеют все шансы в последствии становиться классикой.</p>
                   </li>
-                  <li><a href="http://www.intospace.in.ua/allurataq-2015-unearthly-inversion/" target="_blank">Allura’taq — Unearthly Inversion</a>
+                  <li><a href="https://intospace.rocks/allurataq-2015-unearthly-inversion/" target="_blank">Allura’taq — Unearthly Inversion</a>
                   <p>Ну это просто новые цари дэт/блэка! Атмосферного и мелодичного! Конфетка, а не альбом.</p>
                   </li>
-                  <li><a href="http://www.intospace.in.ua/cult-of-occult-2015-five-degrees-of-insanity/" target="_blank">Cult Of Occult — Five Degrees Of Insanity</a>
+                  <li><a href="https://intospace.rocks/cult-of-occult-2015-five-degrees-of-insanity/" target="_blank">Cult Of Occult — Five Degrees Of Insanity</a>
                   <p>Сладжик года. Монструозный альбом. На данный момент эти одни из королей на мировой сладж/дум сцене.</p>
                   </li>
-                  <li><a href="http://www.intospace.in.ua/this-gift-is-a-curse-2015-all-hail-the-swinelord/" target="_blank">This Gift Is A Curse — All Hail The Swinelord</a>
+                  <li><a href="https://intospace.rocks/this-gift-is-a-curse-2015-all-hail-the-swinelord/" target="_blank">This Gift Is A Curse — All Hail The Swinelord</a>
                   <p>Шведы продолжают набирать обороты. Новый альбом даже сильнее дебютника. А Вы что думали? На Season Of Mist невесть кого не издают.</p>
                   </li>
-                  <li><a href="http://www.intospace.in.ua/dark-buddha-rising-2015-inversum" target="_blank">Dark Buddha Rising — Inversum</a>
+                  <li><a href="https://intospace.rocks/dark-buddha-rising-2015-inversum" target="_blank">Dark Buddha Rising — Inversum</a>
                   <p>:pray:</p>
                   </li>
-                  <li><a href="http://www.intospace.in.ua/windhand-2015-griefs-infernal-flower" target="_blank">Windhand — Grief’s Infernal Flower</a>
+                  <li><a href="https://intospace.rocks/windhand-2015-griefs-infernal-flower" target="_blank">Windhand — Grief’s Infernal Flower</a>
                   <p>Смотреть выше.</p>
                   </li>
-                  <li><a href="http://www.intospace.in.ua/dreadnought-2015-bridging-realms" target="_blank">Dreadnought — Bridging Realms</a>
+                  <li><a href="https://intospace.rocks/dreadnought-2015-bridging-realms" target="_blank">Dreadnought — Bridging Realms</a>
                   <p>Очень неоднозначная группа выпустили еще более неоднозначный альбом. Dreadnought сильно ушли в сторону прогрессив метала, и практически забросили чернушку. Нам он понравился.</p>
                   </li>
-                  <li><a href="http://www.intospace.in.ua/rivers-of-nihil-2015-monarchy" target="_blank">Rivers Of Nihil — Monarchy</a>
+                  <li><a href="https://intospace.rocks/rivers-of-nihil-2015-monarchy" target="_blank">Rivers Of Nihil — Monarchy</a>
                   <p>Rivers Of Nihil — через десять лет будут называть классикой прогрессив/техникал дэта. Запомните эти слова.</p>
                   </li>
-                  <li><a href="http://www.intospace.in.ua/fractal-generator-2015-apotheosynthesis" target="_blank">Fractal Generator — Apotheosynthesis</a>
+                  <li><a href="https://intospace.rocks/fractal-generator-2015-apotheosynthesis" target="_blank">Fractal Generator — Apotheosynthesis</a>
                   <p>В интернетах альбом не вызвал какого-либо ажиотажа. Неизвестная группа, дебютный альбом, причем изданный собственными силами. И очень зря, подобного атмосферного дэта еще поискать надо.</p>
                   </li>
-                  <li><a href="http://www.intospace.in.ua/tulsadoom-2015-storms-of-the-netherworld" target="_blank">Tulsadoom — Storms Of The Netherworld</a>
+                  <li><a href="https://intospace.rocks/tulsadoom-2015-storms-of-the-netherworld" target="_blank">Tulsadoom — Storms Of The Netherworld</a>
                   <p>Угарный, разухабистый трэш/блэк. Конана Вам во все щели!</p>
                   </li>
-                  <li><a href="http://www.intospace.in.ua/weedeater-2015-goliathan" target="_blank">Weedeater — Goliathan</a>
+                  <li><a href="https://intospace.rocks/weedeater-2015-goliathan" target="_blank">Weedeater — Goliathan</a>
                   <p>Дикси сотоварищи не собираются останавливаться. Ну и правильно, пока они горазды писать такие риффы, уйти со сцены будет просто преступлением.</p>
                   </li>
-                  <li><a href="http://www.intospace.in.ua/bio-cancer-2015-tormenting-the-innocent" target="_blank">Bio-Cancer — Tormenting the Innocent</a>
+                  <li><a href="https://intospace.rocks/bio-cancer-2015-tormenting-the-innocent" target="_blank">Bio-Cancer — Tormenting the Innocent</a>
                   <p>Лучший трэш мэтл 2015-го, этим всё сказано.</p>
                   </li>
                   <li><a href="http://bong.bandcamp.com" target="_blank">Bong — We Are, We Were and We Will Have Been</a>
@@ -147,7 +147,7 @@
                   <li><a href="http://tombstonesoslo.bandcamp.com/" target="_blank">Tombstones — Vargariis</a>
                   <p>Плотный, тяжеленный саунд вытягивает альбом из выше среднего в топ года.</p>
                   </li>
-                  <li><a href="http://www.intospace.in.ua/hivelords-2015-tapered-limbs-of-a-human-star" target="_blank">Hivelords — Tapered Limbs Of A Human Star</a>
+                  <li><a href="https://intospace.rocks/hivelords-2015-tapered-limbs-of-a-human-star" target="_blank">Hivelords — Tapered Limbs Of A Human Star</a>
                   <p>Чернушный пост-метал/сладж с психоделией, чего бы Вам еще надо?</p>
                   </li>
                   <li><a href="https://www.facebook.com/ayahuasca.death/" target="_blank">Ayahuasca — Instinct</a>

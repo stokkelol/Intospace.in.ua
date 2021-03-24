@@ -52,7 +52,7 @@ class VideoController extends Controller
         $data = [
             'video' => $video,
             'title' => $video->title,
-            'app_name' => 'https://intospace.in.ua/'
+            'app_name' => 'https://intospace.rocks/'
         ];
 
         return view('frontend.videos.video', $data);

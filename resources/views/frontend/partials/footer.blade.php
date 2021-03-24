@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row">
                 <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                    <blockquote><p><a href="http://www.intospace.in.ua">Intospace</a> - это попытка вернуться во времена когда обзоры читали, а жесткие диски не ломились от гигабайт mp3.</p>
+                    <blockquote><p><a href="https://intospace.rocks">Intospace</a> - это попытка вернуться во времена когда обзоры читали, а жесткие диски не ломились от гигабайт mp3.</p>
                     </blockquote>
                     <div class="footer-column">
                         <ul class="list-unstyled list-inline footer-social-links">
@@ -70,7 +70,7 @@
                 <div class="footer-copyright">
                     <blockquote>
                         <br>
-                        <i class="fa fa-copyright" aria-hidden="true"></i> 2015-2020 intospace.rocks. Большая просьба, при использовании материалов с сайта добавьте активную гиперссылку на <a href="https://intospace.rocks">intospace.rocks</a>
+                        <i class="fa fa-copyright" aria-hidden="true"></i> 2015-2021 intospace.rocks. Большая просьба, при использовании материалов с сайта добавьте активную гиперссылку на <a href="https://intospace.rocks">intospace.rocks</a>
                     </blockquote>
                     <p>Powered by <a href="https://laravel.com/">Laravel</a>.</p>
                     <p class="load-timer">This page took {{ round((microtime(true) - LARAVEL_START), 3) }} seconds to render</p>
