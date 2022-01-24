@@ -12,7 +12,7 @@
                             <li><a href="https://twitter.com/_redwhite_"><i class="fa fa-twitter-square" aria-hidden="true"></i></a></li>
                             <li><a href="https://www.facebook.com/redwhiteua"><i class="fa fa-facebook-official" aria-hidden="true"></i></a></li>
                             <li><a href="/feed"><i class="fa fa-rss-square" aria-hidden="true"></i></a></li>
-                            <li><a href="mailto:redwhite@bigmir.net"><i class="fa fa-envelope" aria-hidden="true"></i></a></li>
+                            <li><a href="mailto:redwhitepwnz@gmail.com"><i class="fa fa-envelope" aria-hidden="true"></i></a></li>
                         </ul>
                         <!--<p class="text-center"><a href="/sitemap">Карта сайта</a></p>-->
                     </div>
@@ -70,7 +70,7 @@
                 <div class="footer-copyright">
                     <blockquote>
                         <br>
-                        <i class="fa fa-copyright" aria-hidden="true"></i> 2015-2021 intospace.rocks. Большая просьба, при использовании материалов с сайта добавьте активную гиперссылку на <a href="https://intospace.rocks">intospace.rocks</a>
+                        <i class="fa fa-copyright" aria-hidden="true"></i> 2014-2022 intospace.rocks. Большая просьба, при использовании материалов с сайта добавьте активную гиперссылку на <a href="https://intospace.rocks">intospace.rocks</a>
                     </blockquote>
                     <p>Powered by <a href="https://laravel.com/">Laravel</a>.</p>
                     <p class="load-timer">This page took {{ round((microtime(true) - LARAVEL_START), 3) }} seconds to render</p>
