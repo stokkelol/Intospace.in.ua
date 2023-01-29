@@ -3,14 +3,11 @@ declare(strict_types=1);
 
 namespace App\Bot\ResponseMessages\CommandResponses;
 
-use App\Bot\Jobs\MorningMessage;
 use App\Models\Band;
 use App\Models\BandTelegramUser;
-use App\Models\Post;
 use App\Models\Tag;
 use App\Models\TagTelegramUser;
 use App\Models\TelegramUser;
-use App\Models\TelegramUserRecommendation;
 
 /**
  * Class StatisticGatherer
