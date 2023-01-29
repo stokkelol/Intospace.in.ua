@@ -31,22 +31,22 @@ $('[data-toggle="tooltip"]').tooltip();
 });
 
 
-$(document).ready(function() {
-    if (navigator.userAgent.indexOf("Chrome") != -1)
-    {
-      $("#sidebar").stick_in_parent()
-        .on('sticky_kit:bottom', function(e) {
-          $(this).parent().css('position', 'static');
-        })
-        .on('sticky_kit:unbottom', function(e) {
-          $(this).parent().css('position', 'relative');
-        })
-    }
-    if (navigator.userAgent.indexOf("Firefox") != -1)
-    {
-
-    }
-});
+// $(document).ready(function() {
+//     if (navigator.userAgent.indexOf("Chrome") != -1)
+//     {
+//       $("#sidebar").stick_in_parent()
+//         .on('sticky_kit:bottom', function(e) {
+//           $(this).parent().css('position', 'static');
+//         })
+//         .on('sticky_kit:unbottom', function(e) {
+//           $(this).parent().css('position', 'relative');
+//         })
+//     }
+//     if (navigator.userAgent.indexOf("Firefox") != -1)
+//     {
+//
+//     }
+// });
 
 $(document).ready(function() {
   $('.js-lazyYT').lazyYT();
