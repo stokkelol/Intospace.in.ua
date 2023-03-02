@@ -7,6 +7,7 @@ use App\Models\Post;
 use App\Models\Tag;
 use App\Support\Services\RelatedPostsService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\App;
 
 /**
@@ -44,18 +45,19 @@ class PostController extends Controller
      */
     public function index(Request $request)
     {
-
-        if ($request->has('search')) {
+        $posts = $this->getCollection($request);
+        if ($posts->count() == 1) {
             $query = $request->get('search');
-            $posts = $this->post->getPostsBySearchQuery($query)->get();
+            $topPost = $this->post->bySearchQuery($query)->first();
+            $posts = [];
         } else {
-            $posts = $this->post->getLatestPublishedPosts()->paginate(15);
+            $topPost = [];
         }
 
         $data = [
-            'toppost' => $this->post->getPinnedPost()->first(),
+            'toppost' => $topPost,
             'posts' => $posts,
-            'tags' => $this->tagRepository->getAllTags(),
+            'tags' => $this->tag->get(),
             'randposts' => $this->post->getRandomPosts()
         ];
 
@@ -96,5 +98,25 @@ class PostController extends Controller
         if ($post->status === 'active') {
             $post->increment('views');
         }
+    }
+
+    /**
+     * @param Request $request
+     * @return Collection
+     */
+    public function getCollection(Request $request): Collection
+    {
+        if ($request->has('search')) {
+            $query = $request->get('search');
+            $postsCollection = collect($this->post->bySearchQuery($query)->get());
+            $videosCollection = collect($this->video->bySearchQuery($query)->get());
+
+            return $postsCollection->merge($videosCollection)->sortByDesc('published_at');
+        }
+
+        $postsCollection = collect($this->post->active()->get());
+        $videosCollection = collect($this->video->with('user', 'band')->latest()->get());
+
+        return $postsCollection->merge($videosCollection)->sortByDesc('published_at');
     }
 }
