@@ -8,6 +8,7 @@ use App\Models\Tag;
 use App\Models\Video;
 use App\Support\Services\RelatedPostsService;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\App;
 
@@ -18,6 +19,8 @@ use Illuminate\Support\Facades\App;
  */
 class PostController extends Controller
 {
+    const POSTS_PER_PAGE = 15;
+
     /**
      * @var Post
      */
@@ -54,18 +57,21 @@ class PostController extends Controller
     public function index(Request $request)
     {
         $posts = $this->getCollection($request);
-        if ($posts->count() == 1) {
-            $query = $request->get('search');
-            $topPost = $this->post->bySearchQuery($query)->first();
-            $posts = [];
-        } else {
-            $topPost = [];
-        }
+
+        $page = $request->get('page', LengthAwarePaginator::resolveCurrentPage());
+        $perPage = static::POSTS_PER_PAGE;
+        $offSet = ($page * $perPage) - $perPage;
+        $items = $posts->slice($offSet, $perPage)->all();
+
+        $links = new LengthAwarePaginator($posts, count($posts), $perPage);
+        $links->setPath('/');
+        $topPost = $this->post->pinned()->first();
 
         $data = [
             'toppost' => $topPost,
-            'posts' => $posts,
-            'tags' => $this->tag->get(),
+            'links' => $links,
+            'posts' => $items,
+            'tags' => $this->tag->allWith()->get(),
             'randposts' => $this->post->where('status', 'active')
                 ->where('category_id', '=', '1')->inRandomORder()->take(18)->get()
         ];
