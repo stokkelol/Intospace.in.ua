@@ -66,7 +66,8 @@ class PostController extends Controller
             'toppost' => $topPost,
             'posts' => $posts,
             'tags' => $this->tag->get(),
-            'randposts' => $this->post->getRandomPosts()
+            'randposts' => $this->post->where('status', 'active')
+                ->where('category_id', '=', '1')->inRandomORder()->take(18)->get()
         ];
 
         return view('frontend.main', $data);
