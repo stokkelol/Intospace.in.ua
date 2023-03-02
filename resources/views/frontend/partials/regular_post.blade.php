@@ -17,17 +17,11 @@
         @endif
     @endforeach
 @endif
-@if (Request::path() == '/')
+@if (Request::path() == '/' || Request::path() == 'posts' || starts_with(Request::path(), 'categories'))
     <!-- Main page paginator -->
     @if (!empty($links))
         <div class="paginate text-center">
             {!! $links->links() !!}
         </div>
     @endif
-@endif
-@if (Request::path() == 'posts' || starts_with(Request::path(), 'categories'))
-    <!-- Posts & category pages paginator -->
-    <div class="paginate text-center">
-        {!! $posts->links() !!}
-    </div>
 @endif
