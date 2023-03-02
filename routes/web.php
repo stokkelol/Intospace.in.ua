@@ -13,7 +13,7 @@ Route::get('/posts/{slug}', [
     'uses' => 'PostController@show'
 ]);
 
-Route::get('/posts', 'PostController@index');
+Route::get('/posts', 'MainController@index');
 
 Route::get('/videos', 'VideoController@index');
 
