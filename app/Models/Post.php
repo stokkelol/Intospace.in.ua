@@ -209,6 +209,16 @@ class Post extends Entity
         return $query->active()->where('category_id','=','3');
     }
 
+    public function scopeGetPostsBySearchQuery($query)
+    {
+        return $query->byStatus('active')
+            ->where('title', 'like', '%' . $query . '%')
+            ->orWhere('excerpt', 'like', '%' . $query . '%')
+            ->orWhere('content', 'like', '%' . $query . '%')
+            ->groupBy('published_at')
+            ->orderBy('published_at', 'desc');
+    }
+
     /**
      * @param $slug
      * @return mixed
