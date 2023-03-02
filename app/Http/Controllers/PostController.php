@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\Models\Tag;
+use App\Models\Video;
 use App\Support\Services\RelatedPostsService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
@@ -28,15 +29,22 @@ class PostController extends Controller
     private $tag;
 
     /**
+     * @var Video
+     */
+    private $video;
+
+    /**
      * PostController constructor.
      *
      * @param Post $post
      * @param Tag $tag
+     * @param Video $video
      */
-    public function __construct(Post $post, Tag $tag)
+    public function __construct(Post $post, Tag $tag, Video $video)
     {
         $this->post = $post;
         $this->tag = $tag;
+        $this->video = $video;
     }
 
     /**
