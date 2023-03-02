@@ -64,7 +64,7 @@ class PostController extends Controller
         $items = $posts->slice($offSet, $perPage)->all();
 
         $links = new LengthAwarePaginator($posts, count($posts), $perPage);
-        $links->setPath('/');
+        $links->setPath('/posts');
         $topPost = $this->post->pinned()->first();
 
         $data = [
